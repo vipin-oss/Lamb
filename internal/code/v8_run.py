@@ -78,7 +78,7 @@ def dips(curve, depth=1.0):
     return out
 
 
-def branch(sch, fd, h, P, c0, half=100.0, step=5.0, closure='variational'):
+def branch(sch, fd, h, P, c0, half=100.0, step=5.0, closure='variational', magbc='open'):
     """smallest singular value on a fine grid about a branch, and the parabola vertex."""
     import v8_scan as SS
     c0 = float(c0)
@@ -89,7 +89,7 @@ def branch(sch, fd, h, P, c0, half=100.0, step=5.0, closure='variational'):
         c += step
     vals = []
     for cc in cs:
-        s, n, ncond = SS.point(sch, mp.mpf(cc), fd, h, P, closure)
+        s, n, ncond = SS.point(sch, mp.mpf(cc), fd, h, P, closure, magbc)
         vals.append((cc, s))
         if s == 0.0:
             vals[-1] = (cc, None)

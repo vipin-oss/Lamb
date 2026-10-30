@@ -57,7 +57,7 @@ def const_rows(sch, eta, k, w, P, lnl, s):
     return [[0, eta*f, 0, 0, 0], [eta*f, I*k*f, 0, 0, 0]]
 
 
-def build_B(sch, k, w, P, h, closure='variational'):
+def build_B(sch, k, w, P, h, closure='variational', magbc='open'):
     mp.mp.dps = 60
     Mfun, rowfun = BUILD[sch], ROWS[sch]
     roots, b, R0 = CORE.roots_eta(k, w, P, Mfun=Mfun)
@@ -72,6 +72,9 @@ def build_B(sch, k, w, P, h, closure='variational'):
         M = Mfun(eta, k, w, P)
         v = CORE.nullvec(M)
         rows = rowfun(eta, k, w, P)
+        if magbc == 'closed' and len(rows) == 7:
+            rows = list(rows)
+            rows[6] = [0, 0, 0, 1, 0]        # psi = 0 on the face instead of B_z = 0
         if ncond == 5:
             rows = [rows[0], rows[1], rows[4], rows[5], rows[6]]
         elif closure == 'constitutive':
@@ -103,10 +106,10 @@ def build_B(sch, k, w, P, h, closure='variational'):
     return B, n, ncond
 
 
-def point(sch, c, fd, h, P, closure='variational'):
+def point(sch, c, fd, h, P, closure='variational', magbc='open'):
     w = 2*mp.pi*mp.mpf(fd)/(2*h)
     k = w/mp.mpf(c)
-    B, n, ncond = build_B(sch, k, w, P, h, closure)
+    B, n, ncond = build_B(sch, k, w, P, h, closure, magbc)
     if B is None:
         return None, n, ncond
     s0, s1 = sigma_min(B)

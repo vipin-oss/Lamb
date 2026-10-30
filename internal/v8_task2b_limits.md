@@ -179,3 +179,71 @@ A0 at `fd = 1000`, fine window of 0.5 m/s, parabola through the three lowest poi
 Peak at `v = 1/2`, zero at both ends, `dc/f^2` constant to 5 per cent: `Delta c ∝ alpha^2`, as
 asked. The five per cent is the quadratic approximation ending, not scatter — the two symmetric
 points 0.25 and 0.75 agree to the last digit.
+
+## Neha S0, re-run in a properly centred window (30 October 2026, second pass)
+
+The earlier S0 attempt at 5050 m/s with depth 12 was a mis-centred window. Decoupled reference:
+`R1 = R2 = R3 = b_w = e = b = p3 = 0`, `gamma = 0`, with the phason elastic constants `K1`, `K2` and
+`rho_p` kept (zeroing those leaves the phason column empty and the matrix singular). `h = 5e-4`,
+`fd = 1000`, `l = 0`:
+
+* decoupled S0 near 5000 m/s, `sigma_min = 4.01e-2`, median `5.85e-1`, depth 14.6;
+* window of +-15 per cent about 5000 (4250 to 5750), step 10 m/s, all couplings on:
+
+| gamma | S0 (m/s) | sigma_min | median | depth |
+|---|---|---|---|---|
+| 1e2 | 5070.8 | 1.92e-3 | 3.62e-1 | 189 |
+| 1e8 | 5070.9 | 3.03e-3 | 4.04e-1 | 133 |
+| 1e12 | 5115.6 | 7.86e-4 | 5.74e-2 | 73 |
+
+All three are clean dips, so the S0 entry can now be quoted: the coupling lifts S0 from 5000 to
+5070.8 m/s while the phason is wave-like, and the overdamped phason lifts it further to 5115.6.
+
+## Anu: why the thin-plate S0 does not move
+
+The three coupling numbers from the default constants:
+
+| combination | value |
+|---|---|
+| q31^2/(mu33 c11) | 2.370e-3 |
+| q33^2/(mu33 c33) | 3.612e-3 |
+| q15^2/(mu11 c44) | 2.762e-3 |
+
+All are below 1e-2, so the defaults sit in the regime where the reviewer's first branch applies: a
+weak magnetoelastic coupling and placeholders for the phase constants. The plate reduction cuts it
+further, to the same shape as the piezoelectric one: `cbar11 = c11 - c13^2/c33 = 1.6793e11`,
+`qbar31 = q31 - q33 c13/c33 = 108.519` (against 290 for `q31`), `mubar33 = mu33 + q33^2/c33 =
+1.5757e-4`, so `qbar31^2/(mubar33 cbar11) = 4.451e-4`. That is five times smaller than the raw
+number and twenty times smaller than the piezoelectric `ebar31^2/(epbar33 cbar11) = 9.76e-3` of the
+Sumit plate, which is exactly why the piezo plate stiffened S0 by 4.7 per cent and this one does
+not.
+
+The face condition in use is **open**, `B_z = 0`, row 6 of `rows_anu`
+(`[i k q31, eta q33, -eta al33, -eta mu33, lam]`). Runs at `v = 0.5`, `h = 5e-4`, `fd = 100`:
+
+| condition | S0 (m/s) | sigma_min | median | depth |
+|---|---|---|---|---|
+| open `B_z = 0` | 6280.57 | 3.12e-3 | 2.30e-2 | 7.4 |
+| closed `psi = 0` | none in +-150 m/s | 9.67e-4 | 1.01e-3 | 1.0 |
+
+The uncoupled value is 6280.67, so the open face shifts S0 by -0.10 m/s. Under the closed condition
+the dip disappears from a 300 m/s band, which is not physical for a passive shift and is noted as a
+thing to chase if that condition is ever used.
+
+Quadratic check, A0 at `fd = 1000`, `q` scaled by 1 and 2: 2277.477 and 2281.220, i.e. shifts of
+1.310 and 5.053 from the uncoupled 2276.167. Ratio 3.86 against the expected 4, so the shift is
+quadratic in the coupling, which is what `alpha^2` requires.
+
+## The alpha(v) = v(1-v) rule is a code scaling, not a physical model
+
+Recorded so that it is not mistaken for one. The rule was put into the sweep to test whether the
+A0 shift follows the square of the ME coefficient; it says nothing about how a real two-phase
+composite mixes. The scholar file needs a sourced model with an equation number, and until one is
+read the Anu paper must say that the volume-fraction study is a scaling exercise.
+
+Candidate source, not yet usable: the open-access review of magnetoelectric composites,
+arXiv:2503.13187 (2025), which discusses 0-3 particulate connectivity and reports that the ME
+voltage coefficient peaks at an intermediate volume fraction. Only the abstract and the introduction
+have been read; no equation for the effective coefficient has been located, so nothing from it may
+be cited yet. Next round: find the theory section, read the equation, and then either adopt it or
+state that ours is a placeholder.
