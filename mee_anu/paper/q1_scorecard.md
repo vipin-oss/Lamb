@@ -48,3 +48,31 @@ the band is wider than the ridge's motion, C1 and C3 are both dead and only the 
 ### What I would tell Anu to do first
 Compute `K_ME(vf)` at `fd = 500` and `fd = 5000` on the reduced model and report (a) the peak height,
 (b) the peak position, (c) the half-width. Three numbers; they decide Q1 vs Q2 in one day.
+
+---
+
+## v3 rescore — after Route A (30 Oct 2026)
+
+The ME-ridge claim never needed the heat equation. Route A deletes the weakest section and replaces it
+with a bracket whose width is `O(Delta_E) = 1e-3..1e-2`, i.e. below the ridge resolution.
+
+**Sweep re-run for the non-MGT cell** — ME ridge x NSGT: no paper in this check plots a *frequency-
+dependent* ME optimum, and none treats the ridge position as a mechanical matching condition. The
+static optimum remains the only published number, which is the paper's opening.
+
+| # | Criterion | v2 | **v3** | Why |
+|---|---|---|---|---|
+| 1 | Novelty | 2 | **2** | Unchanged — the ridge is new but the field is not short of ME-plate papers. |
+| 2 | Physical insight | 3 | **3** | Unchanged. |
+| 3 | Rigour | 4 | **4** | Unchanged. |
+| 4 | Validity of the size-effect model | 2 | **3** | The thermal model leaves the corner of the map where it was indefensible; the bracket is rigorous. |
+| 5 | Device relevance | 3 | **3** | Unchanged. |
+| 6 | Reproducibility | 5 | **5** | Unchanged. |
+| | **Total** | **19/30** | **20/30** | |
+
+### Verdict: **DOWNGRADE to Q2** (unchanged, lowest priority)
+
+Week-9 Q1-vs-Q2 decision still rests on the ridge test. Route A does not move that decision either way.
+
+**Single biggest risk:** ridge resolution in volume fraction at the available precision. If the ridge is
+not resolvable in `phi`, the paper is a formulation note regardless of the thermal treatment.

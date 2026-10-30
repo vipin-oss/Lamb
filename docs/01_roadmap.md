@@ -22,7 +22,7 @@ Sumit leads, Neha one week behind, Anu two weeks behind.
 | 1 | Literature + novelty sweep, Step 1 equations | Reading items 1-5, decide poling/quasi axis | Reading items 1-3, fix poling axis | Run common solver, send equations pack |
 | 2 | Step 1 done -> plot | Step 1 | Reading, Step 1 | Cross-check Step 1 numbers (3 scholars) |
 | 3 | Step 2 piezo | Step 1 done / Step 2 | Step 1 | Independent Step 2 in Arena for Sumit |
-| 4 | **bulk-medium test (Fourier vs MGT) -> then** Step 3 MGT heat | Step 2 | Step 2 | Cross-check Sumit; start Neha Step 2 check |
+| 4 | Step 3 **thermal bracket** (adiabatic/isothermal) + classical check | Step 2 | Step 2 | Cross-check Sumit; start Neha Step 2 check |
 | 5 | Step 4 carriers | Step 3 phason (decision gate) | Step 2 done / Step 3 | Arena: carrier limit check |
 | 6 | Step 4 done, **base paper figures** | Step 3 done | Step 3 | Cross-check Neha Step 3 vs published |
 | 7 | Step 5 NSGT | Step 4 MGT | Step 3 done | Arena NSGT root-count check |
@@ -48,6 +48,11 @@ Sumit leads, Neha one week behind, Anu two weeks behind.
 - **Step 3 is blocked** until Dr. Vipin confirms the Gupta heat equation (he is adding it to `paper/`).
 - **Provisional retitle (Sumit):** `paper/problem_v3_proposal.md` proposes carrier screening + NSGT as the claims,
   MGT as a comparison section. `problem_v2.md` is untouched pending review.
+- **Route A (accepted 30 Oct 2026):** heat is an **adiabatic/isothermal bracket**, not a coupled MGT
+  mechanism. Step 3 is now short: substitute `c^T` or `c^ad = c^T + (T0/rho c_p) beta⊗beta`, run the same
+  plate code twice, and check the peak against eq. (3) of the bulk note in trend with `kh` stated. No MGT
+  solver is built; MGT is a one-page appendix item. This shortens Step 3 by roughly one half and removes
+  the `tau_q`, `k_th`, `c_p`, `alpha_T`, `Lambda_ph` table from all three papers.
 - **Scale-overlap window (`docs/04_scale_overlap_window.md`):** empty for all three papers; heat to be
   carried as an adiabatic/isothermal bracket rather than modelled. See the note for what changes in each v3.
 - **MGT maps, all three scholars:** outside the trust band in every case once `Lambda_ph` is sourced

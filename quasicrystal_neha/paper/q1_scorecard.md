@@ -49,3 +49,31 @@ wide enough to wash out the slope, C2 dies.
 Compute, on a reduced 1D model (phonon + phason only, no piezo, no heat), the two kinematics side by
 side and check whether the A0 attenuation differs by more than 1% at the fixed comparison points.
 One day of work; it decides whether this is a Q1 paper or a Q2 paper.
+
+---
+
+## v3 rescore — after Route A (30 Oct 2026)
+
+Neha's claims never contained the thermal channel, so Route A removes a *defence* burden (the MGT
+form) without removing a claim. Scores are therefore unchanged, with one exception noted.
+
+**Sweep re-run for the non-MGT cell** — phason kinematics x NSGT: the 2026 competitor (Acta Mech.
+Solida Sin., 10.1007/s10338-026-00755-4) still owns the attenuation-jump story, and no paper found in
+this check compares wave-like against diffusive phason kinematics in a plate with NSGT on the phonon
+stress only. The spine of the paper is intact and is still unoccupied.
+
+| # | Criterion | v2 | **v3** | Why |
+|---|---|---|---|---|
+| 1 | Novelty | 2 | **2** | The niche is still crowded; Route A neither helps nor hurts. |
+| 2 | Physical insight | 4 | **4** | The three-exponent thickness fingerprint is untouched. |
+| 3 | Rigour | 4 | **4** | Unchanged; the merge test remains the strongest check. |
+| 4 | Validity of the size-effect model | 2 | **3** | Small gain: the paper no longer has to defend a continuum heat model in the same 10 nm corner where NSGT-on-phason is already unjustified. |
+| 5 | Device relevance | 2 | **2** | Unchanged — quasicrystal plates are not devices. |
+| 6 | Reproducibility | 5 | **5** | Unchanged. |
+| | **Total** | **19/30** | **20/30** | |
+
+### Verdict: **REFOCUS** (unchanged)
+
+**Single biggest risk:** novelty, not physics. A referee will find the 2026 AMSS paper on page one. The
+phason-kinematics comparison must be shown to *change a measurable number* by a margin larger than the
+model uncertainty, or the paper is a comparison study in a crowded field.

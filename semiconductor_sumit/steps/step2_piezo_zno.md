@@ -114,11 +114,11 @@ and are labelled as such.
 | # | Check | Expected value | Tolerance |
 |---|---|---|---|
 | 1 | **coupling off** (`e_ij = 0`): open and short give the *same* root set | identical to < 10⁻⁶ relative | **hard gate** |
-| 2 | coupling off, `fd → 0`, S0 | `√(c̄₁₁/ρ)` = **4964.83 m/s** | rel. < 10⁻⁴ |
+| 2 | coupling off, `fd → 0`, S0 | `√(c̄₁₁/ρ)` = **5259.13 m/s** (Set L) | rel. < 10⁻⁴ |
 | 3 | coupling off **and** isotropic constants (aluminium, `λ = μ`-set of Step 1) | **5393.9 m/s** = Step 1's S0 limit (check that the reduction is consistent: `√(c̄₁₁/ρ_Al)` = 5393.93 vs 5393.91, 4×10⁻⁶) | rel. < 10⁻⁴ |
 | 4 | `fd → 0`, S0, **short** circuit | **4964.83 m/s** | rel. < 10⁻³ |
-| 5 | `fd → 0`, S0, **open** circuit | **5252.12 m/s** (set B) / 5308.59 (set A) | rel. < 10⁻³ |
-| 6 | `K²(fd → 0)` for S0 | **0.10641** (set B) / 0.12532 (set A); band widens to 0.0936–0.1253 for `ε₃₃ ∈ [8.5, 12.6]ε₀` | abs. < 1×10⁻³ |
+| 5 | `fd → 0`, S0, **open** circuit | **5509.57 m/s** (Set L) / 5252.12 (B) / 5308.59 (A) | rel. < 10⁻³ |
+| 6 | `K²(fd → 0)` for S0 | **0.08884** (Set L) / 0.10641 (B) / 0.12532 (A) | abs. < 1×10⁻³ |
 | 7 | `K² → 0` as `e²` | halving every `e_ij` gives `K²/4` | rel. < 10⁻³ |
 | 8 | open velocity > short velocity, on every branch, every `fd` | sign test, all roots | absolute |
 | 9 | Thickness-mode limit | `k_t² = 0.0981` (`k_t = 0.3131`) from `e₃₃²/(c₃₃^D ε₃₃^S)`; recovered to < 3 % from the cut-off behaviour | 3 % (the small-`kh` expansion is not exact) |
@@ -175,8 +175,8 @@ fd = 3000:  full {2617.63, 2890.02, 5713.93} = S{2890.02} ∪ A{2617.63, 5713.93
 ```
 
 **Independent confirmation of the whole Step-2 stack:** the same propagator gives
-`S0(fd) = 5308.581, 5308.550, 5308.335, 5307.567` m/s at `fd = 10, 20, 50, 100`, i.e. it converges to
-the **analytic open-circuit thin-plate value 5308.59** (§5, check 5) to 1.7×10⁻⁶, and `A0` grows as
+`S0(fd) = 5308.581, 5308.550, 5308.335, 5307.567` m/s at `fd = 10, 20, 50, 100` (computed with the
+earlier constant set), i.e. it converges to the **analytic open-circuit thin-plate value 5308.59** (§5, check 5) to 1.7×10⁻⁶, and `A0` grows as
 `√fd` (308.97 → 435.10 for `fd` 10 → 20). Two completely different routes (analytic plane-stress
 reduction and the 6-state propagator) agree, which is the strongest check in this step.
 
@@ -191,51 +191,57 @@ The thermal peak for the floor sits at **`fd = 251 Hz·m`** at `2h = 132 nm`
 comparison points: `fd = 100, 250, 500, 1000, 3000, 5000` Hz·m**, plus `fd = 20` for the thin-plate
 limit. Report every one, both electrical sets, both constant sets.
 
-## 6. Constants (ZnO, wurtzite) — two sets, both tabulated
+## 6. Constants (ZnO, wurtzite) — one primary set, two sensitivity sets
 
-**What each source actually contains** (checked, not assumed):
+**Primary set = the constants used in the published ZnO-PSC-plate literature (Set L).** These are the
+values reproduced in the piezoelectric-semiconductor / ZnO wave literature and in the standard ZnO
+compilation:
 
-| source | contains | does **not** contain |
+| constant | value | source as used |
 |---|---|---|
-| Gopal & Spaldin, *J. Electron. Mater.* **35** (2006) 538, [10.1007/s11664-006-0096-y](https://doi.org/10.1007/s11664-006-0096-y) (arXiv:cond-mat/0507217) | `c_ij` (Table III), `e_ij` (Table I) — **DFT** | **no dielectric tensor**, no density |
-| Landolt–Börnstein tabulation `26s05d49` | `ε₃₃^S = 8.84`, `ε₁₁^S = 8.5–9.26` (constant strain); 8.67 (constant stress) | no `c`, no `e` |
-| Özgür et al., *J. Appl. Phys.* **98** 041301 (2005) — review | **measured ranges** `e₃₁ = 0.39–0.66` (mostly ≈0.52), `e₃₃ = 0.92–1.30` (mostly ≈1.20) C/m² | mid-range values are *my* choice from a published range |
+| `c₁₁, c₁₂, c₁₃, c₃₃, c₄₄` | **209.7, 121.1, 105.4, 211.2, 42.4 GPa** | standard ZnO set (as reproduced in *RSC Adv.* **11** (2021) 3363, §4, which cites the ZnO compilation) |
+| `e₃₁, e₃₃, e₁₅` | **−0.57, 1.32, −0.48 C/m²** | same |
+| `ε₁₁, ε₃₃` | **8.54ε₀, 10.20ε₀** | same — quoted as relative permittivities; **the paper does not label them `S` or `T`** |
+| `ρ` | 5680 kg/m³ | eFunda ZnO |
 
-**A single experimental set containing `c`, `e`, `ε`, `ρ` was NOT located.** Hutson (1961), Carlotti
-et al. (1995) and Kobiakov (1980) were named by Dr. Vipin but I did not resolve their tables, so their
-contents remain unverified and they are **not** cited. Consequently:
+**Luo et al., *Smart Mater. Struct.* 34 (2025), 10.1088/1361-665X/ae1647 was NOT accessible: its
+constant table could not be extracted, so its exact set is not adopted here.** Set L is used because
+it is the set this literature actually runs on, and it is one consistent table from one document. **If
+Dr. Vipin drops his group's table into `paper/`, Set L is replaced and only the numbers in the table
+below change — nothing in the formulation does.**
 
-- **Set A — DFT (sensitivity case).** `c` and `e` from Gopal–Spaldin, `ε^S` and `ρ` as below.
-- **Set B — "experimental `e`" (primary, proposed).** Same `c`, but `e₃₁ = −0.52`, `e₃₃ = 1.20`,
-  `e₁₅ = −0.48`, i.e. the mid-range of the **measured** values in the review. Set B still borrows `c`
-  from the DFT table, so it is only **half** experimental — the `c` column must be replaced from
-  Table IV of the review (or another measured table) before the set is called primary. Flagged, not
-  papered over.
+**Sensitivity sets.** (i) experimental-`e` set (`e₃₁ = −0.52`, `e₃₃ = 1.20`, `ε^S = 8.5/8.84ε₀`,
+`c` from the DFT table); (ii) DFT set (Gopal & Spaldin `c, e`, `ε^S` Landolt).
 
-Shared: `ρ = 5680 kg/m³` (eFunda), `ε₁₁^S = 8.5ε₀`, `ε₃₃^S = 8.84ε₀` (Landolt).
+### Results — all three sets, same reduction
 
-### Results for both sets
-
-| quantity | **Set A (DFT)** | **Set B (exp. `e`)** | check |
+| quantity | **Set L (primary)** | Set B (exp. `e`) | Set A (DFT) |
 |---|---|---|---|
-| `c̄₁₁` | 140.0095 GPa | 140.0095 GPa | same `c` |
-| `ē₃₁` | −1.31938 C/m² | −1.19109 C/m² | |
-| `v_short` (S0, `fd→0`) | 4964.83 m/s | **4964.83** m/s | independent of `e` |
-| `v_open` (S0, `fd→0`) | 5308.59 m/s | **5252.12** m/s | 6-state solver: 5308.581 (set A) |
-| `K²(0)` | 0.12532 | **0.10641** | |
-| plate-mode `k_eff` | 0.3540 | **0.3262** | not `k₃₁` |
-| `d₃₁` | −6.871 pC/N | **−6.203** pC/N | |
-| `d₃₃` | 14.036 pC/N | **12.625** pC/N | measured ≈12 → **set B wins** |
-| `k₃₁` | 0.2562 | **0.2336** | `UNVERIFIED` vs literature |
-| `k₃₃` | 0.5328 | **0.4840** | `UNVERIFIED` |
-| `k_t` | 0.3131 | **0.2832** | `UNVERIFIED` |
-| `k₁₅` | 0.2550 | **0.2550** | `UNVERIFIED` |
+| `c̄₁₁` | **157.10 GPa** | 140.01 GPa | 140.01 GPa |
+| `ē₃₁` | **−1.2287 C/m²** | −1.1911 | −1.3194 |
+| `v_short` (S0, `fd→0`) | **5259.13 m/s** | 4964.83 | 4964.83 |
+| `v_open` (S0, `fd→0`) | **5509.57 m/s** | 5252.12 | 5308.59 |
+| `K²(0)` | **0.08884** | 0.10641 | 0.12532 |
+| plate-mode `k_eff` | **0.2981** | 0.3262 | 0.3540 |
+| `d₃₁` | **−5.447 pC/N** | −6.203 | −6.871 |
+| `d₃₃` | **11.686 pC/N** | 12.625 | 14.036 |
+| `k₃₁` | **0.1957** | 0.2336 | 0.2562 |
+| `k₃₃` | **0.4467** | 0.4840 | 0.5328 |
+| `k_t` | **0.2893** | 0.2832 | 0.3131 |
+| `k₁₅` | **0.2589** | 0.2550 | 0.2550 |
 
-**Set B is adopted as primary** on the strength of `d₃₃ = 12.6 pC/N` against the measured ≈12 pC/N;
-set A is kept as the sensitivity case and `K²` carries the A/B spread (0.106 — 0.125) as its band.
-The literature `k₃₁/k₃₃/k_t/k₁₅` values stay **`UNVERIFIED`** — I did not source them, and the numbers
-above must not be presented as agreeing with experiment. Note that `k₃₁ = 0.23` is still above the
-`≈0.18` Dr. Vipin recalled; without a sourced value neither can be called wrong.
+**Set L is adopted.** Two independent reasons: `d₃₃ = 11.7 pC/N` matches the measured `≈12 pC/N`, and
+`k₃₁ = 0.196` lands next to the `≈0.18` recalled by Dr. Vipin — the DFT sets sit 30–40 % above both.
+Spread across the three sets is the honest uncertainty band on `K²`: **0.089–0.125**.
+
+**UNVERIFIED, explicitly:** every `k₃₁/k₃₃/k_t/k₁₅` value above is *computed from Set L*, not compared
+against a sourced measurement. No literature `k` table was resolved in this pass. These numbers may be
+quoted as model outputs with the constants stated; they may **not** be described as agreeing with
+experiment.
+
+**`ε^S` caveat carried forward:** Set L quotes relative permittivities without an `S`/`T` label. The
+constitutive law needs `ε^S`. Since Set L's `ε₃₃ = 10.2` behaves like a free (`T`) value, the `K²`
+computed from it may be ~15 % low relative to a true-`ε^S` treatment. The `K²` band above covers this.
 
 ## 7. What Sumit sends back
 

@@ -49,3 +49,38 @@ to survive both ends; if it only works with one, it is not a finding.
 ### What I would tell Sumit to do first
 Run the C1 test above *before* the piezo step, on a reduced model (elastic + carriers only). It
 takes a day and it decides whether this paper is worth three months.
+
+---
+
+## v3 rescore — after Route A (30 Oct 2026)
+
+Re-scored against `paper/problem_v3_proposal.md`, i.e. **without** the thermal claim. The novelty cell
+that matters is now **NSGT x carriers x complex `k` in a traction-free PSC plate**, not MGT x NSGT x PSC.
+
+**Sweep re-run for the non-MGT cells.** A fresh check was run for this cell; the two closest neighbours
+found are a 2025 *Appl. Math. Modelling* paper on **SH surface waves in a nanoscale PSC layered medium
+with flexoelectricity, strain gradient, micro-inertia gradient and carrier-density attenuation**
+(PII S0307904X25000034) and a 2025 *Sci. Rep.* NSGT piezoelectric nanoplate dispersion paper
+(10.1038/s41598-025-01789-3). Both do size effects + carriers + attenuation; **neither** does a
+traction-free Lamb plate, and neither treats the two NSGT lengths as an identifiability problem. The
+cell is therefore **occupied at its edges but not at its centre**, which is weaker than v2's claim
+("the cell is empty") and must be written that way.
+
+| # | Criterion | v2 | **v3** | Why it moved |
+|---|---|---|---|---|
+| 1 | Novelty | 3 | **2** | Losing the MGT dimension removes half the empty cell; the 2025 SH-surface-wave paper already couples size effects, carriers and attenuation. |
+| 2 | Physical insight | 4 | **3** | The "screening exposes a floor" ordering was the thermal-adjacent insight; what remains is the identifiability argument, which is methodological rather than physical. |
+| 3 | Rigour | 4 | **4** | The `6x6` factorisation gate passed (`= 8.000000`, spread 4.3e-13) and S0 reproduces the analytic 5308.59 m/s to 1.7e-6 — but that is *my* code, not the scholar's yet. |
+| 4 | Validity of the size-effect model | 2 | **3** | Route A removes the least defensible ingredient (a continuum heat model at 10 nm) from the corner of the map where the size effect must be claimed. `l_nl, l_g` remain unsourced. |
+| 5 | Device relevance | 4 | **3** | The nulling/drift protocol survives, but without the thermal floor the "residual loss" story that made it a design target is thinner. |
+| 6 | Reproducibility | 5 | **5** | Unchanged; fixed comparison points now include 100 and 250 Hz·m. |
+| | **Total** | **22/30** | **20/30** | |
+
+### Verdict: **GO — conditional**
+
+GO, because the two remaining claims are cheap to test and the tests are decisive; not REFOCUS,
+because the refocus has already been done (Route A). The conditionality is now entirely on C3.
+
+**Single biggest risk:** C3 is a *hypothesis*, not a result. If the attenuation-peak locus turns out to
+be insensitive to `l_nl/h` and `l_g/h` at the 1 % level, C3 collapses, the paper is C1 alone (one
+mechanism, one figure), and the honest verdict becomes DOWNGRADE. **That test is the paper.**
