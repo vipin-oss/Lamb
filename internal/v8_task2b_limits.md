@@ -117,3 +117,65 @@ Unchanged and reconfirmed: Sumit none, Sumit with `beta_th = Pi_th = E_g = 0` th
 ## Not done
 
 Phason limits (Neha) and magnetoelastic limits (Anu).
+
+## Note for the scholar file: the screening density is not a constant
+
+The density at which the piezoelectric stiffening is screened is
+`n0_th = eps33|-i omega + D_n k^2 + 1/tauR|/(q b_n)`, so it depends on the carrier lifetime, not
+only on the frequency. The value quoted in the papers, with `tauR = 1` ns, is a placeholder for a
+material that has not been characterised: at `tauR = 1` ms the same plate screens by `n0 = 1e18`
+instead of `1e19`. Until a measured lifetime is available for the film, any statement of the form
+"the crossover lies at such and such a density" must carry the lifetime beside it. This goes into
+the scholar notes when the Sumit paper is next opened; it is recorded here first.
+
+## Phason relaxation (Neha), 30 October 2026
+
+Bulk, decoupled phason, closed form from `K1 k^2 = rho_p omega^2 + i omega gamma`:
+`c_ph = sqrt(K1/rho_p) = 31622.78` m/s for `gamma -> 0`, `k_i/k_r = gamma/(2 rho_p omega)` while
+`gamma << 2 rho_p omega = 1.5e9`, and the diffusive branch `k_r -> sqrt(omega gamma/(2 K1))`,
+`k_i/k_r -> 1` for `gamma >> 1.5e9`. At `omega = 2 pi 1e8`:
+
+| gamma | k_r (1/m) | k_i/k_r | omega/k_r (m/s) | closed form |
+|---|---|---|---|---|
+| 0 | 1.986918e4 | 0 | 31622.8 | 31622.8 |
+| 1e2 | 1.986918e4 | 6.6315e-8 | 31622.8 | wave |
+| 1e4 | 1.986918e4 | 6.6315e-6 | 31622.8 | wave |
+| 1e6 | 1.986918e4 | 6.6315e-4 | 31622.8 | wave |
+| 1e8 | 1.991263e4 | 6.6025e-2 | 31553.8 | wave, damping visible |
+| 1e10 | 5.313019e4 | 0.927 | 11826 | diffusive, sqrt(w g/(2K1)) = 5.117e4 |
+| 1e12 | 5.118563e5 | 0.9993 | 1228 | diffusive, 5.117e5 |
+
+Plate, all couplings on, `l = 0`, `h = 5e-4`, `fd = 1000`, A0 branch; the decoupled-phason value
+(`R1 = R2 = R3 = b_w = 0`) is 2222.5 m/s:
+
+| gamma | 1e2 | 1e6 | 1e8 | 1e10 | 1e12 |
+|---|---|---|---|---|---|
+| A0 (m/s) | 2216.6 | 2216.6 | 2216.6 | 2219.3 | 2222.0 |
+
+The phonon branch recovers the decoupled value as the phason is overdamped, 2222.0 against 2222.5
+at `gamma = 1e12`, and the coupling costs 5.9 m/s while the phason is still wave-like. The S0
+window tried at 5308 m/s was misplaced: the Neha S0 branch sits near 5050 m/s with a dip depth of
+only 12, so no S0 entry is quoted.
+
+## Magnetoelastic coupling against volume fraction (Anu)
+
+Mixing rule, ours: the two-phase ME coefficient is taken as the product property
+`alpha(v) = v(1-v) alpha_0`, which vanishes at both ends and peaks at `v = 1/2`. It is put into the
+model by scaling the three magnetoelastic constants with `f(v) = 4v(1-v)`, so `alpha^2 ∝ f^2`.
+
+Thin plate, `fd = 100`, S0: the speed is 6280.67 m/s for every `v` to 0.01 m/s. The effect is below
+resolution because at small `k` the magnetoelastic terms enter the mechanical rows through
+`eta q31`, `eta q33` and `i k q15`, and `q15/c44` is of order `4e-9`.
+
+A0 at `fd = 1000`, fine window of 0.5 m/s, parabola through the three lowest points:
+
+| v | 0 | 0.25 | 0.5 | 0.75 | 1 |
+|---|---|---|---|---|---|
+| f = 4v(1-v) | 0 | 0.75 | 1 | 0.75 | 0 |
+| A0 (m/s) | 2276.17 | 2276.94 | 2277.48 | 2276.94 | 2276.17 |
+| dc (m/s) | 0 | +0.775 | +1.310 | +0.775 | 0 |
+| dc/f^2 | - | 1.377 | 1.310 | 1.377 | - |
+
+Peak at `v = 1/2`, zero at both ends, `dc/f^2` constant to 5 per cent: `Delta c ∝ alpha^2`, as
+asked. The five per cent is the quadratic approximation ending, not scatter — the two symmetric
+points 0.25 and 0.75 agree to the last digit.

@@ -1,10 +1,9 @@
 # Status, 30 October 2026
 
-- Hutson-White sign resolved: the model and masters were right, my hand-built test sub-block had the
-  piezoelectric block symmetric instead of skew. With M23 = +e15 k^2 the bulk test gives k_i > 0,
-  peak at n0 = 3e16 against n0* = 2.9654e16, magnitude 1.73e-2. Pass.
-- Plate screening explained in closed form: n0_th = eps33|-i w + Dn k^2 + 1/tauR|/(q bn), which is
-  n0* when 1/tauR << w and 5.6e19 for tauR = 1 ns. Verified by changing tauR to 1 ms.
-- Phason (Neha) 0.27 per cent, magnetoelastic (Anu) 0.03 per cent at fd = 1000, both at l = 0.
-- Parity unchanged; the held 0.2/0.5 closure entry stays unquoted.
-- Masters as v8. No LaTeX engine here, so the report is a source only.
+- Neha phason: bulk closed form verified (c_ph = 31622.78 m/s, k_i/k_r = gamma/(2 rho_p w), diffusive
+  above gamma = 1.5e9); plate A0 recovers the decoupled 2222.5 m/s as gamma -> 1e12 (2222.0).
+- Anu ME: mixing rule ours, alpha = v(1-v); S0 at fd = 100 shows no shift (q15/c44 ~ 4e-9), A0 at
+  fd = 1000 follows alpha^2, peak at v = 1/2, dc/f^2 = 1.31-1.38.
+- Neha S0 branch sits near 5050 m/s with depth 12, not quoted.
+- Scholar note recorded: the screening n0 follows tau_R, and 1 ns is a placeholder.
+- Masters stay v8. Report reports/limits_v8e.tex, one page.
