@@ -66,11 +66,14 @@ gradient, and this is visible as a split between the phonon-like and phason-like
   nonlocal contour that best fits the same data (the difference between the two is the claim).
 - **Limiting cases.** `l_nl = l_g = 0` returns Step 4 (MGT, no size effect); nonlocal-only and
   gradient-only give opposite shifts of the same magnitude.
-- **Fails if.** the phason length scale cannot be given an independent meaning within the NSGT
-  functional (a real risk — the NSGT functional is written for the phonon strain only). **This is a
-  stop-and-ask item for Dr. Vipin before Step 5**: applying NSGT to phason strain is an extension
-  with no literature precedent found in the sweep, and it must either be justified from a
-  variational principle or restricted to the phonon field (with the restriction stated).
+- **Fails if.** the two branches are not split differently by the two scales, i.e. the phason
+  length scale carries no independent effect.
+- **SETTLED AT THE GATE (Dr. Vipin, 30 Oct 2026).** In the **base model, NSGT is applied to the
+  phonon stress only; the phason stress remains classical.** The NSGT-on-phason variant is **not**
+  part of the base model: it is added at **Step 5 as a sensitivity result only**, and reported as
+  such (one figure, clearly labelled, never used to support C1–C3). C3 must therefore be stated in
+  terms of how the *phonon* length scales split the two branches, with the phason-gradient variant
+  as a caveat on the size of the effect. I will not extend NSGT to the phason field silently.
 
 ## 4. Upgrades: one major, one minor
 
@@ -162,6 +165,11 @@ common-mode rescaling.
 Explicitly **not** targeted: *Wave Motion* (Q2, 0.499 in SJR 2025). *Applied Mathematics and
 Mechanics (Engl. Ed.)*, *Composite Structures*, *Results in Physics* — not checked; they are where
 neighbours published.
+
+> **PROVISIONAL HOOK (30 Oct 2026).** Dr. Vipin's ruling: the thickness-scaling hook of C2 is
+> **provisional, pending his review**. No writing, no figure titles and no abstract may commit to it
+> until he has approved it. The work that can proceed meanwhile is the part that is needed either
+> way: the two phason kinematics and the merge test (C1), which are also the Step-3 gate.
 
 ## 9. What would change this problem again
 1. If C1's merge test fails (the two phason models are not implementations of the same physics),

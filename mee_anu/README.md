@@ -2,9 +2,10 @@
 
 BaTiO₃/CoFe₂O₄ + MGT heat + nonlocal strain gradient (2 length scales).
 
-**Status: Task 0 done (30 Oct 2026), awaiting Dr. Vipin's approval at the gate.**
-Scope re-anchored at Task 0 — see `paper/problem_v2.md`. **Verdict: DOWNGRADE to Q2** with a Q1
-stretch; this matches the pre-literature prediction in `docs/00_feasibility_analysis.md`.
+**Status: Task 0 done (30 Oct 2026); DOWNGRADE to Q2 ACCEPTED by Dr. Vipin.**
+This is now the **lowest-priority** of the three papers; the Q1-vs-Q2 decision is deferred to
+**week 9** of the roadmap, on the three-number ridge test below. Scope re-anchored at Task 0 — see
+`paper/problem_v2.md`.
 
 ## Hook (rewritten at Task 0)
 

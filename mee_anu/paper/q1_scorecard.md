@@ -17,6 +17,10 @@ is the weakest of the three, and the sweep agrees.
 
 ## Verdict: **DOWNGRADE to Q2** (Q1 stretch kept, but not assumed)
 
+> **ACCEPTED by Dr. Vipin, 30 Oct 2026.** Paper C is the lowest priority of the three; the Q1-vs-Q2
+> decision is deferred to **week 9**, taken on the three-number ridge test at the end of this file.
+> Work proceeds in roadmap order without any schedule pressure to lift it back to Q1.
+
 This is the honest call and it matches the pre-literature prediction in
 `docs/00_feasibility_analysis.md` ("lowest Q1 probability as planned"). The sweep found nothing to
 raise it: no thermal MEE Lamb paper exists, so "add MGT" would be an easy sell to a Q2 editor, but

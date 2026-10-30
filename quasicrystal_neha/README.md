@@ -39,10 +39,12 @@ Details: `paper/literature_table.md`.
 - Quasiperiodic axis **along thickness z**; poling direction to be fixed at Step 2 (write it here).
 - **Phason kinematics: do BOTH** (wave-like and diffusive). The plan's instruction "choose one" is
   reversed at Task 0, because the comparison is now the paper's only defensible novelty.
-- **Open question for Dr. Vipin (Step 5, stop-and-ask):** does NSGT apply to the **phason** strain?
-  The NSGT functional is derived for phonon strain only; applying it to phason strain has no
-  literature precedent in the sweep. Either justify it from a variational principle, or restrict
-  NSGT to the phonon field and state the restriction. I will not decide this silently.
+- **SETTLED at the gate (30 Oct 2026):** **NSGT applies to the phonon stress only** in the base
+  model; the phason stress is classical. The NSGT-on-phason variant is a **Step-5 sensitivity
+  result only** — one labelled figure, never used to support C1–C3.
+- **PROVISIONAL:** the thickness-scaling hook (C2) is provisional **pending Dr. Vipin's review**.
+  Nothing may be written around it until approved; the two-kinematics work and the merge test (C1)
+  can proceed because they are needed either way.
 - **Open question (Step 3):** phason traction-free face condition `H_zz = H_zx = 0` and phason flux
   `∂w/∂z = 0` for the diffusive model — the latter has no experimental support; label as assumed.
 - Constants: one literature set, source in `params.md`; `D_ph` and `τ_q` are **assumed ranges**, never
@@ -50,9 +52,10 @@ Details: `paper/literature_table.md`.
 
 ## Gate status
 
-Task-0 gate: **waiting for approval**. Verdict in `paper/q1_scorecard.md` is **REFOCUS** — Q1 only
-if the merge test and the slope-separation test both pass; otherwise Q2 (and that is an acceptable
-outcome for this paper).
+Task-0 gate: **reports received; hook provisional.** Verdict in `paper/q1_scorecard.md` is
+**REFOCUS** — Q1 only if the merge test and the slope-separation test both pass; otherwise Q2.
+Step 1 may start; Step 5 waits on nothing further (the NSGT-on-phason question is settled), but the
+C2 hook cannot appear in any text until Dr. Vipin reviews it.
 
 ## Folder layout
 `paper/` — `steps/` — `checks/` — `code_arena/` — `figures/`
