@@ -17,11 +17,10 @@ Plane strain in the `x–z` plane: `u_y = 0`, `∂/∂y = 0`. Isotropic, homogen
 σ_ij,j = ρ ü_i ,    σ_ij = λ ε_kk δ_ij + 2μ ε_ij ,    ε_ij = ½(u_i,j + u_j,i)      (1)
 ```
 
-Helmholtz decomposition `u = ∇φ + ∇×ψ` with the vector potential taken along `−y`,
-`ψ = (0, −ψ, 0)`, so that `∇×ψ = (ψ,_z, 0, −ψ,_x)`:
+Helmholtz decomposition `u = ∇φ + ∇×ψ` with `ψ = (0, ψ, 0)`:
 
 ```
-u_x = φ,_x + ψ,_z ,      u_z = φ,_z − ψ,_x                                        (2)
+u_x = φ,_x − ψ,_z ,      u_z = φ,_z + ψ,_x                                        (2)
 ```
 
 With the harmonic ansatz `φ = Φ(z) e^{i(kx−ωt)}`, `ψ = Ψ(z) e^{i(kx−ωt)}`, (1)–(2) give
@@ -42,8 +41,14 @@ family `φ = A sin(pz)`, `ψ = B cos(qz)`. Substituting into (2) and then into t
 
 | | `σ_zz / μ` | `σ_xz / μ` |
 |---|---|---|
-| S | `−(q²−k²) A cos(pz) − 2ikq B cos(qz)` | `−2ikp A sin(pz) − (q²−k²) B sin(qz)` |
-| A | `−(q²−k²) A sin(pz) + 2ikq B sin(qz)` | `2ikp A cos(pz) − (q²−k²) B cos(qz)` |
+| S | `−(q²−k²) A cos(pz) + 2ikq B cos(qz)` | `−2ikp A sin(pz) + (q²−k²) B sin(qz)` |
+| A | `−(q²−k²) A sin(pz) − 2ikq B sin(qz)` | `2ikp A cos(pz) + (q²−k²) B cos(qz)` |
+
+These follow from (2) with `σ_zz = μ[−(q²−k²)φ + 2ikψ,_z]` and
+`σ_xz = μ[(q²−k²)ψ + 2ikφ,_z]`, using `p² = ω²/c_L² − k²`, `q² = ω²/c_T² − k²` and
+`ρω² = μ(k²+q²)`. **Reversing the potential, `ψ → −ψ` (equivalently taking `ψ` along `−y`), flips the
+sign of every `B`-column entry, i.e. multiplies each `2×2` determinant by `−1`: it changes only the
+overall sign of the dispersion determinant (and `B → −B`, so `u` is unchanged), never a root.
 
 ## 3. Boundary conditions and the dispersion equations
 

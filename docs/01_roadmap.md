@@ -39,6 +39,13 @@ Sumit leads, Neha one week behind, Anu two weeks behind.
 - **Week 2:** novelty sweep for all three. If a near-identical paper exists, change the hook now.
 - **Step 3 of Neha:** phason wave-like vs diffusive. Pick, justify, test the other.
 - **Step 4 of Sumit:** carriers-off returns Step 3 AND high-density limit sane. This is a base paper.
+- **MGT distinguishability gate (Sumit, before Step 3):** `steps/step3_prerecheck_mgt_map.md` gives the
+  boundary `2h* = pi sqrt(kappa tau_q)` against the trust band. Rule: MGT stays in the title only if the
+  boundary is inside the band for a *sourced* `(k_th, tau_q)` pair with a *sourced* phonon mean free path;
+  otherwise the paper is retitled and MGT becomes a sensitivity. At the assumed constants this passes for
+  `k_th = 60 W/mK` with `tau_q >= 2e-12 s` and `Lambda_ph <= 2 nm`, and fails outright for the thin-film
+  `k_th = 1.2 W/mK`. `Lambda_ph` must be sourced before the title is fixed.
+- **Step 3 is blocked** until Dr. Vipin confirms the Gupta heat equation (he is adding it to `paper/`).
 - **Bulk-medium gate (Sumit, before Step 3):** `steps/step3_prerecheck_bulk_medium.md` shows both Fourier and MGT *saturate* in an infinite medium; MGT only rescales the plateau and moves the peak. C2 was restated accordingly — the observable is peak position vs thickness. Step 3 does not start until Dr. Vipin accepts the restatement and confirms the Gupta equation's placement of tau_q.
 - **Step 4 of Sumit, added at Task 0 (cheap, decides the paper):** the **C1 test** — `k_i(n0)` at
   fd = 1000 and 3000 must be non-monotonic with its peak within 5% of `n0* = eps33 w/(e mu)`. If it
