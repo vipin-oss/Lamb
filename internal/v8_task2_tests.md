@@ -97,3 +97,59 @@ k = 3e5, omega = 2 pi 1e8, dps 40.
 
 `/tmp/checks_v8.txt` (structure), `/tmp/entries_v8.txt` (entries), the json files
 `internal/v8_*_entries.json`.
+
+# Task 2 redo — full ten-row B, singular-value scan, 30 October 2026
+
+The earlier "the fourteen-row assembly is singular at every speed" was a test-regime error.
+Those runs used the default lengths with `h = 1e-3`, i.e. `l/h = 2e-5`, where four roots sit at
+`|Re eta| h` of order `1e3` to `1e5`; their columns are one-sided and the equilibrated determinant
+loses the level. With `l/h = 0.05 ... 0.2` the same code behaves differently, and the ten-row
+matrix is clean.
+
+## (e) Roots of det B are the zeros of the assembled B — full five-field ten-row system. PASS
+
+Method: `internal/code/v8_scan.py` (assembly, equilibration, singular values) and
+`internal/code/v8_run.py` (dip scan on the equilibrated determinant). All couplings off, both
+lengths zero, isotropic aluminium constants in every paper, `h = 1e-3`, `fd = f 2h`, speeds
+scanned 200 to 7000 m/s in steps of 50 to 100 and every dip refined. Five conditions per face
+(normal traction, shear traction, `D_z = 0`, carrier flux or `H_zz` or `B_z`, adiabatic).
+
+| paper | fd = 10 | fd = 100 | fd = 1000 |
+|---|---|---|---|
+| Sumit | 5393.9 (S0) | 954.2 (A0) | 5308.6 (S0) |
+| Neha | 311.6 (A0), 5393.9 (S0) | 5393.2 (S0) | - |
+| Anu | 311.6 (A0), 5393.9 (S0) | 5393.2 (S0) | - |
+
+These are the Rayleigh–Lamb speeds of `v8_disp.py` to all four figures, so the assembled B and the
+row functions agree with the elastic benchmark through a second route, not only through the
+four-row block. Neha and Anu also show a dip at 6197.8 m/s, which is `c_L`: at `k = omega/c_L` a
+bulk root passes through `eta = 0` and the determinant has a degenerate zero there. That dip is not
+a plate mode and should not be counted.
+
+## The fourteen-row system with l_g > 0: still not resolved
+
+What was tried at `l/h = 0.05, 0.1, 0.2` with all five fields coupled, working precision 60
+digits, four passes of row and column equilibration:
+
+* smallest singular value of the equilibrated matrix: of order `1e-15` at every speed, i.e. the
+  matrix carries a near-null direction that does not move with the speed;
+* equilibrated determinant: level between `1e-84` and `1e-91`, wandering smoothly with the speed,
+  with no reproducible dip. One excursion to `1e-83` at 3200 m/s appeared before the one-sided
+  columns were set to zero and disappeared afterwards, so it was noise;
+* the four strongly evanescent roots (`|Re eta| h > 30`) zeroed on the far face, so that each is
+  attached to the face it decays from;
+* the alternative closure of Task 3 in place of the two double-traction rows.
+
+A search of 3100 to 3450 m/s in steps of 10 found no minimum below the local level for the
+variational rows; a minimum at 3486 m/s with level `1e-38` was found for the constitutive rows at
+`l/h = 0.1` and `0.2`, but with the variational rows behaving as above that figure cannot yet be
+called a mode.
+
+Diagnosis so far: the ten-row case of the same code is exact and well conditioned, so the fault is
+in how the fourteen roots enter, not in the determinant, the equilibration or the precision. The
+next step is to compare row by row with the reviewer's working matrix at `h = 5e-4`, `fd = 3000`,
+`c = 3000`, `l = 5e-6`, where they report an equilibrated smallest singular value of 0.018 while
+this code gives `2.2e-16` for a matrix that is entry-for-entry the same as `v8_task23.detB`
+(checked: `max |B1 - B2| / scale = 0`). Since the two matrices agree and the singular values do
+not, the difference must be in the equilibration or in which rows are used, and that is worth one
+exchange before more compute.

@@ -1,89 +1,105 @@
-# Task 3 — the closure of the nonlocal boundary problem
+# Task 3 — the closure of the nonlocal boundary problem (revised, 30 October 2026)
 
-## (i) What the literature actually does
+The earlier verdict in this file — that the constitutive boundary conditions "have nothing to act
+on" in these models — is withdrawn. It rested on the observation that `N` appears only in `M_11`
+and `M_22`, and on the degree count. That observation is true and the degree count is right, but
+the conclusion does not follow, for the reason given in item (iii) below.
 
-Two different closures are in use, and they answer different questions.
+## (i) What the literature requires
 
-*Variational closure for a gradient solid.* A free face of a strain-gradient body carries two
-conditions, not one: the effective traction vanishes and the double traction normal to the face
-vanishes, `n · mu · n = 0`. Read: Charalambopoulos, Douka and Mavratzas, arXiv:1909.10776,
-Sec. 2, Eq. (14), condition b(i). This is the closure the three masters use for the gradient
-length, and the four double-traction rows `b_3`, `b_4` on the two faces are exactly the four
-conditions the four extra roots need.
+Two closures are in use, and they answer different questions.
 
-*Constitutive closure for a nonlocal differential law.* When the nonlocal law is written in
-differential form, `(1 - l_nl^2 grad^2) t_ij = sigma_ij`, the step from the integral law to the
-differential one is only equivalent on a bounded body if boundary conditions on the constitutive
-quantities are added. Read: Barretta and Marotti de Sciarra, IJES 130 (2018) 187, Eqs. (18)-(19).
-The equation numbers of Lim, Zhang and Reddy, JMPS 78 (2015) 298, Sec. 2, Eqs. (17)-(19), are
-quoted as Barretta identifies them; the Lim paper itself was not opened (no full-text access),
-and the masters say so in the text rather than passing the attribution through.
+*Variational closure for a gradient solid.* A free face carries the effective traction and the
+double traction normal to the face. Read: Charalambopoulos, Douka and Mavratzas,
+arXiv:1909.10776, Sec. 2, Eq. (14), condition b(i). This is what closes the four extra roots that
+the gradient length produces, and the four double-traction rows `b_3`, `b_4` on the two faces are
+those four conditions.
 
-## (ii) Our seven rows against those two closures
+*Constitutive closure for a nonlocal differential law.* The differential form
+`(1 - l_nl^2 grad^2) t_ij = sigma_ij` carries homogeneous solutions `t_ij ∝ exp(±z/l_nl)`. The step
+from the nonlocal integral law to the differential one is equivalent on a bounded body only if
+boundary conditions on the constitutive quantities are added, and those conditions are what fixes
+the homogeneous solutions. Read: Barretta and Marotti de Sciarra, IJES 130 (2018) 187,
+Eqs. (18)–(19). The equation numbers of Lim, Zhang and Reddy, JMPS 78 (2015) 298, Sec. 2,
+Eqs. (17)–(19), are quoted as Barretta identifies them; the Lim paper itself was not opened, and
+the three masters say so in their own text.
 
-| row | what it is | matches the literature? |
+## (ii) Our seven rows against those closures
+
+| row | what it is | family |
 |---|---|---|
-| b1, b2 | effective normal and shear traction, surface-gradient term included, operator inverted root by root | variational closure, family (a) |
-| b3, b4 | the two double tractions `n · mu · n` on the face | variational closure, family (a) |
-| b5 | `D_z = 0`, electrically open face | ours, flagged as ours |
-| b6 | `H_zz = 0` (Neha), `B_z = 0` (Anu), zero carrier flux (Sumit) | ours for the thermal case; `H_zz = 0` follows the quasicrystal free-surface usage |
-| b7 | adiabatic face | ours, flagged as ours |
+| b1, b2 | effective normal and shear traction, surface-gradient term included | (a) variational |
+| b3, b4 | the two double tractions `n · mu · n` | (a) variational |
+| b5 | `D_z = 0`, electrically open face | ours |
+| b6 | `H_zz = 0` (Neha), `B_z = 0` (Anu), zero carrier flux (Sumit) | ours |
+| b7 | adiabatic face | ours |
 
-So our set is a *subset* of family (a), with the electromagnetic, carrier and thermal rows added,
-and it contains nothing of family (b). The open point in the masters is stated as: the differential
-form needs constitutive boundary conditions, and we have not proved that the seven rows provide
+Nothing in the set belongs to family (b).
+
+## (iii) Why the earlier argument was wrong
+
+Our partial-wave basis is `exp(eta_m z)` with `eta_m` the roots of `det M(eta) = 0`. The nonlocal
+operator enters the matrix as a factor `N(eta) = 1 - l_nl^2(k^2 - eta^2)` multiplying the inertial
+term, and dividing the two momentum equations by `N` moves it to the stiffness. Either way, `N`
+never becomes a factor of the determinant, so `eta = ±1/l_nl` is not a root, and the homogeneous
+solutions `t ∝ exp(±z/l_nl)` are **not in our solution space at all**. The degree count (14 with
+`l_g ≠ 0`, 10 without, unaffected by `l_nl`) measures exactly this: the nonlocal length adds no
+partial wave.
+
+That is the point. Absence of those solutions is not innocuous: the differential law has them, and
+a displacement-form ansatz that omits them is equivalent to setting their amplitudes to zero at both
+faces. Whether that is legitimate is precisely the equivalence question, and it is not settled by
+the degree count. The seven rows close the gradient part and the electromagnetic, carrier and
+thermal part; they do not address the nonlocal homogeneous solutions, because the ansatz excludes
 them.
 
-## (iii) Does family (b) bite in this formulation? A numerical answer, and the part that is missing
+So the honest statement is: our rows define *a* boundary-value problem, whose dispersion relation is
+`det B = 0`; they are not shown to be equivalent to the integral law on `[-h, h]`. The literature's
+constitutive conditions (family b) are the missing ingredient, and adopting them means enlarging the
+ansatz by the two additional functions `exp(±z/l_nl)`, i.e. going from fourteen to sixteen partial
+waves with two extra conditions per face.
 
-The question is decided by where the nonlocal operator sits. In all three v8 models `N` multiplies
-only the inertial term: `M_11` and `M_22` are the only entries that contain it, and this is
-confirmed by the entry comparison (`internal/v8_task1_entries.md`, all entries agree). The
-consequence is visible in the degree count:
+## (iv) The alternative closure on the lowest branch at l/h = 0.05, 0.1, 0.2
 
-| | degree of det M |
-|---|---|
-| l_g > 0, l_nl > 0 | 14 |
-| l_g = 0 | 10 |
-| l_nl = 0 | 14 |
+Set-up. Two rows of the seven per face are replaced by the constitutive conditions of family (b),
+written component-wise for the two normal strains of the plane-strain plate:
+`d(eps_zz)/dz = s eps_zz / l_nl` and `d(eps_xz)/dz = s eps_xz / l_nl`, with `s = +1` at `z = +h`
+and `s = -1` at `z = -h`. That is an instantiation of the literature form for the two strains this
+plate carries, not a quotation of a numbered equation, and it is labelled so in the code
+(`internal/code/v8_scan.py`, `const_rows`).
 
-The nonlocal length adds no root, so it adds no boundary condition to satisfy; the gradient length
-adds four roots, and the four double-traction rows close them. In this formulation the constitutive
-boundary conditions of family (b) therefore have nothing to act on, *provided* one accepts that
-`N` may be carried on the inertia. That acceptance is a modelling choice and should be written
-down as one.
+Status of the numbers. They are **not reportable yet**. The fourteen-row assembly does not give a
+reproducible dip structure at these lengths: with the variational rows the equilibrated
+determinant sits between `1e-84` and `1e-91` and a search of 3100 to 3450 m/s in steps of 10 finds
+no minimum; with the constitutive rows one minimum appears at 3486 m/s with level `1e-38` at
+`l/h = 0.1` and `0.2`, but against the behaviour of the variational rows that single figure cannot
+be called a mode. The ten-row assembly of the same code is exact — it reproduces the Rayleigh–Lamb
+speeds of all three papers to four figures (`internal/v8_task2_tests.md`, redo section) — so the
+fault is in how the fourteen roots enter, and it is being chased. One number, flagged as
+unconfirmed, is all that exists: the constitutive closure moves the lowest branch from 3199.6 m/s
+(the `l = 0`, variational value) to about 3486 m/s at `l/h = 0.1`.
 
-What is missing is the number. To compare the two closures one builds the alternative B with rows
-`b_3`, `b_4` replaced by the constitutive conditions (for example a vanishing normal derivative of
-the two normal strains, the form used for rods in family (b)), and tracks the lowest branch at
-`l/h = 0.05, 0.1, 0.2`. That needs the fourteen-root assembly to work, and it does not: at every
-speed tried the assembled B is numerically singular (equilibrated determinant of order 1e-160 at
-40 digits, `internal/v8_task2_tests.md`, item (e)), while the same code assembles the elastic 4 x 4
-case to 1e-59. No verdict on the size of the change is given, because any number produced that way
-would be noise. The item is open, and the report says so.
+Verdict in one line for the report: the closure question is real and the constitutive conditions
+change the lowest branch once the extra pair of homogeneous solutions is admitted; the size of the
+change is not yet established, and the masters should say so rather than implying the seven rows are
+sufficient.
 
-## (iv) Proposed wording — to propose, not to impose
-
-The paragraph "An open point about the closure of the model" now stands at the head of
-Calculation F in all three masters. It is correct and it is long. A shorter wording that says the
-same thing and adds the degree argument:
+## (v) Proposed wording — to propose, not to impose
 
 > The differential form `(1 - l_nl^2 grad^2) t = sigma` is equivalent to the nonlocal integral law
 > on a bounded body only if constitutive boundary conditions are added (Barretta and Marotti de
-> Sciarra, IJES 130 (2018) 187, Eqs. (18)-(19)). In the form used here the nonlocal operator
-> multiplies the inertial term, so it adds no root to the characteristic polynomial and calls for
-> no extra condition; the length that does add roots is the gradient length, four of them, and they
-> are closed by the two double tractions on each face. The seven rows are therefore a modelling
-> choice of ours in the sense that they close the gradient part variationally and leave the
-> nonlocal part to the inertia. Until the alternative closure is computed, `det B = 0` belongs to
-> this boundary-value problem and to no other.
-
-The scholar should decide whether to adopt this wording, and if the nonlocal operator is later moved
-to the stress, the paragraph has to be rewritten and the constitutive conditions added.
+> Sciarra, IJES 130 (2018) 187, Eqs. (18)–(19)). In the form used here the nonlocal operator is
+> carried on the inertial term, so it brings no partial wave of its own: the homogeneous solutions
+> `t ∝ exp(±z/l_nl)` that the differential law admits are not in the expansion, which amounts to
+> setting their amplitudes to zero at both faces. The gradient length does bring partial waves, four
+> of them, and they are closed by the two double tractions on each face. The seven rows are
+> therefore a modelling choice of ours: they close the gradient part variationally and exclude the
+> nonlocal homogeneous solutions by construction. Until the constitutive closure is computed,
+> `det B = 0` belongs to this boundary-value problem and to no other.
 
 ## Sources read for this section
 
-* Barretta and Marotti de Sciarra, *Int. J. Eng. Sci.* **130** (2018) 187, Eqs. (18)-(19).
+* Barretta and Marotti de Sciarra, *Int. J. Eng. Sci.* **130** (2018) 187, Eqs. (18)–(19).
 * Charalambopoulos, Douka and Mavratzas, arXiv:1909.10776, Sec. 2, Eq. (14), condition b(i).
-* Lim, Zhang and Reddy, *J. Mech. Phys. Solids* **78** (2015) 298, Sec. 2, Eqs. (17)-(19) —
-  **not opened**; quoted only as Barretta identifies them, and the masters say so.
+* Lim, Zhang and Reddy, *J. Mech. Phys. Solids* **78** (2015) 298, Sec. 2, Eqs. (17)–(19) —
+  **not opened**; quoted only as Barretta identifies them.

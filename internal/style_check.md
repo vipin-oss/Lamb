@@ -29,3 +29,9 @@ engine in the sandbox, so no PDF exists and no page count can be measured.
 - sentence length: mean 21.3, sd 11.3, shortest 3, longest 48
 - forbidden words: none found
 - runs of three sentences with the same opening word: 0
+
+## reports/packages_v8b.tex (report of this round)
+
+- prose words 768, tables 2, em dashes 1, estimated pages 1.8 (estimate only, no engine)
+- forbidden words: none found (a case-insensitive match on the two letters of "AI" hits "against" and is not a finding)
+- no bold in running text, no bullet lists in prose, no slogan headings

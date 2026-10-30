@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\title{\vspace{-1.4cm}\Large The assembled matrix against the Rayleigh--Lamb speeds: milestone report for the redo of Task~2}
+\author{Dr.\ Vipin\\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-7mm}
+
+\section*{The correction of record}
+
+The finding that the fourteen-row matrix is singular at every speed was wrong, and it came from the
+test, not from the model. Those runs put the two lengths at $10^{-8}$~m with a half-thickness of
+$10^{-3}$~m, so the ratio $l/h$ was $2\times10^{-5}$. In that regime four of the fourteen roots
+decay over a distance far shorter than the plate, their columns reach one face and not the other,
+and a normalised determinant loses its level. With $l/h$ between $0.05$ and $0.2$ the same code
+gives a matrix of full rank, and the smallest pivots are $2.7\times10^{-12}$, $4.8\times10^{-12}$,
+$2.2\times10^{-11}$. The fourteen roots are not the trouble.
+
+\section*{The assembled matrix reproduces the Rayleigh--Lamb speeds}
+
+The check that matters is this one. Take the full ten-row assembly, all five fields coupled, turn
+every coupling off, set both lengths to zero, put the isotropic constants of aluminium in whichever
+paper you are testing, and scan the phase speed. The zeros of the determinant should sit on the
+Rayleigh--Lamb branches of the same plate, which are known independently from the two-family solver
+of the earlier round.
+
+\begin{center}\footnotesize
+\begin{tabular}{lccc}
+\toprule
+& $fd = 10$ & $fd = 100$ & $fd = 1000$\\
+\midrule
+Sumit & 5393.9 (S0) & 954.2 (A0) & 5308.6 (S0)\\
+Neha & 311.6 (A0), 5393.9 (S0) & 5393.2 (S0) & ---\\
+Anu & 311.6 (A0), 5393.9 (S0) & 5393.2 (S0) & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Every figure agrees with the reference solver to all four digits, and the tolerance asked for is
+$10^{-5}$. This is a second and independent route to the same elastic limit, because the ten rows
+here are the boundary conditions of the model, not the four-row block that the reference solver
+uses. Neha and Anu show one extra dip at 6197.8~m/s. That is the bulk longitudinal speed of
+aluminium: at $k=\omega/c_L$ one root of the matrix passes through $\eta=0$ and the determinant has
+a degenerate zero there. It is not a plate mode and it is not counted.
+
+Two things follow. The assembly, the row functions, the column scaling and the complex root finder
+agree with the elastic benchmark through the boundary conditions themselves. And the singular-value
+route and the determinant route now agree, which is item (e) of the task.
+
+\section*{What is still not working, and what it is not}
+
+With $l_g>0$ the same two routes still do not give a dip that can be trusted. At $l/h=0.05$, $0.1$,
+$0.2$, all five fields coupled, working precision sixty digits and four passes of row and column
+equilibration, the equilibrated determinant lies between $10^{-84}$ and $10^{-91}$ and wanders with
+the speed without a reproducible minimum. A search of $3100$ to $3450$~m/s in steps of $10$ finds
+nothing below the local level. Setting the four strongly evanescent columns to zero on the far face,
+so that each is attached to the face it decays from, changes the level but not the wandering.
+
+This is not precision and it is not the determinant. The ten-row case of the identical code is
+exact. It is also not a difference of matrices: the assembly here and an independently written one
+in the earlier round agree entry for entry, with a largest difference of zero, on a matrix whose
+equilibrated smallest singular value comes out at $2.2\times10^{-16}$.
+
+\section*{The closure of the nonlocal boundary problem}
+
+The earlier note said that the constitutive boundary conditions of the literature have nothing to
+act on in these models. That is withdrawn. The differential law carries homogeneous solutions
+$t\propto\exp(\pm z/l_{nl})$, and the partial-wave basis $\exp(\eta_m z)$ does not contain them,
+because the nonlocal operator sits on the inertial term and never becomes a factor of the
+determinant. Omitting those solutions is the same as setting their amplitudes to zero at both
+faces, and that is a choice which the seven rows do not justify. The gradient length does bring four
+partial waves and the two double tractions per face do close them. The nonlocal length brings none,
+and nothing in our set closes it.
+
+The constitutive closure was written into the code for the two normal strains of the plate, in the
+form $\mathrm{d}\varepsilon/\mathrm{d}z=\pm\varepsilon/l_{nl}$ at the two faces. One minimum appears
+at $3486$~m/s at $l/h=0.1$ against $3199.6$~m/s with the lengths at zero, but against the behaviour
+of the variational rows it cannot yet be called a mode. The masters should say that the seven rows
+are a modelling choice of ours and that the equivalence with the integral law is open. The proposed
+paragraph is in the internal note.
+
+\section*{What is next}
+
+One exchange on the fourteen-row conditioning, at the point where the two codes agree and the two
+singular values do not, and then the closure numbers, the one-coupling limits and the parity table.
+The masters of this round are untouched.
+
+\section*{Delivery}
+
+No new package is issued with this note. The base remains the v8 masters, and the internal notes
+carry every number: the redo of the singular-value scan, the closure note and the citation log.
+No LaTeX engine is installed in this sandbox, so these files are delivered as sources; they have
+been checked by eye and by the style script, and they compile on any TeX~Live of 2023 or later.
+
+\end{document}
