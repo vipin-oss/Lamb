@@ -1,0 +1,155 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{4pt}
+\title{\vspace{-1.6cm}\Large Basics and Definitions\\[2pt]
+\large A plain-language companion to the research plan on Lamb waves in a quasicrystal plate}
+\author{Dr.\ Vipin \\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-6mm}
+
+\section{Order without repetition}
+
+Most solids we meet are crystals. Their atoms sit on a lattice that repeats, so if you take a small block of
+the crystal and slide it by one lattice spacing it looks exactly the same. Quasicrystals do not do this. They
+have sharp diffraction spots, which means their atoms are arranged with long-range order, but the spots sit
+at spacings that no repeating lattice can produce. The discovery of such a material in 1982 changed the way
+chemists and physicists thought about what a solid is allowed to be, and the Nobel Prize in Chemistry in 2011
+went to Dan Shechtman for it.
+
+The easiest picture is a tiling. Take two shapes of tile, say a fat rhombus and a thin one, and lay them out
+so that the pattern never repeats but always follows the same local rules. A well-known example is the
+Penrose tiling of the plane, built from two such rhombi. Stand on any tile and look around: the pattern is
+ordered, and yet no two places are identical in the way that two places in a brick wall are. Quasicrystals
+are the three-dimensional version of that idea, and one-dimensional quasicrystals are the version in which
+the aperiodic order runs along a single direction only.
+
+\section{Why a quasicrystal needs two displacements}
+
+In a normal solid, one field is enough to describe deformation. That field is the displacement, the small
+movement of each point away from where it was. Engineers call it the phonon displacement, borrowing the name
+of the sound quantum, because the waves of that field are sound waves.
+
+In a quasicrystal something else can happen. A block of tiles can rearrange without any of the tiles being
+squeezed. They slide over each other, the way a set of books slides along a shelf, and after the slide the
+material is locally a different tiling. This rearrangement is described by a second field, the phason
+displacement. It is worth saying clearly what it is not. The phason displacement is not a movement of
+material in space. A point does not go anywhere. What changes is the way the tiles fit, and the phason field
+measures how much the fit has changed. That is why writers speak of phason strain but rarely of phason
+velocity in the ordinary sense.
+
+The practical consequence is that a quasicrystal has more elastic constants than a crystal of the same
+symmetry. Some of them describe the ordinary elasticity, some the cost of a rearrangement, and some the
+coupling between the two. Once the material is deformed, a phonon strain can generate a phason strain, and
+the other way round, and that traffic is what makes these materials interesting to a mechanician.
+
+\section{Phasons relax, and sometimes they travel}
+
+The distinguishing feature of the phason field in dynamics is that it is not conserved. A rearrangement can
+happen, and then it can undo itself. In the language of mechanics, the phason has friction. If the friction
+is large compared with the inertia, a disturbance in the phason field does not travel as a wave; it spreads
+and dies, exactly as heat spreads through a metal bar. If the friction is small, the phason field can carry a
+wave with a finite speed.
+
+Both behaviours are described by one equation, the telegraph equation, which contains an inertia term and a
+friction term. Turn the friction off and you get a wave equation. Turn the inertia off and you get a
+diffusion equation. Keep both and the behaviour changes with frequency: at low frequency the disturbance
+diffuses, at high frequency it propagates. Which regime you are in depends on how the wave period compares
+with the relaxation time.
+
+This is not a mathematical curiosity. A plate has a smallest wavelength it can support, because a
+half-wavelength cannot be longer than the plate is thick. So the thickness sets the lowest frequency at
+which a phason mode can exist, and by choosing the thickness one can push the phason mode from the diffusing
+side of the crossover to the travelling side. That is the reason a plate is a good place to study this.
+
+\section{What one-dimensional hexagonal means}
+
+Real quasicrystals are classified by their symmetry, just as crystals are. A one-dimensional quasicrystal has
+periodic order in two directions and aperiodic order in the third. If the periodic plane has six-fold
+symmetry, the material is called a one-dimensional hexagonal quasicrystal. It is the simplest case, it is the
+one for which the plate literature is largest, and it is the one in which the phason field has a single
+independent component along the aperiodic axis.
+
+In our problem the aperiodic axis is the thickness, which is a deliberate choice. It means the phason
+displacement is a function of the thickness coordinate, and the plate faces are where the phason field must
+be told what to do. That last point is where much of the difficulty sits, because nobody has a handbook of
+phason boundary conditions.
+
+\section{Piezoelectric quasicrystals}
+
+A piezoelectric material produces a voltage when squeezed and a strain when a voltage is applied. Some
+quasicrystals are piezoelectric, and the coupling works in the same way, with one addition: the electric
+field also couples to the phason strain, because a rearrangement of tiles can shift charge. So a
+piezoelectric quasicrystal plate has three couplings in play, phonon to phason, phonon to electric field, and
+phason to electric field, and a wave that travels in it carries all three fields at once.
+
+This is what makes the dispersion problem worth solving. Each coupling shifts the branches, and the shifts
+are not independent, so a measurement of two branches gives more information than two independent
+measurements would.
+
+\section{Lamb waves in one paragraph}
+
+A plate is thin compared with its length, so a disturbance inside it bounces between the free faces and ends
+up travelling along the plate rather than escaping. These guided waves come in two families, symmetric, in
+which the faces move in and out in opposite directions, and antisymmetric, in which they move together and
+the plate bends. The phase velocity of a guided wave depends on frequency, and that dependence, drawn as a
+graph, is the dispersion curve. A real wave also weakens as it travels, and the weakening is described by
+letting the wave number have an imaginary part: the real part fixes the wavelength and the imaginary part
+fixes the decay. Attenuation in nepers per metre follows from the ratio of the two parts. For comparing
+plates of different thickness one plots against frequency times thickness, because with that product the
+curves of different plates fall on top of one another.
+
+\section{The size effect, in two sentences}
+
+Thin plates do not behave like scaled-down thick plates. Two lengths are used to describe the difference, one
+that softens the response because the stress at a point depends on the strain around it, and one that
+stiffens it because bending a region costs extra energy. Both enter our model as a ratio to the thickness,
+and both raise the order of the equations, which is why the faces need more conditions than the classical
+ones.
+
+\section{The thermal part, briefly}
+
+Strain changes temperature and temperature changes strain, so a wave in any solid drags a temperature field
+along with it, and that field takes energy out of the wave. In the classical description heat diffuses
+instantly in the sense that a change anywhere is felt everywhere at once, which is unphysical at high
+frequency. The modified theory gives heat a short memory, so at high frequency the heat flow lags and the
+attenuation stops growing and levels off. In a quasicrystal plate both the phonon stress and the phason
+stress do work against the temperature, so the heat equation has two source terms rather than one, and the
+second one is the part of this work that has no published source.
+
+\section{Glossary and units}
+
+\begin{center}
+\small
+\begin{tabular}{p{4.2cm}p{8.4cm}p{2.4cm}}
+\toprule
+term & what it means & unit\\
+\midrule
+quasicrystal & solid with long-range order but no repeating unit cell & \\
+phason displacement & field that measures local rearrangement of tiles & m\\
+phonon displacement & ordinary displacement of material points & m\\
+phason stress & stress conjugate to the phason strain & Pa\\
+phonon-phason coupling & the traffic between the two strain fields & Pa\\
+telegraph equation & equation with both inertia and friction, diffusion at low frequency and waves at high & \\
+relaxation time & the time over which a disturbance of the phason field dies away & s\\
+one-dimensional hexagonal & periodic in a plane, aperiodic along one axis, six-fold symmetry in the plane & \\
+piezoelectricity & strain producing charge and charge producing strain & C\,m$^{-2}$\\
+mode, symmetric, antisymmetric & the two families of guided waves in a plate & \\
+dispersion curve & phase velocity drawn against frequency & \\
+wavenumber & phase per metre; complex, the imaginary part is the decay & m$^{-1}$\\
+attenuation & decay of amplitude per unit distance & Np\,m$^{-1}$\\
+frequency times thickness & comparison coordinate for plates of different thickness & Hz\,m\\
+size length & the length at which nonlocal or gradient effects become visible & m\\
+phase lag & the short memory given to heat by the modified theory & s\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

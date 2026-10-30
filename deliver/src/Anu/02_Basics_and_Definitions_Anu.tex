@@ -1,0 +1,139 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{4pt}
+\title{\vspace{-1.6cm}\Large Basics and Definitions\\[2pt]
+\large A plain-language companion to the research plan on Lamb waves in a magneto-electro-elastic plate}
+\author{Dr.\ Vipin \\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-6mm}
+
+\section{Three properties, three fields}
+
+A piezoelectric material produces a voltage when it is squeezed, and it changes shape when a voltage is
+applied to it. Barium titanate is the standard example and it is used in sensors, in capacitors and in
+ultrasonic transducers.
+
+A piezomagnetic material does the same thing with magnetism instead of electricity. Squeeze it and the
+magnetisation changes; apply a magnetic field and it changes shape. Cobalt ferrite is the common example.
+
+A magneto-electric material is one in which a magnetic field produces an electric polarisation, or an
+electric field produces a magnetisation. Single phases with a useful magnetoelectric effect are rare. What
+works is a composite: put the piezoelectric and the piezomagnetic phases together so that the strain passes
+from one to the other. The magnetic field strains the ferrite through piezomagnetism, the strain is
+transmitted across the interface, and the titanate polarises through piezoelectricity. The chain works
+because the strain is the messenger.
+
+The consequence for anyone writing a paper on such a material is important. The magnetoelectric coefficient
+of a composite is not a material constant in the way that a density is. It depends on how much of each phase
+there is, on the shape of the inclusions, on the interface, and on the temperature. Different ways of
+averaging the two phases give different answers, and the spread between them is a real uncertainty, not a
+rounding error.
+
+\section{What pyroelectric and pyromagnetic mean}
+
+Heating a piezoelectric crystal changes its polarisation even if nothing mechanical happens, because the
+crystal expands and the charges shift. The coefficient that measures this is called the pyroelectric
+coefficient. In the same way, heating a piezomagnetic crystal changes its magnetisation, and the coefficient
+is called the pyromagnetic coefficient.
+
+Both effects run backwards. An electric field applied across the crystal changes its temperature, and that is
+called the electrocaloric effect. A magnetic field changes its temperature, and that is called the
+magnetocaloric effect. These backwards effects are the reason a magnetocaloric material can be used in a
+refrigerator without any moving gas.
+
+The two directions are not independent. If the material is heated and polarises, then an applied field must
+also change its heat content, and the two coefficients are tied by the same thermodynamic reciprocity that
+links the Seebeck and Peltier effects in a thermocouple. In an equation of motion, this means that a paper
+which keeps the pyroelectric term in the electric displacement but drops the electrocaloric term in the heat
+equation is not conserving anything. Our model keeps both, and that is a small point of correctness rather
+than a new discovery.
+
+\section{How the two phases are averaged}
+
+If you mix two materials, you need a rule for what the mixture's stiffness, permittivity and permeability
+are. The simplest rule is the rule of mixtures, which says that the property is the volume average of the two
+phases. It is exact when the two phases are arranged as layers in series or in parallel, and it is the rule
+most often used for laminates because a laminate really is layers.
+
+A better rule for a material with inclusions is the Mori and Tanaka estimate, which accounts for the shape of
+the inclusions and for the fact that each inclusion feels the average field of its neighbours, not the
+applied field. For a stack of two continuous layers, the two rules give the same answer in the layering
+direction and different answers in the plane.
+
+In this work both routes are carried. The reason is not indecision. If the thermal effect we are chasing is
+smaller than the difference between the two routes, then no experiment could tell the effect from the
+uncertainty, and the reader deserves to see that on the same graph rather than in a footnote.
+
+\section{Lamb waves in one paragraph}
+
+A plate is thin compared with its length, so a disturbance inside it bounces between the free faces and
+travels along the plate. The guided waves that result come in two families, symmetric, where the faces move
+in and out in opposite directions, and antisymmetric, where they move together and the plate bends. Phase
+velocity depends on frequency, and the graph of one against the other is the dispersion curve. A real wave
+also weakens as it goes, and that weakening is written by giving the wave number an imaginary part: the real
+part fixes the wavelength, the imaginary part fixes the decay, and the ratio of the two tells you how lossy
+the mode is. Comparing plates of different thickness is done by plotting against frequency times thickness.
+
+\section{The size effect}
+
+Very thin plates do not behave like scaled-down thick plates. Two lengths describe the difference. One
+softens, because the stress at a point is taken to depend on the strain in a whole neighbourhood and not
+at the point alone. The other stiffens, because a region where the strain changes quickly costs more energy than a
+region where it is uniform. Both are written as ratios to the thickness, both are small at ordinary
+thicknesses, and both raise the order of the equations, which is why the faces need more conditions.
+
+In a laminated composite the size length is not that of either phase. This is one of the places where the
+model is weaker than we would like, and the paper treats the size lengths as a sensitivity rather than as
+fitted quantities.
+
+\section{The thermal part, briefly}
+
+Strain changes temperature and temperature changes strain, so a wave in any solid drags a temperature field
+and loses some energy to it. In the classical description heat diffuses, and the description allows a
+temperature change in one place to be felt everywhere at once in a small way, which is unphysical at high
+frequency. The modified theory gives heat a short memory, controlled by a relaxation time, and the practical
+effect is that the attenuation stops growing with frequency and levels off.
+
+For the composite there is a further difficulty. The relaxation time of the ceramic and that of the ferrite
+are very different, because their thermal conductivities and heat capacities are different. An effective lag
+for the stack therefore has to be defined, and the choice has to be defended. This is one of the four risks
+listed in the plan.
+
+\section{Glossary and units}
+
+\begin{center}
+\small
+\begin{tabular}{p{4.2cm}p{8.4cm}p{2.4cm}}
+\toprule
+term & what it means & unit\\
+\midrule
+piezoelectricity & strain producing charge and charge producing strain & C\,m$^{-2}$\\
+piezomagnetism & strain producing magnetisation and field producing strain & N\,A$^{-1}$m$^{-1}$\\
+magnetoelectric effect & magnetic field producing polarisation, or the reverse & s\,m$^{-1}$\\
+pyroelectricity & polarisation produced by a change of temperature & C\,m$^{-2}$K$^{-1}$\\
+pyromagnetism & magnetisation produced by a change of temperature & N\,A$^{-1}$m$^{-1}$K$^{-1}$\\
+electrocaloric, magnetocaloric & temperature change produced by an applied electric or magnetic field & \\
+product property & property of the composite that neither phase has on its own & \\
+rule of mixtures & averaging the property by volume fraction & \\
+Mori and Tanaka & averaging that accounts for inclusion shape and interaction & \\
+laminate & stack of layers with the layering along the thickness & \\
+mode, symmetric, antisymmetric & the two families of guided waves in a plate & \\
+dispersion curve & phase velocity drawn against frequency & \\
+wavenumber & phase per metre; complex, the imaginary part is the decay & m$^{-1}$\\
+attenuation & decay of amplitude per unit distance & Np\,m$^{-1}$\\
+frequency times thickness & comparison coordinate for plates of different thickness & Hz\,m\\
+size length & the length at which nonlocal or gradient effects become visible & m\\
+phase lag & the short memory given to heat by the modified theory & s\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

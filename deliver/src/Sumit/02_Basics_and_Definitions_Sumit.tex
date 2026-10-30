@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{4pt}
+\title{\vspace{-1.6cm}\Large Basics and Definitions\\[2pt]
+\large A plain-language companion to the research plan on guided waves in a piezoelectric semiconductor plate}
+\author{Dr.\ Vipin \\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-6mm}
+
+\section{What we are looking at}
+
+A plate is a slab of material whose thickness is much smaller than its length and width. If you tap a plate
+at one point, the disturbance does not simply travel through it and leave. It bounces between the two free
+surfaces, and the bouncing slows it down in the direction along the plate. The result is a wave that stays
+inside the plate and runs along it. Such a wave is called a guided wave. Lamb waves are the guided waves of
+a solid plate, named after Horace Lamb, who worked them out in 1917.
+
+The reason a plate can hold a wave is the free surface. A free surface cannot pull or push, so the stress on
+it must be zero. When the whole plate is thick compared with the wavelength, a wave near one surface does not
+feel the other surface, and it behaves like a wave on a half space. When the plate is thin, the two surfaces
+talk to each other, and the wave acquires a character of its own.
+
+Lamb waves come in two families, symmetric and antisymmetric. In a symmetric wave the two faces move in
+opposite directions, in and out, and the middle of the plate stays more or less still in the thickness
+direction. In an antisymmetric wave the faces move together, up and down, and the plate bends. The two
+lowest members of the families are called $S_0$ and $A_0$, and they are the ones most often used in devices.
+
+\section{Speed, frequency and dispersion}
+
+A wave has a frequency, which is how many times per second the material goes back and forth, and a
+wavelength, which is the distance between two neighbouring crests. The phase velocity is the speed at which
+a crest appears to move. It is the wavelength multiplied by the frequency. For light in vacuum the phase
+velocity is the same for every frequency, and that is why a rainbow forms only when light bends. For guided
+waves in a plate the phase velocity depends on frequency. That dependence is called dispersion, and a graph
+of phase velocity against frequency is called a dispersion curve.
+
+Dispersion is not a nuisance. It is the reason a plate is useful. Because the dispersion curve of a plate
+depends on its thickness, on its elasticity, on its density and on how it is held, a measured dispersion
+curve can be turned around and used to infer those quantities. This is how a thin plate can be used as a
+sensor without any electrical connection to its interior.
+
+There are two different frequencies in the room and it is easy to mix them up. One is measured in hertz, the
+number of cycles in one second. The other is set by the plate itself, and it is the frequency at which a
+half wavelength fits through the thickness. When we compare plates of different thickness we use the
+product of ordinary frequency and thickness, written $f\,(2h)$ with $2h$ the thickness. With that product on
+the horizontal axis, plates of different thickness fall on the same curve, which makes comparison possible.
+Its unit is hertz times metre.
+
+\section{Attenuation, and why the wave number is complex}
+
+In a real material a guided wave weakens as it travels. Part of the energy is carried away, part is turned
+into heat, and part leaks into whatever the plate touches. The simplest way to describe this is to let the
+wave number be a complex number. The wave number says how many radians of phase fit into one metre, and its
+magnitude is the reciprocal of the wavelength apart from a factor of two pi. Writing it as a real part plus
+an imaginary part, the real part sets the wavelength and the imaginary part sets the decay. A positive
+imaginary part means the amplitude falls off as the wave moves in the positive direction. The ratio of
+imaginary to real part is a measure of how lossy the mode is over one wavelength. Multiplying that ratio by
+the frequency and dividing by the phase velocity gives attenuation in nepers per metre, and dividing by the
+phase velocity again converts it into decibels per unit length, which is what an instrument reports.
+
+This is the quantity the paper is built around. Phase velocity tells you how fast and how long; attenuation
+tells you how far. A device designer needs both, because the useful length of a delay line or a filter is
+set by the attenuation, not by the speed.
+
+\section{The material and why it is a semiconductor}
+
+A piezoelectric material is one in which squeezing the crystal produces a voltage, and applying a voltage
+produces a squeeze. Zinc oxide is one. It is used in thin films for acoustic devices because it can be grown
+on silicon and it couples electricity to strain reasonably well.
+
+A semiconductor is a material in which a small number of electrons are free to move, and their number can be
+changed by doping. Zinc oxide can be made either way depending on how it is grown. When a material is both
+piezoelectric and semiconducting, the two behaviours are not separate. A wave travelling through it produces
+a voltage through piezoelectricity, and that voltage pushes the free electrons around. The electrons gather
+where the voltage is high and thin out where it is low, and their redistribution modifies the very electric
+field that caused it. The motion of electrons is slow compared with the wave, so the two are out of step, and
+that lag is what produces extra attenuation.
+
+The physics of this is standard in semiconductor devices. Electrons drift under an electric field and they
+diffuse from crowded places to empty places. They can also recombine, which means an extra electron finds a
+hole and the pair disappears. In our model the excess electron density is a field in its own right, with its
+own equation, and that equation sits alongside the equations of motion.
+
+\section{Heat, and the modified gradient idea}
+
+When a material is strained it changes temperature slightly, and when it changes temperature it strains.
+This two-way traffic is called thermoelastic coupling. It produces a small attenuation of waves in every
+solid, and it is the reason a piece of metal warmed at one end develops stress far away.
+
+In the classical description, heat diffuses the way a smell spreads through a room. It is governed by a
+parabolic equation, which has the awkward property that a temperature change at one point is felt
+instantaneously, however far away, even if only in an immeasurably small amount. Modified gradient theory
+repairs this by giving heat a short memory. The temperature field obeys a relation that refers to itself a
+small time earlier, and the heat flux referred to itself a small time earlier, with two lags. In the base
+form we use, one lag is set to zero, and the equation keeps a single relaxation time. The effect is that at
+high frequency the heat flow starts to lag behind the temperature gradient, and the attenuation of the wave
+stops growing as it would classically and levels off instead.
+
+That levelling off has a practical consequence. It means the thermal contribution to attenuation is
+concentrated in a band of frequency, and for a given material that band corresponds to a band of thickness.
+A plate that is too thick has already passed the band, and a plate that is too thin is below it. One of the
+figures in the paper maps that band for the user, which is more useful than a single number.
+
+\section{The size effect}
+
+At very small thickness, a plate does not behave like a scaled-down version of a thick plate. It behaves
+stiffer or softer than scaling predicts, and both have been seen. Two ideas are used to describe this. The
+first says that the stress at a point is not decided by the strain at that point alone but by the strain in
+a small neighbourhood, so the material has a memory in space. This is the nonlocal idea, and it makes the
+material softer. The second says that the energy also depends on how fast the strain changes from point to
+point as well as on the strain itself, so a bent region costs more than a region of uniform strain. This is
+the strain gradient idea, and it makes the material stiffer.
+
+Each idea brings one length, a material property much smaller than a grain but much larger than an atom.
+Neither length can be measured directly in a wave test, which is why they are written as a ratio to the
+plate thickness and reported as a band. When both are present, a plate can be stiffer or softer than
+classical theory says depending on which of the two dominates, and that competition is part of what the
+paper reports.
+
+Both ideas, when written in the form used here, raise the order of the equations. In plain language, the
+equation for the through-thickness behaviour needs more information at the free surface than the classical
+one did. Deciding what that extra information should be is a research problem in itself, and it is the part
+of this work that the scholar takes up.
+
+\section{What the four couplings mean}
+
+It helps to keep the four couplings apart, because they are all in the same model and they all change the
+attenuation.
+
+The piezoelectric coupling turns strain into charge and charge into strain. It is the strongest of the
+four, and it is what makes the plate useful.
+
+The carrier coupling turns electric field into electron motion. It is weak in magnitude but it is the one
+that can be controlled from outside, by a bias voltage, and it can change sign in the sense that it can
+either attenuate or amplify a wave depending on the direction of the drift.
+
+The thermal coupling turns strain into temperature and temperature into strain. It is weak but it is
+universal, and it grows with frequency squared until the relaxation cuts it off.
+
+The thermoelectric coupling turns a temperature gradient into a carrier current, and, by the reciprocity of
+onsager, a carrier current into heat. The two directions are not independent: one material property, the
+Seebeck coefficient, fixes both. That is why the paper needs only one new number to add this effect, and why
+the sign of the effect is decided by the carrier type rather than by a fitting choice.
+
+\section{How the work will be judged}
+
+All four couplings together make a system that is easy to program and hard to trust. So the plan tests the
+model against things that are already known before it asks anything new. The elastic plate spectrum, the
+piezoelectric splitting, the two classical limits of the heat equation, and the known behaviour of the
+relaxation at high frequency are all things that can be compared with published work. Only after those four
+comparisons agree does the new result, the carrier contribution to attenuation in a thin plate, get a
+figure.
+
+There is one more test that is worth explaining. If a coupling is switched off in the model and the answer
+does not change, then either the coupling is small or the model is wrong. To tell the two apart, the same
+calculation is run twice, once with the coupling switched off by setting its constant to zero, and once with
+a version of the model in which that term was never written. The two answers must agree to six decimal
+places. This is a test of the code, not of the physics, and it is the reason the plan can claim later that a
+small effect is small because of the material and not because of a mistake in the assembly.
+
+\section{Glossary and units}
+
+\begin{center}
+\small
+\begin{tabular}{p{4.2cm}p{8.4cm}p{2.4cm}}
+\toprule
+term & what it means & unit\\
+\midrule
+thickness & the plate dimension across which the wave bounces & m\\
+frequency & cycles per second & Hz\\
+angular frequency & frequency multiplied by two pi & rad\,s$^{-1}$\\
+frequency times thickness & comparison coordinate for plates of different thickness & Hz\,m\\
+wavenumber & phase per metre; complex, the imaginary part is the decay & m$^{-1}$\\
+phase velocity & frequency divided by the real part of the wavenumber & m\,s$^{-1}$\\
+attenuation & decay of amplitude per unit distance travelled & Np\,m$^{-1}$\\
+dispersion curve & phase velocity drawn against frequency & \\
+mode & one of the possible through-thickness shapes of the wave & \\
+symmetric, antisymmetric & the two mode families, faces moving in or out together & \\
+piezoelectricity & strain producing charge and charge producing strain & C\,m$^{-2}$\\
+carrier density & number of free electrons per cubic metre & m$^{-3}$\\
+mobility & how easily an electron moves under a field & m$^2$V$^{-1}$s$^{-1}$\\
+diffusion coefficient & how quickly carriers spread from crowded to empty regions & m$^2$s$^{-1}$\\
+recombination time & average life of an excess electron before it disappears & s\\
+Seebeck coefficient & voltage produced per degree of temperature difference & V\,K$^{-1}$\\
+Peltier coefficient & heat carried per unit charge by a current & V\\
+thermal diffusivity & how quickly a temperature change spreads & m$^2$s$^{-1}$\\
+relaxation time & the short memory given to heat by the modified theory & s\\
+size length & the length at which nonlocal or gradient effects become visible & m\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}
