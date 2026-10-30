@@ -7,113 +7,121 @@
 \usepackage[a4paper,margin=2.2cm]{geometry}
 \usepackage[hidelinks]{hyperref}
 \setlength{\parskip}{3pt}
-\title{\vspace{-1.4cm}\Large The fourteen-row matrix is not singular: milestone report for the redo of Task~2}
+\title{\vspace{-1.4cm}\Large Couplings one at a time and the closure: milestone report for Task~2}
 \author{Dr.\ Vipin\\ Gurugram University}
 \date{30 October 2026}
 \begin{document}
 \maketitle
 \vspace{-7mm}
 
-\section*{The correction of record}
+\section*{What was already settled}
 
-The finding that the fourteen-row matrix is singular at every speed was wrong, and it came from the
-test, not from the model. Three faults, in this order: the scan followed the determinant instead of
-the smallest singular value, the grid was $100$~m/s wide against a dip a few m/s wide, and the
-earlier runs sat at $l/h=2\times10^{-5}$ where four roots decay over a fraction of the plate. At
-$h=5\times10^{-4}$~m with $l/h$ between $0.05$ and $0.2$ the equilibrated matrix has full rank and
-the dips are clean.
+The fourteen-row matrix is not singular; the earlier verdict came from scanning the determinant, a
+coarse grid and the wrong length ratio. Your three dips are reproduced to the grid: A0 at
+$2340.0$, $2365.0$ and $2460.3$~m/s for $l_g/h=0.05$, $0.10$, $0.20$ at $h=5\times10^{-4}$~m and
+$fd=1000$, with depths of $92$, $33$ and $63$ against the local median. The gradient length
+stiffens both branches monotonically: S0 runs $5311.2$, $5318.7$, $5348.4$ at the same three
+lengths against $5308.6$ elastic, and A0 runs $2337.4$, $2367.0$, $2460.3$ against $2326.6$. The
+$fd=10$ S0 entries stay excluded for the reason already accepted.
 
-A fourth fault was found while reproducing the case. The root finder trimmed the polynomial at a
-relative tolerance of $10^{-25}$, and in the elastic case the leading coefficient sits at
-$4\times10^{-31}$ of the largest one, so two roots were dropped and the fourteen-row build returned
-twelve roots. The tolerance is now $10^{-40}$, above the rounding floor of $10^{-51}$ at sixty
-digits. The A0 numbers below are unchanged by that fix.
+\section*{The piezoelectric limit, corrected}
 
-\section*{The case put to us, reproduced}
-
-Aluminium, couplings off, nonlocal length zero, $h=5\times10^{-4}$~m, $fd=1000$, A0 branch whose
-elastic value is $2326.6$~m/s, smallest singular value on a $5$~m/s grid.
+You were right that the $5368$~m/s figure was not a fault. The carriers were still on and mobile
+charge was screening the stiffening. With $q=0$, the thermal couplings off, $p_3=0$ and
+$b_1=b_3=0$, the open-circuit thin-plate speed comes out where it should:
 
 \begin{center}\footnotesize
 \begin{tabular}{lccc}
 \toprule
-$l_g/h$ & this code & reported & depth, median to dip\\
+case & $fd=10$ & $fd=100$ & closed form\\
 \midrule
-0.05 & 2340.0 & 2340 & $9.2\times10^{-3}$ to $2.7\times10^{-4}$\\
-0.10 & 2365.0 & 2365 & $9.9\times10^{-3}$ to $3.0\times10^{-4}$\\
-0.20 & 2460.3 & 2460 & $1.6\times10^{-2}$ to $2.2\times10^{-4}$\\
+piezoelectric, faces open & 5509.7 & 5509.2 & 5509.57\\
+elastic baseline, $e=0$ & 5259.5 & 5258.8 & 5259.13\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The agreement is exact to the grid. No exchange is needed on the conditioning.
+That is 0.06 per cent at worst, and it confirms the plane-stress reduction the masters carry.
 
-\section*{Both families, three frequencies, three lengths}
+Switching the carriers back on gives the screening curve at $fd=100$: $5509.2$ at $n_0=0$,
+$5509.2$ at $10^{16}$, $5504.9$ at $10^{18}$, $5474.7$ at $10^{19}$, $5355.1$ at $10^{20}$ and
+$5273.7$~m/s at $10^{21}$~m$^{-3}$. The crossover falls between $10^{18}$ and $10^{19}$, and at the
+top of the range the speed has come down to the short-circuit value, which is what complete
+screening means. This curve is worth a figure in the Sumit paper.
 
-Elastic limit, couplings off, windows of $\pm90$~m/s about the elastic values of the earlier round
-(the $l/h=0.2$ entry of A0 needs $\pm200$~m/s because the dip leaves the narrow window).
+\section*{The closure, with the two lengths separated}
+
+Your diagnosis was exact. With $l_{nl}=l_g$ the two operators coincide, $N(\eta)=G(\eta)$, the
+elastic block becomes $G$ times the classical one, and at the four gradient roots $G$ vanishes, so
+the traction rows divide by zero. That is the origin of the $10^{-18}$ singular values, not the
+closure. With $l_{nl}=0.5\,l_g$ and $l_{nl}=2\,l_g$ the runs are healthy: medians of $10^{-2}$ to
+$10^{-1}$ and dips of depth 87 to 420.
+
+Sumit paper fully coupled, $h=5\times10^{-4}$~m, $fd=1000$, A0 branch, elastic value $2326.6$~m/s:
 
 \begin{center}\footnotesize
-\begin{tabular}{ccccc}
+\begin{tabular}{lccc}
 \toprule
-$fd$ & $l/h$ & A0 & S0 & \\
+$l_g/h$ & $l_{nl}/l_g$ & our seven rows & alternative closure\\
 \midrule
-10 & 0.05 & 311.9 (311.6) & --- & \\
-10 & 0.10 & 313.8 & --- & \\
-10 & 0.20 & 321.0 & --- & \\
-100 & 0.05 & 955.9 (954.2) & 5393.2 (5393.2) & \\
-100 & 0.10 & 962.2 & 5393.2 & \\
-100 & 0.20 & 983.7 & 5393.4 & \\
-1000 & 0.05 & 2337.4 (2326.6) & 5311.2 (5308.6) & \\
-1000 & 0.10 & 2367.0 & 5318.7 & \\
-1000 & 0.20 & 2460.3 & 5348.4 & \\
+0.05 & 0.5 & 2193.2 & 2211.5\\
+0.05 & 2 & 2175.8 & 2170.8\\
+0.10 & 0.5 & 2220.2 & 2195.3\\
+0.10 & 2 & 2154.4 & 2128.4\\
+0.20 & 0.5 & 2300.7 & no dip near 2300\\
+0.20 & 2 & 1825 & 1825\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The gradient length stiffens both branches, monotonically in $l/h$, by $0.2$ to $5.7$ per cent at
-$l/h=0.2$. The stiffening is stronger on A0 than on S0 at the same length, and stronger at the lower
-frequency, which is what a length competing with the wavelength should give. This is the behaviour
-the task asks for, and it now has numbers behind it.
+Where both closures give a dip in the same window the difference is at most 26~m/s, 1.1 per cent,
+and carries no systematic sign. That is smaller than the size effect it is competing with, since
+these lengths move the branch by 3 to 22 per cent, so the closure does not decide the numbers. It
+does decide what we may claim: the seven rows remain a modelling choice of ours, and the masters
+still need the paragraph that says so. The proposed wording now carries the 1.1 per cent figure.
 
-The missing S0 entries at $fd=10$ are physical, not numerical. There $k l_g$ is $3\times10^{-4}$, so
-the four partial waves that the gradient length generates collapse onto $\eta=\pm1/l_g$ to within
-$10^{-7}$ of their own value, $40000.003$ against $40000.007$. Their columns differ in the eighth
-digit, the equilibrated singular value rounds to zero at every speed, and there is no dip to find.
-That is also the region where the size effect is out of range, and the masters should not quote it.
+Two entries need care. Every value in the table lies below the elastic speed, even with $l_{nl}$ at
+half the gradient length, because at these lengths the nonlocal softening outweighs the gradient
+stiffening; that ordering should be stated where the limits are quoted. And the
+$l_{nl}=0.5\,l_g$, $l_g/h=0.2$ alternative closure has no dip anywhere near 2300~m/s but a shallow
+one at 1110~m/s. A closure that removes a branch is not credible, so that entry is held back and
+will be re-run; the likely cause is the same near-degenerate column pair, now appearing inside one
+of the two row sets at the larger length.
 
-\section*{The first single-coupling limit: piezoelectric, thin plate}
+\section*{Parity}
 
-Sumit paper, both lengths zero, carrier and thermal terms switched off so that only the
-piezoelectric coupling is live, faces electrically open, $fd=100$. The S0 dip sits at $5368$~m/s.
-The plane-stress open-circuit speed from the same constants is $5509.6$~m/s and the short-circuit
-speed is $5259.1$~m/s, so the model lies between the two, and the stiffening it produces is
-$6.6$~GPa against $15.3$~GPa from the closed-form reduction, about forty per cent.
+All thirty-two diagonal sign vectors were tested against $M(-\eta)=S\,M(\eta)\,S$ at
+$k=3\times10^{5}$, $\omega=2\pi10^{8}$ and $\eta=10^{4}+2\times10^{3}i$.
 
-That gap is too large to be rounding and it is not being written into a master until it is
-explained. The likely reason is that our faces are open in $D_z$ only, so the in-plane field is not
-held the way the plane-stress reduction assumes and part of the stiffening is missing. This is the
-one point where a word from you would save a week.
+\begin{center}\footnotesize
+\begin{tabular}{llc}
+\toprule
+paper & field order & patterns\\
+\midrule
+Sumit & $u_x,u_z,\phi,\psi,\theta$ & none\\
+Sumit, $\beta_{th}=\Pi_{th}=E_g=0$ & same & $(+,-,-,-,+)$ and its negative\\
+Neha & $u_x,u_z,w,\phi,\theta$ & $(+,-,-,-,+)$ and its negative\\
+Anu & $u_x,u_z,\phi,\psi,\theta$ & $(+,-,-,-,+)$ and its negative\\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\section*{The closure of the nonlocal boundary problem}
+This is the wording the three masters already carry, and it stands as written.
 
-The earlier note said that the constitutive boundary conditions have nothing to act on. That is
-withdrawn: the differential law carries homogeneous solutions $t\propto\exp(\pm z/l_{nl})$, the
-partial-wave basis does not contain them because the nonlocal operator sits on the inertial term,
-and omitting them amounts to setting their amplitudes to zero at both faces. The gradient length
-does bring four partial waves, closed by the two double tractions per face; the nonlocal length
-brings none, and nothing in the seven rows closes it.
+\section*{Fourier damping: attempted, not a test yet}
 
-The comparison itself is still not run. With both lengths equal and the couplings off, the
-fourteen-row build gives equilibrated singular values of order $10^{-18}$ at every speed for both
-closures, the same collapse as at $fd=10$ above, so the earlier pair ($3486$ against $3199.6$~m/s)
-stays unconfirmed. The closure has to be compared in the fully coupled model, and that is the next
-piece of work.
+A bulk longitudinal wave at $\eta=0$ with the thermal coupling live and everything else off gives
+$k_i/k_r$ of order $10^{-19}$ at $100$~kHz and $10^{-14}$ at $10$~GHz, rising straight through the
+frequency where the Fourier shape should peak, $1/(2\pi\tau_R)=159$~MHz. Attenuation five to seven
+orders below any physical $\Delta_E$ cannot be right, and the likely reason is that the defaults
+mingle units: $bth=10^{18}$ cannot be SI beside $b_1=b_3=4\times10^{5}$. The damping check, and with
+it the Hutson--White peak, the phason limits and the magnetoelastic limits, waits until the two are
+put on one footing. I would rather say that than quote a number.
 
 \section*{Delivery}
 
-No new package is issued with this note; the v8 masters are untouched. The internal notes carry
-every number, the code and the fixed tolerance. No \LaTeX{} engine is installed here, so this file
-is a source; it has been checked by the style script and compiles on any recent \TeX{}~Live.
+The v8 masters are untouched. Every number here is in the internal notes with the code that
+produced it. No \LaTeX{} engine is installed in this sandbox, so this file is a source; it has been
+through the style script and compiles on any recent \TeX{}~Live.
 
 \end{document}

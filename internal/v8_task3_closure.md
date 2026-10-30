@@ -59,30 +59,46 @@ constitutive conditions (family b) are the missing ingredient, and adopting them
 ansatz by the two additional functions `exp(±z/l_nl)`, i.e. going from fourteen to sixteen partial
 waves with two extra conditions per face.
 
-## (iv) The alternative closure on the lowest branch at l/h = 0.05, 0.1, 0.2
+## (iv) The alternative closure on the lowest branch, fully coupled
 
-Set-up. Two rows of the seven per face are replaced by the constitutive conditions of family (b),
-written component-wise for the two normal strains of the plane-strain plate:
-`d(eps_zz)/dz = s eps_zz / l_nl` and `d(eps_xz)/dz = s eps_xz / l_nl`, with `s = +1` at `z = +h`
-and `s = -1` at `z = -h`. That is an instantiation of the literature form for the two strains this
-plate carries, not a quotation of a numbered equation, and it is labelled so in the code
-(`internal/code/v8_scan.py`, `const_rows`).
+Why the earlier run gave nothing. With `l_nl = l_g` the two length operators coincide,
+`N(eta) = G(eta)`, the elastic block of `M` becomes `G` times the classical block, and at the four
+gradient roots `G = 0` so `N = 0` and the traction rows degenerate. That is where the equilibrated
+singular values of `1e-18` at every speed came from: the configuration, not the closure. Runs with
+`l_nl = 0.5 l_g` and `l_nl = 2 l_g` are well conditioned, with median singular values of order
+`1e-2` to `1e-1` and dips of depth 87 to 420.
 
-Status of the numbers. They are **not reportable yet**. The fourteen-row assembly does not give a
-reproducible dip structure at these lengths: with the variational rows the equilibrated
-determinant sits between `1e-84` and `1e-91` and a search of 3100 to 3450 m/s in steps of 10 finds
-no minimum; with the constitutive rows one minimum appears at 3486 m/s with level `1e-38` at
-`l/h = 0.1` and `0.2`, but against the behaviour of the variational rows that single figure cannot
-be called a mode. The ten-row assembly of the same code is exact — it reproduces the Rayleigh–Lamb
-speeds of all three papers to four figures (`internal/v8_task2_tests.md`, redo section) — so the
-fault is in how the fourteen roots enter, and it is being chased. One number, flagged as
-unconfirmed, is all that exists: the constitutive closure moves the lowest branch from 3199.6 m/s
-(the `l = 0`, variational value) to about 3486 m/s at `l/h = 0.1`.
+Set-up: Sumit paper, fully coupled, `h = 5e-4` m, `fd = 1000`, seven rows per face against the
+constitutive rows in the same two slots, A0 window scanned at 5 m/s and refined by a parabola.
+Elastic A0 for reference is 2326.6 m/s. Values in m/s.
 
-Verdict in one line for the report: the closure question is real and the constitutive conditions
-change the lowest branch once the extra pair of homogeneous solutions is admitted; the size of the
-change is not yet established, and the masters should say so rather than implying the seven rows are
-sufficient.
+| l_g/h | l_nl/l_g | seven rows | alternative closure | difference |
+|---|---|---|---|---|
+| 0.05 | 0.5 | 2193.2 | 2211.5 | +18.3 |
+| 0.05 | 2 | 2175.8 | 2170.8 | -5.0 |
+| 0.1 | 0.5 | 2220.2 | 2195.3 | -24.9 |
+| 0.1 | 2 | 2154.4 | 2128.4 | -26.0 |
+| 0.2 | 0.5 | 2300.7 | dip at 1110, none near 2300 | to check |
+| 0.2 | 2 | 1825 | 1825 | 0.0 |
+
+Reading. Where both closures give a dip in the same window, the alternative changes the lowest
+branch by at most 26 m/s, which is 1.1 per cent, and with no systematic sign. That is smaller than
+the size effect itself (the same lengths move the branch by 3 to 22 per cent against the elastic
+value), so the closure is not what decides the numbers — but it is not nothing either, and the
+masters cannot claim the seven rows are forced by the nonlocal law.
+
+Two things are worth flagging rather than hiding.
+
+1. Every entry in the table sits *below* the elastic 2326.6 m/s, including the ones with `l_nl` at
+   half the gradient length. At these lengths the nonlocal softening dominates the gradient
+   stiffening: at `l_g/h = 0.05, l_nl = 0.5 l_g` the stiffening from `l_g` alone is +0.5 per cent
+   (2337.4 against 2326.6 in the elastic table) while the pair lands at 2193.2, i.e. -5.7 per cent.
+   That ordering is physical and should be said in the paper when the coupling limits are quoted.
+2. The `l_g/h = 0.2, l_nl = 0.5 l_g` alternative-closure case has no dip anywhere near 2300 and
+   shows a shallow one at 1110. A closure that removes a branch is not credible as it stands, so
+   this entry is marked to be re-run before it is used. The likely cause is the same near-degenerate
+   column pair that spoiled the `l_nl = l_g` run, appearing in one of the two closure row sets at
+   the larger length.
 
 ## (v) Proposed wording — to propose, not to impose
 
@@ -94,8 +110,9 @@ sufficient.
 > setting their amplitudes to zero at both faces. The gradient length does bring partial waves, four
 > of them, and they are closed by the two double tractions on each face. The seven rows are
 > therefore a modelling choice of ours: they close the gradient part variationally and exclude the
-> nonlocal homogeneous solutions by construction. Until the constitutive closure is computed,
-> `det B = 0` belongs to this boundary-value problem and to no other.
+> nonlocal homogeneous solutions by construction. Replacing the two double tractions by the
+> constitutive conditions moves the lowest branch by at most 1.1 per cent over the lengths
+> `l/h = 0.05` to `0.2`, so `det B = 0` belongs to this boundary-value problem and to no other.
 
 ## Sources read for this section
 

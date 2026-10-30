@@ -1,11 +1,12 @@
 # Status, 30 October 2026
 
-- v8 masters stay the delivered base; Task 1 closed.
-- Task 2, fourteen-row matrix: the reviewer's case is reproduced exactly, A0 at 2340 / 2365 / 2460
-  m/s for l/h = 0.05 / 0.10 / 0.20 with h = 5e-4 and fd = 1000. Root tolerance fixed to 1e-40.
-- Both families, three frequencies: l_g stiffens A0 and S0 monotonically; table in the report.
-  S0 at fd = 10 is degenerate and excluded on physical grounds.
-- First single-coupling limit: piezoelectric open faces give 5368 m/s against 5509.6 from the
-  closed form, 40 per cent of the stiffening. Needs one word from the reviewer before use.
-- Closure: verdict withdrawn; the comparison is blocked by near-duplicate columns in the elastic run.
-- Next: closure in the fully coupled model, remaining coupling limits, parity table.
+- v8 masters stay the delivered base; Task 1 and the fourteen-row redo are closed and accepted.
+- Piezoelectric limit corrected: with q = 0 the open faces give 5509.7 / 5509.2 m/s against
+  5509.57, and e = 0 gives 5259.5 / 5258.8 against 5259.13. Screening curve S0(n0) runs 5509.2 to
+  5273.7 m/s between n0 = 0 and 1e21.
+- Closure: l_nl = l_g was the fault; with 0.5 and 2 l_g the alternative closure moves the lowest
+  branch by at most 1.1 per cent (26 m/s). One entry at l/h = 0.2 held back for a re-run.
+- Parity reconfirmed: only (+, -, -, -, +) and its negative, always for Neha and Anu, and for Sumit
+  exactly when beta_th = Pi_th = E_g = 0.
+- Fourier damping blocked: the default constants are not on one footing (bth against b1), so no
+  damping number is quoted. Hutson-White, phason and ME limits wait on the same fix.
