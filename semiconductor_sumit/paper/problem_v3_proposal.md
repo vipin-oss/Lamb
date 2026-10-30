@@ -53,14 +53,19 @@ dispersion-only measurement can do.
 - **Why earlier models cannot show it.** Published NSGT plate papers report fits with one length scale
   set to zero; none demonstrates identifiability of the pair.
 
-### MGT — carried as a **comparison section, not a claim** (demoted from C2 per this proposal)
-- **Statement.** With `Λ_ph = 13.2 nm` (Krahl et al., JPCC 124 (2020) 24731) the band `2h ≥ 10Λ_ph`
-  makes `ωτ_q ≪ 1` everywhere admissible, so MGT and Fourier attenuation agree to better than the
-  solver's resolution. The section states this **quantitatively** and shows the two curves
-  superimposed on one axis, with the ratio annotated.
-- **Figure F6 (kept, demoted to a section figure).** `k_i^MGT/k_i^Fourier` vs `fd` at
-  `2h = 132, 264 nm`, `τ_q = 10⁻¹³…10⁻¹¹ s`, with the `O(τ_q/τ_th)` bound marked.
-- **Limiting case.** `τ_q → 0` reproduces Fourier to < 10⁻⁶ (this remains a *programming* check).
+### The thermal channel — **Route A: an adiabatic/isothermal bracket, not a coupled MGT mechanism**
+- **Statement (ruling 30 Oct 2026 — Route A).** The heat problem is solved **twice**, in the two
+  rigorous limits — **adiabatic** (no heat flow between material points) and **isothermal**
+  (temperature slaved to the strain) — and the true attenuation is *bracketed* between them. The
+  bracket width is `O(Δ_E)`, `Δ_E = T₀β²/(ρ c_p c_L²)`, i.e. 10⁻³–10⁻². No `τ_q`, `κ` or `Λ_ph`
+  enters the result. MGT appears **only** as a one-page appendix item showing it lies inside the
+  bracket, and therefore is not an observable (`docs/04_scale_overlap_window.md`; map in
+  `steps/step3_prerecheck_mgt_map.md`).
+- **Figure F6 (kept, demoted).** `k_i` vs `fd` for the adiabatic and isothermal bounds, with the
+  bracket shaded and MGT drawn inside it for one `τ_q` value to show it is invisible at that scale.
+- **Limiting case.** The two bounds must coincide to < 10⁻⁶ when the thermal coupling is switched
+  off (`β = 0`), and the adiabatic curve must reproduce classical thermoelastic damping at the low-`fd`
+  edge (programming checks).
 - **Honest value.** Pre-empts the obvious referee objection and shows the formulation is complete
   without claiming an effect that the numbers do not support.
 
@@ -79,9 +84,10 @@ dispersion-only measurement can do.
 - **Steps 1 and 2 are unchanged**: isotropic elastic Rayleigh–Lamb (`steps/step1_…md`), then the
   piezoelectric open/short boundary conditions (`steps/step2_piezo_zno.md`). No re-derivation, no
   re-numbering, and the Step-1 targets stand (S0 → 5393.91, A0 → 2909.73 m/s, 1e-3…1e-4 tolerances).
-- **Step 3 runs the heat model twice** — Fourier and MGT, same code path, `τ_q` as a switch — because
-  the comparison section needs both curves from one implementation. This is the only change to Step 3,
-  and it is a *saving*: no separate MGT solver.
+- **Step 3 = bracket + classical thermoelastic check.** Run the adiabatic and isothermal limits, verify
+  they bracket a classical coupled-thermoelasticity run at low `fd`, and record the bracket width. No
+  MGT solver is built; the MGT one-pager reuses the same code path with `τ_q` as a switch, for the
+  appendix only.
 - The two Step-4 hard gates stay: C1 monotonicity, and floor resolution.
 
 ## 5. Model, boundary conditions, validity window

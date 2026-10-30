@@ -117,8 +117,8 @@ and are labelled as such.
 | 2 | coupling off, `fd → 0`, S0 | `√(c̄₁₁/ρ)` = **4964.83 m/s** | rel. < 10⁻⁴ |
 | 3 | coupling off **and** isotropic constants (aluminium, `λ = μ`-set of Step 1) | **5393.9 m/s** = Step 1's S0 limit (check that the reduction is consistent: `√(c̄₁₁/ρ_Al)` = 5393.93 vs 5393.91, 4×10⁻⁶) | rel. < 10⁻⁴ |
 | 4 | `fd → 0`, S0, **short** circuit | **4964.83 m/s** | rel. < 10⁻³ |
-| 5 | `fd → 0`, S0, **open** circuit | **5308.59 m/s** | rel. < 10⁻³ |
-| 6 | `K²(fd → 0)` for S0 | **0.12532** (= plate-mode `k_eff = 0.3540`), band 0.0936–0.1253 for `ε₃₃ ∈ [8.5, 12.6]ε₀` | abs. < 1×10⁻³ |
+| 5 | `fd → 0`, S0, **open** circuit | **5252.12 m/s** (set B) / 5308.59 (set A) | rel. < 10⁻³ |
+| 6 | `K²(fd → 0)` for S0 | **0.10641** (set B) / 0.12532 (set A); band widens to 0.0936–0.1253 for `ε₃₃ ∈ [8.5, 12.6]ε₀` | abs. < 1×10⁻³ |
 | 7 | `K² → 0` as `e²` | halving every `e_ij` gives `K²/4` | rel. < 10⁻³ |
 | 8 | open velocity > short velocity, on every branch, every `fd` | sign test, all roots | absolute |
 | 9 | Thickness-mode limit | `k_t² = 0.0981` (`k_t = 0.3131`) from `e₃₃²/(c₃₃^D ε₃₃^S)`; recovered to < 3 % from the cut-off behaviour | 3 % (the small-`kh` expansion is not exact) |
@@ -146,24 +146,96 @@ review table, or take all three from the same DFT calculation (which would give 
 much larger `k`). Until that is settled the `K²` targets above carry a **±40 % band** and must not be
 used as a pass/fail criterion for anything except check 1 (coupling off).
 
-## 6. Constants (ZnO, wurtzite)
+## 5a. The `6×6` factorisation — RUN AND PASSED (30 Oct 2026)
 
-| constant | value | source | status |
+Implemented as a **propagator** (`y = [u_x, u_z, φ, σ_xz, σ_zz, D_z]`,
+`y' = A y`, `Φ = exp(hA)` on the half-plate, state scaled by
+`diag(h, h, c₄₄h/e₃₃, c₄₄, c₄₄, e₃₃)` to keep `max|A| = O(1)`). The full determinant is
+
+```
+det₆ = det [ B Φ ; B P Φ P ] ,   B = rows (σ_xz, σ_zz, D_z),   P = diag(1,−1,−1,−1,1,1)
+```
+
+because `Φ⁻¹ = PΦP` follows from `PAP = −A`, which holds **exactly** (checked to 1e-16). The two
+blocks are `det_S = det(BΦ |_{u₁,σ₃,D₃})` and `det_A = det(BΦ |_{u₃,φ,σ_xz})` — the parity subspaces at
+the mid-plane are simply coordinate planes.
+
+| quantity | result |
+|---|---|
+| `det₆/(det_S·det_A)` | **+8.000000**, over 39 `(fd, c)` points with `kh ≤ 6` |
+| spread of that ratio | **4.3×10⁻¹³** (machine precision) |
+| union of block roots = full-system roots | **yes**, at `fd = 100, 500, 1000, 3000` |
+
+Root sets found (open circuit, ZnO set B below):
+
+```
+fd = 500 :  full {1816.86, 5282.40} = S{5282.40} ∪ A{1816.86}
+fd = 1000:  full {2214.36, 5194.92} = S{5194.92} ∪ A{2214.36}
+fd = 3000:  full {2617.63, 2890.02, 5713.93} = S{2890.02} ∪ A{2617.63, 5713.93}
+```
+
+**Independent confirmation of the whole Step-2 stack:** the same propagator gives
+`S0(fd) = 5308.581, 5308.550, 5308.335, 5307.567` m/s at `fd = 10, 20, 50, 100`, i.e. it converges to
+the **analytic open-circuit thin-plate value 5308.59** (§5, check 5) to 1.7×10⁻⁶, and `A0` grows as
+`√fd` (308.97 → 435.10 for `fd` 10 → 20). Two completely different routes (analytic plane-stress
+reduction and the 6-state propagator) agree, which is the strongest check in this step.
+
+**Numerical caution (repeat of the Step-1 warning).** The propagator is ill-conditioned at large `kh`
+(`Φ` develops `e^{κh}` growth); it was used only for `kh ≤ 6`. Beyond that, use the parity-reduced
+`3×3` systems rather than the `6×6`.
+
+## 5b. Comparison points — the `fd` grid must go below 500
+
+The thermal peak for the floor sits at **`fd = 251 Hz·m`** at `2h = 132 nm`
+(`fd_peak = πκ/(2·2h)`, `κ = 2.11×10⁻⁵ m²/s`). A grid starting at 500 Hz·m would miss it. **Fixed
+comparison points: `fd = 100, 250, 500, 1000, 3000, 5000` Hz·m**, plus `fd = 20` for the thin-plate
+limit. Report every one, both electrical sets, both constant sets.
+
+## 6. Constants (ZnO, wurtzite) — two sets, both tabulated
+
+**What each source actually contains** (checked, not assumed):
+
+| source | contains | does **not** contain |
+|---|---|---|
+| Gopal & Spaldin, *J. Electron. Mater.* **35** (2006) 538, [10.1007/s11664-006-0096-y](https://doi.org/10.1007/s11664-006-0096-y) (arXiv:cond-mat/0507217) | `c_ij` (Table III), `e_ij` (Table I) — **DFT** | **no dielectric tensor**, no density |
+| Landolt–Börnstein tabulation `26s05d49` | `ε₃₃^S = 8.84`, `ε₁₁^S = 8.5–9.26` (constant strain); 8.67 (constant stress) | no `c`, no `e` |
+| Özgür et al., *J. Appl. Phys.* **98** 041301 (2005) — review | **measured ranges** `e₃₁ = 0.39–0.66` (mostly ≈0.52), `e₃₃ = 0.92–1.30` (mostly ≈1.20) C/m² | mid-range values are *my* choice from a published range |
+
+**A single experimental set containing `c`, `e`, `ε`, `ρ` was NOT located.** Hutson (1961), Carlotti
+et al. (1995) and Kobiakov (1980) were named by Dr. Vipin but I did not resolve their tables, so their
+contents remain unverified and they are **not** cited. Consequently:
+
+- **Set A — DFT (sensitivity case).** `c` and `e` from Gopal–Spaldin, `ε^S` and `ρ` as below.
+- **Set B — "experimental `e`" (primary, proposed).** Same `c`, but `e₃₁ = −0.52`, `e₃₃ = 1.20`,
+  `e₁₅ = −0.48`, i.e. the mid-range of the **measured** values in the review. Set B still borrows `c`
+  from the DFT table, so it is only **half** experimental — the `c` column must be replaced from
+  Table IV of the review (or another measured table) before the set is called primary. Flagged, not
+  papered over.
+
+Shared: `ρ = 5680 kg/m³` (eFunda), `ε₁₁^S = 8.5ε₀`, `ε₃₃^S = 8.84ε₀` (Landolt).
+
+### Results for both sets
+
+| quantity | **Set A (DFT)** | **Set B (exp. `e`)** | check |
 |---|---|---|---|
-| `c₁₁, c₁₂, c₁₃, c₃₃, c₄₄` | 206, 118, 118, 211, 44 GPa | arXiv:cond-mat/0507217v2, measured row | sourced (as in v2 §7) |
-| `e₃₃, e₃₁, e₁₅` | 1.34, −0.57, −0.48 C/m² | same | `e₁₅` value **to be confirmed** by Sumit |
-| `ε₁₁^S, ε₃₃^S` | 8.5ε₀, 8.84ε₀ | Landolt–Börnstein tabulation `26s05d49` (constant strain) | **clamped values**, read from a tabulation |
-| `ρ` | 5680 kg/m³ | eFunda ZnO | sourced |
-| derived `c̄₁₁, ē₃₁, ε̄₃₃` | 140.0095 GPa, −1.31938 C/m², 8.6781×10⁻¹¹ F/m | §4 reduction | computed |
+| `c̄₁₁` | 140.0095 GPa | 140.0095 GPa | same `c` |
+| `ē₃₁` | −1.31938 C/m² | −1.19109 C/m² | |
+| `v_short` (S0, `fd→0`) | 4964.83 m/s | **4964.83** m/s | independent of `e` |
+| `v_open` (S0, `fd→0`) | 5308.59 m/s | **5252.12** m/s | 6-state solver: 5308.581 (set A) |
+| `K²(0)` | 0.12532 | **0.10641** | |
+| plate-mode `k_eff` | 0.3540 | **0.3262** | not `k₃₁` |
+| `d₃₁` | −6.871 pC/N | **−6.203** pC/N | |
+| `d₃₃` | 14.036 pC/N | **12.625** pC/N | measured ≈12 → **set B wins** |
+| `k₃₁` | 0.2562 | **0.2336** | `UNVERIFIED` vs literature |
+| `k₃₃` | 0.5328 | **0.4840** | `UNVERIFIED` |
+| `k_t` | 0.3131 | **0.2832** | `UNVERIFIED` |
+| `k₁₅` | 0.2550 | **0.2550** | `UNVERIFIED` |
 
-**`ε^S` versus `ε^T` — determined, and the earlier numbers were wrong because of it.**
-The constitutive law above needs the **clamped (constant-strain) `ε^S`**. The `9.16 / 12.64` values in
-the earlier draft behave like `ε^T`-type numbers, and using them as `ε^S` is exactly what produced the
-optimistic `K² = 0.0936`. Sourced clamped values: `ε₃₃^S = 8.84`, `ε₁₁^S = 8.5–9.26`
-(Landolt–Börnstein tabulation `26s05d49`, "static dielectric tensor, constant strain"; the same entry
-gives `8.67` for constant stress). `ε^T` for ZnO is larger (`≈ 9.8–10.4`, the 10.4 being Langton &
-Matthews' *colloidal* value, [10.1088/0508-3443/9/11/308](https://doi.org/10.1088/0508-3443/9/11/308) —
-not a single-crystal number). **Use `ε^S`; sweep `ε₃₃ ∈ [8.5, 12.6]ε₀` as an uncertainty band.**
+**Set B is adopted as primary** on the strength of `d₃₃ = 12.6 pC/N` against the measured ≈12 pC/N;
+set A is kept as the sensitivity case and `K²` carries the A/B spread (0.106 — 0.125) as its band.
+The literature `k₃₁/k₃₃/k_t/k₁₅` values stay **`UNVERIFIED`** — I did not source them, and the numbers
+above must not be presented as agreeing with experiment. Note that `k₃₁ = 0.23` is still above the
+`≈0.18` Dr. Vipin recalled; without a sourced value neither can be called wrong.
 
 ## 7. What Sumit sends back
 
