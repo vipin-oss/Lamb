@@ -161,10 +161,12 @@ Linearised carrier transport with a DC drift `v_d` along x:
 ∂Δn/∂t = D_n ∇²Δn + n₀ μ_n ∇²φ + v_d ∂Δn/∂x − Δn/τ_R               (4)
 ```
 
-with `μ_n` electron mobility, `D_n = μ_n k_B T₀/e` (Einstein), `τ_R` recombination time.
-Recombination is **neglected** (`τ_R → ∞`) in the base model, and Step 4 must show that keeping a
-finite `τ_R` only shifts the complex relaxation rate by `O(1/τ_R)` and does not move `n₀*`. That is
-a decision for Dr. Vipin to confirm at the Step-4 gate.
+with `μ_n` electron mobility, `D_n = μ_n k_B T₀/e` (Einstein), and **`τ_R` the carrier
+recombination (lifetime) time** — not a relaxation time of the dielectric response. Resolved at the
+gate: `τ_R → ∞` is the **base case** (no recombination over a wave period); a finite-`τ_R`
+sensitivity (`τ_R = 10⁻⁹`–`10⁻⁶` s) is run at Step 4 and must show only a shift of the complex
+relaxation rate, with the peak locus `n₀*` unmoved. If `n₀*` moves, the base model was wrong and
+C1 must be recomputed with `τ_R` as a parameter.
 
 MGT heat conduction with thermoelastic coupling:
 
@@ -172,11 +174,15 @@ MGT heat conduction with thermoelastic coupling:
 k_th ∇²θ = ρ c_p (τ_q θ̈ + θ̇) + T₀ β_ij (τ_q ε̈_ij + ε̇_ij)           (5)
 ```
 
-`τ_q → 0` gives classical coupled thermoelasticity (this is the Step-3 limiting check), and it is
-the **only** reason eq. (5) is written with τ_q in the coupling term — the algebra must be
-reconciled line by line with the group's earlier MGT papers (Gupta et al. 2025, IJNMHFF 35(9),
-doi:10.1108/HFF-04-2025-0254) before Step 3 is coded, because the τ_q placement differs between
-papers. **Flagged: this is a stop-and-confirm item, not something I will silently choose.**
+`τ_q → 0` gives classical coupled thermoelasticity (this is the Step-3 limiting check).
+
+> **Resolved at the Task-0 gate (Dr. Vipin, 30 Oct 2026).** The MGT form to be used is the one in
+> **Gupta et al., IJNMHFF 35(9) (2025) 3400–3428, doi:10.1108/HFF-04-2025-0254**, which Dr. Vipin
+> will place in `paper/`. Eq. (5) above is therefore provisional: the scholar must transcribe the
+> Gupta form, and the **alternative placement of `τ_q` in the thermoelastic term is carried as a
+> Step-3 sensitivity case** (not a silent choice). Both placements must reduce to classical coupled
+> thermoelasticity as `τ_q → 0`, and that is the check that decides whether a transcription error
+> was made.
 
 ### 5.3 Boundary conditions at z = ±h — including the NSGT extras
 | Condition | Expression | Note |
@@ -240,8 +246,8 @@ explicitly reported as measured in the cited source.
 | Thermal expansion | α_T | ~4×10⁻⁶ /K | — | `[U]` |
 | MGT relaxation time | τ_q | 10⁻¹³–10⁻¹¹ s (range) | — | `[U]` range only; no measured ZnO value found in the sweep. The paper must say "assumed range", never "measured" |
 | Recombination time | τ_R | ∞ (base), 10⁻⁹–10⁻⁶ s (check) | — | `[U]` |
-| Nonlocal length | l_nl | 0–1 × h, and 0–20 nm absolute | — | `[U]` — must be calibrated/discussed, not asserted (Shaat critique, arXiv:1711.09938) |
-| Gradient length | l_g | same ranges | — | `[U]` |
+| Nonlocal length | l_nl | **dimensionless `l/h` only** (0, 0.1, 0.3, 0.5, 1.0) | — | gate ruling: **no dimensional value is claimed**; entered as an `l/h` sweep |
+| Gradient length | l_g | **dimensionless `l/h` only**, same set | — | gate ruling: same; the ratio `l_g/l_nl` is the second sweep axis |
 | Acoustic drift velocity | v_d | 0–1.2 c_ph | derived from the applied field | parameter, not a constant |
 
 **Carrier-density range:** 10¹⁸–10²⁴ m⁻³. The upper end is set by Dhib et al.'s measured
