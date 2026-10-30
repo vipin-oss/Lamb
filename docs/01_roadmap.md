@@ -46,6 +46,10 @@ Sumit leads, Neha one week behind, Anu two weeks behind.
   `k_th = 60 W/mK` with `tau_q >= 2e-12 s` and `Lambda_ph <= 2 nm`, and fails outright for the thin-film
   `k_th = 1.2 W/mK`. `Lambda_ph` must be sourced before the title is fixed.
 - **Step 3 is blocked** until Dr. Vipin confirms the Gupta heat equation (he is adding it to `paper/`).
+- **Provisional retitle (Sumit):** `paper/problem_v3_proposal.md` proposes carrier screening + NSGT as the claims,
+  MGT as a comparison section. `problem_v2.md` is untouched pending review.
+- **MGT maps, all three scholars:** outside the trust band in every case once `Lambda_ph` is sourced
+  (`quasicrystal_neha/checks/mgt_map.md`, `mee_anu/checks/mgt_map.md`).
 - **Bulk-medium gate (Sumit, before Step 3):** `steps/step3_prerecheck_bulk_medium.md` shows both Fourier and MGT *saturate* in an infinite medium; MGT only rescales the plateau and moves the peak. C2 was restated accordingly — the observable is peak position vs thickness. Step 3 does not start until Dr. Vipin accepts the restatement and confirms the Gupta equation's placement of tau_q.
 - **Step 4 of Sumit, added at Task 0 (cheap, decides the paper):** the **C1 test** — `k_i(n0)` at
   fd = 1000 and 3000 must be non-monotonic with its peak within 5% of `n0* = eps33 w/(e mu)`. If it

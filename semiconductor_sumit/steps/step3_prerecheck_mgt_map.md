@@ -78,7 +78,46 @@ quote a number for it without a reference. With `Λ_ph = 2, 5, 10` nm:
 
 | `k_th = 1.2` | `Λ_ph ≳ 0.013` nm | empty: B3 caps `2h ≤ 1.33` nm, far below `10Λ_ph` | — | **no** |
 
-## 4. Verdicts (this is the decision the note exists to force)
+## 3a. Sourced `Λ_ph` and the re-run (30 Oct 2026 — **supersedes the `Λ_ph`-as-parameter reading of §3**)
+
+`Λ_ph` for ZnO at 300 K, from the literature:
+
+| source | statement | status |
+|---|---|---|
+| Krahl et al., *J. Phys. Chem. C* **124** (2020) 24731, [10.1021/acs.jpcc.0c06461](https://doi.org/10.1021/acs.jpcc.0c06461) | gray-medium mean free path **≈ 13.2 nm**, from `κ = ⅓C_V v̄ l` with `C_V = 2.8 J cm⁻³K⁻¹` and Debye-averaged `v̄` from the Γ→M dispersion | **verified DOI**; the value is a *derived* gray estimate, not a direct measurement |
+| same paper, quoting Wu et al. (first-principles ZnO) | **≈ 60 % of κ comes from phonons with MFP > 50 nm** | secondary citation — the primary paper was **not** resolved here; treat as `UNVERIFIED` until the DOI is supplied |
+| same paper, own conclusion | "the gray-medium approximation can greatly under-predict the majority of the spectral mean free paths … a conservative estimate" | **verified** (the authors say the 13 nm figure is a *lower* bound) |
+
+**Which `Λ_ph` is defensible for a continuum heat model in a plate?** Not the gray average and not the
+longest MFP, but the **spectrally averaged MFP of the heat-carrying modes**, because that is the length
+over which Fourier's law must hold. On the evidence above that number is **larger** than 13.2 nm (the
+dominant carriers exceed 50 nm), so **13.2 nm is the most favourable admissible value** and is adopted
+as the central value with a 2× spread: `Λ_ph ∈ [6.6, 26.4] nm`. Adopting the smaller figure is
+deliberate — it gives MGT its best chance, so a "not distinguishable" verdict below is conservative.
+
+The kinetic cross-check `Λ ≈ 3k/(ρ c_p v̄)` gives, with `v̄ ≈ 3000` m/s,
+`3×60/(5680×500×3000) = 21.1 nm` (16 nm with `v̄ = 4000` m/s) — the same order, **used only as a
+consistency check, not as a source** (as instructed).
+
+**Re-run of the band (B2 `2h ≥ 10Λ_ph`, B3 unchanged):**
+
+| `Λ_ph` | `2h` floor | `τ_q` needed for the boundary to enter the band, `k_th = 60` | inside `τ_q ≤ 10⁻¹¹`? |
+|---|---|---|---|
+| 6.6 nm (½×) | 66 nm | 2.09×10⁻¹¹ s | **no** (2.1× above) |
+| **13.2 nm (central)** | **132 nm** | **8.36×10⁻¹¹ s** | **no** (8.4× above limits) |
+| 26.4 nm (2×) | 264 nm | 3.34×10⁻¹⁰ s | **no** |
+
+**Verdict, revised:** for **every** value in the sourced spread, the thermoelastic boundary sits below
+the `10Λ_ph` floor, so MGT is **not distinguishable anywhere in the admissible band** for ZnO in a
+continuum plate at either conductivity end. The provisional verdict of §4/§5 (which let `Λ_ph` float)
+is **withdrawn**: it was an artefact of leaving `Λ_ph` unsourced. This is the physics reason behind the
+retitle in `paper/problem_v3_proposal.md`.
+
+   Caveat, stated plainly: the conclusion is only as good as `Λ_ph`. If a sourced ZnO value near 2 nm
+   appears, the `Λ_ph = 2 nm` row of §3 revives the "keep MGT" case. `Λ_ph = 13.2 nm` is defensible;
+   `Λ_ph = 2 nm` for a crystalline oxide at 300 K is not.
+
+## 4. Verdicts (provisional — **superseded by §3a** once `Λ_ph` is sourced)
 
 - **`k_th = 1.2` W/m·K (thin film): MGT is not distinguishable anywhere in the band.** B3 caps
   `2h ≤ 1.33` nm, which is below any phonon mean free path and below the continuum limit, and above
@@ -99,11 +138,11 @@ quote a number for it without a reference. With `Λ_ph = 2, 5, 10` nm:
 > trust band for at least one **sourced** pair `(k_th, τ_q)` with a **sourced** `Λ_ph`. The pair must
 > be quoted with its source in the title's supporting paragraph — not as a range.
 
-Applying the rule to what is currently sourced:
+Applying the rule to what is currently sourced (see §3a for the sourced-`Λ_ph` re-run):
 
 | case | boundary inside band? | title |
 |---|---|---|
-| `k_th = 60`, `τ_q ≥ 2×10⁻¹²` s, `Λ_ph ≤ 2` nm — **all sourced** | yes | **keep MGT in the title** |
+| `k_th = 60`, `τ_q ≥ 2×10⁻¹²` s, `Λ_ph ≤ 2` nm | yes **only** for this combination | would keep MGT — **but `Λ_ph = 2` nm is not defensible for ZnO (§3a), so this row does not apply** |
 | `k_th = 1.2` (thin film) with any `τ_q` in range | no | **retitle** |
 | `k_th = 60` but `Λ_ph` unsourced, or `τ_q ≤ 10⁻¹³` | unresolved | hold; MGT in the subtitle at most |
 
