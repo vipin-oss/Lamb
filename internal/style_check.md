@@ -49,3 +49,21 @@ Checked on 30 October 2026, before zipping. Fixes are logged, not hidden.
 The paragraphs are long in the model sections, because the equations are long and each one needs a sentence
 of justification. If Dr. Vipin wants a shorter page count after compilation, the cuts should come from the
 figure paragraphs in the plans, not from the model.
+
+## v4.1 re-check (30 October 2026, after the reviewer's compile)
+
+| Item | Result | Action |
+|---|---|---|
+| "modified gradient" anywhere in the six files | zero | the name is gone; first use in each file is Moore-Gibson-Thompson (MGT), with the sentences rewritten, not patched |
+| "check" in running text | one occurrence, in Anu basics, "a test of the second law" after the fix | the only remaining occurrences are the section titles "How to check your own work", which the reviewer asked for by that name |
+| "not only" constructions | one in Sumit basics, rewritten | none left |
+| Bold in running text | zero; plans use `\paragraph` run-in headings, bibliography volume numbers are bold by convention | kept |
+| Em dashes | zero in all six | none |
+| Word counts | plan 3280 / 2820 / 2310; basics 8840 / 6440 / 6040 | basics inside the requested 6000 to 9000 band |
+| Symbols in the basics table | 41 / 35 / 34, covering every symbol used in the matching plan | one table per booklet, with unit and rough size as asked |
+| Brace, environment and dollar balance | all six clean | none |
+| New numbers used as comparisons | none | the only numbers added are everyday illustrations (mains hum, tuning fork, rainfall) and order of magnitude scales in the symbol table |
+| Scope rules | still honoured: no boundary conditions, no solution method, no benchmark numbers | none |
+
+One honest note. The three basics documents share a skeleton, as they should, but the prose was rewritten per
+scholar and the examples differ, because three identical booklets would be an insult to the reader.

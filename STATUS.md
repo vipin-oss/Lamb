@@ -34,6 +34,15 @@ two `.tex` files each.
 6. **Symbols separated**: `q` charge, `k` wavenumber, `h_kij` piezomagnetic, `b_n` mobility, `mu_ik`
    permeability.
 
+## v4.1 (second review round)
+
+1. **MGT named properly**: Moore-Gibson-Thompson at first use in all six files; "modified gradient" gone.
+2. **Sumit signs fixed**: `beta_th = -b_n n_0 S_n > 0`, bracket entry `+q Pi_th d(Dn)/dt`, Onsager ratio
+   `-T_0/(b_n n_0)`. Independent derivation agrees with the reviewer; audit in `internal/sumit_audit.md`.
+3. **Sign and unit audits** for all three papers in `internal/{sumit,neha,anu}_audit.md`.
+4. **Basics expanded**: 8840 / 6440 / 6040 words, 23 sections, full symbol table with units and scales,
+   self-testing section. Zips rebuilt; `reports/packages_v4.tex` carries the new counts.
+
 ## Open items
 
 - **[V]** Lim et al. (2015) Eqs. (17)–(19) on the page; the equation numbers are still secondary.

@@ -23,3 +23,13 @@ Reviewer: Dr. Vipin. Date of changes: 30 October 2026. Files touched: `reports/m
 3. Open Zhang et al. Acta Mech. 232 (2021) in full; only abstract and display equations were reachable.
 4. Confirm the Ozgur ZnO review constants table entry by entry; the piezo range is known but not a single
    self-consistent measured set.
+
+## v4.1 addendum: second review round
+
+| # | Instruction | Change | Status |
+|---|---|---|---|
+| 8 | MGT is Moore-Gibson-Thompson | every "modified gradient" replaced in the six files and in the model document; first use in each file spells the name out; sentences rewritten around it | done |
+| 9 | Sumit sign error: beta_th and the Peltier term | beta_th = -b_n n_0 S_n (>0) and the bracket entry +q Pi_th d(Dn)/dt; the Onsager ratio now written as -T_0/(b_n n_0); text rewritten so that carriers accumulate on the cold side; derivation in `internal/sumit_audit.md` | done, reviewer's version confirmed by independent derivation |
+| 10 | sign and unit audit for Neha and Anu | `internal/neha_audit.md`, `internal/anu_audit.md`: every shared constant checked for reciprocity, every term checked for units, plus the two by-products (unit of alpha is s/m; gamma must be positive) | done |
+| 11 | basics files expanded | 8840, 6440 and 6040 words; 23 sections each; every symbol of the matching plan tabulated with unit and rough size; a section on self-testing | done |
+| 12 | zips rebuilt, milestone report updated with counts | three archives rebuilt, `reports/packages_v4.tex` rewritten with the new counts | done |

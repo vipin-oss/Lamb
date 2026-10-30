@@ -72,7 +72,7 @@ $h_{kij}$ & piezomagnetic constant (was $q_{kij}$; renamed to free $q$ for charg
 $b_n$ & electron mobility (was $\mu_n$; $\mu_{ik}$ is kept for magnetic permeability) & m$^2$V$^{-1}$s$^{-1}$\\
 $D_n$ & carrier diffusion coefficient & m$^2$s$^{-1}$\\
 $v_d$ & drift velocity, $v_d=b_nE_0$ & m\,s$^{-1}$\\
-$\beta_{\rm th}$ & thermodiffusion coefficient, $\beta_{\rm th}=b_nn_0S_n$; negative for $n$-type carriers & m$^{-1}$s$^{-1}$K$^{-1}$\\
+$\beta_{\rm th}$ & thermodiffusion coefficient, $\beta_{\rm th}=-b_nn_0S_n$; negative for $n$-type carriers & m$^{-1}$s$^{-1}$K$^{-1}$\\
 $S_n$ & Seebeck coefficient of the electrons & V\,K$^{-1}$\\
 $\Pi_{\rm th}$ & Peltier coefficient, $\Pi_{\rm th}=T_0S_n$ & V\\
 $\tau_R$ & carrier recombination time (option, $\tau_R\to\infty$ means none) & s\\
@@ -81,7 +81,7 @@ $\rho_p$, $\gamma$ & phason mass density, phason friction & kg\,m$^{-3}$, kg\,m$
 $l_{\rm nl}$, $l_g$ & nonlocal and gradient lengths, entering only as $l/h$ & m\\
 $\beta_{ij}=c_{ijkl}\alpha_{kl}$, $p_i$, $m_i$ & thermal-stress tensor, pyroelectric vector, pyromagnetic vector & N\,m$^{-2}$K$^{-1}$, C\,m$^{-2}$K$^{-1}$, N\,A$^{-1}$m$^{-1}$K$^{-1}$\\
 $\alpha_{ik}$ & magnetoelectric coefficient of the composite & s\,m$^{-1}$\\
-$\tau_q$, $\tau_T$ & MGT phase lag, $\tau_T=(2h)^2/(\pi^2\kappa)$ & s\\
+$\tau_q$, $\tau_T$ & Moore--Gibson--Thompson (MGT) phase lag, $\tau_T=(2h)^2/(\pi^2\kappa)$ & s\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -107,7 +107,7 @@ D_{i,i}&=-q\,\Delta n, \tag{A4}\\
 +v_d\frac{\partial\Delta n}{\partial x}+\beta_{\rm th}\nabla^2\theta-\frac{\Delta n}{\tau_R}, \tag{A5}\\
 \Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
 \Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\varepsilon_{ij}
-+T_0p_i\dot E_i-q\Pi_{\rm th}\frac{\partial\Delta n}{\partial t}
++T_0p_i\dot E_i+q\Pi_{\rm th}\frac{\partial\Delta n}{\partial t}
 +\frac{E_g\Delta n}{\tau_R}\Bigr]&=k_{\rm th}\nabla^2\theta . \tag{A6}
 \end{align}
 
@@ -115,8 +115,8 @@ D_{i,i}&=-q\,\Delta n, \tag{A4}\\
 replaces it is the Peltier heat of the carrier current, and the pair is fixed by one material function,
 the Seebeck coefficient:
 \begin{equation}
-\beta_{\rm th}=b_nn_0S_n,\qquad \Pi_{\rm th}=T_0S_n,\qquad
-\frac{\Pi_{\rm th}}{\beta_{\rm th}}=\frac{T_0}{b_nn_0}\quad\text{(Onsager symmetry).}
+\beta_{\rm th}=-b_nn_0S_n,\qquad \Pi_{\rm th}=T_0S_n,\qquad
+\frac{\Pi_{\rm th}}{\beta_{\rm th}}=-\frac{T_0}{b_nn_0}\quad\text{(Onsager symmetry).}
 \tag{A7}
 \end{equation}
 For $n$-type carriers of charge $-q$ the Seebeck coefficient is negative, $S_n<0$, so

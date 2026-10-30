@@ -4,152 +4,552 @@
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
 \usepackage{array}
-\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[a4paper,margin=2.4cm]{geometry}
 \usepackage[hidelinks]{hyperref}
-\setlength{\parskip}{4pt}
+\setlength{\parskip}{5pt}
 \title{\vspace{-1.6cm}\Large Basics and Definitions\\[2pt]
-\large A plain-language companion to the research plan on Lamb waves in a quasicrystal plate}
+\large Everything you need before the research plan on waves in a quasicrystal plate}
 \author{Dr.\ Vipin \\ Gurugram University}
 \date{30 October 2026}
 \begin{document}
 \maketitle
 \vspace{-6mm}
 
-\section{Order without repetition}
+\section{How to use this booklet}
 
-Most solids we meet are crystals. Their atoms sit on a lattice that repeats, so if you take a small block of
-the crystal and slide it by one lattice spacing it looks exactly the same. Quasicrystals do not do this. They
-have sharp diffraction spots, which means their atoms are arranged with long-range order, but the spots sit
-at spacings that no repeating lattice can produce. The discovery of such a material in 1982 changed the way
-chemists and physicists thought about what a solid is allowed to be, and the Nobel Prize in Chemistry in 2011
-went to Dan Shechtman for it.
+The research plan is short and it assumes a good deal. It assumes you know what a wave is, what a plate does
+to a wave, what stress and strain mean, how an electric field behaves inside a crystal, how heat flows when
+it is in a hurry, and why a quasicrystal needs a second kind of displacement that no ordinary solid has. None
+of that is difficult, but all of it is unfamiliar at the start, and a plan read without it is just a list of
+symbols.
 
-The easiest picture is a tiling. Take two shapes of tile, say a fat rhombus and a thin one, and lay them out
-so that the pattern never repeats but always follows the same local rules. A well-known example is the
-Penrose tiling of the plane, built from two such rhombi. Stand on any tile and look around: the pattern is
-ordered, and yet no two places are identical in the way that two places in a brick wall are. Quasicrystals
-are the three-dimensional version of that idea, and one-dimensional quasicrystals are the version in which
-the aperiodic order runs along a single direction only.
+So this booklet starts from the beginning and builds up. Sections two to nine are about waves: what they are,
+how we count them in time and in space, how fast they go, why a plate turns a continuous spectrum into a
+discrete list, and what those modes look like. Sections ten and eleven are about complex numbers, built from
+nothing, because the wavenumber in the plan is complex and the word should not be allowed to frighten anyone.
+Sections twelve to fourteen are about force in a solid. Sections fifteen to nineteen are about the physics
+that belongs to this particular paper: electricity in a crystal, quasicrystals and phasons, heat with a
+memory, and the size effect. Section twenty is a table of every symbol in the plan with its unit and a rough
+size. Section twenty one is a glossary. Section twenty two tells you how to test your own work.
+
+There are no boundary conditions here, no solution method, and no numbers to compare your answers against.
+Those belong to you. This booklet only makes the plan say what it says.
+
+\section{What a wave is}
+
+Strike a long table at one end. The sound reaches the other end almost at once, and yet nothing has travelled
+from your hand to the far end except a disturbance. Each small piece of wood pushes the next piece and then
+settles back roughly where it was. The pattern of pushing moves; the wood does not.
+
+That is a wave: a disturbance that travels through a material while the material stays at home. Two features
+of that sentence matter. First, the wave carries energy, and that is why it can do work at the far end, such
+as rattle a cup. Second, the wave's speed is decided by the material and by the geometry, not by how hard you
+hit it. Hit the table harder and the sound is louder; its speed and its pitch are unchanged.
+
+A wave has an amplitude, which is the size of the disturbance, and a shape. The shapes we care about are
+smooth and repeating, built from sines. This is not laziness. Any smooth repeating shape, however odd, can be
+written as a sum of sines of different wavelengths, so a theory that handles one sine handles everything, one
+sine at a time. When the plan says that a field varies as a single exponential in space and time, it is
+choosing one of those sines and following it.
+
+Solids carry two kinds of disturbance. A push and pull along the direction of travel is a longitudinal wave;
+sound in air is of this kind. A sideways sliding across the direction of travel is a transverse wave; light
+is of this kind, and so is the shaking that arrives after the first jolt of an earthquake. A solid can carry
+both at once, and in a plate the two get mixed together at the free surfaces. That mixing is the origin of
+the mode structure we come to later.
+
+\section{Frequency, period, and counting in time}
+
+Frequency is how often the disturbance repeats in one second. The unit is the hertz, one cycle per second. A
+guitar string tuned to a low E vibrates about eighty times a second; the high E is some four hundred times a
+second. Your ear reads frequency as pitch, which is why the two strings sound different although they are
+plucked the same way.
+
+The period is the time for one full cycle, and it is the reciprocal of the frequency. A vibration at four
+hundred hertz has a period of two and a half milliseconds. Fast vibration, short period. Slow vibration, long
+period. Half a period, by the way, is not a full cycle: a full cycle goes up, down, and back to where it
+started, while half a cycle goes up and down once.
+
+Angular frequency is frequency multiplied by two pi, and it is written with the Greek letter omega. The
+reason is that one cycle is one full turn, and a full turn is two pi radians. Measuring angles in radians
+rather than degrees makes the algebra of oscillations tidy, and the tidiness is worth one extra symbol. When
+the plan writes omega, read it as the number of radians of phase per second.
+
+Frequency is not just a label. It sets the rate at which the material is being asked to change, and every
+material has a rate beyond which it cannot keep up. A material that follows faithfully at low frequency lags
+at high frequency, and a lag is where energy leaks out as heat. Most of what the paper calls attenuation comes
+from that lag, in one mechanism or another.
+
+\section{Wavelength, and counting in space}
+
+Wavelength is the distance between two points that are doing the same thing at the same time. It is measured
+in metres or fractions of a metre. The wavelength of middle A in air is about three quarters of a metre,
+which is why a doorway does not block it; the wavelength of a whistle is a few centimetres, which is why the
+sound turns corners reluctantly.
+
+Wavelength matters because a wave only notices obstacles of a size comparable with itself. That is the whole
+of diffraction in one sentence, and it applies inside a solid as much as in a room. In a plate, the ratio of
+wavelength to thickness decides which kinds of motion are geometrically possible, and that ratio is the true
+subject of the paper.
+
+The three quantities are related by one line of arithmetic. A wave travels one wavelength in one period, so
+speed is wavelength divided by period, and period is the reciprocal of frequency, so speed is wavelength times
+frequency. That is all.
+
+\section{The wavenumber}
+
+The wavenumber counts the repetitions in space the way frequency counts them in time. Its symbol is k and its
+unit is one over a metre.
+
+The useful definition is not crests per metre but phase per metre. One full cycle is two pi radians, so a
+wave of wavelength lambda has wavenumber two pi divided by lambda. Keeping the two pi makes the travelling
+wave read as a cosine of k x minus omega t, with no stray constants anywhere else. Every formula in the paper
+is written on that convention, and it is worth adopting it for life.
+
+To feel the difference between the two counts, stand at a railway line. The number of carriages passing per
+minute is a frequency. The number of carriages in a hundred metres of track is a wavelength count, and its
+reciprocal is a wavenumber. Both describe the same train.
+
+For a plate, the wavenumber along the plate is the important number, because the plate is long in that
+direction and thin across it. The wave may pick any wavenumber along the plate, but the plate then decides
+which through-thickness shapes are compatible with it. The paper is a careful study of that decision.
+
+\section{Phase velocity, group velocity, and dispersion}
+
+Phase velocity is the speed at which a crest moves: frequency divided by wavenumber, which is the same as
+wavelength times frequency. If that were the whole story, waves would be simple.
+
+It is not the whole story because phase velocity usually depends on frequency. That dependence is dispersion,
+and it is why a prism spreads white light into a rainbow. In a plate, dispersion is unavoidable, because the
+zigzag path between the faces depends on the wavelength.
+
+There is a second speed, the group velocity, which is the speed at which a bundle of waves travels and the
+speed at which energy moves. In a dispersive medium the two differ, and a short pulse spreads out as it
+travels because its different frequencies travel at different speeds. If you have ever heard a distant clap
+arrive as a soft hiss rather than a sharp crack, you have heard dispersion in air.
+
+Dispersion is a nuisance for communication and a gift for measurement. A measured dispersion curve is a
+fingerprint of the plate. Change the material, the thickness, or the amount of damage and the fingerprint
+moves. That is the basis of a large industry of testing by guided waves, and it is why a paper on a new plate
+material is worth writing.
+
+\section{A plate, and why waves stay inside it}
+
+A plate is a solid much thinner in one direction than in the other two. In our problem the thickness is two
+h, so the faces are at plus h and minus h, and the plate is taken as infinite in the other directions, which
+is the mathematician's way of saying long enough not to matter.
+
+Send a wave into the plate at an angle. It reaches a face; a free face cannot push back into the air in any
+useful way, so nearly all of the wave reflects. It crosses to the other face, reflects again, and continues.
+The wave is trapped, and while trapped it travels along the plate.
+
+The picture to hold is a zigzag. The wave does not travel straight down the plate; it travels diagonally,
+bouncing. Its forward progress is the projection of that diagonal, and the apparent speed along the plate is
+therefore less than the speed of the wave in the bulk material. The steeper the zigzag, the slower the
+apparent speed.
+
+Two consequences follow immediately, and both shape the paper. First, the thickness appears directly in the
+problem, because the round trip length is fixed by it. Second, the two reflections must agree in phase for a
+mode to exist at all. That condition is what turns a continuum of possibilities into a discrete list of
+modes.
+
+\section{Modes, symmetric and antisymmetric}
+
+A mode is one of the allowed zigzags. Each has a definite shape across the thickness and its own dispersion
+relation. You can picture a mode as a standing pattern through the thickness that is carried along the plate
+like a wave on a string that is moving sideways at the same time.
+
+The modes come in two families, and symmetry is the reason. The plate looks the same if you turn it over, so
+every solution must have a partner under that turn.
+
+In the symmetric family the two faces move in and out together, opposite to one another, and the middle of
+the plate moves only along the plate. The lowest such mode stretches and squeezes the plate and is often
+called the extensional mode. In the antisymmetric family the two faces move the same way at the same time, so
+the plate bends. The lowest of these is the bending mode, and it is what a plate does when you tap it in the
+middle.
+
+At low frequency only these two exist. As frequency rises, more appear, each at its own cutoff. In a simple
+elastic plate the families do not mix, because a symmetric motion cannot become antisymmetric without
+breaking the symmetry of the problem. In our material they can mix at the surfaces, because the electric and
+thermal conditions at a face need not respect the same symmetry. Part of the paper's work is to see how much
+mixing there is.
+
+\section{Cutoff, and the frequency times thickness axis}
+
+The cutoff of a mode is the lowest frequency at which it can exist. Below it the mode does not travel; it
+decays away from where it was created and is called evanescent. The physical reason is the zigzag again: at
+low frequency the wavelength is long compared with the thickness, so a wave cannot complete a round trip and
+come back in step. Only the lowest two modes escape this restriction, which is why a thin plate driven slowly
+carries only two useful modes.
+
+A dispersion curve is a graph of phase velocity against frequency, one curve per mode. Cutoffs appear as the
+points where curves begin. The higher modes rise steeply after their cutoff and then flatten towards the
+speed of a wave on the surface of a half space, the Rayleigh speed. Any calculation that does not approach
+that limit has something wrong with it.
+
+One practical trick removes most of the confusion about thickness. A plate twice as thick at half the
+frequency behaves almost identically, because the wave knows the product of frequency and thickness rather
+than either alone. So the horizontal axis of every figure is frequency multiplied by thickness, in hertz
+metres. On that axis, plates of different thickness and the same material fall on the same curves.
+
+\section{Complex numbers, from nothing}
+
+A complex number is an ordinary number with one extra idea attached, and the idea is a number whose square is
+minus one.
+
+Ordinary numbers do not have it: anything real squared is positive or zero. So x squared equals minus one has
+no solution among them. We invent one and call it i, with the rule that i squared is minus one. It looks
+arbitrary, and for a century it was treated as a trick. It is really a way of writing two numbers at once,
+and that is exactly what a wave needs, because a wave has an amplitude and a phase.
+
+A complex number is written a plus b i, where a and b are ordinary numbers. The first is called the real part
+and the second the imaginary part. The name imaginary is an accident of history. If a is the length of a step
+to the east and b the length of a step to the north, then a plus b i is simply where you end up. In other
+words, it is a pair of numbers written compactly.
+
+Addition is easy: add east to east and north to north. Multiplication follows the usual rules with i squared
+replaced by minus one. The size, or modulus, of a plus b i is the square root of a squared plus b squared,
+which is Pythagoras and the length of the step to the corner. Every complex number can also be written as its
+size times a phase, where the phase is the angle of the step from the east direction, measured in radians.
+
+That polar form carries the physics. When you multiply two complex numbers the sizes multiply and the phases
+add. A wave travelling through a material has a size that shrinks and a phase that turns, so a single complex
+number can carry both. And the exponential of i times an angle equals a cosine plus i times a sine, which
+means a wave can be written as a size times an exponential, and then the trigonometry of waves becomes the
+arithmetic of exponents.
+
+Two rules follow, and they explain why the equations in the plan look so short. Differentiating with respect
+to time multiplies by minus i omega; differentiating twice multiplies by minus omega squared; differentiating
+with respect to position multiplies by i k. So a symbol like omega squared or k squared in front of a term is a
+derivative in disguise. If you can read that, you can read most of the paper.
+
+\section{The complex wavenumber, and attenuation}
+
+Write a wave travelling forward as a size times the exponential of i times k x minus omega t, and let k be
+complex: k equals k real plus i k imaginary. Split the exponential into a phase part and a size part. The
+phase part turns, and its rate is set by the real part of k, so the wavelength is two pi divided by the real
+part. The size part shrinks with distance, and its rate is set by the imaginary part.
+
+So a complex wavenumber is not a mathematical decoration. Its real part is the wavelength and its imaginary
+part is the loss. The convention here is that a positive imaginary part means decay in the positive
+direction. That is a choice, like measuring height upwards, but every paper must state it, because a reader
+who assumes the opposite will see growth where the author wrote decay.
+
+Attenuation is quoted either as the imaginary part itself, in reciprocal metres, in which case the unit is
+called nepers per metre, or in decibels per metre. A neper is like a radian: a ratio wearing the clothes of a
+unit. The conversion is about eight and a half decibels to a neper, because decibels use base ten logarithms
+and nepers use base e.
+
+The ratio of imaginary to real part is the useful number. It says how much amplitude is lost per radian of
+phase, which is the same as the loss per wavelength travelled. A mode with a small ratio goes a long way; a
+mode with a ratio near one dies within a wavelength and is useless in a device. When the plan says that an
+effect may be too small to see, it usually means that the change in this ratio is smaller than the accuracy of
+a measurement.
+
+\section{Stress, strain, and Hooke's law}
+
+Pull a rubber band. It gets longer. The change in length divided by the original length is the strain, a pure
+number, usually small. The band pulls back, and the force it transmits divided by the area over which it acts
+is the stress, measured in pascals, which are newtons per square metre.
+
+There are two kinds of stress. A normal stress pulls apart or pushes together, and a shear stress slides one
+layer over the next. A solid carries both, and in a plate both appear at once, because the zigzag keeps
+converting one into the other.
+
+Stress and strain are not single numbers. At a point there are three directions, and a stress can act on each
+of three faces, which makes nine components, of which six are independent in a symmetric material. When the
+plan writes a symbol with indices like i j, it is naming one component. You do not need to hold nine numbers
+in your head; you need to know that the notation is counting them.
+
+Strain can also vary from point to point. The top of a bent ruler is stretched more than the middle. How fast
+the strain changes along a direction is the strain gradient, with units of one over length. In ordinary
+elasticity the strain gradient costs nothing; in the theory we use it costs a little, and that little is what
+makes a thin plate behave differently from a scaled drawing of a thick one.
+
+Hooke's law says that, for small pushes, the response is proportional to the cause. Hang a weight on a spring
+and it stretches; double the weight and it stretches twice as much. In a solid the bookkeeping is heavier but
+the idea is identical: a strain in one direction produces stresses in several, and the table of proportions is
+the stiffness. Pull a strip of rubber and it narrows as it lengthens; the ratio of the narrowing to the
+lengthening is Poisson's ratio, near one half for rubber, near zero for cork, which is why cork makes a good
+bottle stopper.
+
+For a material that looks the same in all directions the table collapses to two numbers, and it is convenient
+to turn those two into two wave speeds: a faster one for push and pull, a slower one for shear. Our materials
+are not like that. A crystal has a preferred axis, and a laminated composite is a stack rather than a
+material, so its effective stiffness is an average. Averages always involve a choice, and a paper must say
+which choice it made.
+
+\section{Balance laws, and what a divergence means}
+
+Physics rests on a few conservation statements. Mass is conserved: what flows into a small box either stays or
+leaves. Momentum is conserved: the net force on a box equals the rate of change of its momentum, which for a
+solid is its mass times its acceleration. Energy is conserved: what the wave stores as elastic energy and
+carries as kinetic energy, it must have taken from somewhere.
+
+These are written with a divergence, a word that alarms people unnecessarily. A divergence is a net outflow.
+Imagine a small box and a flow of something through it. If more leaves through the faces than enters, the
+amount inside falls and the divergence is positive. If more enters, the divergence is negative and the amount
+inside grows. That is all it means.
+
+Put a material law and a balance law together and you get a wave equation. The material law says how stress
+follows strain; the balance law says how stress accelerates the material. Combine them and the acceleration
+of the displacement turns out to be proportional to its curvature in space. That equation has waves as its
+solutions, and their speed is the square root of stiffness over density. Every wave speed in the paper comes
+from that one recipe, applied more carefully each time.
+
+\section{Electric fields, potential, and what a crystal does to them}
+
+A charge feels a force when other charges are near. Rather than compute that force charge by charge, we say
+the space is filled with an electric field, and a charge placed in the field feels a force equal to its charge
+times the field. The field is force per unit charge, and its unit is the volt per metre.
+
+The potential is the second convenience, and it is the one that takes getting used to. It is energy per unit
+charge. Moving a charge from one place to another costs energy, and the cost per unit charge is the potential
+difference, which we normally call voltage. A battery labelled nine volts promises nine joules for every
+coulomb taken through it.
+
+Field and potential are related by a gradient with a minus sign: the field points the way the potential falls
+fastest. Water runs downhill; positive charge drifts towards lower potential. The minus sign exists so that
+those two sentences agree, and it is the source of half the sign errors in the literature.
+
+Gauss's law says that field lines begin on positive charge and end on negative charge. Draw a closed surface
+and count the lines poking out of it, with sign: the count equals the charge inside. Inside a material the
+quantity to count is the electric displacement, which is the field scaled by the permittivity, because the
+atoms of the material stretch into tiny dipoles and cancel part of the charge you supplied. The displacement
+counts only the charge you control, which is why it is the convenient variable in a device.
+
+Our material is piezoelectric as well as being a quasicrystal, so squeezing it produces a voltage and applying
+a voltage squeezes it. This coupling is what makes the electric field a full partner in the wave problem
+rather than a passenger, and it is why the plan carries the electric potential as one of the unknowns.
+
+\section{What a quasicrystal is}
+
+Most solids are crystals. Their atoms sit on a lattice that repeats, so a small block of the crystal slid by
+one lattice spacing looks exactly the same. Quasicrystals do not do that. Their diffraction patterns have
+sharp spots, which says they have long-range order, but the spots lie at spacings no repeating lattice can
+produce. The first such material was reported in 1982 and the Nobel Prize in Chemistry followed in 2011.
+
+The easiest picture is a tiling. Take two shapes, a fat rhombus and a thin one, and lay them out so that the
+pattern never repeats, yet follows the same local rules everywhere. The Penrose tiling of the plane is the
+best known example. Stand on any tile: the arrangement is ordered, but no two places are identical in the way
+two places in a brick wall are. A quasicrystal is the three-dimensional version of that idea.
+
+Quasicrystals are classified by symmetry, as crystals are. A one-dimensional quasicrystal is periodic in two
+directions and aperiodic in the third. If the periodic plane has six-fold symmetry, it is called a
+one-dimensional hexagonal quasicrystal, and it is the case with the largest plate literature. In our problem
+the aperiodic direction is the thickness, which is a deliberate choice, because the plate faces then become
+the place where the unusual field has to be told what to do.
 
 \section{Why a quasicrystal needs two displacements}
 
-In a normal solid, one field is enough to describe deformation. That field is the displacement, the small
-movement of each point away from where it was. Engineers call it the phonon displacement, borrowing the name
-of the sound quantum, because the waves of that field are sound waves.
+In an ordinary solid one field is enough. The displacement tells you how far each point has moved from where
+it was, and the strain is its gradient. The waves of that field are sound waves, and the field is called the
+phonon displacement.
 
-In a quasicrystal something else can happen. A block of tiles can rearrange without any of the tiles being
-squeezed. They slide over each other, the way a set of books slides along a shelf, and after the slide the
-material is locally a different tiling. This rearrangement is described by a second field, the phason
-displacement. It is worth saying clearly what it is not. The phason displacement is not a movement of
-material in space. A point does not go anywhere. What changes is the way the tiles fit, and the phason field
-measures how much the fit has changed. That is why writers speak of phason strain but rarely of phason
+In a quasicrystal a second thing can happen. A block of tiles can rearrange without any tile being squeezed.
+They slide over one another, as a row of books slides along a shelf, and after the slide the material is
+locally a different tiling. That rearrangement is described by a second field, the phason displacement.
+
+It is worth being clear about what the phason displacement is not. It is not a movement of matter through
+space; no atom packs up and leaves. What changes is the way the tiles fit together, and the phason field
+measures how much the fit has changed. That is why the literature speaks of phason strain but not of phason
 velocity in the ordinary sense.
 
-The practical consequence is that a quasicrystal has more elastic constants than a crystal of the same
-symmetry. Some of them describe the ordinary elasticity, some the cost of a rearrangement, and some the
-coupling between the two. Once the material is deformed, a phonon strain can generate a phason strain, and
-the other way round, and that traffic is what makes these materials interesting to a mechanician.
+The consequence is a richer elasticity. Some constants describe ordinary stretching, some the cost of a
+rearrangement, and some the coupling between the two. Once the material is deformed, a phonon strain can
+generate a phason strain and the reverse, and that two way traffic is what makes these materials interesting
+to a mechanician. In our plate the phason displacement along the thickness is the fourth unknown, and its
+coupling to the phonon field is the reason the paper is not a copy of an elastic plate calculation.
 
 \section{Phasons relax, and sometimes they travel}
 
-The distinguishing feature of the phason field in dynamics is that it is not conserved. A rearrangement can
-happen, and then it can undo itself. In the language of mechanics, the phason has friction. If the friction
-is large compared with the inertia, a disturbance in the phason field does not travel as a wave; it spreads
-and dies, exactly as heat spreads through a metal bar. If the friction is small, the phason field can carry a
-wave with a finite speed.
+The phason field has a feature that no ordinary elastic field has: it is not conserved. A rearrangement can
+happen and then undo itself. In mechanical language, the phason has friction.
 
-Both behaviours are described by one equation, the telegraph equation, which contains an inertia term and a
-friction term. Turn the friction off and you get a wave equation. Turn the inertia off and you get a
-diffusion equation. Keep both and the behaviour changes with frequency: at low frequency the disturbance
-diffuses, at high frequency it propagates. Which regime you are in depends on how the wave period compares
-with the relaxation time.
+If the friction is large compared with the inertia, a disturbance in the phason field does not travel. It
+spreads and dies, exactly as heat spreads through a metal bar. If the friction is small, the phason field
+carries a wave with a finite speed. If the two are comparable, the behaviour depends on frequency: slow
+disturbances diffuse, fast ones propagate.
 
-This is not a mathematical curiosity. A plate has a smallest wavelength it can support, because a
-half-wavelength cannot be longer than the plate is thick. So the thickness sets the lowest frequency at
-which a phason mode can exist, and by choosing the thickness one can push the phason mode from the diffusing
-side of the crossover to the travelling side. That is the reason a plate is a good place to study this.
+All three cases are described by one equation, called the telegraph equation, which contains both an inertia
+term and a friction term. Turn the friction off and it becomes a wave equation. Turn the inertia off and it
+becomes a diffusion equation. Keep both and you have a crossover, at a frequency set by the ratio of friction
+to inertia. This is not a curiosity of our model; it is the standard dynamics of the phason field, and the
+literature on quasicrystal hydrodynamics wrote it down in the nineteen eighties.
 
-\section{What one-dimensional hexagonal means}
+Why does a plate matter here? Because a plate has a smallest wavelength it can hold, since a half wavelength
+cannot be longer than the plate is thick. That sets the lowest frequency at which a phason mode can exist, and
+by choosing the thickness one can place the phason mode on either side of the crossover. That is a real
+experimental knob, and it is the reason the paper is about plates rather than about bulk material.
 
-Real quasicrystals are classified by their symmetry, just as crystals are. A one-dimensional quasicrystal has
-periodic order in two directions and aperiodic order in the third. If the periodic plane has six-fold
-symmetry, the material is called a one-dimensional hexagonal quasicrystal. It is the simplest case, it is the
-one for which the plate literature is largest, and it is the one in which the phason field has a single
-independent component along the aperiodic axis.
+\section{Heat, and heat with a memory}
 
-In our problem the aperiodic axis is the thickness, which is a deliberate choice. It means the phason
-displacement is a function of the thickness coordinate, and the plate faces are where the phason field must
-be told what to do. That last point is where much of the difficulty sits, because nobody has a handbook of
-phason boundary conditions.
+Heat flows from hot to cold, at a rate proportional to the temperature gradient. That is Fourier's law, and
+for steady problems it is all you need. Combine it with energy conservation and you get a diffusion equation
+for the temperature, in which a point warms if it is colder than its neighbours on average.
 
-\section{Piezoelectric quasicrystals}
+The diffusion equation has an uncomfortable feature: it lets a temperature change at one point be felt
+everywhere at once, however slightly. For ordinary engineering that is harmless. For a wave at very high
+frequency it is not, because the equation then predicts a loss that grows without limit as frequency rises.
+Nature does not do that, and the divergence is a warning that the theory is being asked a question outside
+its range.
 
-A piezoelectric material produces a voltage when squeezed and a strain when a voltage is applied. Some
-quasicrystals are piezoelectric, and the coupling works in the same way, with one addition: the electric
-field also couples to the phason strain, because a rearrangement of tiles can shift charge. So a
-piezoelectric quasicrystal plate has three couplings in play, phonon to phason, phonon to electric field, and
-phason to electric field, and a wave that travels in it carries all three fields at once.
+The repair is to give the heat flux a short memory. The flux does not respond instantly to the gradient; it
+relaxes towards it over a relaxation time. One memory gives a wave equation for heat. Two memories give the
+version introduced by Moore, Gibson and Thompson in 1994 and called the Moore-Gibson-Thompson theory, or MGT.
 
-This is what makes the dispersion problem worth solving. Each coupling shifts the branches, and the shifts
-are not independent, so a measurement of two branches gives more information than two independent
-measurements would.
+MGT changes the picture in a way that can be stated without any algebra. At low frequency the relaxation time
+multiplied by the frequency is small, and the classical answer comes back. At high frequency the flux lags,
+the loss stops rising and levels off at a plateau. That plateau is the observable difference between the two
+descriptions, and it is one of the things the paper has to say something about.
 
-\section{Lamb waves in one paragraph}
+Whether the plateau is visible depends on the thickness. The time for heat to diffuse across a plate grows as
+the square of the thickness, and the ratio of the relaxation time to that diffusion time tells you whether
+the memory matters for that plate. Thin plates are therefore the interesting ones, and very thin plates leave
+the range in which a continuum description of heat makes sense at all. That double restriction is why one
+figure in the plan is a map of thickness against relaxation time.
 
-A plate is thin compared with its length, so a disturbance inside it bounces between the free faces and ends
-up travelling along the plate rather than escaping. These guided waves come in two families, symmetric, in
-which the faces move in and out in opposite directions, and antisymmetric, in which they move together and
-the plate bends. The phase velocity of a guided wave depends on frequency, and that dependence, drawn as a
-graph, is the dispersion curve. A real wave also weakens as it travels, and the weakening is described by
-letting the wave number have an imaginary part: the real part fixes the wavelength and the imaginary part
-fixes the decay. Attenuation in nepers per metre follows from the ratio of the two parts. For comparing
-plates of different thickness one plots against frequency times thickness, because with that product the
-curves of different plates fall on top of one another.
+\section{The size effect in words}
 
-\section{The size effect, in two sentences}
+At very small thickness, a plate stops behaving like a scaled drawing of a thick plate. Two ideas are used to
+describe what happens, and both are needed because experiments show both kinds of deviation.
 
-Thin plates do not behave like scaled-down thick plates. Two lengths are used to describe the difference, one
-that softens the response because the stress at a point depends on the strain around it, and one that
-stiffens it because bending a region costs extra energy. Both enter our model as a ratio to the thickness,
-and both raise the order of the equations, which is why the faces need more conditions than the classical
-ones.
+The first is nonlocal elasticity. The stress at a point is allowed to depend on the strain in a neighbourhood
+around it. The image is a row of springs linked by weak cross springs: a displacement in one place is felt a
+little further along. Nonlocality makes the material softer than the classical theory says.
 
-\section{The thermal part, briefly}
+The second is strain gradient elasticity. The energy is allowed to depend on how quickly the strain changes
+from point to point, as well as on the strain itself. The image is a sheet of rubber: a patch of uniform
+stretch and a patch of rapidly changing stretch can have the same strain at their centres, but the second
+costs more energy. The gradient makes the material stiffer.
 
-Strain changes temperature and temperature changes strain, so a wave in any solid drags a temperature field
-along with it, and that field takes energy out of the wave. In the classical description heat diffuses
-instantly in the sense that a change anywhere is felt everywhere at once, which is unphysical at high
-frequency. The modified theory gives heat a short memory, so at high frequency the heat flow lags and the
-attenuation stops growing and levels off. In a quasicrystal plate both the phonon stress and the phason
-stress do work against the temperature, so the heat equation has two source terms rather than one, and the
-second one is the part of this work that has no published source.
+The version used here combines the two and comes from Lim, Zhang and Reddy. Each idea brings one length, one
+for nonlocality and one for the gradient, and the two compete. Both lengths are written as ratios to the
+thickness, because a length on its own tells you nothing and a ratio to the geometry tells you everything.
 
-\section{Glossary and units}
+There is a price, and it is the sentence that closes the model section of the plan. A theory with a second
+derivative of the strain raises the order of the equations, and higher order equations need more conditions at
+the boundary. A classical plate needs three conditions at each face; this one needs more, and which extra
+conditions to use is not settled. That is your decision to make, and the plan says so.
+
+\section{What a model is allowed to assume}
+
+A model is not a photograph of the world. It is a set of statements that are true enough, in a range, to
+answer a question. The range is part of the model.
+
+Our model assumes the material is a continuum, so no atoms are followed. It assumes a linear response, so
+doubling the cause doubles the effect. It assumes constant properties at a reference temperature, which is
+strong, given that temperature is one of the fields. It assumes the phason friction is isotropic in the plane
+of the plate, although the literature carries a tensor. It assumes a single phason inertia. It assumes the
+faces are free of pressure and of charge.
+
+Each assumption is a place where a referee will push, and each deserves a sentence in the paper. The good news
+is that assumptions can be tested. If a conclusion survives when the assumption is relaxed, the assumption was
+decorative; if it does not, the reader needs to know.
+
+\section{Table of symbols used in the plan}
 
 \begin{center}
 \small
-\begin{tabular}{p{4.2cm}p{8.4cm}p{2.4cm}}
+\begin{tabular}{p{1.9cm}p{6.0cm}p{2.4cm}p{2.6cm}}
 \toprule
-term & what it means & unit\\
+symbol & meaning in words & unit & rough size\\
 \midrule
-quasicrystal & solid with long-range order but no repeating unit cell & \\
-phason displacement & field that measures local rearrangement of tiles & m\\
-phonon displacement & ordinary displacement of material points & m\\
-phason stress & stress conjugate to the phason strain & Pa\\
-phonon-phason coupling & the traffic between the two strain fields & Pa\\
-telegraph equation & equation with both inertia and friction, diffusion at low frequency and waves at high & \\
-relaxation time & the time over which a disturbance of the phason field dies away & s\\
-one-dimensional hexagonal & periodic in a plane, aperiodic along one axis, six-fold symmetry in the plane & \\
-piezoelectricity & strain producing charge and charge producing strain & C\,m$^{-2}$\\
-mode, symmetric, antisymmetric & the two families of guided waves in a plate & \\
-dispersion curve & phase velocity drawn against frequency & \\
-wavenumber & phase per metre; complex, the imaginary part is the decay & m$^{-1}$\\
-attenuation & decay of amplitude per unit distance & Np\,m$^{-1}$\\
-frequency times thickness & comparison coordinate for plates of different thickness & Hz\,m\\
-size length & the length at which nonlocal or gradient effects become visible & m\\
-phase lag & the short memory given to heat by the modified theory & s\\
+$u_x,u_z$ & phonon displacement along and across the plate & m & $10^{-10}$ to $10^{-8}$\\
+$w_z$ & phason displacement along the aperiodic axis & m & $10^{-11}$ to $10^{-9}$\\
+$w_{ij}$ & phason strain, gradient of the phason displacement & none & $10^{-6}$ to $10^{-4}$\\
+$\varepsilon_{ij}$ & phonon strain & none & $10^{-6}$ to $10^{-4}$\\
+$\sigma_{ij},t_{ij}$ & local stress, total nonlocal stress & Pa & $10^{5}$ to $10^{8}$\\
+$H_{ij}$ & phason stress & Pa & $10^{4}$ to $10^{7}$\\
+$C_{ijkl}$ & phonon elastic stiffness & Pa & $10^{10}$ to $10^{11}$\\
+$K_{ijkl}$ & phason elastic stiffness & Pa & $10^{9}$ to $10^{10}$\\
+$R_{ijkl}$ & phonon-phason coupling & Pa & $10^{9}$ to $10^{10}$\\
+$\rho$ & mass density & kg\,m$^{-3}$ & $4\times10^{3}$ to $6\times10^{3}$\\
+$\rho_p$ & phason mass density & kg\,m$^{-3}$ & $10^{-3}$ to $10^{-1}$ times $\rho$\\
+$\gamma$ & phason friction coefficient & kg\,m$^{-3}$s$^{-1}$ & $10^{5}$ to $10^{9}$\\
+$\varphi$ & electric potential & V & 0.1 to 10\\
+$E_i$ & electric field, minus the gradient of the potential & V\,m$^{-1}$ & $10^{4}$ to $10^{7}$\\
+$D_i$ & electric displacement & C\,m$^{-2}$ & $10^{-3}$ to $10^{-1}$\\
+$e_{kij}$ & piezoelectric constant & C\,m$^{-2}$ & 0.1 to 2\\
+$\epsilon_{ik}$ & permittivity & F\,m$^{-1}$ & $10^{-10}$ to $10^{-9}$\\
+$p_i$ & pyroelectric coefficient & C\,m$^{-2}$K$^{-1}$ & $10^{-6}$ to $10^{-4}$\\
+$\theta$ & temperature rise above the reference value & K & below 1\\
+$T_0$ & reference temperature & K & about 300\\
+$\beta_{ij}$ & thermal stress, stiffness times thermal expansion & Pa\,K$^{-1}$ & $10^{4}$ to $10^{6}$\\
+$\beta^{w}_{ij}$ & thermo-phason coupling, no published source & Pa\,K$^{-1}$ & unknown\\
+$\alpha_{kl}$ & thermal expansion coefficient & K$^{-1}$ & $10^{-6}$ to $10^{-5}$\\
+$\rho c_p$ & heat capacity per unit volume & J\,m$^{-3}$K$^{-1}$ & $10^{6}$ to $3\times10^{6}$\\
+$k_{\rm th}$ & thermal conductivity & W\,m$^{-1}$K$^{-1}$ & 1 to 10\\
+$\kappa$ & thermal diffusivity & m$^2$s$^{-1}$ & $10^{-7}$ to $10^{-6}$\\
+$\tau_q$ & relaxation time of the heat flux (MGT) & s & $10^{-12}$ to $10^{-10}$\\
+$\tau_T$ & diffusion time across the plate & s & $10^{-13}$ to $10^{-12}$\\
+$l_{\rm nl}$, $l_g$ & nonlocal and gradient lengths & m & $10^{-9}$ to $10^{-7}$\\
+$2h$, $h$ & plate thickness and half of it & m & $10^{-9}$ to $10^{-3}$\\
+$k$ & complex wavenumber along the plate & m$^{-1}$ & $10^{4}$ to $10^{8}$\\
+$k_r,k_i$ & real part sets wavelength, imaginary part sets decay & m$^{-1}$ & $k_i\ll k_r$\\
+$\lambda$ & wavelength & m & $10^{-8}$ to $10^{-4}$\\
+$\omega$ & angular frequency & rad\,s$^{-1}$ & $10^{6}$ to $10^{11}$\\
+$f$ & ordinary frequency & Hz & $10^{5}$ to $10^{10}$\\
+$f(2h)$ & frequency times thickness, the comparison axis & Hz\,m & 1 to $10^{4}$\\
 \bottomrule
 \end{tabular}
 \end{center}
+
+\section{Glossary}
+
+\textit{Aperiodic} means ordered but not repeating.
+
+\textit{Coupling} is any term through which one field influences another.
+
+\textit{Cutoff} is the lowest frequency at which a mode exists.
+
+\textit{Dispersion} is the dependence of phase velocity on frequency.
+
+\textit{Dissipation} is the irreversible conversion of wave energy into heat. A positive friction coefficient
+is what makes dissipation positive.
+
+\textit{Phason} is the field describing local rearrangements of the tiling. \textit{Phonon} is the ordinary
+displacement field.
+
+\textit{Phason strain} is the gradient of the phason displacement. \textit{Phason stress} is its conjugate.
+
+\textit{Piezoelectricity} is the coupling between strain and electric polarisation.
+
+\textit{Relaxation time} is how long a system takes to come back to equilibrium after a small push.
+
+\textit{Strain} is change of length per unit length; \textit{stress} is force per unit area.
+
+\textit{Telegraph equation} is the equation containing both inertia and friction, with diffusion at low
+frequency and waves at high frequency.
+
+\textit{Unit cell} is the repeating block of a crystal. A quasicrystal has none, which is the whole point.
+
+\section{How to check your own work}
+
+Five generic tests will catch most mistakes, and none of them requires a published number.
+
+\textit{First, units.} Write the unit of every term in every equation before coding. Terms that disagree are
+usually wrong in sign as well. Keep the table and put it in the paper.
+
+\textit{Second, limits.} Every new term has a limit in which it vanishes. Put the phason friction to zero and
+you must recover a lossless phason wave. Put the phason inertia to zero and you must recover diffusion. Put
+the thermal coupling to zero and the attenuation must fall to its mechanical value. Compute the reduced case
+separately and compare, do not simply delete a line from your own code.
+
+\textit{Third, symmetry.} Turn the plate over. The dispersion curves must be unchanged for each family. If a
+mode that should be symmetric comes out mixed, either the coupling is real or the assembly has a sign error,
+and separating those two possibilities is worth a day of work.
+
+\textit{Fourth, switch a term off in two ways.} Set a coupling constant to zero, and separately assemble a
+model in which the term was never written. The two answers must agree to six decimal places. This tests your
+code, not the physics.
+
+\textit{Fifth, compare with a cited source.} Digitise two or three points from a published curve and compare
+shape and order. The constants will differ, so you are looking for the same trend, not the same digits. If
+your curve bends the other way, stop and find out why before writing a sentence.
+
+Three habits complete the set. Keep a log of every run so that results can be reproduced. Plot whatever you
+are about to quote, because a table hides a shape. And repeat any surprising result by a different route
+before believing it.
 
 \end{document}

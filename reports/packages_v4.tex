@@ -8,7 +8,7 @@
 \usepackage[hidelinks]{hyperref}
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{#1}}}
 \setlength{\parskip}{3pt}
-\title{\vspace{-1.5cm}\textbf{Packages v4 --- what was delivered, and what the searches changed}\\[2pt]
+\title{\vspace{-1.5cm}\textbf{Packages v4.1 --- rename, sign audit, and expanded basics}\\[2pt]
 \large Milestone report}
 \author{Dr.\ Vipin \\ Gurugram University}
 \date{30 October 2026}
@@ -17,100 +17,92 @@
 \vspace{-8mm}
 \footnotesize
 
-\section*{1. What is in the delivery}
+\section*{1. The delivery, with counts}
 
-Three archives, each with exactly two \LaTeX\ files and nothing else.
+Three archives, each with exactly two \LaTeX\ files. Word counts are of the source, so they run a little
+above the compiled count; section counts exclude the bibliography.
 
 \begin{center}\footnotesize
-\begin{tabular}{lll}
+\begin{tabular}{lrrrrr}
 \toprule
-archive & file 1 & file 2\\
+archive & plan words & plan sections & basics words & basics sections & symbols in table\\
 \midrule
-\texttt{Lamb\_Sumit.zip} & \texttt{01\_Research\_Plan\_Sumit.tex} & \texttt{02\_Basics\_and\_Definitions\_Sumit.tex}\\
-\texttt{Lamb\_Neha.zip} & \texttt{01\_Research\_Plan\_Neha.tex} & \texttt{02\_Basics\_and\_Definitions\_Neha.tex}\\
-\texttt{Lamb\_Anu.zip} & \texttt{01\_Research\_Plan\_Anu.tex} & \texttt{02\_Basics\_and\_Definitions\_Anu.tex}\\
+\texttt{Lamb\_Sumit.zip} & 3280 & 6 & 8840 & 23 & 41\\
+\texttt{Lamb\_Neha.zip} & 2820 & 6 & 6440 & 23 & 35\\
+\texttt{Lamb\_Anu.zip} & 2310 & 6 & 6040 & 23 & 34\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Each plan carries the seven sections you asked for: title, abstract and keywords; introduction with cited
-literature and the gap; problem and assumptions; the model up to but not including the boundary conditions;
-a six-step work plan with the switching-off tolerance written into it; figures, risks and timeline; and
-references. The notation table sits inside the model section and carries units. Each basics document is
-written for a reader at class ten, has no equations to derive and no numbers, and ends in a glossary with
-units. No LaTeX engine exists in this workspace, so nothing is compiled; the code is kept to the eight
-packages you allowed, with no images and no custom environments.
+The three basics documents now stand on their own. Each opens with waves, frequency, wavelength, wavenumber,
+phase velocity, dispersion, plates, modes, cutoffs, symmetric and antisymmetric motion; then complex numbers
+from zero, the complex wavenumber and attenuation; then stress, strain, Hooke's law and balance laws; then the
+field theory of the paper; then heat, Fourier, relaxation and MGT; then the size effect; then what a model may
+assume; then a table of every symbol in the plan with its unit and a rough size; a glossary; and a closing
+section on testing your own work. Neha's and Anu's documents reach the material only after the general
+apparatus, as instructed.
 
-\section*{2. The seven corrections, and where each one landed}
+\section*{2. The three corrections in this round}
 
-\begin{center}\footnotesize
-\begin{tabular}{p{0.4cm}p{4.6cm}p{8.6cm}}
-\toprule
-\# & correction & what was done\\
-\midrule
-1 & NSGT in Lim form, momentum form, equation number & (N1) is $(1-l_{\rm nl}^2\nabla^2)t_{ij}=\sigma_{ij}$ with the gradient operator on $c{:}\varepsilon$ only. (N2) is the equivalent momentum form with the operator on the inertia. Equations (18) and (19) of Lim et al.\ are cited \emph{through} Barretta \& Marotti de Sciarra (2018), because the Elsevier file was closed to me; the status is [S], secondary, and the scholar is told to confirm (18) on the page.\\
-2 & local couplings & the gradient operator removed from A2, B3, C2, C3. It survives only on $c{:}\varepsilon$. The modelling choice is stated once, with the three reasons: $D$ and $B$ stay second order, the extra face conditions stay mechanical, and no field gradient is differentiated twice.\\
-3 & A6 Peltier term, units, sign, recombination & the band-gap term is gone. (A5) carries $\beta_{\rm th}\nabla^2\theta$ with $\beta_{\rm th}=b_nn_0S_n$, unit m$^{-1}$s$^{-1}$K$^{-1}$, negative for electrons. (A6) carries $-q\Pi_{\rm th}\partial_t\Delta n$ with $\Pi_{\rm th}=T_0S_n$ and (A7) states the Onsager ratio. Recombination is an optional pair that vanishes as $\tau_R\to\infty$. Every term of (A5) and (A6) is dimension-tested in a table.\\
-4 & three claims removed or sourced & all three removed; the searches that replaced them are in section 3 below.\\
-5 & Lubensky and phason dynamics & corrected to Lubensky, Ramaswamy \& Toner, \emph{Phys.\ Rev.\ B} \textbf{32} (1985) 7444, icosahedral, cited for the mechanism only. Added Agiasofitou \& Lazar, \emph{Int.\ J.\ Solids Struct.} \textbf{51} (2014) 923, Eqs.~(26) and (30), for the telegraph phason balance, and Baggioli \& Landry, \emph{SciPost Phys.} \textbf{9} (2020) 062, Eq.~(17), for the crossover.\\
-6 & distinct symbols & $q$ is the carrier charge, $k$ the wavenumber, $h_{kij}$ the piezomagnetic constant, $b_n$ the mobility so that $\mu_{ik}$ stays permeability. Renamed in all three sets.\\
-7 & order of the system & one sentence in each plan, at the end of the model section, handing the extra face conditions to the scholar. \\
-\bottomrule
-\end{tabular}
-\end{center}
+\textbf{The name.} Every occurrence of ``modified gradient theory'' is gone from all six files. The first use
+in each document now reads Moore-Gibson-Thompson (MGT), and the sentences that were built around the wrong
+name were rewritten rather than patched: for example the abstract of the Sumit plan now says that the heat
+equation is of the MGT type in its base form, and the Anu plan says that Matlam and Kedar applied the MGT
+theory to an electro-magneto-thermoelastic medium. In the basics documents the theory has its own section,
+where it is introduced by name with its two authors' dates and then called MGT for the rest of the text.
 
-\section*{3. What the searches changed, and why the papers are narrower than they were}
+\textbf{The signs.} The reviewer was right and the file was wrong. I re-derived both coefficients from the
+flux law, and the audit is in \texttt{internal/sumit\_audit.md}. Starting from
+$j_i=-n b_nE_i+n b_nS_n\theta_{,i}$ and $\partial_t\Delta n=-\nabla\!\cdot\!j_i$, the carrier equation gives
+$\beta_{\rm th}=-b_nn_0S_n$, positive for $n$-type, so a hot spot loses carriers and they gather where it is
+cold. The heat delivered to the lattice is $-\nabla\!\cdot\!(\Pi_{\rm th}J_i)$ with $J_i=-qj_i$, which is
+$-q\Pi_{\rm th}\partial_t\Delta n$; because the bracket of the heat equation carries the negative of each
+source, the entry is $+q\Pi_{\rm th}\partial_t\Delta n$. Both changes are in the plan and in the model
+document, and the Onsager ratio now carries its sign, $\Pi_{\rm th}/\beta_{\rm th}=-T_0/(b_nn_0)$.
 
-This is the part that matters most, and it is not all good news.
+The same audit was done for the other two papers and is in \texttt{internal/neha\_audit.md} and
+\texttt{internal/anu\_audit.md}: every pair that shares a constant is tested for reciprocity and for
+dimensions, including the phonon-phason pair $R_{ijkl}=R_{klij}$, the sign of the phason dissipation
+$\gamma\dot w^2\ge0$, the magnetoelectric pair $\alpha$ appearing with the same sign in $D$ and $B$, and the
+two caloric pairs. Two by-products: the unit of $\alpha$ must be s/m, which follows from either of its two
+appearances, and the phason friction must be stated positive or the material becomes a pump.
 
-\noindent\emph{Paper A.} Qu, Pan, Zhu, Jin and Roy published a thermoelectric theory of piezoelectric
-semiconductors with the Seebeck and Peltier effects derived from a dissipation inequality
-(\doi{10.1016/j.ijengsci.2022.103775}). Gupta and co-workers already put the modified gradient heat equation
-into a piezo-semiconductor half space with voids and studied the Rayleigh wave
-(\doi{10.1108/HFF-04-2025-0254}). Yang and Zhou already solved wave amplification in piezoelectric
-semiconductor plates (\doi{10.1016/j.ijsolstr.2004.10.011}). So the claim that published PSC work closes at
-most one direction of the carrier--temperature loop is false, and it is gone. What remains is the free-face
-plate problem, the size effect and the attenuation curves.
+\textbf{The length.} The three basics documents went from about 1500 words to 6000 to 8800, with the sections
+listed in section 1 above, a symbol table of every symbol in the corresponding plan, and a closing section on
+self-testing. Nothing was added that gives away a boundary condition, a solution step, or a number to compare
+against.
 
-\noindent\emph{Paper B.} A 2026 paper on generalized thermoelastic Lamb waves in one-dimensional hexagonal
-quasicrystal nanoplates exists (\doi{10.1007/s10338-026-00755-4}). I could not read it. It is now week-one
-reading for Neha, with four questions to answer before she writes a novelty sentence: which generalized
-model, one lag or two, attenuation reported or not, phason dynamic or static. Until that is answered her
-plan carries a provisional claim and says so.
+\section*{3. What has not changed since the last review}
 
-\noindent\emph{Paper C.} Pyroelectric and pyromagnetic coefficients \emph{are} retained in plate work:
-Kondaiah, Shankar and Ganesan (\doi{10.12989/csm.2013.2.1.001}) and Tocci Monaco and co-workers
-(\doi{10.3390/nano11010087}) both keep them, the second inside a nonlocal strain gradient nanoplate. The
-claim that they are rare is withdrawn, and so is the claim of a frequency-dependent magnetoelectric
-coefficient, for which I found no source. What remains is the attenuation of Lamb modes in a layered plate
-with a relaxation-time heat equation, with the effective magnetoelectric coefficient carried as a band from
-two homogenisation routes. Matlam and Kedar (\doi{10.1080/01495739.2025.2612316}) and Kakar and Kakar
-(\doi{10.12989/sem.2015.53.1201}) are the two nearest thermal neighbours and both are now cited.
+The seven corrections from the previous round stand: the Lim form of the nonlocal strain gradient law with the
+operator on inertia and on $c{:}\varepsilon$ only, the equivalent momentum form, all piezoelectric,
+piezomagnetic, thermal and phason couplings local as a stated modelling choice, the Peltier term in place of
+the band-gap term, the three withdrawn novelty claims, the corrected Lubensky reference with its icosahedral
+caveat, the separated symbols, and the sentence in each plan that hands the extra face conditions to the
+scholar.
 
-\section*{4. What is not in the packages, and why}
+The claims remain narrow, and the searches behind them stand. Paper A is a free-face plate with a size effect
+and attenuation curves, not a new thermoelectric constitutive law; Qu et al.\ (2023) and Gupta et al.\ (2025)
+own that ground. Paper C is attenuation in a layered magneto-electro-elastic plate with MGT heat and an
+effective magnetoelectric coefficient carried as a band, not the discovery of the pyroelectric or
+pyromagnetic coefficient; Kondaiah et al.\ (2013) and Tocci Monaco et al.\ (2021) own those. Paper B is the
+telegraph phason plus a relaxation-time heat equation, and its novelty remains provisional until the 2026
+Acta Mechanica Solida Sinica paper is read.
 
-There are no boundary conditions, no dispersion determinant, no solution method and no numerical value in
-any of the six documents. That was your instruction and it is also the right division of labour: a scholar
-who is handed a determinant learns nothing, and a scholar who is handed the model and the sequence of tests
-has a job with a shape.
+\section*{4. What is deliberately absent, and what is left on my side}
 
-The internal folder carries the material that the packages deliberately lack:
-\texttt{sumit\_equation\_source\_log.md}, \texttt{neha\_equation\_source\_log.md},
-\texttt{anu\_equation\_source\_log.md}, the three benchmark files with every tolerance and every number we
-hold, \texttt{changes\_v4\_review.md} and \texttt{style\_check.md}. The source logs mark each equation [R]
-read, [S] secondary, [T] textbook, [D] your instruction, [P] proposed extension with no source, and they
-name what I did not open. That list is short and uncomfortable: the Lim paper itself, the 2026 quasicrystal
-thermoelastic paper, the Qu paper's equations, and the MGT heat equation as any of the cited authors write
-it.
+No boundary conditions, no dispersion determinant, no solution method, no numbers to compare against. The
+internal folder carries what the packages lack: three equation source logs marked [R], [S], [T], [D] or [P],
+three benchmark files with every tolerance and every number we hold, three sign and unit audits, the change
+log, and the style record.
 
-\section*{5. The week-one gates}
+No LaTeX engine exists in this workspace, so nothing was compiled here; the code is kept to the eight allowed
+packages, with no images and no custom environments. If a page count comes out too long once you compile, the
+cuts should come from the figure paragraphs in the plans, not from the model.
 
-Each plan opens with reading, not computing, and each scholar reports on it before touching code. Sumit
-confirms equations (17) to (19) of Lim et al.\ and the Peltier term in Qu et al. Neha obtains the 2026 paper
-and writes down what is inside it. Anu reads the magnetoelectric sign convention in Chen, Pan and Chen and
-the thermal face conditions in Kakar and Kakar. No calculations are set for the scholars yet, as agreed.
-
-\noindent\textbf{Next step on my side, when you say so:} the three plans go out as the archives above, and
-the first meeting is the reading report. The model document stays as the gate record.
+The week-one gates are unchanged. Sumit confirms equations (17) to (19) of Lim et al.\ on the page and the
+Peltier term in Qu et al. Neha obtains the 2026 quasicrystal thermoelastic paper and writes down what heat
+operator it uses. Anu reads the magnetoelectric sign convention in Chen, Pan and Chen and the thermal face
+conditions in Kakar and Kakar. No calculations are set for the scholars yet.
 
 \end{document}

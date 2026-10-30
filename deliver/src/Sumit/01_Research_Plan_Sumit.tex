@@ -26,8 +26,8 @@ semiconductor of the ZnO family, with free faces at $z=\pm h$ and poling along t
 carries five fields: the two displacements, the electric potential, the excess carrier density and the
 temperature rise. The mechanical stress is written in the nonlocal strain gradient form, with one length
 for the nonlocal softening and one for the gradient stiffening, so that the size effect is described by
-two numbers that enter only as length over thickness. The heat equation is of the modified
-gradient type in its base form, with one phase lag and one time derivative cancelled, so that the
+two numbers that enter only as length over thickness. The heat equation is of the Moore-Gibson-Thompson (MGT)
+type in its base form, with one phase lag and one time derivative cancelled, so that the
 parabolic and the hyperbolic descriptions are recovered as limits. The carrier equation carries
 diffusion, drift, a thermodiffusion term and an optional recombination term, and the heat equation carries
 the reciprocal Peltier term, the thermoelastic coupling and the pyroelectric coupling. Three questions are
@@ -53,7 +53,7 @@ through the thickness \cite{Othmani2017}. In all of that work the plate is isoth
 either absent or treated as a constant that shifts the material constants.
 
 The thermal side of our problem is already partly occupied, and the plan says so at the start. Gupta and
-co-workers put the modified gradient heat equation, with one lag, into a piezo-semiconductor half space with
+co-workers put the MGT heat equation, with one lag, into a piezo-semiconductor half space with
 voids and studied the size-dependent Rayleigh wave \cite{Gupta2025}. That paper settles two things for us:
 the heat operator in a semiconducting piezoelectric medium is writable, and the Rayleigh limit of a
 half space is already published. What it does not contain is a finite plate, the free-face problem, the
@@ -83,7 +83,7 @@ differential law raises the order of the problem \cite{Barretta2018}. For a plat
 the order in the thickness coordinate goes up, and the faces must be given more conditions than the
 classical six.
 
-For the thermal side we use the modified gradient theory in its base form, one phase lag, one time
+For the thermal side we use the MGT theory in its base form, one phase lag, one time
 derivative cancelled, which is the version implemented in the recent heat transfer literature
 \cite{Gupta2025}. The operator is simple enough to carry through a dispersion calculation and it has two
 limits that can be tested against the classical solutions.
@@ -176,23 +176,30 @@ carrier continuity,
 =D_n\nabla^2\Delta n+b_nn_0\nabla\!\cdot\!E+v_d\frac{\partial\Delta n}{\partial x}
 +\beta_{\rm th}\nabla^2\theta-\frac{\Delta n}{\tau_R},
 \end{equation}
-and the heat equation in the base form of the modified gradient theory,
+and the heat equation in the base form of the MGT theory,
 \begin{equation}
 \Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
 \Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\varepsilon_{ij}+T_0p_i\dot E_i
--q\Pi_{\rm th}\frac{\partial\Delta n}{\partial t}+\frac{E_g\Delta n}{\tau_R}\Bigr]
++q\Pi_{\rm th}\frac{\partial\Delta n}{\partial t}+\frac{E_g\Delta n}{\tau_R}\Bigr]
 =k_{\rm th}\nabla^2\theta .
 \end{equation}
 Five equations for five unknowns. The two coefficients that appear in both the carrier and the heat
 equation are not independent. With $S_n$ the Seebeck coefficient of the electrons,
 \begin{equation}
-\beta_{\rm th}=b_nn_0S_n,\qquad \Pi_{\rm th}=T_0S_n,\qquad
-\frac{\Pi_{\rm th}}{\beta_{\rm th}}=\frac{T_0}{b_nn_0},
+\beta_{\rm th}=-b_nn_0S_n,\qquad \Pi_{\rm th}=T_0S_n,\qquad
+\frac{\Pi_{\rm th}}{\beta_{\rm th}}=-\frac{T_0}{b_nn_0},
 \end{equation}
 which is the Onsager symmetry between the Soret and Peltier cross effects, and the Kelvin relation
 $\Pi=TS$ in its local form. For $n$-type material the carriers have charge $-q$ and $S_n<0$, so
-$\beta_{\rm th}<0$ and $\Pi_{\rm th}<0$: a temperature gradient pushes electrons towards the cold face, and
-heat is released where carriers accumulate. The recombination pair $-\Delta n/\tau_R$ and
+$\beta_{\rm th}>0$ and $\Pi_{\rm th}<0$. Two signs are worth writing out, because this is where a double
+sign error hides. Take the particle flux $j_i=-b_nnE_i+b_nnS_n\theta_{,i}$, which is drift plus a
+thermodiffusion term that pushes electrons from hot to cold. Charge conservation,
+$\partial_t\Delta n=-\nabla\!\cdot\!j_i$, gives $\beta_{\rm th}=-b_nn_0S_n$, positive here, so a hot spot
+with $\nabla^2\theta<0$ loses carriers and they gather on the cold side. The heat given to the lattice is
+$-\nabla\!\cdot\!(\Pi_{\rm th}J_i)$ with $J_i=-qj_i$, which equals $-q\Pi_{\rm th}\partial_t\Delta n$ and is
+positive where carriers accumulate. In the bracket of the heat equation, where the thermoelastic and
+pyroelectric sources also enter with the sign opposite to their contribution, the entry is therefore
+$+q\Pi_{\rm th}\partial_t\Delta n$. The audit is in the internal log. The recombination pair $-\Delta n/\tau_R$ and
 $+E_g\Delta n/\tau_R$ is an option, not a commitment; taking $\tau_R\to\infty$ deletes both terms and
 nothing else changes. If you keep it, you must justify a value for $\tau_R$ from the literature or sweep it
 and say so.
@@ -220,7 +227,7 @@ $b_n$ & electron mobility & m$^2$V$^{-1}$s$^{-1}$\\
 $D_n$ & carrier diffusion coefficient & m$^2$s$^{-1}$\\
 $E_0$, $v_d$ & bias field, drift velocity $v_d=b_nE_0$ & V\,m$^{-1}$, m\,s$^{-1}$\\
 $S_n$ & Seebeck coefficient of the electrons, negative for $n$-type & V\,K$^{-1}$\\
-$\beta_{\rm th}$ & thermodiffusion coefficient, $b_nn_0S_n$ & m$^{-1}$s$^{-1}$K$^{-1}$\\
+$\beta_{\rm th}$ & thermodiffusion coefficient, $-b_nn_0S_n$, positive for $n$-type & m$^{-1}$s$^{-1}$K$^{-1}$\\
 $\Pi_{\rm th}$ & Peltier coefficient, $T_0S_n$ & V\\
 $\tau_R$, $E_g$ & recombination time, band gap & s, J\\
 $\alpha_{kl}$, $\beta_{ij}$, $p_i$ & thermal expansion, thermal stress $c_{ijkl}\alpha_{kl}$, pyroelectric vector & K$^{-1}$, Pa\,K$^{-1}$, C\,m$^{-2}$K$^{-1}$\\
