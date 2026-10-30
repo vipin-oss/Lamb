@@ -26,9 +26,10 @@ Traction-free faces: sigma_zz = sigma_xz = 0 at z = +-h. Splitting into even/odd
 |---|---|
 | S0 as fd -> 0 | 2 cT sqrt(1 - cT^2/cL^2) = 5393.9 m/s |
 | A0 as fd -> 0 | c -> 0 like sqrt(fd) |
-| Large fd, S0 and A0 | -> Rayleigh speed (about 2906 m/s) |
+| Large fd, S0 and A0 | -> Rayleigh speed **2909.7 m/s** (exact root at E=70 GPa, nu=0.33, rho=2700; tolerance 1e-3 relative). Do not use the Viktorov formula cR = cT(0.862+1.14 nu)/(1+nu) = 2906.5 m/s as the check value - it is 0.11% low and would fail the tolerance. |
 | Cutoffs (fd = f*2h) | A1: cT/2 = 1561; S1: cL/2 = 3099; S2: cT = 3122; A2: cL = 6198 Hz*m |
-| Mode counts | 1S+1A below 1561; 3S+2A at fd = 3434 |
+| Mode counts | 1S+1A below 1561; 2A (A1 appears) above 1561; 3S+2A at fd = 3434 |
 
-Reference implementation: `common/rayleigh_lamb.py` (run `python3 rayleigh_lamb.py`).
+Reference implementation: `common/rayleigh_lamb.py` (run `python3 rayleigh_lamb.py`; the script
+asserts the exact Rayleigh value and both thick-plate limits, so a failure is visible immediately).
 Send the c-vs-fd plot and the CSV of the fixed comparison points (see docs/02_workflow_crosscheck.md).

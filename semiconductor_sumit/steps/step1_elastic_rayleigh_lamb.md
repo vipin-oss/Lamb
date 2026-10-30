@@ -106,12 +106,14 @@ constants in §7. Record scholar-vs-Arena differences in `checks/step1_compare.m
 | 7 | Mode count | 1S+1A below 1561; 3S+2A at fd = 3434 Hz·m | exact count |
 | 8 | No spurious root | no root at `c = c_T` (see §6) | exact absence |
 
-> **Correction to `common/step1_instructions.md`.** That file quotes "Rayleigh speed about
-> 2906 m/s". Solved properly at ν = 0.33 the value is **2909.7 m/s** (≈ 0.9321 `c_T`); 2906 differs
-> by 0.13%, i.e. outside the 1e-3 tolerance of check 5. I suggest the number be corrected to 2909.7
-> before it is quoted to Sumit. (Also note check 4's `A0 → 0` limit makes the tolerance table in
-> `docs/02_workflow_crosscheck.md` unusable for A0 at low fd — compare `c²/fd` instead, which tends
-> to a constant.)
+> **Correction applied (30 Oct 2026).** `common/step1_instructions.md` quoted "Rayleigh speed about
+> 2906 m/s". That came from the Viktorov approximation, `c_T(0.862+1.14ν)/(1+ν) = 2906.5`, which is
+> 0.11% low. The exact root at ν = 0.33 is **2909.73 m/s**; the instructions and
+> `common/rayleigh_lamb.py` have been corrected, and the script now asserts both the exact value and
+> the two thick-plate limits. Re-run confirmed: S0 and A0 at fd = 20 kHz·m both give 2909.73 m/s,
+> relative difference 8.3e-8, i.e. **PASS** at the 1e-3 tolerance.
+> (Check 4 still stands: the `A0 → 0` limit makes the relative tolerance unusable for A0 at low fd —
+> compare `c²/fd` instead, which tends to a constant.)
 
 ## 6. Numerical warnings — three failures I reproduced myself
 
