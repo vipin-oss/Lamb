@@ -27,3 +27,19 @@ else is [T] textbook, [D] instruction, [P] proposed, or [S] secondary (someone e
 4. Gupta et al., the MGT heat equation and the void terms, to see which terms they keep.
 5. Sharma, Pal & Chand, the secular equations and the attenuation definition, so that our attenuation is
    comparable with a published one.
+
+## v7 round: equations added to `Lamb_Sumit.tex`
+
+The master file repeats the equations above and adds the following. Status codes as at the top of this log.
+
+| Equation in the master | What it is | Status |
+|---|---|---|
+| strain, field, phason strain | kinematics and quasi-static fields | [T] textbook |
+| constitutive law | class 6mm components, size operator on the elastic part | [T] + [S] as above |
+| momentum with the nonlocal operator | NSGT differential form | [S] via Barretta Eq. (18) |
+| MGT heat equation | operator plus caloric terms | operator [R] Quintanilla; caloric pair [T]/[P] |
+| boundary condition b1, b2 | traction with the surface gradient of the double traction | [R] Charalambopoulos Eq. (14), extended = ours |
+| boundary condition b3, b4 | double traction R = n.mu.n | [R] Charalambopoulos condition b(i) |
+| boundary conditions b5, b6, b7 | open circuit, no carrier flux (or phason traction), adiabatic | [P] our modelling choice |
+| entropy balance derivation | energy balance plus MGT flux law giving the heat equation | [T] plus our combination |
+| limits in Calculation H | Rayleigh-Lamb, thin plate, bulk damping, Hutson-White (variants per paper) | [T] derivations |

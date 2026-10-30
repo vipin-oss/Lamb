@@ -1,58 +1,11 @@
-# STATUS — three-paper project
+# STATUS — 30 Oct 2026 (v7). Branch `arena/beec1abf-lamb`, PR #1 open, not merged.
 
-**Updated 30 Oct 2026 (v4). Branch `arena/beec1abf-lamb`, PR #1 (open, not merged).**
-
-## One-line state
-
-Heat is back in the model as a full coupled MGT field for all three papers (v4, overriding Route A; the
-adiabatic/isothermal bracket survives only as a verification limit). The gate document is revised to the
-reviewer's seven corrections, and the three scholar packages are built: `deliver/Lamb_{Sumit,Neha,Anu}.zip`,
-two `.tex` files each.
-
-## Paper status
-
-| paper | stage | gate now blocking | verdict |
-|---|---|---|---|
-| **Sumit** (ZnO PSC plate) | v4 model fixed; package delivered; Step 2 (6×6) closed | week-1 reading: Lim (17)–(19) on the page, Qu et al. Peltier term | **GO, conditional** (risk: identifiability) |
-| **Neha** (QC plate) | v4 model fixed; package delivered | week-1 reading: AMSS 2026 generalized thermoelastic QC plate paper (novelty may close) | **REFOCUS** |
-| **Anu** (MEE plate) | v4 model fixed; package delivered | week-9 ridge test; band of two homogenisation routes vs thermal contribution | **DOWNGRADE to Q2** |
-
-## What changed in v4
-
-1. **NSGT in Lim form**: `(1 - l_nl^2 lap) t = sigma` with `sigma` carrying `(1 - l_g^2 lap)` on `c:eps`
-   only, plus the equivalent momentum form with the operator on inertia. Lim et al. Eqs. (18), (19), cited
-   through Barretta & Marotti de Sciarra (2018) — no access to the Elsevier PDF, marked secondary.
-2. **All piezo, piezomagnetic, thermal and phason terms local** — stated once as a modelling choice.
-3. **A6**: band-gap term removed; Onsager-reciprocal Peltier term `-q Pi_th d(dn)/dt` added, with
-   `beta_th = b_n n_0 S_n` (m^-1 s^-1 K^-1, negative for n-type), `Pi_th = T_0 S_n`, and recombination only
-   as an optional finite-`tau_R` pair. Every term of (A5) and (A6) dimension-tested in a table.
-4. **Three claims withdrawn** after searching: A "close at most one direction" (killed by Qu et al. 2023 and
-   Gupta et al. 2025), C "rarely retained" (killed by Kondaiah et al. 2013 and Tocci Monaco et al. 2021),
-   C "frequency-dependent alpha" (no source).
-5. **Lubensky corrected**: Lubensky, Ramaswamy & Toner, PRB 32 (1985) 7444, icosahedral. Phason telegraph
-   dynamics now sourced to Agiasofitou & Lazar (2014) Eqs. (26), (30) and Baggioli & Landry (2020) Eq. (17).
-6. **Symbols separated**: `q` charge, `k` wavenumber, `h_kij` piezomagnetic, `b_n` mobility, `mu_ik`
-   permeability.
-
-## v4.1 (second review round)
-
-1. **MGT named properly**: Moore-Gibson-Thompson at first use in all six files; "modified gradient" gone.
-2. **Sumit signs fixed**: `beta_th = -b_n n_0 S_n > 0`, bracket entry `+q Pi_th d(Dn)/dt`, Onsager ratio
-   `-T_0/(b_n n_0)`. Independent derivation agrees with the reviewer; audit in `internal/sumit_audit.md`.
-3. **Sign and unit audits** for all three papers in `internal/{sumit,neha,anu}_audit.md`.
-4. **Basics expanded**: 8840 / 6440 / 6040 words, 23 sections, full symbol table with units and scales,
-   self-testing section. Zips rebuilt; `reports/packages_v4.tex` carries the new counts.
-
-## Open items
-
-- **[V]** Lim et al. (2015) Eqs. (17)–(19) on the page; the equation numbers are still secondary.
-- **[V]** AMSS 2026 `10.1007/s10338-026-00755-4`: obtain and read. It may close Paper B's thermal novelty.
-- **[S]** week-1 reading report before any computation.
-- **[N]** same, plus a phason relaxation time tied to a real material.
-- **[A]** magnetoelectric sign convention and thermal face conditions; two homogenisation routes.
-- **[all]** no LaTeX engine here: nothing is compiled, and no PDF is promised.
-
-## Internal records
-
-`internal/changes_v4_review.md`, `internal/{sumit,neha,anu}_equation_source_log.md`,
-`internal/{sumit,neha,anu}_benchmarks.md`, `internal/style_check.md`.
+1. Three masters delivered with the full hand calculation: `deliver/Lamb_{Sumit,Neha,Anu}.zip`, two files each, sources in `deliver/src_v7/`.
+2. Section order of v7 §3 followed; every step inside the `worked` block, every result outside; no code and no numbers in the three `.tex`.
+3. Parity: Sumit splits only with `beta_th = Pi_th = 0` (correction to the reviewer's item 3); Neha and Anu split for every coupling.
+4. Numbers, tolerances and residuals in `internal/*_matrix_verification.md`; Rayleigh–Lamb six branches pass at 9.9e-16; degrees 14/10 confirmed in all three.
+5. Citations: numbers only where read (Quintanilla, Zhu block, Barretta, Charalambopoulos, Agiasofitou–Lazar, Baggioli–Landry, Tocci §2); everything else says "number not read" and carries a `.bib` note.
+6. Milestone report `reports/packages_v7.tex`.
+7. Not done: no LaTeX engine here, so nothing is compiled, no PDF exists and page counts are estimates (29/19/16 pp master, 23/15/14 pp scholar) — below the 35–60 guide for the master.
+8. Open: numerical thin-plate open-circuit, bulk damping and Hutson–White scans; full 14×14 boundary assembly needs the double-traction moduli; AMSS 2026 competitor still unopened.
+9. Next round: extend Calculations C–G for length, build the 14×14 assembly, compile all six variants.

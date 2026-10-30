@@ -1,69 +1,31 @@
-# Style self-check, v4 packages
+# Style self-check for the three v7 masters
 
-Six documents: `01_Research_Plan_*` and `02_Basics_and_Definitions_*` for Sumit, Neha and Anu.
-Checked on 30 October 2026, before zipping. Fixes are logged, not hidden.
+The script works on prose only. Display mathematics, worked blocks, tables, lists and section headings are
+treated as separators, so a run of three sentences can only be counted inside one continuous paragraph of
+running text. Em dashes are counted as the LaTeX ligature. Page counts are estimates: there is no LaTeX
+engine in the sandbox, so no PDF exists and no page count can be measured.
 
-## Automated scan
 
-| Item | Rule | Result | Action |
-|---|---|---|---|
-| Forbidden words (delve, moreover, furthermore, it is important to note, in the realm of, comprehensive, robust, leverage, landscape, tapestry, pivotal, crucial, seamless) | none | zero hits in all six | none needed |
-| "not only ... but also" chains | none | two "not only" constructions found, in Sumit basics (size effect) and Anu basics (size effect) | both rewritten as "as well as" / "and not ... alone" |
-| "check", "verified", "UNVERIFIED", "Arena", "Claude", "AI" | none | zero hits in the six documents | none needed |
-| Bold in running text | none | run-in labels were set with `\textbf{}` in the three plans (working title, abstract, keywords, steps, figure paragraphs) | all converted to `\paragraph{}` headings. Remaining `\textbf` is only the volume number in bibliography entries |
-| Em dashes | at most one per page | zero `---` in all six | none needed |
-| Emojis | none | none | none needed |
-| Bullet lists | only real lists | itemize used nowhere; enumerate used three times, once per plan, for the list of assumptions | kept, these are real lists |
-| Slogan headings | none | section headings are plain nouns ("Introduction", "The model", "Work plan") | none needed |
-| Sentences repeating the paragraph | none | one instance in the Sumit abstract ("Numbers are deliberately absent at this stage") was kept because it states a scope decision, not a summary | kept, flagged here |
+## Sumit
 
-## Structural scan
+- prose words 4926, numbered display environments 36, em dashes 2
+- estimated pages 18.7 (words/430 + displays/5; estimate only)
+- sentence length: mean 20.7, sd 12.0, shortest 3, longest 64
+- forbidden words: none found
+- runs of three sentences with the same opening word: 0
 
-| Item | Result |
-|---|---|
-| Brace balance | zero delta in all six |
-| `\begin`/`\end` balance | matched in all six |
-| Odd number of `$` per line | none |
-| Packages used | fontenc, lmodern, amsmath, amssymb, booktabs, array, geometry, hyperref only |
-| Class and size | article, 11pt, a4paper |
-| Bibliography | `thebibliography` in each plan; basics documents carry no citations by design |
-| Dates | 30 October 2026 on every title page |
-| Author block | Dr. Vipin, Gurugram University |
-| Engine | no LaTeX engine in this workspace, so nothing is compiled. Code kept conservative: no `\usepackage{tikz}`, no `\includegraphics`, no custom environments |
+## Neha
 
-## Content scan against the scope rules
+- prose words 2912, numbered display environments 28, em dashes 1
+- estimated pages 12.4 (words/430 + displays/5; estimate only)
+- sentence length: mean 20.8, sd 11.5, shortest 3, longest 54
+- forbidden words: none found
+- runs of three sentences with the same opening word: 0
 
-| Rule | Result |
-|---|---|
-| No derivations | none. The reciprocal-coefficient relation in Sumit's plan is stated, not derived; the derivation is the scholar's task |
-| No dispersion determinant | none |
-| No solution method | none. The plans say the scholar chooses the method; the steps state what is compared, not how to invert the matrix |
-| No boundary conditions | none. Each plan ends its model section with a sentence handing the faces to the scholar |
-| No benchmark numbers | none in the six documents. All numbers (Rayleigh velocity, Set L constants, tau_q maps) live in `internal/*_benchmarks.md` |
-| Every equation sourced in the plan | the source log carries each equation with the status I can defend: [R], [S], [T], [D], [P] |
-| Supervisor voice | yes: "we", "you", plain sentences, mixed length. The basics documents address the reader directly |
-| Novae stated as search results | yes, three times, each with the month of the search, the databases, and the named neighbours |
+## Anu
 
-## One thing I could not fix
-
-The paragraphs are long in the model sections, because the equations are long and each one needs a sentence
-of justification. If Dr. Vipin wants a shorter page count after compilation, the cuts should come from the
-figure paragraphs in the plans, not from the model.
-
-## v4.1 re-check (30 October 2026, after the reviewer's compile)
-
-| Item | Result | Action |
-|---|---|---|
-| "modified gradient" anywhere in the six files | zero | the name is gone; first use in each file is Moore-Gibson-Thompson (MGT), with the sentences rewritten, not patched |
-| "check" in running text | one occurrence, in Anu basics, "a test of the second law" after the fix | the only remaining occurrences are the section titles "How to check your own work", which the reviewer asked for by that name |
-| "not only" constructions | one in Sumit basics, rewritten | none left |
-| Bold in running text | zero; plans use `\paragraph` run-in headings, bibliography volume numbers are bold by convention | kept |
-| Em dashes | zero in all six | none |
-| Word counts | plan 3280 / 2820 / 2310; basics 8840 / 6440 / 6040 | basics inside the requested 6000 to 9000 band |
-| Symbols in the basics table | 41 / 35 / 34, covering every symbol used in the matching plan | one table per booklet, with unit and rough size as asked |
-| Brace, environment and dollar balance | all six clean | none |
-| New numbers used as comparisons | none | the only numbers added are everyday illustrations (mains hum, tuning fork, rainfall) and order of magnitude scales in the symbol table |
-| Scope rules | still honoured: no boundary conditions, no solution method, no benchmark numbers | none |
-
-One honest note. The three basics documents share a skeleton, as they should, but the prose was rewritten per
-scholar and the examples differ, because three identical booklets would be an insult to the reader.
+- prose words 3022, numbered display environments 20, em dashes 2
+- estimated pages 11.0 (words/430 + displays/5; estimate only)
+- sentence length: mean 21.3, sd 11.3, shortest 3, longest 48
+- forbidden words: none found
+- runs of three sentences with the same opening word: 0

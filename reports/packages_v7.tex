@@ -1,0 +1,168 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\title{\vspace{-1.4cm}\Large Three masters with the full calculation: milestone report for v7}
+\author{Dr.\ Vipin\\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-7mm}
+
+\section*{What is in the delivery}
+
+Three master files and three bibliographies, zipped one pair per scholar:
+\texttt{deliver/Lamb\_Sumit.zip}, \texttt{deliver/Lamb\_Neha.zip}, \texttt{deliver/Lamb\_Anu.zip}. Each
+zip holds exactly two files, \texttt{Lamb\_<Scholar>.tex} and \texttt{Lamb\_<Scholar>.bib}. The sources are
+in \texttt{deliver/src\_v7/<Scholar>/}. Every file follows the section order of your section 3, has a
+\texttt{worked} environment with the definition you gave, and keeps every calculation step inside it and
+every result outside.
+
+\begin{center}\footnotesize
+\begin{tabular}{p{3.4cm}p{3.1cm}p{3.1cm}p{3.1cm}}
+\toprule
+ & Sumit & Neha & Anu\\
+\midrule
+numbered equations & 44 & 35 & 27\\
+worked blocks & 31 & 22 & 16\\
+degree of $\det\mathbf M(\eta)$ & 14 ($l_g\ne0$), 10 ($l_g=0$) & 14 / 10 & 14 / 10\\
+roots (partial waves) & 14 / 10 & 14 / 10 & 14 / 10\\
+rows of $\mathbf B$ & 14 / 10 & 14 / 10 & 14 / 10\\
+rows per face & 7 / 5 & 7 / 5 & 7 / 5\\
+parity of $\det\mathbf M$ & fails with $\beta_{\rm th}$ or $\Pi_{\rm th}$ & holds always & holds always\\
+S/A factorisation & only with both thermoelectric terms off & yes & yes\\
+bib entries & 8 & 11 & 11\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{The parity result, which differs between the papers}
+
+For Sumit the determinant is even in $\eta$ if and only if $\beta_{\rm th}=0$ and $\Pi_{\rm th}=0$. The two
+entries that break the sign pattern are $M_{45}=-\beta_{\rm th}L$ and $M_{54}$, both even where the pattern
+needs odd. This is a correction to item 3 of your section 2: the conjunction with a polar coupling is not
+needed. The piezoelectric and pyroelectric constants respect the pairing; the thermodiffusion and Peltier
+coefficients break it, each on its own. Numbers are in \texttt{internal/sumit\_matrix\_verification.md},
+table of Test 3.
+
+For Neha and Anu the determinant is even for every value of every coupling, and the sign vector is
+$(-1,+1,+1,+1,-1)$ in the order (displacement along the plate, across it, the third field, the electric
+potential, the temperature): the first and the last are odd through the thickness. For Neha this answers the
+question in your section 6: the phonon--phason constants, the thermo-phason coefficient and the
+piezoelectric and pyroelectric constants all preserve the split. For Anu the same holds for the
+magnetoelectric, pyroelectric and pyromagnetic constants. Both papers therefore factorise,
+$\det\mathbf B=\det\mathbf B_{\rm S}\det\mathbf B_{\rm A}$, with two 7$\times$7 blocks (5$\times$5 at
+$l_g=0$).
+
+\section*{Tests run, with the largest residual}
+
+The rebuild is in \texttt{internal/code/} (mpmath only, 60 digits, scaled polynomial fit on a circle,
+adjugate null vectors, columns scaled by $\exp(-|{\rm Re}\,\eta_m|h)$).
+
+\begin{center}\footnotesize
+\begin{tabular}{p{4.6cm}p{4.9cm}p{5.4cm}}
+\toprule
+test & what was compared & result\\
+\midrule
+Rayleigh--Lamb, 4$\times$4 route & six branches (S0, A0 at fd = 10, 100, 1000) against the classical
+transcendental equations & $|{\det B}|/\|B\|^4 \le 9.9\times10^{-16}$ at the reference roots, six of six
+PASS, tolerance $10^{-5}$\\
+degree of $\det\mathbf M$ & 10/14 switch with $l_g$, and $l_{nl}$ alone & PASS in all three papers\\
+parity & existence of a diagonal sign vector & PASS, see above\\
+$l_g,l_{nl}\to0$ & ten physical roots against the local set at $l_g=10^{-11}$ & largest relative shift
+$3.7\times10^{-12}$; the four extra roots scale as $1/l_g$ with $l_g|\eta|=$ 1.000 and 1.045\\
+null vectors & $\|\mathbf M\mathbf v\|/\max|\mathbf M|$ & $9.4\times10^{-102}$ (Sumit),
+$8.1\times10^{-72}$ (Neha), $7.1\times10^{-71}$ (Anu)\\
+roots against conditions & 14 roots against 7 conditions per face & consistent, and the two
+double-traction rows vanish with $l_g^2$ as the count requires\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Not run, with reasons, in each verification file: the thin-plate open-circuit speed, the Fourier
+bulk damping scan, the Hutson--White scan and the phason limit curves. All four are derived by hand in
+Calculation H of the masters. The numerical versions need a branch-tracking search in the complex $k$ plane
+that was not built in this round. The full boundary assembly is also open: the double-traction rows need the
+double-traction moduli of the gradient theory, which no constant set we have fixes. This is the largest open
+item of the three papers and it is flagged in all three verification files.
+
+\section*{Citations: what was read and what was not}
+
+Read with equation numbers: Quintanilla, Eqs.~(2.5) and (3.1)--(3.5); Zhu, Negahban, Xu, Xia and Li,
+Eqs.~(1)--(7) as a block; Barretta and Marotti de Sciarra, Eqs.~(18)--(19); Charalambopoulos, Douka and
+Mavratzas, Sec.~2 Eq.~(14) and condition b(i); Agiasofitou and Lazar, Eqs.~(26) and (30); Baggioli and
+Landry, Eqs.~(17)--(18); Tocci Monaco and co-workers, Sec.~2 for the list of constants.
+
+Not read, and said so in the text and in the .bib note: Lim, Zhang and Reddy (cited through Barretta);
+Yang and Zhou (title and abstract); Qu and co-workers (abstract); Gupta and co-workers (abstract); Chen, Pan
+and Chen (bibliographic data only); Xiao and co-workers, Kondaiah and co-workers, Kakar and Kakar, Matlam
+and Kedar (titles and abstracts); Lubensky, Ramaswamy and Toner (metadata); Zhang and co-workers, Acta Mech.
+232 (2021) (displayed equations in the preview, no moduli table); and the 2026 competitor
+doi:10.1007/s10338-026-00755-4, which could not be opened at all. Where we could not read a numbering, the
+file says ``equation number not read'' and asks the scholar to locate it, and the .bib entry carries a
+\texttt{note}. No equation number is written that was not seen.
+
+\section*{Corrections and checks against your Sumit file}
+
+\begin{enumerate}
+\item Every entry of the $5\times5$ in your section 3 was re-derived from the model set and reproduced.
+   In particular $M_{51}=fT_0\omega k\beta_1$ and $M_{52}=-\ii\omega fT_0\beta_3\eta$ are right as printed;
+   with $sp=-\ii\omega$ in the reference code they agree with the code as well, so no sign change is needed
+   there.
+\item Parity: corrected as described above (the polar coupling is not part of the condition).
+\item $M_{54}$ was checked against the heat equation of the agreed model set and is right; the Peltier and
+   recombination terms both carry the sign that the bracket requires.
+\item Nothing else in your file was found wrong. The seven conditions per face, the $1/\Nc(\eta_m)$
+   inversion and the 14/10 counting all stand.
+\end{enumerate}
+
+\section*{Page counts, and the one thing that could not be done}
+
+There is no LaTeX engine in this environment, so no PDF exists, neither variant was compiled, and no page
+count was measured. What follows is an estimate from the word count and the number of displays
+(words/430 + displays/5):
+
+\begin{center}\footnotesize
+\begin{tabular}{lccc}
+\toprule
+ & Sumit & Neha & Anu\\
+\midrule
+master (worked blocks on) est.\ pages & 29.0 & 18.6 & 16.3\\
+scholar (worked blocks off) est.\ pages & 22.6 & 15.0 & 13.6\\
+share of the text inside worked blocks & 29\,\% & 28\,\% & 22\,\%\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The master estimates are below your 35--60 page guide, most of all for Anu. The content of the
+fifteen sections is complete; what is missing is length in Calculations C to G, where each entry and each
+boundary row could carry a longer paragraph. That is the first thing to extend in the next round, and it is
+an addition, not a correction.
+
+The other estimates are inside their bands: the scholar versions land in 15--25 for Sumit and Neha and just
+below it for Anu. Since neither variant was compiled, please run pdflatex, bibtex, pdflatex, pdflatex on each
+file, check that there are no undefined citations and no overfull display, and report the two real page
+counts. Both settings of the \texttt{worked} switch are formally valid: the environment is the one you gave,
+and no result equation is inside it, so the numbering is unchanged when the switch is flipped.
+
+\section*{Week-one reading for each scholar}
+
+Sumit: Lim et al.\ Section 2; the block of Eqs.~(1)--(7) in Zhu et al.; Quintanilla Eqs.~(2.5) and
+(3.1)--(3.5). Neha: the 2026 competitor first, then Agiasofitou and Lazar around Eqs.~(26) and (30). Anu:
+Chen, Pan and Chen Section 2 for the constitutive law and the sign of $\alpha$, then the published product
+formula for the effective magnetoelectric coefficient.
+
+\section*{Files}
+
+\texttt{deliver/*.zip} (the delivery), \texttt{deliver/src\_v7/} (sources),
+\texttt{internal/\{sumit,neha,anu\}\_matrix\_verification.md} (numbers and tolerances),
+\texttt{internal/style\_check.md} (forbidden words, sentence openings, em dashes),
+\texttt{internal/\{sumit,neha,anu\}\_equation\_source\_log.md} (status of every equation),
+\texttt{internal/code/} (the rebuild).
+
+\end{document}

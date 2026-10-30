@@ -1,0 +1,716 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsthm}
+
+\newif\ifshowworked \showworkedtrue
+\newenvironment{worked}{\ifshowworked\par\smallskip\noindent\textit{Working.}\par\else\setbox0\vbox\bgroup\fi}{\ifshowworked\par\smallskip\else\egroup\fi}
+
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\bx}{\hat u_x}
+\newcommand{\bz}{\hat u_z}
+\newcommand{\bp}{\hat\varphi}
+\newcommand{\bpsi}{\hat\psi}
+\newcommand{\bt}{\hat\theta}
+\newcommand{\kB}{k_{\mathrm{th}}}
+\newcommand{\aME}{\alpha}
+
+\title{\bfseries Lamb waves in a magneto-electro-elastic plate of the\\[2pt]
+BaTiO$_3$/CoFe$_2$O$_4$ type with Moore--Gibson--Thompson heat\\[2pt]
+conduction and the nonlocal strain gradient size effect}
+\author{Dr.\ Vipin\\ Gurugram University}
+\date{30 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+A magneto-electro-elastic composite of barium titanate and cobalt ferrite carries three couplings in one
+material: piezoelectric, piezomagnetic, and a magnetoelectric cross-coupling that neither phase has on its
+own. We write the five coupled field equations of a plate of this material with poling along the normal,
+reduce them to a plane-wave problem in the thickness coordinate, and carry the reduction to the boundary
+matrix. The plate has thickness $2h$ and free faces; the wave is $\exp[\ii(kx-\omega t)]$ with complex $k$.
+Heat conduction is of Moore--Gibson--Thompson type with pyroelectric and pyromagnetic terms; the elastic
+stress carries the nonlocal strain gradient operator. The file gives the effective constants under two
+homogenisation schemes, the constitutive components, the five equations, the $5\times5$ matrix, its degree
+and parity, the amplitude ratios, the seven conditions per face, the boundary matrix and the hand limits,
+including the thin-plate magnetoelectric coefficient.
+\end{abstract}
+
+\noindent\textit{Keywords.} magneto-electro-elastic; BaTiO$_3$/CoFe$_2$O$_4$; Lamb wave;
+Moore--Gibson--Thompson; nonlocal strain gradient; magnetoelectric coefficient.
+
+\section{Introduction}
+
+A magneto-electro-elastic material responds to three inputs at once. Push it and it produces an electric
+field and a magnetic field; apply an electric field and it strains; apply a magnetic field and it strains
+too. The reason is composite construction: barium titanate is piezoelectric, cobalt ferrite is
+magnetostrictive, and when the two are sintered together the strain of one phase is felt by the other, which
+produces an electric response to a magnetic input and the other way round. This product property is called
+the magnetoelectric effect, and it is the reason the composite is more interesting than either phase.
+
+The effect is weak but real, and it is useful precisely because it is a cross-correlation: a magnetic field
+can be measured through an electric voltage, without a coil. Lamb waves make it stronger, because a guided
+wave concentrates energy in the plate and because the plate has a resonance structure that a bulk sample
+does not. The price is that the theory becomes a five-field problem: two displacements, an electric
+potential, a magnetic potential and a temperature.
+
+Heat enters through three doors. The temperature changes the stress through the thermal expansion, it
+changes the electric displacement through the pyroelectric constant, and it changes the magnetic induction
+through the pyromagnetic constant. Both pyroelectric and pyromagnetic terms appear in plate papers on this
+material, and we keep both \cite{Tocci2021}; the list of constants in that source includes the elastic,
+piezoelectric, piezomagnetic, dielectric, magnetic, magnetoelectric, pyroelectric and pyromagnetic
+coefficients in one place, which is what we need for the notation table. We read their Section~2 for the
+list and we did not read a numbered equation from it.
+
+Heat conduction itself is taken in the Moore--Gibson--Thompson form, with one time derivative cancelled. The
+operator is read in \cite[Eqs.~(2.5) and (3.1)--(3.5)]{Quintanilla2019}. In a magneto-thermoelastic medium with memory
+the same operator was used by Matlam and Kedar \cite{Matlam2026}; we read the title and the
+abstract only, so no equation number is quoted from them.
+
+The size effect is the nonlocal strain gradient theory, applied to the elastic part. Two lengths enter, a
+gradient length $l_g$ that stiffens and a nonlocal length $l_{\rm nl}$ that softens. For a composite the
+gradient length has a physical meaning that is easy to state: it is the distance over which the strain field
+of one phase is felt by its neighbour, of the order of the phase size. That is also why the two
+homogenisation schemes of Section~\ref{sec:A} matter: the effective constants depend on the volume fraction,
+and the size lengths depend on the phase size.
+
+Waves in magneto-electro-elastic plates are a well developed subject. Xiao, Han, Liu and Li \cite{Xiao2016}
+study guided waves in magneto-electro-elastic plates; Kondaiah, Shankar and Ganesan \cite{Kondaiah2013}
+study the same class with thermal effects; Kakar and Kakar \cite{Kakar2015} treat edge waves in an
+electro-magneto-thermoelastic plate. We read titles and abstracts for all three and say so; no equation
+number is quoted from them. The constitutive law we use is the standard linear one for this class, as
+written by Chen, Pan and Chen \cite{Chen2007}; their paper was not opened, and the citation carries a note
+to that effect. The reader who wants the numbered equations should go to \cite{Chen2007} Section~2 and
+write them beside ours.
+
+Our claim, in the words agreed with the supervisor, is this. Magnetoelectric coupling is kept as a full
+constitutive constant with its own unit and sign, not as a perturbation. Heat conduction is of
+Moore--Gibson--Thompson type with both the pyroelectric and the pyromagnetic terms, and the size effect is
+kept in the gradient form on the elastic part only. Boundary conditions include the double tractions of the
+gradient theory and both the electric and the magnetic conditions in open and closed versions. Parity is
+the last part of the claim: this plate always splits into symmetric and antisymmetric families, unlike the
+piezoelectric semiconductor plate of the companion paper, and Section~\ref{sec:D} explains why.
+
+We also record the agreed downgrade. This paper is aimed at a second-quartile journal, not a first-quartile
+one, and the decision between the two is to be taken at week nine on the ridge test, after the first
+dispersion and attenuation curves exist. The ridge test asks whether the magnetoelectric coupling leaves a
+visible signature on the attenuation ridge, not merely on the phase velocity.
+
+\section{Setting and assumptions}
+
+The plate occupies $-h\le z\le h$, is unbounded in $x$ and $y$, and has free faces. The material is a
+two-phase BaTiO$_3$/CoFe$_2$O$_4$ composite, poled along $z$. Polling along the normal is what makes the
+problem plane: the effective medium is transversely isotropic with the axis along $z$, class $6mm$ for the
+elastic and electric parts, and the magnetic part has the same structure.
+
+Plane strain in the $x$--$z$ plane: $u_y=0$, $\partial_y=0$. The wave is $\exp[\ii(kx-\omega t)]$ with real
+$\omega$ and complex $k=k_r+\ii k_i$; positive $k_i$ means decay along $+x$. Across the thickness every
+field is a sum of $\exp(\eta z)$.
+
+The electromagnetic part is quasi-static: the wave speed is five orders of magnitude below the speed of
+light, so the magnetic induction is the gradient of a scalar potential, $H_i=-\psi_{,i}$, and no wave
+equation for the fields is solved. There are no free charges and no free currents in the plate, so both
+Gauss laws are homogeneous. This is the standard magneto-electro-elastic approximation and it is a textbook
+statement; no equation number is claimed.
+
+The theory is linear. The temperature change $\theta$ is small, the fields are small, and the effective
+constants are those of the homogenised medium, not of either phase. Recombination and carrier effects do not
+exist here; the plate is an insulator and a dielectric.
+
+The two size operators act as in the companion papers:
+$\Nc(\eta)=1-l_{\rm nl}^2(\eta^2-k^2)$ on the inertia and $\Gc(\eta)=1-l_g^2(\eta^2-k^2)$ on the elastic
+stress. The electric, magnetic and thermal parts carry no size operator.
+
+\section{Notation}\label{sec:not}
+
+\begin{center}\footnotesize
+\begin{tabular}{p{2.0cm}p{5.6cm}p{1.9cm}p{4.6cm}}
+\toprule
+symbol & meaning in words & unit & where it enters\\
+\midrule
+$h$ & half the plate thickness & m & boundary rows\\
+$k,\omega,\eta$ & wave number, angular frequency, thickness rate & rad/m, rad/s, 1/m & everywhere\\
+$u_x,u_z$ & elastic displacements & m & rows 1, 2\\
+$\varphi$ & electric potential; $\mathbf E=-\nabla\varphi$ & V & row 3\\
+$\psi$ & magnetic potential; $\mathbf H=-\nabla\psi$ & A & row 4\\
+$\theta$ & temperature change & K & row 5\\
+$c_{11},c_{13},c_{33},c_{44}$ & effective elastic stiffnesses & Pa & rows 1, 2\\
+$e_{31},e_{33},e_{15}$ & effective piezoelectric constants & C/m$^2$ & rows 1--3\\
+$q_{31},q_{33},q_{15}$ & effective piezomagnetic constants & N/(A\,m) & rows 1, 2, 4\\
+$\epsilon_{11},\epsilon_{33}$ & effective permittivities & F/m & row 3\\
+$\mu_{11},\mu_{33}$ & effective magnetic permeabilities & H/m & row 4\\
+$\aME_{11},\aME_{33}$ & effective magnetoelectric coefficients & s/m & rows 3, 4\\
+$\beta_1,\beta_3$ & thermal stress coefficients & Pa/K & rows 1, 2, 5\\
+$p_3$ & pyroelectric constant & C/(m$^2$K) & rows 3, 5\\
+$\lambda_3$ & pyromagnetic constant & T/K & rows 4, 5\\
+$\rho$ & density & kg/m$^3$ & rows 1, 2\\
+$c_p$, $\kB$ & specific heat, thermal conductivity & J/(kg\,K), W/(m\,K) & row 5\\
+$T_0$ & reference temperature & K & row 5\\
+$\tau_q$ & MGT relaxation time & s & row 5\\
+$l_g$, $l_{\rm nl}$ & size lengths of NSGT & m & $\Gc$, $\Nc$\\
+$v$ & volume fraction of the ferrite phase & --- & effective constants only\\
+$\mathbf M(\eta)$, $\mathbf B$ & amplitude and boundary matrices & --- & Sections~\ref{sec:C}, \ref{sec:G}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two units deserve a word because they are where mistakes happen in this literature. The magnetoelectric
+coefficient $\aME$ appears in $\mathbf D=\dots+\aME\mathbf H$; with $\mathbf D$ in C/m$^2$ and $\mathbf H$ in
+A/m, the unit of $\aME$ is s/m. Some papers write the coefficient in the magnetic equation instead, or as a
+voltage coefficient with unit V\,m/A; before you compare numbers with any paper, convert to s/m and say which
+convention you used. The piezomagnetic constant $q$ appears in $\boldsymbol\sigma=\dots-q\mathbf H$; with
+stress in Pa and $\mathbf H$ in A/m its unit is Pa\,m/A, which is the same as N/(A\,m) or T.
+
+\section{Source equations}\label{sec:src}
+
+\subsection{Strain and fields}
+
+$\eps_{ij}=\tfrac12(u_{i,j}+u_{j,i})$, $E_i=-\varphi_{,i}$, $H_i=-\psi_{,i}$. Under the plane wave,
+$\eps_{xx}=\ii k\bx$, $\eps_{zz}=\eta\bz$, $\eps_{xz}=\tfrac12(\eta\bx+\ii k\bz)$, $E_x=-\ii k\bp$,
+$E_z=-\eta\bp$, $H_x=-\ii k\bpsi$, $H_z=-\eta\bpsi$. Tag: textbook laws.
+
+\subsection{Linear constitutive law of the magneto-electro-elastic medium}
+
+\begin{equation}\label{eq:const}
+\begin{aligned}
+\sigma_{ij}&=c_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\eps_{kl}-e_{kij}E_k-q_{kij}H_k-\beta_{ij}\theta,\\
+D_i&=e_{ikl}\eps_{kl}+\epsilon_{ik}E_k+\aME_{ik}H_k+p_i\theta,\\
+B_i&=q_{ikl}\eps_{kl}+\aME_{ki}E_k+\mu_{ik}H_k+\lambda_i\theta .
+\end{aligned}
+\end{equation}
+The structure is the standard one for this class, as written by Chen, Pan and Chen \cite{Chen2007}; we did
+not open that paper, so no equation number is quoted, and the .bib entry carries a note. In \cite[Sec.~2]{Tocci2021} the list of
+constants that survive, including the pyroelectric $p$ and the pyromagnetic $\lambda$, matches ours, which we did read; the coefficients are
+$e,q,\zeta,p,\lambda$ in their notation, where $\zeta$ is the magnetoelectric coefficient. The gradient
+operator on the elastic strain is the NSGT placement, ours, and the two thermal terms are textbook.
+Tag: taken from the class literature without an equation number; the size operator is ours.
+
+The magnetoelectric tensor is symmetric in the sense $\aME_{ik}=\aME_{ki}$, which is the Onsager symmetry of
+the pair: the coefficient that makes a magnetic field produce electric displacement is the same one that
+makes an electric field produce magnetic induction. This is why one symbol appears in two places in
+\eqref{eq:const}, and it is the first thing to check if a computed dispersion curve looks asymmetric.
+
+\subsection{Momentum, Gauss laws and heat}
+
+\begin{equation}\label{eq:gov}
+\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\rho\ddot u_i=\sigma_{ij,j},\qquad
+D_{i,i}=0,\qquad B_{i,i}=0,
+\end{equation}
+\begin{equation}\label{eq:heat}
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\eps_{ij}+T_0p_i\dot E_i+T_0\lambda_i\dot H_i\Bigr]
+=\kB\nabla^2\theta .
+\end{equation}
+The momentum balance with the nonlocal operator is taken from \cite[Eqs.~(18)--(19)]{Barretta2018}, who
+attribute the differential law to Lim, Zhang and Reddy \cite{Lim2015}; we did not open \cite{Lim2015} and say
+so in the .bib. Both Gauss laws are textbook electrostatics and magnetostatics of a dielectric with no
+free charge. The heat equation is the Moore--Gibson--Thompson equation of
+\cite[Eqs.~(2.5) and (3.1)--(3.5)]{Quintanilla2019} with the two caloric terms added; the pyroelectric term is
+classical and the pyromagnetic one is its magnetic partner, and both are the reciprocity partners of the
+$+p_3\theta$ and $+\lambda_3\theta$ terms in \eqref{eq:const}.
+Tag: the momentum law is taken from \cite{Barretta2018}; the heat operator from \cite{Quintanilla2019}; the
+placement of the operators and the pairing of the caloric terms are ours.
+
+\section{Calculation A: effective constants and constitutive components}\label{sec:A}
+
+\subsection{Two homogenisation schemes}
+
+The composite is described by effective constants. We fix two schemes, and we state them so that you can
+reproduce both and see how much the dispersion curve depends on the choice.
+
+Scheme one is the rule of mixtures. Every constant is the volume average of the two phases,
+\begin{equation}\label{eq:voigt}
+\bar C=v\,C^{(f)}+(1-v)\,C^{(m)},\qquad
+\bar e=v\,e^{(f)},\qquad \bar q=v\,q^{(f)},\qquad
+\bar\eps=v\,\eps^{(f)}+(1-v)\,\eps^{(m)},\qquad \bar\mu=v\,\mu^{(f)}+(1-v)\,\mu^{(m)},
+\end{equation}
+where the superscript $(f)$ is the ferrite, which carries the piezomagnetic constants, and $(m)$ is the
+barium titanate, which carries the piezoelectric ones. This is a textbook mixture rule and needs no
+citation. It has a defect that matters here: both phases have zero magnetoelectric coefficient, so the
+average \eqref{eq:voigt} gives $\bar\aME=0$ and the very effect we want to study disappears.
+
+Scheme two is a two-phase estimate of the Mori--Tanaka type. Write the strain concentration tensor $\mathbb A$
+of the inclusion phase, and use one weight for all the coupled constants,
+\begin{equation}\label{eq:mt}
+\bar{\mathbb C}={\mathbb C}^{(m)}+v\bigl({\mathbb C}^{(f)}-{\mathbb C}^{(m)}\bigr)\mathbb A,\qquad
+\bar e={\mathbb C}^{(m)}\mathbb A\,{\mathbb e}^{(m)}\ \text{replaced by}\ v\,{\mathbb e}^{(f)}\mathbb A,
+\end{equation}
+with the same weight applied to $q$, $\eps$ and $\mu$. For the magnetoelectric coefficient we take the
+product form
+\begin{equation}\label{eq:alpha}
+\bar\aME_{33}=v(1-v)\,\frac{e^{(f)}_{31}q^{(m)}_{33}}{\bar C_0},
+\end{equation}
+where $\bar C_0$ is an effective stiffness of the composite used as the normaliser. The units check: $\bar
+e$ is C/m$^2$, $\bar q$ is N/(A\,m), and their product divided by a stiffness in Pa gives C/(A\,m), which is
+s/m, the unit of $\aME$ fixed in the notation table.
+
+We must be plain about the status of \eqref{eq:mt} and \eqref{eq:alpha}. The product form is the standard
+reason why a two-phase composite shows a magnetoelectric effect that neither phase shows, but we did not read
+a numbered equation for it in any source, and the normaliser $\bar C_0$ is not fixed by anything we read.
+Before submission, find the formula in \cite[Sec.~2]{Chen2007} or in \cite[Sec.~2]{Tocci2021}, quote its
+number, and replace \eqref{eq:alpha} by the published form. Until then, treat $\bar\aME_{33}$ as a parameter
+of the model and say so.
+
+The sign of $\aME$ is a convention, and it is the convention that trips people. Define the positive sense of
+$z$ as the poling direction of the piezoelectric phase. Reversing that poling reverses $e_{31}$, and by
+\eqref{eq:alpha} it reverses $\aME_{33}$; the physics does not change, the sign of the predicted induced
+field does. Write the convention in the caption of every figure.
+
+\subsection{The two schemes, element by element}
+
+Scheme one is short enough to write out for the constants we need, and writing it out shows what volume
+fraction does to each of them.
+
+\begin{worked}
+Let $v$ be the ferrite fraction. The elastic stiffnesses of the composite are
+$\bar c_{11}=v c^{(f)}_{11}+(1-v)c^{(m)}_{11}$ and the same for $c_{13},c_{33},c_{44}$; the piezoelectric
+constants come only from the barium titanate, $\bar e_{31}=(1-v)e^{(m)}_{31}$ and the same for $e_{33},e_{15}$;
+the piezomagnetic constants come only from the ferrite, $\bar q_{31}=vq^{(f)}_{31}$ and the same for
+$q_{33},q_{15}$; the permittivity and the permeability are averages,
+$\bar\epsilon_{33}=v\epsilon^{(f)}_{33}+(1-v)\epsilon^{(m)}_{33}$ and
+$\bar\mu_{33}=v\mu^{(f)}_{33}+(1-v)\mu^{(m)}_{33}$; the two pyroelectric and pyromagnetic coefficients follow
+their phases: $\bar p_3=(1-v)p^{(m)}_3$ and $\bar\lambda_3=v\lambda^{(f)}_3$. The magnetoelectric coefficient
+is zero by construction, because both phases have zero and an average of zeros is zero.
+\end{worked}
+
+\noindent Read the consequences off these lines before you go to scheme two. The piezoelectric constant falls
+with the ferrite fraction, the piezomagnetic one rises with it, so their product is largest in the middle,
+and the magnetoelectric effect of the composite vanishes at both ends. That is the physics that the
+magnetoelectric coefficient must carry, and scheme two is the smallest change to scheme one that gives it a
+non-zero value.
+
+Scheme two replaces the arithmetic average by a weighted one. Write $\mathbb A$ for the strain concentration
+tensor of the inclusion phase, which is a fourth-order tensor built from the stiffness of the matrix and the
+shape of the inclusion. Every constant is then weighted by $\mathbb A$ rather than by the volume fractions
+alone, and the magnetoelectric coefficient takes the product form of \eqref{eq:alpha}. The shape of the
+inclusion is what makes $\mathbb A$ different from the identity, so the difference between the two schemes is
+largest for elongated phases, which is also where the measured magnetoelectric coefficient of such composites
+is largest.
+
+\subsection{Constitutive components in our geometry}
+
+\begin{worked}
+Apply the routine: $\partial_x\to\ii k$, $\partial_z\to\eta$, Laplacian $\to\eta^2-k^2$, and $-e_{kij}E_k$
+with $E_z=-\eta\bp$ gives $+\eta e_{33}\bp$ for the $zz$ component and $-e_{31}E_z=+\eta e_{31}\bp$ for the
+$xx$ component. The piezomagnetic terms follow the same pattern with $q$ in place of $e$ and $\bpsi$ in place
+of $\bp$. In $D_x$ the electric term is $-\ii k\epsilon_{11}\bp$ and the magnetoelectric term is
+$-\ii k\aME_{11}\bpsi$; in $D_z$ they are $-\eta\epsilon_{33}\bp$ and $-\eta\aME_{33}\bpsi$. The magnetic
+components are the same with $D\to B$, $\bp\to\bpsi$, and the pair $(\epsilon,\aME)$ replaced by
+$(\aME,\mu)$.
+\end{worked}
+
+\noindent
+\begin{align}
+\hat\sigma_{xx}&=\Gc\bigl(\ii kc_{11}\bx+\eta c_{13}\bz\bigr)+\eta e_{31}\bp+\eta q_{31}\bpsi-\beta_1\bt,
+\label{eq:sxx}\\
+\hat\sigma_{zz}&=\Gc\bigl(\ii kc_{13}\bx+\eta c_{33}\bz\bigr)+\eta e_{33}\bp+\eta q_{33}\bpsi-\beta_3\bt,
+\label{eq:szz}\\
+\hat\sigma_{xz}&=\Gc c_{44}\bigl(\eta\bx+\ii k\bz\bigr)+\ii ke_{15}\bp+\ii kq_{15}\bpsi,
+\label{eq:sxz}\\
+\hat D_x&=e_{15}\bigl(\eta\bx+\ii k\bz\bigr)-\ii k\epsilon_{11}\bp-\ii k\aME_{11}\bpsi,
+\label{eq:Dx}\\
+\hat D_z&=\ii ke_{31}\bx+\eta e_{33}\bz-\eta\epsilon_{33}\bp-\eta\aME_{33}\bpsi+p_3\bt,
+\label{eq:Dz}\\
+\hat B_x&=q_{15}\bigl(\eta\bx+\ii k\bz\bigr)-\ii k\aME_{11}\bp-\ii k\mu_{11}\bpsi,
+\label{eq:Bx}\\
+\hat B_z&=\ii kq_{31}\bx+\eta q_{33}\bz-\eta\aME_{33}\bp-\eta\mu_{33}\bpsi+\lambda_3\bt .
+\label{eq:Bz}
+\end{align}
+
+Read the symmetry off \eqref{eq:Dz} and \eqref{eq:Bz}. The coefficient $\aME_{33}$ sits in the same place in
+both, which is the Onsager pair; if you change its sign in one line and not the other, the model loses its
+reciprocity and the parity argument of Section~\ref{sec:D} still holds, but the energy argument does not.
+That is the kind of error that survives every numerical check and fails on the first referee report.
+
+\section{Calculation B: the five governing equations}\label{sec:B}
+
+\begin{worked}
+The two momentum equations are the same routine as in the companion papers:
+$-\bigl(\ii k\hat\sigma_{xx}+\eta\hat\sigma_{xz}\bigr)-\Nc\rho\omega^2\bx=0$ and
+$-\bigl(\ii k\hat\sigma_{xz}+\eta\hat\sigma_{zz}\bigr)-\Nc\rho\omega^2\bz=0$. The two Gauss laws are
+$\ii k\hat D_x+\eta\hat D_z=0$ and $\ii k\hat B_x+\eta\hat B_z=0$. The heat equation is
+$f\bigl[-\ii\omega\rho c_p\bt+T_0\omega k\beta_1\bx-\ii\omega T_0\beta_3\eta\bz
++\ii\omega T_0p_3\eta\bp+\ii\omega T_0\lambda_3\eta\bpsi\bigr]-\kB L\bt=0$, obtained by the same
+substitution: each time derivative is $-\ii\omega$, $T_0p_i\dot E_i$ gives
+$T_0p_3(-\ii\omega)(-\eta\bp)=\ii\omega T_0p_3\eta\bp$, and the magnetic term gives the same with
+$\lambda_3$ and $\bpsi$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:g}
+\begin{gathered}
+-\bigl(\ii k\hat\sigma_{xx}+\eta\hat\sigma_{xz}\bigr)-\Nc\rho\omega^2\bx=0,\qquad
+-\bigl(\ii k\hat\sigma_{xz}+\eta\hat\sigma_{zz}\bigr)-\Nc\rho\omega^2\bz=0,\\
+\ii k\hat D_x+\eta\hat D_z=0,\qquad \ii k\hat B_x+\eta\hat B_z=0,\\
+f\Bigl[-\ii\omega\rho c_p\bt+T_0\omega k\beta_1\bx-\ii\omega T_0\beta_3\eta\bz
++\ii\omega T_0p_3\eta\bp+\ii\omega T_0\lambda_3\eta\bpsi\Bigr]-\kB L\bt=0 .
+\end{gathered}
+\end{equation}
+
+\section{Calculation C: the amplitude matrix}\label{sec:C}
+
+Order the unknowns as $\mathbf a=(\bx,\bz,\bp,\bpsi,\bt)^{\top}$. Rows: momentum $x$, momentum $z$,
+electric Gauss, magnetic Gauss, heat.
+
+\subsection{Rows 1 and 2}
+
+\begin{worked}
+Put \eqref{eq:sxx} and \eqref{eq:sxz} into the first equation of \eqref{eq:g}. For $\bx$:
+$\ii k\Gc c_{11}\ii k=-k^2\Gc c_{11}$ and $\eta\Gc c_{44}\eta=\eta^2\Gc c_{44}$, with the overall minus and
+the inertia. For $\bz$: $\ii k\Gc c_{13}\eta+\eta\Gc c_{44}\ii k$, with a minus. For $\bp$:
+$\ii k\eta e_{31}+\eta\ii ke_{15}$, with a minus. For $\bpsi$: the same with $q$. For $\bt$:
+$\ii k(-\beta_1)$ with the overall minus gives $+\ii k\beta_1$. The second row is the same routine with
+$c_{11}\leftrightarrow c_{44}$, $c_{13}\to c_{33}$, $e_{31}\to e_{33}$, $q_{31}\to q_{33}$ and the pairing
+of the shear components.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:row12}
+\begin{aligned}
+&M_{11}=-\Nc\rho\omega^2+\Gc(c_{11}k^2-c_{44}\eta^2),\quad
+M_{12}=-\ii k\eta\Gc(c_{13}+c_{44}),\\
+&M_{13}=-\ii k\eta(e_{31}+e_{15}),\quad
+M_{14}=-\ii k\eta(q_{31}+q_{15}),\quad M_{15}=\ii k\beta_1,\\
+&M_{21}=-\ii k\eta\Gc(c_{13}+c_{44}),\quad
+M_{22}=-\Nc\rho\omega^2+\Gc(c_{44}k^2-c_{33}\eta^2),\\
+&M_{23}=e_{15}k^2-e_{33}\eta^2,\quad
+M_{24}=q_{15}k^2-q_{33}\eta^2,\quad M_{25}=\eta\beta_3 .
+\end{aligned}
+\end{equation}
+
+\subsection{Rows 3 and 4}
+
+\begin{worked}
+For the electric Gauss law, $\ii k\hat D_x+\eta\hat D_z$ with \eqref{eq:Dx} and \eqref{eq:Dz}. For $\bx$:
+$\ii ke_{15}\eta+\eta\ii ke_{31}$. For $\bz$: $-k^2e_{15}+\eta^2e_{33}$. For $\bp$:
+$\epsilon_{11}k^2-\epsilon_{33}\eta^2$. For $\bpsi$: $\aME_{11}k^2-\aME_{33}\eta^2$. For $\bt$: $\eta p_3$.
+The magnetic row is the same with $(e,q)\to(q,e)$ care: the $\bx$ entry is $\ii kq_{15}\eta+\eta\ii kq_{31}$,
+the $\bz$ entry is $-k^2q_{15}+\eta^2q_{33}$, the $\bp$ entry is $\aME_{11}k^2-\aME_{33}\eta^2$ again, the
+$\bpsi$ entry is $\mu_{11}k^2-\mu_{33}\eta^2$, and the thermal entry is $\eta\lambda_3$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:row34}
+\begin{aligned}
+&M_{31}=\ii k\eta(e_{15}+e_{31}),\quad M_{32}=e_{33}\eta^2-e_{15}k^2,\quad
+M_{33}=\epsilon_{11}k^2-\epsilon_{33}\eta^2,\\
+&M_{34}=\aME_{11}k^2-\aME_{33}\eta^2,\quad M_{35}=\eta p_3,\\
+&M_{41}=\ii k\eta(q_{15}+q_{31}),\quad M_{42}=q_{33}\eta^2-q_{15}k^2,\quad
+M_{43}=\aME_{11}k^2-\aME_{33}\eta^2,\\
+&M_{44}=\mu_{11}k^2-\mu_{33}\eta^2,\quad M_{45}=\eta\lambda_3 .
+\end{aligned}
+\end{equation}
+
+\subsection{Row 5}
+
+\begin{worked}
+Read the coefficients from the last line of \eqref{eq:g}: $M_{51}=fT_0\omega k\beta_1$,
+$M_{52}=-\ii\omega fT_0\beta_3\eta$, $M_{53}=\ii\omega fT_0p_3\eta$, $M_{54}=\ii\omega fT_0\lambda_3\eta$,
+$M_{55}=-\ii\omega f\rho c_p-\kB L$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:row5}
+M_{51}=fT_0\omega k\beta_1,\quad M_{52}=-\ii\omega fT_0\beta_3\eta,\quad
+M_{53}=\ii\omega fT_0p_3\eta,\quad M_{54}=\ii\omega fT_0\lambda_3\eta,\quad
+M_{55}=-\ii\omega f\rho c_p-\kB L .
+\end{equation}
+
+\noindent Collecting \eqref{eq:row12}--\eqref{eq:row5} gives $\mathbf M(\eta)\mathbf a=\mathbf 0$ with
+$\Nc=1-l_{\rm nl}^2L$, $\Gc=1-l_g^2L$, $L=\eta^2-k^2$ and $f=1-\ii\omega\tau_q$. The matrix is not written
+as one array because its entries are long; the five row equations are the matrix, in order.
+
+The magnetic and electric rows are twins. Exchange $\bp\leftrightarrow\bpsi$, $e\leftrightarrow q$ and
+$\epsilon\leftrightarrow\mu$, and one becomes the other, with $\aME$ unchanged. That symmetry is a useful
+check: if the determinant of your $5\times5$ matrix is not invariant under that exchange when
+$\epsilon=\mu$ and $e=q$, there is a sign error in row 3 or row 4.
+
+\section{Calculation D: degree and parity}\label{sec:D}
+
+\subsection{Degree}
+
+\begin{worked}
+The highest power of $\eta$ in each entry: row 1 has $M_{11}\sim\eta^4$ (when $l_g\ne0$), $M_{12}\sim\eta^3$,
+$M_{13},M_{14}\sim\eta^1$, $M_{15}\sim\eta^0$; row 2 has $M_{21}\sim\eta^3$, $M_{22}\sim\eta^4$,
+$M_{23},M_{24}\sim\eta^2$, $M_{25}\sim\eta^1$; rows 3 and 4 have entries of degree 1, 2, 2, 2, 1; row 5 has
+degrees 0, 1, 1, 1, 2. The permutation with the largest total is the diagonal one, giving 14. No other
+permutation can exceed it, because rows 1 and 2 give at most four each and rows 3, 4, 5 at most two each.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:deg}
+\deg_\eta\det\mathbf M=\begin{cases}14,&l_g\ne0,\\10,&l_g=0,\end{cases}
+\end{equation}
+so the plate carries fourteen partial waves and needs seven conditions per face, or ten and five when the
+gradient length is zero.
+
+\subsection{Parity}
+
+\begin{worked}
+From row 1: $M_{12}$ odd gives $s_2=-s_1$; $M_{13}$ odd gives $s_3=-s_1$; $M_{14}$ odd gives $s_4=-s_1$;
+$M_{15}$ even gives $s_5=s_1$. Take $s_1=-1$, so $s=(-1,+1,+1,+1,-1)$. Check every other entry: row 2 has
+$M_{21}$ odd, needing $s_2s_1=-1$; $M_{23}$ and $M_{24}$ even, needing $s_2s_3=s_2s_4=+1$; $M_{25}$ odd,
+needing $s_2s_5=-1$; all these hold. Row 3 has $M_{31}$ odd, $M_{32}$, $M_{33}$, $M_{34}$ even, $M_{35}$ odd,
+and with $s_1=-1$, $s_5=-1$ and $s_2=s_3=s_4=+1$ every one of them holds. Row 4 is the twin of row 3, so it
+holds too. Row 5 has $M_{51}$ even, $M_{52},M_{53},M_{54}$ odd, $M_{55}$ even; with $s_5=-1$ and
+$s_2=s_3=s_4=+1$ each product is $-1$ where the entry is odd and $+1$ where it is even, so it holds.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:parity}
+\det\mathbf M(-\eta)=\det\mathbf M(\eta)\quad\text{for every value of every coupling,}
+\end{equation}
+with the sign vector $(-1,+1,+1,+1,-1)$: the displacement along the plate and the temperature are odd
+through the thickness; the displacement across it, the electric potential and the magnetic potential are
+even.
+
+Compare this with the companion paper on the piezoelectric semiconductor. There the carrier density sits in
+the matrix in a place that no sign vector can accommodate together with the temperature, so the parity fails
+as soon as the thermodiffusion or the Peltier coefficient is switched on. Here there is no carrier field: all
+five couplings are of even parity in the appropriate sense, and the split survives. The magnetoelectric
+coefficient, which one might suspect of breaking it, does not, because it appears only in the two Gauss rows
+and always as an even entry.
+
+The practical consequence is the factorisation of the boundary matrix,
+\begin{equation}\label{eq:factor}
+\det\mathbf B=\det\mathbf B_{\rm S}\cdot\det\mathbf B_{\rm A},
+\end{equation}
+with seven rows and seven columns in each block. Work with the two blocks separately; the full $14\times14$
+determinant is then only a check.
+
+\section{Calculation E: amplitude ratios and partial waves}\label{sec:E}
+
+\begin{worked}
+At a root $\eta_m$ the adjugate $\mathbf A$ of $\mathbf M(\eta_m)$ has columns proportional to the null
+vector. Use the cofactor formula $A_{ij}=(-1)^{i+j}\det\mathbf M^{(ji)}$, where $\mathbf M^{(ji)}$ is the
+$4\times4$ matrix obtained by deleting row $j$ and column $i$. Take the column with the largest entries and
+divide by its largest entry. This avoids dividing by a small determinant and stays finite when two roots are
+close.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:general}
+\bigl(u_x,u_z,\varphi,\psi,\theta\bigr)=\sum_{m=1}^{N}a_m
+\bigl(\rho^{(1)}_m,\rho^{(2)}_m,\rho^{(3)}_m,\rho^{(4)}_m,1\bigr)e^{\eta_mz}e^{\ii(kx-\omega t)},
+\end{equation}
+with $N=14$ or $10$ as in \eqref{eq:deg}. Because the parity \eqref{eq:parity} holds, the roots come in pairs
+and the amplitude ratios of a pair differ only by the sign vector: the odd fields flip, the even ones do not.
+Each pair can therefore be written as a hyperbolic cosine for the even fields and a hyperbolic sine for the
+odd ones, which is the classical form of the symmetric and antisymmetric solutions.
+
+\section{Calculation F: boundary conditions}\label{sec:F}
+
+At each face, with outward normal $\mathbf n=(0,0,\pm1)$:
+
+\begin{enumerate}
+\item[(b1)] normal traction with the surface gradient of the double traction:
+$\bigl[\sigma_{zz}-\partial_xR_{xz}\bigr]_{z=z_0}=0$;
+\item[(b2)] shear traction with its surface gradient:
+$\bigl[\sigma_{xz}-\partial_xR_{xx}\bigr]_{z=z_0}=0$;
+\item[(b3)] normal double traction: $\bigl[R_{zz}\bigr]_{z=z_0}=0$;
+\item[(b4)] in-plane double traction: $\bigl[R_{zx}\bigr]_{z=z_0}=0$;
+\item[(b5)] electric condition: open circuit $\bigl[D_z\bigr]_{z=z_0}=0$, or closed circuit
+$\bigl[\varphi\bigr]_{z=z_0}=0$;
+\item[(b6)] magnetic condition: open circuit $\bigl[B_z\bigr]_{z=z_0}=0$, or closed circuit
+$\bigl[\psi\bigr]_{z=z_0}=0$;
+\item[(b7)] thermal condition: adiabatic $\bigl[\partial_z\theta\bigr]_{z=z_0}=0$, or isothermal
+$\bigl[\theta\bigr]_{z=z_0}=0$.
+\end{enumerate}
+
+The surface-gradient form of (b1) and (b2) and the double-traction conditions (b3) and (b4) are taken from
+\cite[Sec.~2, Eq.~(14)]{Charalambopoulos2019} and extended by us to the electric, magnetic and thermal parts.
+For the four electric and magnetic conditions we follow standard practice in this literature; titles and
+abstracts of \cite{Xiao2016} and \cite{Kondaiah2013} were read, their equations were not, so we quote no
+number. Open circuit on the magnetic side is the condition that matters for a magnetoelectric measurement,
+because it is the condition under which the induced field is not shorted out by the surroundings. That
+statement is ours, not a citation.
+
+\begin{worked}
+The nonlocal operator is inverted root by root: at root $\eta_m$ the constitutive law reads
+$\Nc(\eta_m)\hat\sigma_m=\hat\sigma^{\rm loc}_m$, so the stress in a boundary row is
+$\hat\sigma^{\rm loc}_m/\Nc(\eta_m)$ and the factor belongs to column $m$. No common operator can be pulled
+out of a sum over roots.
+\end{worked}
+
+\noindent The seven row functions at $z=+h$, with the amplitudes of partial wave $m$ and
+$\partial_x\to\ii k$, are
+\begin{align}
+b_1&=\frac{1}{\Nc(\eta_m)}\Bigl[\hat\sigma_{zz}-\ii k\,l_g^2c_{44}L\hat\eps_{xz}\Bigr],\quad
+b_2=\frac{1}{\Nc(\eta_m)}\Bigl[\hat\sigma_{xz}-\ii k\,l_g^2c_{11}L\hat\eps_{xx}\Bigr],
+\label{eq:b12}\\
+b_3&=\frac{1}{\Nc(\eta_m)}l_g^2c_{33}L\hat\eps_{zz},\quad
+b_4=\frac{1}{\Nc(\eta_m)}l_g^2c_{44}L\hat\eps_{xz},\quad
+b_5=\hat D_z,\quad b_6=\hat B_z,\quad b_7=\eta_m\bt .
+\label{eq:b34567}
+\end{align}
+
+\begin{worked}
+At $z=-h$ the partial wave carries $\exp(-\eta_mh)$ instead of $\exp(\eta_mh)$, and the outward normal is
+$(0,0,-1)$, so $\sigma_{zz}$, $\sigma_{xz}$, $D_z$ and $B_z$ change sign while the double tractions and the
+temperature gradient behave as in the companion papers: the double tractions keep their sign because they are
+quadratic in the normal, and the temperature gradient changes sign because $\partial_z$ is odd.
+\end{worked}
+
+\noindent With $c_m=\exp(\eta_mh)$ and $d_m=\exp(-\eta_mh)$,
+\begin{equation}\label{eq:rows}
+b_1c_m,\ b_2c_m,\ b_3c_m,\ b_4c_m,\ b_5c_m,\ b_6c_m,\ b_7c_m\ (z=+h),\qquad
+-b_1d_m,\ -b_2d_m,\ b_3d_m,\ b_4d_m,\ -b_5d_m,\ -b_6d_m,\ -b_7d_m\ (z=-h).
+\end{equation}
+
+If you choose closed circuit for the electric condition, replace (b5) by $\bp$ alone, and the same for the
+magnetic condition. The choice changes the dispersion curves much more than the size lengths do, so state it
+in every figure caption.
+
+\section{Calculation G: the boundary matrix}\label{sec:G}
+
+\noindent Number the roots $\eta_1,\dots,\eta_N$, put the row functions \eqref{eq:b12} and \eqref{eq:b34567}
+in the rows of \eqref{eq:rows}, and the roots in the columns. The dispersion relation is
+\begin{equation}\label{eq:disp}
+\det\mathbf B(k,\omega)=0,\qquad \mathbf B \text{ is }14\times14\ (l_g\ne0),\ 10\times10\ (l_g=0).
+\end{equation}
+When $l_g=0$ the rows (b3) and (b4) vanish and are deleted with the four extra roots. The parity
+\eqref{eq:parity} then blocks the matrix into two $7\times7$ (or $5\times5$) problems as in
+\eqref{eq:factor}.
+
+\begin{worked}
+The frequency is real and given; $k$ is complex. The dispersion relation is one complex equation in two real
+unknowns, so its solutions are isolated pairs, and the search is in the complex $k$ plane started from the
+uncoupled elastic solution. Multiply column $m$ by $\exp(-|\mathrm{Re}\,\eta_m|h)$ before evaluating any
+determinant; the factor is common to the column, so it moves no zero, but it keeps the columns comparable
+once the gradient roots appear.
+\end{worked}
+
+\noindent Two numerical cautions belong in the record. First, the magnetic and electric rows are nearly
+proportional when $\aME$ is small, so the boundary matrix is nearly singular in a way that has nothing to do
+with a mode; watch the smallest singular value against $k$, not the determinant alone. Second, the
+piezomagnetic constants are large compared with the piezoelectric ones, so the magnetic block dominates the
+scaling of the rows; normalise the rows before you look at any singular value.
+
+\section{Calculation H: hand limits}\label{sec:H}
+
+\subsection{Both couplings off}
+
+\begin{worked}
+Set $e=q=\aME=p_3=\lambda_3=0$ and $\beta_1=\beta_3=0$. Rows 3, 4 and 5 decouple from rows 1 and 2, and the
+mechanical part is the $2\times2$ block of the companion papers, whose determinant gives the classical
+Rayleigh--Lamb condition. With $c_{11}=c_{33}=\lambda+2\mu$, $c_{13}=\lambda$, $c_{44}=\mu$ the two families
+obey
+\end{worked}
+
+\begin{equation}\label{eq:RL}
+\frac{\tan(qh)}{\tan(ph)}=-\frac{4k^2pq}{(k^2-q^2)^2}\ ({\rm symmetric}),\qquad
+\frac{\tan(qh)}{\tan(ph)}=-\frac{(k^2-q^2)^2}{4k^2pq}\ ({\rm antisymmetric}).
+\end{equation}
+
+\subsection{Electric off, magnetic on}
+
+\begin{worked}
+Set $e=\aME=p_3=0$ and keep $q$ and $\mu$. The electric row decouples entirely, since $D_z$ then carries only
+$\bp$ and $\bpsi$ through $\aME=0$; the remaining $4\times4$ system is the piezomagnetic analogue of a
+piezoelectric plate. Its two size-free limits are the same as in \eqref{eq:RL} with the magnetic stiffening
+of the appropriate modulus in place of the electric one, and the check is that the magnetic open-circuit
+speed is above the closed-circuit one, exactly as the electric open-circuit speed is above its
+closed-circuit value.
+\end{worked}
+
+\subsection{Thin plate: the effective coupling}
+
+\begin{worked}
+Take the frequency--thickness product small, so the fields are almost uniform across the thickness, and keep
+all couplings. The faces are free and open on both the electric and the magnetic side, so
+$\sigma_{zz}=D_z=B_z=0$ and the plate carries only $\eps_{xx}$. From \eqref{eq:Dz} and \eqref{eq:Bz} with
+$\theta=0$,
+\[
+\epsilon_{33}E_z+\aME_{33}H_z=-e_{31}\eps_{xx},\qquad
+\aME_{33}E_z+\mu_{33}H_z=-q_{31}\eps_{xx},
+\]
+Solve the $2\times2$ system:
+\[
+E_z=\frac{-e_{31}\mu_{33}+\aME_{33}q_{31}}{\epsilon_{33}\mu_{33}-\aME_{33}^2}\,\eps_{xx},\qquad
+H_z=\frac{-q_{31}\epsilon_{33}+\aME_{33}e_{31}}{\epsilon_{33}\mu_{33}-\aME_{33}^2}\,\eps_{xx}.
+\]
+Put both into $\sigma_{xx}$ of \eqref{eq:sxx} with $\eps_{zz}=0$ and $\theta=0$:
+\[
+\bar c_{11}=c_{11}+\frac{e_{31}^2\mu_{33}-2e_{31}q_{31}\aME_{33}+q_{31}^2\epsilon_{33}}
+{\epsilon_{33}\mu_{33}-\aME_{33}^2}.
+\]
+\end{worked}
+
+\noindent The thin-plate modulus is the piezoelectric one plus a magnetic correction and a magnetoelectric
+cross term, and the cross term enters with a minus sign because it is the product of the two couplings
+through the same $\aME$. The ratio of the two induced fields in the same open-circuit state is
+\begin{equation}\label{eq:ratio}
+\frac{H_z}{E_z}=\frac{\aME_{33}e_{31}-q_{31}\epsilon_{33}}{\aME_{33}q_{31}-e_{31}\mu_{33}},
+\end{equation}
+which is the thin-plate magnetoelectric response. Its unit is A/V, that is siemens, and it is large when the
+two couplings are large and the determinant $\epsilon_{33}\mu_{33}-\aME_{33}^2$ is small. This is the
+quantity to plot against the volume fraction: it must vanish at $v=0$ and at $v=1$ because both phases alone
+have no magnetoelectric effect, so it has a maximum somewhere in between, and that maximum is the physical
+content of the composite.
+
+\subsection{The two size lengths and the MGT time}
+
+\begin{worked}
+Setting $l_g=l_{\rm nl}=0$ returns the local plate with ten roots; setting $\tau_q=0$ returns the Fourier
+heat equation. Increasing $l_g$ stiffens the elastic terms of rows 1 and 2, increasing $l_{\rm nl}$ softens
+the inertia. The two effects are opposite and are separated by their order in $k$: the gradient term grows
+with the square of the wave number, the nonlocal term with the square of the frequency, so a dispersion curve
+at fixed frequency separates them.
+\end{worked}
+
+\noindent The MGT time constant is set by the thickness, $\tau_T=(2h)^2/(\pi^2\kappa)$ with $\kappa=\kB/(\rho
+c_p)$ the thermal diffusivity. Its effect on the attenuation is a shift of the classical thermoelastic peak
+and a change of its height; the shift is the measurable signature and it is the reason the operator is worth
+keeping in a paper that is otherwise about the magnetoelectric effect.
+
+\section{Self-test list}\label{sec:tests}
+
+\begin{enumerate}
+\item Units inside each row of the matrix, in particular the magnetoelectric entries, which must combine
+with the dielectric ones to give the same unit as $D_z$ per unit potential.
+\item Degree: fourteen with $l_g\ne0$, ten with $l_g=0$.
+\item Parity: the sign vector $(-1,+1,+1,+1,-1)$ for every choice of couplings, and the factorisation of the
+assembled matrix.
+\item The electric--magnetic exchange symmetry of rows 3 and 4 when $\epsilon=\mu$ and $e=q$.
+\item The classical limit \eqref{eq:RL} with all couplings off.
+\item The open-circuit ordering, electric and magnetic, against the closed-circuit values.
+\item The thin-plate modulus and the field ratio of \eqref{eq:ratio}, both vanishing with $\aME$.
+\item The volume-fraction limits: the effective constants must return the pure phases at $v=0$ and $v=1$,
+and the magnetoelectric coefficient must vanish at both ends.
+\item The two size lengths in opposite directions, and the MGT time shifting the thermal peak.
+\item The boundary switches: closed circuit electric, closed circuit magnetic, isothermal face, one at a
+time, each changing one row.
+\end{enumerate}
+
+\section{Work plan}
+
+\begin{enumerate}
+\item Week 1. Open Chen, Pan and Chen, Section 2, and write the constitutive law of \eqref{eq:const} against
+their numbered equations. Fix the sign convention of $\aME$ and write it in one sentence for the paper.
+\item Week 2. Find the published product formula for $\bar\aME$ and replace \eqref{eq:alpha}. Read the
+homogenisation section of \cite{Tocci2021} again for the list of constants.
+\item Week 3. Read Lim, Zhang and Reddy Section 2 and Barretta and Marotti de Sciarra equations (18) and
+(19); confirm the operator placement. Read Quintanilla's equations (2.5) and (3.1)--(3.5).
+\item Week 4. Redo Calculations A to D by hand and check the parity statement twice.
+\item Week 5. Redo Calculations E to G, build the matrix for the composite at three volume fractions, and
+run the ten self-tests.
+\item Week 6. Compute the dispersion and attenuation curves and plot the field ratio against the volume
+fraction. This is the figure that decides the ridge test at week nine.
+\item Week 7 to 8. Write the paper from this file, keeping the worked blocks out of the submitted version.
+\item Week 9. Take the first-quartile or second-quartile decision on the ridge test, as agreed.
+\end{enumerate}
+
+\bibliographystyle{unsrt}
+\bibliography{Lamb_Anu}
+
+\end{document}
