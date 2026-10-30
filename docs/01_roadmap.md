@@ -48,6 +48,8 @@ Sumit leads, Neha one week behind, Anu two weeks behind.
 - **Step 3 is blocked** until Dr. Vipin confirms the Gupta heat equation (he is adding it to `paper/`).
 - **Provisional retitle (Sumit):** `paper/problem_v3_proposal.md` proposes carrier screening + NSGT as the claims,
   MGT as a comparison section. `problem_v2.md` is untouched pending review.
+- **Scale-overlap window (`docs/04_scale_overlap_window.md`):** empty for all three papers; heat to be
+  carried as an adiabatic/isothermal bracket rather than modelled. See the note for what changes in each v3.
 - **MGT maps, all three scholars:** outside the trust band in every case once `Lambda_ph` is sourced
   (`quasicrystal_neha/checks/mgt_map.md`, `mee_anu/checks/mgt_map.md`).
 - **Bulk-medium gate (Sumit, before Step 3):** `steps/step3_prerecheck_bulk_medium.md` shows both Fourier and MGT *saturate* in an infinite medium; MGT only rescales the plateau and moves the peak. C2 was restated accordingly — the observable is peak position vs thickness. Step 3 does not start until Dr. Vipin accepts the restatement and confirms the Gupta equation's placement of tau_q.
