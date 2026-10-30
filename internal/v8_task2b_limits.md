@@ -40,44 +40,74 @@ This is the check the reviewer asked for, and it passes.
 The plate version is not run: it needs the complex `k` of a plate mode, not a real-speed singular
 value, and that solver is not written.
 
-## Hutson–White, bulk
+## Hutson–White, bulk — the sign was in my test, not in the code
 
-Sub-block `(u_z, phi, delta n)` at `eta = 0`, only `e15` and the carriers live, `D_n = 0`, no
-recombination, `f = 100` kHz, `n0* = eps11 omega/(q b_n) = 2.965e16` m^-3.
+The model is right and the masters are right. Gauss's law reads `M_34 = q` with the row
+`i k D_x + eta D_z + q dn = 0`, the carrier row carries `M_43 = b_n n0 L` and
+`M_44 = -i omega - D_n L - i k v_d + 1/tauR`, and both match the master's Section "Reduced
+equations" line for line (checked against the display in Calculation D and the worked row
+derivations). The piezoelectric block is skew: `M_23 = +e15 k^2` and `M_32 = -e15 k^2` at `eta = 0`.
+
+My hand-built 3x3 had `M_23 = M_32 = -e15 k^2`, symmetric, and that is what produced the growth
+sign. With the skew entry the sub-block `(u_z, phi, dn)` at `eta = 0`, `D_n = 0`, `v_d = 0`,
+`f = 100` kHz, `n0* = eps11 omega/(q b_n) = 2.9654e16`, `K^2 = e15^2/(eps11 c44) = 0.0719`:
 
 | n0 (m^-3) | k_r (1/m) | k_i/k_r |
 |---|---|---|
-| 1e15 | 2.386959e2 | -1.30e-3 |
-| 1e16 | 2.377207e2 | -1.16e-2 |
-| 3e16 | 2.340439e2 | -1.86e-2 |
-| 1e17 | 2.306072e2 | -9.85e-3 |
-| 3e17 | 2.300457e2 | -3.52e-3 |
-| 1e18 | 2.299768e2 | -1.06e-3 |
+| 1e15 | 2.221350e2 | +1.1293e-3 |
+| 1e16 | 2.228563e2 | +1.0219e-2 |
+| 2e16 | 2.244076e2 | +1.5869e-2 |
+| 3e16 | 2.258900e2 | +1.7343e-2 |
+| 4e16 | 2.269985e2 | +1.6758e-2 |
+| 1e17 | 2.292724e2 | +9.7364e-3 |
+| 3e17 | 2.298858e2 | +3.5148e-3 |
+| 1e18 | 2.299623e2 | +1.0645e-3 |
 
-The magnitude peaks at `3e16`, which is `n0*` to within one grid step, as predicted. The sign is
-negative in this convention, i.e. growth rather than decay; four different starting guesses all
-converge to the same root, so it is not a root-selection artefact. Either the acoustoelectric sign
-in the v8 rows is the opposite of what the masters intend, or the masters should say the model
-amplifies at `n0 = n0*` with no drift. That question is put to the reviewer and nothing is written
-into a master until it is answered.
+`k_i > 0`, decay, as it must be. The peak is at `3e16`, one grid step from `n0*`, with
+`k_i/k_r = 1.73e-2`; `K^2/2 = 3.6e-2` and the resonance halves it, so 1.8e-2 is the expected
+magnitude and 1.73e-2 is what comes out. Pass on sign, position and magnitude.
 
-## Why the plate crossover is not at n0*
+The lesson is worth recording: a symmetric test sub-block looks harmless and inverts the physics.
+Nothing in `internal/code` or in the masters changed for this.
 
-Plate S0 at `fd = 100`, piezoelectric plus carriers only, three diffusivities:
+## The closed form for the plate threshold
 
-| D_n (m^2/s) | n0 = 1e16 | 1e17 | 1e18 | 1e19 |
-|---|---|---|---|---|
-| 1e-3 | 5508.9 | 5508.7 | 5504.6 | 5474.3 |
-| 2.6e-4 | 5508.9 | 5508.7 | 5504.6 | 5474.3 |
-| 0 | build degenerates | - | - | - |
+The plate measures the static stiffening at `kh -> 0`, and the piezoelectric term is screened when
+the carrier response keeps up with the field. Linearising the pair (Gauss, carriers) gives the
+threshold
 
-The plate result is independent of `D_n` to the last digit, so it is not a diffusion or Debye-length
-effect inside the code; and at `D_n = 0` the carrier block loses its roots and the build fails, so
-that control cannot be reported. The crossover is set by the ratio of the carrier relaxation
-`(-i omega + 1/tauR)` to `omega` together with `q/eps`, and it sits 30 to 300 times above the bulk
-`n0*` because the plate test measures the static stiffening at `kh -> 0`, not the dielectric
-resonance that produces the bulk peak. That is the reading of the evidence, not a proof, and the
-closed-form plate threshold is the next thing to write down.
+```
+n0_th = eps33 | -i omega + D_n k^2 + 1/tauR | /(q b_n)
+```
+
+Three limits follow, and each was tested.
+
+1. Recombination slow, `1/tauR << omega`: `n0_th = eps33 omega/(q b_n) = n0* = 3.0e16`, the same
+   number as the bulk peak. That is the consistency the bulk test shows.
+2. Recombination fast, `1/tauR >> omega`: `n0_th = eps33/(q b_n tauR)`. With `tauR = 1` ns this is
+   5.6e19, and the observed crossover between 1e18 and 1e19 is its lower shoulder. The factor
+   against `n0*` is `1/(omega tauR) = 1592`, which is why the plate crossover sits 30 to 300 times
+   above the bulk peak.
+3. Change `tauR` and the threshold moves: with `tauR = 1` ms at `fd = 100` the screening is already
+   complete at `n0 = 1e18`, S0 falling to 5262.7 m/s against the short-circuit 5259.1, and the
+   transition sits at or below 1e17. With `tauR = 1` ns at the same frequency the speed is still
+   5504.6 at 1e18. So the threshold is recombination-controlled, as the closed form says.
+
+## Phason limit (Neha) and magnetoelastic limit (Anu)
+
+Both at `l_g = l_nl = 0` (with the defaults at 1e-8 the columns collapse as before, giving
+singular values of 1e-16 and meaningless dips), `h = 5e-4`, `fd = 1000`, A0 branch.
+
+| case | A0 (m/s) | shift |
+|---|---|---|
+| Neha full | 2216.6 | - |
+| Neha, phason decoupled (`R1 = R2 = R3 = b_w = 0`) | 2222.5 | +5.9 (0.27 per cent) |
+| Anu full | 2277.1 | - |
+| Anu, magnetoelastic off (`q31 = q33 = q15 = 0`) | 2276.4 | -0.7 (0.03 per cent) |
+
+At this frequency the phason coupling is a small but measurable correction and the magnetoelastic
+coupling is essentially absent. The `K1 = K2 = 0` variant of Neha gives 2076.6 with a dip depth of
+2, which is not a dip; it is not reported as a limit.
 
 ## Parity
 

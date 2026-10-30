@@ -51,42 +51,63 @@ Four digits at every frequency, the peak at 274~GHz, and $k_i/k_r=\Delta_E/2$ th
 check you asked for and it passes. The plate version needs a complex-$k$ plate solver, which is not
 written yet.
 
-\section*{Hutson--White, bulk}
+\section*{Hutson--White: the sign was in my test}
 
-Sub-block $(u_z,\phi,\delta n)$ at $\eta=0$, only $e_{15}$ and the carriers, $D_n=0$, no
-recombination, $f=100$~kHz. The peak of $|k_i/k_r|$ falls at $n_0=3\times10^{16}$~m$^{-3}$ against
-$n_0^{*}=\varepsilon_{11}\omega/(q b_n)=2.965\times10^{16}$, one grid step, with
-$|k_i/k_r|=1.86\times10^{-2}$ there. So the peak position is confirmed.
-
-The sign is not. In this code's convention the root has $k_i<0$, that is growth, and four different
-starting guesses converge to it, so it is not a root-selection artefact. Without drift a
-piezosemiconductor should attenuate. Either the acoustoelectric term carries the opposite sign in
-the v8 rows from the one the masters intend, or the model does amplify at $n_0^{*}$ and should say
-so. I have not written either into a master.
-
-\section*{Why the plate crossover is not at $n_0^{*}$}
-
-Plate S0 at $fd=100$, piezoelectric and carriers only, three diffusivities:
+The model is right and the masters are right. Gauss's law carries $M_{34}=q$ with the row
+$\mathrm{i}kD_x+\eta D_z+q\Delta n=0$, the carrier row carries $M_{43}=b_nn_0L$ and
+$M_{44}=-\mathrm{i}\omega-D_nL-\mathrm{i}kv_d+1/\tau_R$, and both match the master line for line.
+The piezoelectric block is skew: $M_{23}=+e_{15}k^{2}$ and $M_{32}=-e_{15}k^{2}$ at $\eta=0$. My
+hand-built test sub-block had those two entries equal, and a symmetric sub-block inverts the
+physics. With the skew entry, the sub-block $(u_z,\phi,\Delta n)$ at $\eta=0$, $D_n=0$, $v_d=0$,
+$f=100$~kHz, gives $k_i>0$ and a peak at $n_0=3\times10^{16}$~m$^{-3}$ against
+$n_0^{*}=2.9654\times10^{16}$, with $k_i/k_r=1.73\times10^{-2}$ there against $K^{2}/2=3.6\times10^{-2}$
+halved by the resonance. Sign, position and magnitude all pass, and nothing in the code or the
+masters needed changing.
 
 \begin{center}\footnotesize
-\begin{tabular}{lcccc}
+\begin{tabular}{lcccccccc}
 \toprule
-$D_n$ (m$^2$/s) & $10^{16}$ & $10^{17}$ & $10^{18}$ & $10^{19}$\\
+$n_0$ & $10^{15}$ & $10^{16}$ & $2\times10^{16}$ & $3\times10^{16}$ & $4\times10^{16}$ & $10^{17}$ & $3\times10^{17}$ & $10^{18}$\\
 \midrule
-$10^{-3}$ & 5508.9 & 5508.7 & 5504.6 & 5474.3\\
-$2.6\times10^{-4}$ & 5508.9 & 5508.7 & 5504.6 & 5474.3\\
-0 & build degenerates & --- & --- & ---\\
+$k_i/k_r$ ($10^{-2}$) & 0.11 & 1.02 & 1.59 & 1.73 & 1.68 & 0.97 & 0.35 & 0.11\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The answer is independent of $D_n$ to the last digit, so the gap is not diffusion or Debye screening
-inside the code, and at $D_n=0$ the carrier block loses its roots so that control cannot be
-reported. The crossover is set by the carrier relaxation $-i\omega+1/\tau_R$ against $\omega$, and
-it sits 30 to 300 times above the bulk $n_0^{*}$ because the plate test measures the static
-stiffening at $kh\to0$, not the dielectric resonance that produces the bulk peak. That is what the
-numbers say; the closed-form plate threshold is the next thing to write down, and I would rather do
-that than assert a mechanism now.
+\section*{The closed form for the plate threshold}
+
+Linearising the pair (Gauss, carriers) gives the screening threshold
+$n_{0}^{th}=\epsilon_{33}\lvert -\mathrm{i}\omega+D_nk^{2}+1/\tau_R\rvert/(qb_n)$. Two limits follow
+and both were tested. With $1/\tau_R\ll\omega$ it collapses to $\epsilon_{33}\omega/(qb_n)=n_0^{*}$,
+the bulk value, which is the consistency the bulk test shows. With $1/\tau_R\gg\omega$ it becomes
+$\epsilon_{33}/(qb_n\tau_R)=5.6\times10^{19}$ for $\tau_R=1$~ns, and the observed crossover between
+$10^{18}$ and $10^{19}$ is its lower shoulder; the factor against $n_0^{*}$ is
+$1/(\omega\tau_R)=1592$, which is the 30 to 300 we saw. Lengthening the lifetime moves it: at
+$\tau_R=1$~ms and $fd=100$ the screening is complete by $n_0=10^{18}$, S0 at 5262.7 against the
+short-circuit 5259.1, while at $\tau_R=1$~ns the same point still reads 5504.6.
+
+\section*{Phason and magnetoelastic limits}
+
+Both at $l_g=l_{nl}=0$, $h=5\times10^{-4}$~m, $fd=1000$, A0 branch. With the default lengths of
+$10^{-8}$~m these two papers give singular values of $10^{-16}$ and meaningless dips, so the lengths
+must be zeroed for any limit test on them.
+
+\begin{center}\footnotesize
+\begin{tabular}{lcc}
+\toprule
+case & A0 (m/s) & shift\\
+\midrule
+Neha full & 2216.6 & ---\\
+Neha, phason decoupled ($R_1=R_2=R_3=b_w=0$) & 2222.5 & $+5.9$ (0.27 per cent)\\
+Anu full & 2277.1 & ---\\
+Anu, magnetoelastic off ($q_{31}=q_{33}=q_{15}=0$) & 2276.4 & $-0.7$ (0.03 per cent)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+At this frequency the phason coupling is a small measurable shift and the magnetoelastic coupling is
+absent. The $K_1=K_2=0$ variant of Neha gives 2076.6 with a dip depth of 2, which is not a dip, and
+it is not reported as a limit.
 
 \section*{The closure, with its own baseline}
 
@@ -119,12 +140,11 @@ The $0.2$, $0.5$ alternative entry was re-run over 800 to 2600~m/s in steps of 2
 minima, the deepest $8.3\times10^{-4}$ against a median of $2.6\times10^{-2}$, no clean branch, where
 our rows give a single dip at 2300.7 with depth 87. It stays held.
 
-\section*{Parity and what is left}
+\section*{Parity and delivery}
 
 Parity is unchanged: Sumit none, Sumit with $\beta_{th}=\Pi_{th}=E_g=0$ the pair
-$(+,-,-,-,+)$ and its negative, Neha and Anu the same pair always. The phason limits and the
-magnetoelastic limits are not done; they come with the plate threshold and the sign question above.
-The v8 masters are untouched, and no \LaTeX{} engine is installed here, so this file is a source
-that has been through the style script.
+$(+,-,-,-,+)$ and its negative, Neha and Anu the same pair always. The v8 masters are untouched,
+the held $0.2$, $0.5$ closure entry is not quoted anywhere, and no \LaTeX{} engine is installed
+here, so this file is a source that has been through the style script.
 
 \end{document}
