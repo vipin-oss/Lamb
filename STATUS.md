@@ -1,11 +1,11 @@
 # Status, 30 October 2026
 
-- Neha S0 re-run in a window of +-15 per cent about the decoupled 5000 m/s: clean dips at 5070.8
-  (gamma 1e2, depth 189), 5070.9 (1e8, 133) and 5115.6 (1e12, 73), so the S0 entry can be quoted.
-- Anu: q31^2/(mu33 c11) = 2.37e-3, q33^2/(mu33 c33) = 3.61e-3, q15^2/(mu11 c44) = 2.76e-3, and the
-  plate-reduced value is 4.45e-4, five times smaller; that is why S0 does not move (6280.57 open
-  against 6280.67 uncoupled at fd = 100). Face condition in use is open B_z = 0.
-- Closed psi = 0 removes the dip from a 300 m/s band; noted, not used.
-- The alpha(v) = v(1-v) rule is recorded as a code scaling, not a model; an open-access source is
-  proposed but not yet read, so nothing is cited.
-- Masters stay v8.
+- Neha S0 against the phason-coupling-off reference (5117.4 m/s): 5070.5 at gamma = 1e2 to 1e8, then
+  5107.5, 5113.2, 5114.0 at 1e10, 1e12, 1e14 — the overdamped limit returns the reference to 0.08
+  per cent. 2 rho_p omega = 1.508e7 at this fd, so 1e12 is 6.6e4 times overdamped.
+- Anu: the 6280 m/s dip was the bulk c_L degeneracy, not S0. The plate mode is at 5411.8 m/s.
+- Anu S0 at fd = 100: elastic 5411.8, electric only 5529.6, magnetic only 5413.2 open / 5411.8
+  closed, both 5530.5 / 5529.6. Open minus closed: magnetic +1.4 m/s, as 4.45e-4 implies.
+- The closed-face fault was mine: rows[6] (adiabatic) was overwritten instead of rows[5] (B_z = 0).
+  Fixed; the closed run now returns the elastic value cleanly.
+- arXiv:2503.13187 logged as read to chunk 1 only, no equation numbers, not citable.

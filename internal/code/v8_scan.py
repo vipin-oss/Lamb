@@ -74,7 +74,9 @@ def build_B(sch, k, w, P, h, closure='variational', magbc='open'):
         rows = rowfun(eta, k, w, P)
         if magbc == 'closed' and len(rows) == 7:
             rows = list(rows)
-            rows[6] = [0, 0, 0, 1, 0]        # psi = 0 on the face instead of B_z = 0
+            # the B_z = 0 row is rows[5]; replacing rows[6] throws away the adiabatic
+            # condition instead, which is the fault found in round v8f.
+            rows[5] = [0, 0, 0, 1, 0]        # psi = 0 on the face instead of B_z = 0
         if ncond == 5:
             rows = [rows[0], rows[1], rows[4], rows[5], rows[6]]
         elif closure == 'constitutive':

@@ -247,3 +247,62 @@ voltage coefficient peaks at an intermediate volume fraction. Only the abstract 
 have been read; no equation for the effective coefficient has been located, so nothing from it may
 be cited yet. Next round: find the theory section, read the equation, and then either adopt it or
 state that ours is a placeholder.
+
+# Round v8f second pass — Neha S0 reference changed, Anu root cause
+
+## Neha S0 against the phason-coupling-off reference
+
+Reference is now the same plate with only the phason coupling removed (`R1 = R2 = R3 = b_w = 0`),
+piezoelectric and thermal couplings kept, `gamma = 0`: S0 = 5117.4 m/s, `sigma_min = 4.9e-3`,
+median `5.5e-1`, depth 112. Window of +-15 per cent, step 20 m/s, `h = 5e-4`, `fd = 1000`, `l = 0`.
+
+| gamma | 1e2 | 1e4 | 1e6 | 1e8 | 1e10 | 1e12 | 1e14 |
+|---|---|---|---|---|---|---|---|
+| S0 (m/s) | 5070.5 | 5070.5 | 5070.5 | 5070.6 | 5107.5 | 5113.2 | 5114.0 |
+| depth | 161 | 161 | 161 | 123 | 29 | 52 | 47 |
+
+The overdamped phason returns the reference from below and monotonically: 5117.4 against 5113.2 at
+`gamma = 1e12`, which is 4.2 m/s or 0.08 per cent, and 5114.0 at `1e14`, 0.07 per cent. The gap is
+not 2 per cent. Whether `1e12` is overdamped here: the plate runs at `omega = 2 pi 1e6 = 6.283e6`,
+so `2 rho_p omega = 1.508e7` and `gamma = 1e12` is `6.6e4` times that, deep in the overdamped
+regime; `gamma = 1e8` is already `6.6` times it. The residual falls as `gamma` grows, so the limit
+is being approached slowly rather than not at all.
+
+## Anu: the number was taken at the wrong speed
+
+The 6280 m/s dip I was tracking is `c_L = sqrt(c11/rho) = 6280.2` of the bulk, not the plate mode.
+It is the same degenerate zero seen earlier for aluminium at 6197.8: at `k = omega/c_L` a bulk root
+passes through `eta = 0` and the determinant vanishes whatever the couplings do, which is exactly
+why every case read 6280.0 to 6280.2 and the sign looked wrong. The S0 plate mode of this plate sits
+at 5411.8 m/s.
+
+S0 at `fd = 100`, window 5300 to 5600 in steps of 10, `l = 0`:
+
+| case | open `B_z = 0` | closed `psi = 0` |
+|---|---|---|
+| elastic, `e = q = 0` | 5411.8 | 5411.8 |
+| electric only, `q = 0` | 5529.6 | 5529.6 |
+| magnetic only, `e = 0` | 5413.2 | 5411.8 |
+| both | 5530.5 | 5529.6 |
+
+The electric coupling is the large one: 5411.8 to 5529.6 is +117.8 m/s, and
+`ebar31^2/(epbar33 cbar11) = 4.35e-2` for this plate, so the two are of the size each other implies.
+
+Open minus closed: electric 0, magnetic +1.4, both +0.9. The zero for the electric case is by
+construction, because the flag replaces the magnetic row only and the electric face stays open.
+The magnetic +1.4 m/s is the size the coupling number `qbar31^2/(mubar33 cbar11) = 4.45e-4` implies:
+against the Sumit plate, which gives +250.5 m/s for `5.56e-2`, the ratio of couplings is 125 and
+the ratio of shifts is 179, so the two agree to the accuracy of a linear estimate.
+
+The closed face works once the right row is replaced. In the first attempt I overwrote `rows[6]`,
+which is the adiabatic condition, instead of `rows[5]`, which is `B_z = 0`; that is why the closed
+case had no dip (depth 1.0) and why the reviewer's first suspicion was right. With `rows[5]`
+replaced the closed run returns the elastic value cleanly and the two conditions differ only through
+the magnetic coupling.
+
+## What was read of arXiv:2503.13187
+
+Chunk 1 only: title, contents list, abstract and introduction, Figures 1 to 3, the definitions of
+0-3, 2-2, 1-3 and core-shell connectivity, and one sentence quoting a theoretical coefficient of
+2400 mV cm^-1 Oe^-1 for 0-3 particulate composites. No numbered equation was reached, so nothing is
+cited from it and it must not appear in a master yet.
