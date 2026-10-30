@@ -76,3 +76,37 @@ def dips(curve, depth=1.0):
         if v < good[i-1][1] and v < good[i+1][1] and (good[i-1][1]-v) > depth:
             out.append((c, v))
     return out
+
+
+def branch(sch, fd, h, P, c0, half=100.0, step=5.0, closure='variational'):
+    """smallest singular value on a fine grid about a branch, and the parabola vertex."""
+    import v8_scan as SS
+    c0 = float(c0)
+    cs = []
+    c = c0 - half
+    while c <= c0 + half + 1e-9:
+        cs.append(c)
+        c += step
+    vals = []
+    for cc in cs:
+        s, n, ncond = SS.point(sch, mp.mpf(cc), fd, h, P, closure)
+        vals.append((cc, s))
+        if s == 0.0:
+            vals[-1] = (cc, None)
+    good = [(c, s) for c, s in vals if s is not None and s > 0]
+    if not good:
+        return None
+    med = sorted(s for _, s in good)[len(good)//2]
+    k = min(range(len(good)), key=lambda i: good[i][1])
+    out = {'c': good[k][0], 's': good[k][1], 'med': med, 'depth': med/good[k][1] if good[k][1] > 0 else None}
+    c1, s1 = good[k]
+    if 0 < k < len(good)-1:
+        c0_, s0_ = good[k-1]
+        c2, s2 = good[k+1]
+        den = (s0_ - 2*s1 + s2)
+        if den > 0:
+            shift = 0.5*(s0_ - s2)/den*step
+            if abs(shift) <= step:
+                out['c'] = c1 + shift
+                out['s'] = s1 - 0.25*(s0_ - s2)*shift/step
+    return out

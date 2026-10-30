@@ -140,7 +140,7 @@ def trim(b, tol=1e-25):
         b = b[:-1]
     return b
 
-def roots_eta(k, w, P, Mfun=M_sumit, R0=None, tol=1e-25):
+def roots_eta(k, w, P, Mfun=M_sumit, R0=None, tol=1e-40):
     b, R0 = coeffs_scaled(k, w, P, Mfun, R0)
     b = trim(b, tol)
     ts = mp.polyroots(b[::-1], maxsteps=400, extraprec=800)

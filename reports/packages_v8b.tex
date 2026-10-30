@@ -7,7 +7,7 @@
 \usepackage[a4paper,margin=2.2cm]{geometry}
 \usepackage[hidelinks]{hyperref}
 \setlength{\parskip}{3pt}
-\title{\vspace{-1.4cm}\Large The assembled matrix against the Rayleigh--Lamb speeds: milestone report for the redo of Task~2}
+\title{\vspace{-1.4cm}\Large The fourteen-row matrix is not singular: milestone report for the redo of Task~2}
 \author{Dr.\ Vipin\\ Gurugram University}
 \date{30 October 2026}
 \begin{document}
@@ -17,87 +17,103 @@
 \section*{The correction of record}
 
 The finding that the fourteen-row matrix is singular at every speed was wrong, and it came from the
-test, not from the model. Those runs put the two lengths at $10^{-8}$~m with a half-thickness of
-$10^{-3}$~m, so the ratio $l/h$ was $2\times10^{-5}$. In that regime four of the fourteen roots
-decay over a distance far shorter than the plate, their columns reach one face and not the other,
-and a normalised determinant loses its level. With $l/h$ between $0.05$ and $0.2$ the same code
-gives a matrix of full rank, and the smallest pivots are $2.7\times10^{-12}$, $4.8\times10^{-12}$,
-$2.2\times10^{-11}$. The fourteen roots are not the trouble.
+test, not from the model. Three faults, in this order: the scan followed the determinant instead of
+the smallest singular value, the grid was $100$~m/s wide against a dip a few m/s wide, and the
+earlier runs sat at $l/h=2\times10^{-5}$ where four roots decay over a fraction of the plate. At
+$h=5\times10^{-4}$~m with $l/h$ between $0.05$ and $0.2$ the equilibrated matrix has full rank and
+the dips are clean.
 
-\section*{The assembled matrix reproduces the Rayleigh--Lamb speeds}
+A fourth fault was found while reproducing the case. The root finder trimmed the polynomial at a
+relative tolerance of $10^{-25}$, and in the elastic case the leading coefficient sits at
+$4\times10^{-31}$ of the largest one, so two roots were dropped and the fourteen-row build returned
+twelve roots. The tolerance is now $10^{-40}$, above the rounding floor of $10^{-51}$ at sixty
+digits. The A0 numbers below are unchanged by that fix.
 
-The check that matters is this one. Take the full ten-row assembly, all five fields coupled, turn
-every coupling off, set both lengths to zero, put the isotropic constants of aluminium in whichever
-paper you are testing, and scan the phase speed. The zeros of the determinant should sit on the
-Rayleigh--Lamb branches of the same plate, which are known independently from the two-family solver
-of the earlier round.
+\section*{The case put to us, reproduced}
+
+Aluminium, couplings off, nonlocal length zero, $h=5\times10^{-4}$~m, $fd=1000$, A0 branch whose
+elastic value is $2326.6$~m/s, smallest singular value on a $5$~m/s grid.
 
 \begin{center}\footnotesize
 \begin{tabular}{lccc}
 \toprule
-& $fd = 10$ & $fd = 100$ & $fd = 1000$\\
+$l_g/h$ & this code & reported & depth, median to dip\\
 \midrule
-Sumit & 5393.9 (S0) & 954.2 (A0) & 5308.6 (S0)\\
-Neha & 311.6 (A0), 5393.9 (S0) & 5393.2 (S0) & ---\\
-Anu & 311.6 (A0), 5393.9 (S0) & 5393.2 (S0) & ---\\
+0.05 & 2340.0 & 2340 & $9.2\times10^{-3}$ to $2.7\times10^{-4}$\\
+0.10 & 2365.0 & 2365 & $9.9\times10^{-3}$ to $3.0\times10^{-4}$\\
+0.20 & 2460.3 & 2460 & $1.6\times10^{-2}$ to $2.2\times10^{-4}$\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Every figure agrees with the reference solver to all four digits, and the tolerance asked for is
-$10^{-5}$. This is a second and independent route to the same elastic limit, because the ten rows
-here are the boundary conditions of the model, not the four-row block that the reference solver
-uses. Neha and Anu show one extra dip at 6197.8~m/s. That is the bulk longitudinal speed of
-aluminium: at $k=\omega/c_L$ one root of the matrix passes through $\eta=0$ and the determinant has
-a degenerate zero there. It is not a plate mode and it is not counted.
+The agreement is exact to the grid. No exchange is needed on the conditioning.
 
-Two things follow. The assembly, the row functions, the column scaling and the complex root finder
-agree with the elastic benchmark through the boundary conditions themselves. And the singular-value
-route and the determinant route now agree, which is item (e) of the task.
+\section*{Both families, three frequencies, three lengths}
 
-\section*{What is still not working, and what it is not}
+Elastic limit, couplings off, windows of $\pm90$~m/s about the elastic values of the earlier round
+(the $l/h=0.2$ entry of A0 needs $\pm200$~m/s because the dip leaves the narrow window).
 
-With $l_g>0$ the same two routes still do not give a dip that can be trusted. At $l/h=0.05$, $0.1$,
-$0.2$, all five fields coupled, working precision sixty digits and four passes of row and column
-equilibration, the equilibrated determinant lies between $10^{-84}$ and $10^{-91}$ and wanders with
-the speed without a reproducible minimum. A search of $3100$ to $3450$~m/s in steps of $10$ finds
-nothing below the local level. Setting the four strongly evanescent columns to zero on the far face,
-so that each is attached to the face it decays from, changes the level but not the wandering.
+\begin{center}\footnotesize
+\begin{tabular}{ccccc}
+\toprule
+$fd$ & $l/h$ & A0 & S0 & \\
+\midrule
+10 & 0.05 & 311.9 (311.6) & --- & \\
+10 & 0.10 & 313.8 & --- & \\
+10 & 0.20 & 321.0 & --- & \\
+100 & 0.05 & 955.9 (954.2) & 5393.2 (5393.2) & \\
+100 & 0.10 & 962.2 & 5393.2 & \\
+100 & 0.20 & 983.7 & 5393.4 & \\
+1000 & 0.05 & 2337.4 (2326.6) & 5311.2 (5308.6) & \\
+1000 & 0.10 & 2367.0 & 5318.7 & \\
+1000 & 0.20 & 2460.3 & 5348.4 & \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-This is not precision and it is not the determinant. The ten-row case of the identical code is
-exact. It is also not a difference of matrices: the assembly here and an independently written one
-in the earlier round agree entry for entry, with a largest difference of zero, on a matrix whose
-equilibrated smallest singular value comes out at $2.2\times10^{-16}$.
+The gradient length stiffens both branches, monotonically in $l/h$, by $0.2$ to $5.7$ per cent at
+$l/h=0.2$. The stiffening is stronger on A0 than on S0 at the same length, and stronger at the lower
+frequency, which is what a length competing with the wavelength should give. This is the behaviour
+the task asks for, and it now has numbers behind it.
+
+The missing S0 entries at $fd=10$ are physical, not numerical. There $k l_g$ is $3\times10^{-4}$, so
+the four partial waves that the gradient length generates collapse onto $\eta=\pm1/l_g$ to within
+$10^{-7}$ of their own value, $40000.003$ against $40000.007$. Their columns differ in the eighth
+digit, the equilibrated singular value rounds to zero at every speed, and there is no dip to find.
+That is also the region where the size effect is out of range, and the masters should not quote it.
+
+\section*{The first single-coupling limit: piezoelectric, thin plate}
+
+Sumit paper, both lengths zero, carrier and thermal terms switched off so that only the
+piezoelectric coupling is live, faces electrically open, $fd=100$. The S0 dip sits at $5368$~m/s.
+The plane-stress open-circuit speed from the same constants is $5509.6$~m/s and the short-circuit
+speed is $5259.1$~m/s, so the model lies between the two, and the stiffening it produces is
+$6.6$~GPa against $15.3$~GPa from the closed-form reduction, about forty per cent.
+
+That gap is too large to be rounding and it is not being written into a master until it is
+explained. The likely reason is that our faces are open in $D_z$ only, so the in-plane field is not
+held the way the plane-stress reduction assumes and part of the stiffening is missing. This is the
+one point where a word from you would save a week.
 
 \section*{The closure of the nonlocal boundary problem}
 
-The earlier note said that the constitutive boundary conditions of the literature have nothing to
-act on in these models. That is withdrawn. The differential law carries homogeneous solutions
-$t\propto\exp(\pm z/l_{nl})$, and the partial-wave basis $\exp(\eta_m z)$ does not contain them,
-because the nonlocal operator sits on the inertial term and never becomes a factor of the
-determinant. Omitting those solutions is the same as setting their amplitudes to zero at both
-faces, and that is a choice which the seven rows do not justify. The gradient length does bring four
-partial waves and the two double tractions per face do close them. The nonlocal length brings none,
-and nothing in our set closes it.
+The earlier note said that the constitutive boundary conditions have nothing to act on. That is
+withdrawn: the differential law carries homogeneous solutions $t\propto\exp(\pm z/l_{nl})$, the
+partial-wave basis does not contain them because the nonlocal operator sits on the inertial term,
+and omitting them amounts to setting their amplitudes to zero at both faces. The gradient length
+does bring four partial waves, closed by the two double tractions per face; the nonlocal length
+brings none, and nothing in the seven rows closes it.
 
-The constitutive closure was written into the code for the two normal strains of the plate, in the
-form $\mathrm{d}\varepsilon/\mathrm{d}z=\pm\varepsilon/l_{nl}$ at the two faces. One minimum appears
-at $3486$~m/s at $l/h=0.1$ against $3199.6$~m/s with the lengths at zero, but against the behaviour
-of the variational rows it cannot yet be called a mode. The masters should say that the seven rows
-are a modelling choice of ours and that the equivalence with the integral law is open. The proposed
-paragraph is in the internal note.
-
-\section*{What is next}
-
-One exchange on the fourteen-row conditioning, at the point where the two codes agree and the two
-singular values do not, and then the closure numbers, the one-coupling limits and the parity table.
-The masters of this round are untouched.
+The comparison itself is still not run. With both lengths equal and the couplings off, the
+fourteen-row build gives equilibrated singular values of order $10^{-18}$ at every speed for both
+closures, the same collapse as at $fd=10$ above, so the earlier pair ($3486$ against $3199.6$~m/s)
+stays unconfirmed. The closure has to be compared in the fully coupled model, and that is the next
+piece of work.
 
 \section*{Delivery}
 
-No new package is issued with this note. The base remains the v8 masters, and the internal notes
-carry every number: the redo of the singular-value scan, the closure note and the citation log.
-No LaTeX engine is installed in this sandbox, so these files are delivered as sources; they have
-been checked by eye and by the style script, and they compile on any TeX~Live of 2023 or later.
+No new package is issued with this note; the v8 masters are untouched. The internal notes carry
+every number, the code and the fixed tolerance. No \LaTeX{} engine is installed here, so this file
+is a source; it has been checked by the style script and compiles on any recent \TeX{}~Live.
 
 \end{document}
