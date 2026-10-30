@@ -1,0 +1,560 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt}
+\title{\vspace{-1.6cm}\Large Basics and Definitions\\[2pt]
+\large Everything you need before the research plan on waves in a magneto-electro-elastic plate}
+\author{Dr.\ Vipin \\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-6mm}
+
+\section{How this booklet is arranged}
+
+The plan you have been given is about a plate made of two materials, one of which is piezoelectric and the
+other piezomagnetic, and about what happens to a guided wave when the plate is also allowed to get warm. It
+uses words from acoustics, from elasticity, from electricity and magnetism, and from heat transfer. A reader
+who has finished school can follow all of it, provided the words are unpacked once, in order.
+
+Sections two to nine unpack the wave. Sections ten and eleven unpack the complex wavenumber, starting from
+what a complex number is, because the paper reports a decay and a wavelength in the same symbol and that
+should not be allowed to look like magic. Sections twelve to fourteen unpack force in a solid. Sections fifteen
+to nineteen unpack the physics that is special to this paper: electric and magnetic fields in a crystal, the
+piezoelectric and piezomagnetic effects, the magnetoelectric effect and why it is a property of the composite
+rather than of either ingredient, heat with a memory, and the size effect. Section twenty is a table of every
+symbol in the plan. Section twenty one is a glossary, and section twenty two is about testing your own work.
+
+You will not find a boundary condition here, nor a solution method, nor a number to compare your answers
+against. Those are the parts of the job that belong to you.
+
+\section{Waves in one page}
+
+A wave is a disturbance that moves while the material stays put. Tap one end of a metal railing and your
+friend at the other end hears it, though no metal has travelled. What travelled was a pattern of pushes.
+
+Two things about waves surprise people at first. The first is that they carry energy without carrying
+material, which is why sound can rattle a window from across a room. The second is that the speed is a
+property of the medium and the geometry, not of the loudness. Bang the railing harder and it is louder, not
+faster.
+
+A wave has a size, called the amplitude, and a shape. The shapes used in this work are sines, and that is not
+a simplification made for convenience: any smooth repeating shape can be split into sines, so understanding
+one sine is understanding everything.
+
+A solid can carry two flavours of disturbance. Push and pull along the direction of travel is longitudinal,
+like sound in air. Sideways sliding across the direction of travel is transverse, like light. A solid carries
+both at once, and in a plate the two are forced to mix at the surfaces, which is where the richness of the
+problem comes from.
+
+\section{Frequency and period}
+
+Frequency counts repetitions per second, and its unit is the hertz. A humming transformer hums at twice the
+mains frequency, a hundred times a second, and that is why it sounds like a low drone rather than a musical
+note.
+
+The period is the time for one repetition, and it is one over the frequency. A hundred hertz means ten
+milliseconds per cycle. High frequency goes with short period, always.
+
+Angular frequency is frequency multiplied by two pi, written with omega. One cycle is one full turn and one
+turn is two pi radians, so angular frequency is the number of radians of phase per second. Using radians makes
+the algebra of oscillations clean, and a paper that uses omega everywhere is using that convenience.
+
+Frequency is not decoration. It sets how fast the material is asked to change, and materials cannot change
+infinitely fast. A material that follows a slow push obediently will lag a fast one, and a lag is the point at
+which energy starts leaking into heat. Every attenuation mechanism in this paper is some version of that
+sentence.
+
+\section{Wavelength and the wavenumber}
+
+Wavelength is the distance between two points doing the same thing at the same moment, measured in metres.
+It decides what a wave notices. A wave with a long wavelength walks around a small obstacle; a wave with a
+short one is blocked by it.
+
+The wavenumber counts the repetitions in space the way frequency counts them in time. Its symbol is k and its
+unit is one over a metre. The useful definition is phase per metre: one full cycle is two pi radians, so the
+wavenumber is two pi divided by the wavelength. Keeping the two pi makes a forward travelling wave read as a
+cosine of k x minus omega t, and every formula in the paper is written in that convention.
+
+For a plate the wavenumber along the plate is the number that matters, because the plate is long in that
+direction and thin across it. The wave may choose a wavenumber; the plate then decides which shapes across
+the thickness are compatible with it. The paper is about that decision.
+
+The three quantities tie together in one line. A wave advances one wavelength per period, so the speed is
+wavelength times frequency.
+
+\section{Phase velocity, group velocity, dispersion}
+
+Phase velocity is the speed of a crest: frequency divided by wavenumber. If it were the same for all
+frequencies, waves would be dull.
+
+It is not. Phase velocity usually depends on frequency, and that dependence is dispersion. A prism splitting
+white light is dispersion. A distant thunderclap arriving as a rumble rather than a crack is dispersion in
+air. In a plate, dispersion is unavoidable, because the zigzag path between the faces depends on wavelength.
+
+The group velocity is the speed of a bundle of waves, and the speed at which energy travels. In a dispersive
+medium the two speeds differ, and a short pulse spreads as it travels. The paper reports phase velocity,
+because dispersion curves are drawn with it and devices are designed around it.
+
+Dispersion is what makes measurement possible. A measured dispersion curve is a fingerprint of a plate: change
+the material, the thickness, or the amount of damage, and the fingerprint moves. That is the practical reason
+this kind of theory is worth writing.
+
+\section{A plate, and why it traps a wave}
+
+A plate is a solid thin in one direction and long in the others. Ours has thickness two h, so faces at plus h
+and minus h, and it is treated as infinite along the plate, which means long enough that the ends do not
+matter.
+
+Send a wave in at an angle. It hits a face; a free face cannot absorb it, so nearly all of it reflects. It
+crosses to the other face and reflects again. The wave is trapped, and while trapped it creeps along the
+plate.
+
+The right picture is a zigzag. The wave travels diagonally and bounces, and its forward progress is the
+projection of that diagonal. The apparent speed along the plate is therefore lower than the speed in the bulk
+material, and it is lower still when the zigzag is steep.
+
+Two consequences follow. First, the thickness enters directly, because it sets the round trip length. Second,
+the two reflections must agree in phase for the mode to exist. That single condition is what turns a
+continuous set of possibilities into a discrete list.
+
+\section{Modes, symmetric and antisymmetric, and cutoff}
+
+Each allowed zigzag is a mode: a definite shape across the thickness with its own dispersion relation. A mode
+is a standing pattern through the thickness being carried along the plate.
+
+The modes come in two families because the plate looks the same when turned over. In the symmetric family the
+two faces move in and out in opposition and the middle of the plate moves only along the plate, stretching
+and squeezing it. In the antisymmetric family the faces move together and the plate bends. The lowest members
+of the two families are the extensional and bending modes, and they are the only two that exist at low
+frequency.
+
+More modes appear as frequency rises, each at its own cutoff. The cutoff is the lowest frequency at which the
+mode can exist; below it the mode is evanescent, meaning it dies away from wherever it was made instead of
+travelling. The physical reason is again the zigzag: at low frequency the wavelength is too long to complete a
+round trip in step.
+
+A dispersion curve is phase velocity against frequency, one curve per mode. Cutoffs are where the curves
+begin. At high frequency every curve flattens towards the speed of a wave on the surface of a half space, the
+Rayleigh speed, and that flattening is a useful test of any calculation.
+
+Because the wave cares about the product of frequency and thickness rather than either alone, figures use
+frequency times thickness on the horizontal axis, in hertz metres. On that axis, plates of different
+thickness and the same material lie on the same curves.
+
+\section{Complex numbers, built from nothing}
+
+A complex number is an ordinary number with one extra rule attached: there is a number whose square is minus
+one. Among ordinary numbers no such thing exists, since any real number squared is positive or zero. So we
+name one, call it i, and set i squared equal to minus one.
+
+The point of the invention is bookkeeping. A complex number written as a plus b i is a pair of ordinary
+numbers, and it can be drawn as a step a to the east and b to the north. Adding two complex numbers adds the
+east parts and the north parts separately. The size of the number, called its modulus, is the length of the
+step, which is Pythagoras: the square root of a squared plus b squared.
+
+Every complex number can also be described by its size and its angle from east, called its phase, measured in
+radians. Multiplication then has a simple meaning: sizes multiply, phases add. That is why complex numbers
+suit waves, because a wave has exactly a size and a phase, and travelling through a material turns the phase
+and shrinks the size.
+
+One more relation makes the notation practical. The exponential of i times an angle equals a cosine plus i
+times a sine, a fact due to Euler. So a wave can be written as a size times an exponential, and the arithmetic
+of exponents replaces the trigonometry of waves.
+
+Then derivatives become multiplications. One time derivative multiplies by minus i omega, two time
+derivatives by minus omega squared, one space derivative by i k. Symbols like omega squared in the plan are
+therefore second time derivatives in disguise. A reader who can see that can read the model equations.
+
+\section{Attenuation, and why the wavenumber is complex}
+
+A wave travelling forward is written as a size times the exponential of i times k x minus omega t. If k is an
+ordinary positive number the amplitude never changes and the wave travels forever. Nothing in nature does
+that.
+
+So we allow k to be complex, k real plus i k imaginary, and split the exponential. The phase part turns at a
+rate set by the real part, so the wavelength is two pi divided by the real part. The size part shrinks at a
+rate set by the imaginary part, so the imaginary part is the loss.
+
+The convention in this project is that a positive imaginary part means decay in the positive direction. It is
+a choice, like measuring height upwards, but it must be stated, because a reader who assumes the other
+convention will read a growth where the author wrote a decay.
+
+Attenuation is quoted as the imaginary part in reciprocal metres, called nepers per metre, or in decibels per
+metre. About eight and a half decibels make one neper, the difference arising because decibels use base ten
+logarithms and nepers use base e.
+
+The ratio of imaginary to real part is the number that tells you whether a mode is useful. It is the fraction
+of amplitude lost per radian of phase, the same as the loss per wavelength. A mode with a tiny ratio travels
+far; a mode with a ratio near one dies within a wavelength. When the plan says that an effect may be too small
+to see, it usually means that the change in this ratio is below what could be measured.
+
+In a magneto-electro-elastic plate the loss has several sources. Some is thermoelastic, present in every
+solid. Some is the work done against the electric and magnetic fields. Some is the leakage of energy into the
+surroundings if the faces are not truly free. Our model keeps the first two and excludes the third by
+assuming free faces, and the paper must say so.
+
+\section{Stress and strain}
+
+Bend a plastic ruler and let it go. While bent, one face is stretched and the other is compressed, and the
+ruler pushes back at your fingers. The stretching, measured as a change of length divided by the original
+length, is strain; it is a pure number and usually small. The push back, measured as force per unit area, is
+stress; it is measured in pascals, one pascal being one newton per square metre.
+
+Two kinds of stress are worth naming. A normal stress pulls a face apart or pushes it together, as the ruler
+does on its two faces. A shear stress slides one layer over the next, as happens when you twist a ruler instead
+of bending it. A solid carries both, and a plate under a guided wave does both at every point, because the
+zigzag keeps converting one into the other.
+
+Neither is a single number. At a point there are three directions in which a face can point, and on each face
+a force can have three components, so nine numbers describe the stress, of which six are independent in a
+symmetric material. When the plan writes a symbol with two indices, it is naming one of those components. You
+do not have to picture all six; you have to know that the notation is counting them, and that a material
+constant with four indices relates a stress to a strain in a chosen pair of directions.
+
+Strain can vary from place to place. The top of the bent ruler is stretched more than its middle. How quickly
+the strain changes along a direction is the strain gradient, measured in one over length. In the ordinary
+theory of elasticity the strain gradient costs no energy, and in the theory we use it costs a little. That
+small cost is what makes a thin plate differ from a scaled drawing of a thick one.
+
+\section{Hooke's law, and where it comes from}
+
+Hang a bag on a spring and the spring stretches. Double the bag and it stretches twice as far, until you
+overdo it. That proportionality, for small pushes, is Hooke's law, and almost the whole of linear elasticity is
+that sentence with bookkeeping attached.
+
+The bookkeeping is this. A strain in one direction produces stresses in more than one. Pull a strip of rubber
+and it also narrows; the ratio of the narrowing to the lengthening is Poisson's ratio, near one half for
+rubber, near zero for cork, which is why cork stoppers stay tight in the neck of a bottle.
+
+Written out in full, Hooke's law for a solid is a table relating six stresses to six strains. For a material
+that looks the same in every direction the table collapses to two independent numbers, and those two can be
+turned into two wave speeds, one for push and pull and a slower one for shear. Every wave speed in this paper
+is a square root of a stiffness divided by a density, with extra terms once the electric and magnetic fields
+join in.
+
+Our materials are not isotropic. Barium titanate is a tetragonal crystal with a preferred axis; cobalt ferrite
+is cubic but magnetostrictive; and the plate is a stack of the two. A stack is not a material at all, it is a
+structure, and its effective stiffness depends on how the layers are arranged.
+
+\section{Balance laws and the word divergence}
+
+Three conservation statements do most of the work. Mass is conserved, so what enters a small box either stays
+or leaves. Momentum is conserved, so the net force on a box equals the rate of change of its momentum, which
+for a solid is mass times acceleration. Energy is conserved, so the work done by stresses and fields goes into
+stored energy, kinetic energy, or heat.
+
+All three are written with a divergence, a word that sounds harder than it is. A divergence is a net outflow.
+Picture a small box and a flow through it: if more leaves through the faces than enters, the amount inside
+falls and the divergence is positive. If more enters, the divergence is negative and the amount inside rises.
+Nothing else is meant.
+
+Put a material law into a balance law and a wave equation appears. The stress follows the strain, and the
+stress accelerates the material; combine the two and the acceleration is proportional to the curvature of the
+displacement. Solutions of that equation are waves whose speed is the square root of stiffness over density.
+
+\section{Electric fields, magnetic fields, and two kinds of potential}
+
+A charge feels a force near other charges, and we describe that by saying the space carries an electric field.
+The field is force per unit charge, measured in volts per metre. Its companion, the electric displacement,
+counts the charge you supplied rather than the net field, because the atoms of a material stretch into dipoles
+and cancel part of what you put in.
+
+A magnetic field is the same idea for moving charge and for magnets. Its unit is the tesla, and its companion,
+the magnetic induction, plays the role that the displacement plays for electricity: it counts the field you
+impose rather than the total inside the material, because the material itself magnetises.
+
+Both fields have a potential, and the potentials are the quantities we solve for in a plate. For the electric
+field the potential is ordinary voltage, energy per unit charge. For the magnetic field the potential is a
+magnetic scalar potential, and in a region with no free current it does exactly the job the electric potential
+does: its gradient, with a minus sign, is the field. The minus sign is there so that fields point downhill.
+
+Solving for potentials rather than fields is a habit that pays. A potential is a single number at each point,
+while a field has three components that are not independent, since field lines cannot simply stop. Working
+with the single number removes that constraint automatically. It also means the boundary conditions at the
+faces are written in terms of potentials, which is what your plan asks you to choose.
+
+A word about units, because magnetic units confuse everyone. The magnetic induction is measured in tesla. The
+magnetic field is measured in amperes per metre, and the two are related by the permeability of the material,
+which for most non magnetic materials is close to that of free space. In our composite the permeability is a
+measured effective property, and it enters the calculation in the same way the permittivity does.
+
+\section{Piezoelectricity, piezomagnetism, and the magnetoelectric effect}
+
+A piezoelectric material makes a voltage when squeezed and changes shape when a voltage is applied. Barium
+titanate does this well, and it is the reason it appears in microphones, in ultrasonic transducers and in
+cheap buzzers.
+
+A piezomagnetic material does the same with magnetism. Squeeze cobalt ferrite and its magnetisation changes;
+apply a magnetic field and it strains. The effect exists only in materials whose magnetic order allows it, and
+cobalt ferrite is the standard example used in composites.
+
+A magnetoelectric material allows a magnetic field to produce an electric polarisation, or an electric field to
+produce a magnetisation. Single phases with a useful effect are rare. What works is a composite: put the
+piezoelectric and the piezomagnetic phase together so that strain carries the message from one to the other.
+The magnetic field strains the ferrite, the strain crosses the interface, and the titanate polarises.
+
+This chain has a consequence that matters for the whole paper. The magnetoelectric coefficient of a composite
+is not a material constant the way a density is. It depends on how much of each phase there is, on the shape of
+the inclusions, on the quality of the interface, and on temperature. Different ways of averaging the two phases
+give different answers, and the spread between those answers is a real uncertainty, not a rounding error.
+
+Two smaller effects belong here as well, because they are the ones our model adds to the usual plate
+calculation. Heating a piezoelectric crystal changes its polarisation even with nothing mechanical happening,
+and the coefficient is called pyroelectric. Heating a piezomagnetic crystal changes its magnetisation, and the
+coefficient is called pyromagnetic. Both run backwards: an applied electric field changes the temperature of
+the material, and an applied magnetic field does the same, the electrocaloric and magnetocaloric effects. The
+two directions are tied by thermodynamics, so a paper that keeps the pyroelectric term in the electric
+displacement while dropping the electrocaloric term in the heat equation is not conserving anything. Our model
+keeps both, and that is a point of correctness rather than a discovery.
+
+\section{How two phases are averaged, and why it matters here}
+
+If you mix two materials you need a rule for what the mixture's stiffness, permittivity, permeability and
+magnetoelectric coefficient are.
+
+The simplest rule is the rule of mixtures, which takes the volume average of the property. It is exact for a
+layered stack when you load it along the layering direction and wrong when you load it across, because the
+layers then act in series rather than in parallel.
+
+A better rule for a material with inclusions is the Mori and Tanaka estimate. It accounts for the shape of the
+inclusions and for the fact that each inclusion feels the average field of its neighbours rather than the
+applied field. For continuous layers it does not improve on the rule of mixtures, and for inclusions it does.
+
+Our plate is a stack, so the two rules differ mainly in the plane, which is precisely the direction in which
+the wave travels. That is why both are carried through the paper as a band rather than one being chosen. If
+the thermal effect the paper is chasing turns out to be smaller than the difference between the two rules,
+then no experiment could tell the effect from the uncertainty, and the reader deserves to see that on the same
+figure.
+
+\section{Heat, and heat with a memory}
+
+Heat flows from hot to cold in proportion to the temperature gradient. That is Fourier's law. Combine it with
+energy conservation and you get a diffusion equation, in which a point warms when it is colder than its
+neighbours on average.
+
+Diffusion has an uncomfortable feature. It allows a temperature change at one place to be felt everywhere at
+once, however slightly. For ordinary engineering that is harmless. For a wave at very high frequency it is
+not, because the loss then grows without limit as frequency rises. Nature does not do that, and the divergence
+warns that the theory is being asked a question outside its range.
+
+The repair is to give the heat flux a memory. The flux relaxes towards the gradient over a relaxation time
+instead of responding instantly. One memory gives a wave equation for heat; two give the version introduced by
+Moore, Gibson and Thompson in 1994, called the Moore-Gibson-Thompson theory, or MGT.
+
+In words, MGT says that at low frequency nothing has changed and the classical answer returns, while at high
+frequency the flux lags, the loss stops rising, and it levels off at a plateau. That plateau is the observable
+difference between the classical and MGT descriptions, and it is one of the things the paper must say
+something about.
+
+Whether the plateau is reachable depends on thickness. The time for heat to diffuse across a plate grows as
+the square of the thickness, so the ratio of the relaxation time to that diffusion time decides whether the
+memory matters. Thin plates are the interesting ones, and very thin plates leave the range where a continuum
+description of heat is defensible. That double restriction is why one figure in the plan maps thickness
+against relaxation time.
+
+There is an extra difficulty in a composite, and it is worth stating early. The ceramic and the ferrite have
+very different conductivities and heat capacities, so they have very different relaxation times. There is no
+such thing as the relaxation time of the stack; an effective value has to be defined, justified and, where it
+matters, swept.
+
+\section{The size effect in words}
+
+At very small thickness a plate stops behaving like a scaled drawing of a thick one. Two ideas describe the
+difference, and both are needed because experiments show both.
+
+Nonlocal elasticity lets the stress at a point depend on the strain in a neighbourhood around it. The picture
+is a row of springs joined by weak cross springs, so a displacement in one place is felt a little further
+along. Nonlocality makes the material softer.
+
+Strain gradient elasticity lets the energy depend on how quickly the strain changes from point to point, as
+well as on the strain itself. The picture is a sheet of rubber in which a patch of rapidly changing stretch
+costs more energy than a patch of uniform stretch. The gradient makes the material stiffer.
+
+The version used here combines the two, following Lim, Zhang and Reddy. Each idea brings one length, and the
+two lengths compete. Both are written as ratios to the thickness, because a length on its own says nothing and
+a ratio to the geometry says everything.
+
+The price is the sentence that closes the model section of your plan. A theory containing a second derivative
+of the strain raises the order of the equations, and higher order equations need more conditions at the
+boundaries. A classical plate needs a short list of conditions at each face; this one needs a longer list, and
+which extra conditions to use is not settled. That decision is yours.
+
+\section{What the model assumes}
+
+A model is not a photograph. It is a set of statements that are true enough, in some range, to answer a
+question, and the range is part of the model.
+
+Our model assumes a continuum, so no atoms and no domains. It assumes a linear response, so doubling the cause
+doubles the effect, which rules out the field dependence that real ferroelectric and ferromagnetic materials
+show near saturation. It assumes constant properties at a reference temperature. It assumes ideal interfaces
+inside the stack, with no slip and no interface charge. It assumes the effective constants are known well
+enough to be useful, which is exactly the assumption the paper tests.
+
+Each assumption is a place where a referee can push, and each deserves a sentence of justification. The
+advantage of listing them is that some can be tested: if a conclusion survives when an assumption is relaxed,
+the reader can be told so, and if it does not, the reader can be told that too.
+
+\section{Whose sign is it? A note on conventions}
+
+Half the arguments in this literature are about signs, and almost none of them are about physics. Two
+conventions cause most of the trouble.
+
+The first is the sign of the field-potential relation. We write the electric field as minus the gradient of
+the potential, and the magnetic field as minus the gradient of the magnetic potential. Some papers use plus,
+which flips the sign of every coupling term that contains a field and leaves the dispersion unchanged. Nothing
+is wrong with either choice; a paper must simply say which one it used and use it consistently.
+
+The second is the sign of the magnetoelectric coefficient. It appears once in the electric displacement and
+once in the magnetic induction. If the same constant appears in both with the same sign, the energy is a
+function of state; if the signs differ, the energy depends on the path and the material would be a perpetual
+motion machine. So the audit of that pair is not pedantry, it is a test of the second law.
+
+A practical rule follows. Write the sign convention in the notation table, once, and then never discuss it
+again except where a comparison with another paper demands it. A referee who finds a sign convention stated
+early stops worrying about signs and starts reading the physics.
+
+\section{The four fields in one picture}
+
+It helps to see the whole model at once, in words, before the equations.
+
+The temperature rise is the slowest field. It responds to strain through the thermoelastic coupling, to the
+electric field through the electrocaloric effect, and to the magnetic field through the magnetocaloric effect,
+and it pushes back on all three.
+
+The electric potential responds to strain through piezoelectricity and to the magnetic field through the
+magnetoelectric effect. It pushes back on the strain and, through the electrocaloric term, on the temperature.
+
+The magnetic potential responds to strain through piezomagnetism and to the electric field through the same
+magnetoelectric coefficient. It pushes back in the same two ways.
+
+The mechanical displacement responds to all three of the others, and pushes back on each of them through the
+same constants, in each case with the opposite sign in the conjugate relation. That symmetry of the response
+is the reason the model can be written with a handful of constants instead of a different constant for every
+arrow.
+
+When the plate carries a wave, all four fields oscillate together with the same wavenumber and frequency, and
+the through-thickness shapes arrange themselves so that the faces carry no traction, no free charge and no
+free current. The frequencies at which that arrangement is possible are the modes. Two of them exist at every
+frequency and the rest appear in turn. The paper's figures are the maps of those frequencies and of the loss
+that accompanies them.
+
+\section{Table of symbols used in the plan}
+
+\begin{center}
+\small
+\begin{tabular}{p{1.9cm}p{6.0cm}p{2.4cm}p{2.6cm}}
+\toprule
+symbol & meaning in words & unit & rough size\\
+\midrule
+$u_x,u_z$ & displacement along and across the plate & m & $10^{-10}$ to $10^{-8}$\\
+$\varepsilon_{ij}$ & strain & none & $10^{-6}$ to $10^{-4}$\\
+$\sigma_{ij},t_{ij}$ & local stress, total nonlocal stress & Pa & $10^{5}$ to $10^{8}$\\
+$C_{ijkl}$ & elastic stiffness of the effective medium & Pa & $10^{10}$ to $10^{11}$\\
+$\rho$ & mass density of the effective medium & kg\,m$^{-3}$ & $5\times10^{3}$ to $6\times10^{3}$\\
+$\varphi$ & electric potential & V & 0.1 to 10\\
+$\psi$ & magnetic scalar potential & A & $10^{-2}$ to $10^{2}$\\
+$E_i$ & electric field, minus the gradient of the potential & V\,m$^{-1}$ & $10^{4}$ to $10^{7}$\\
+$H_i$ & magnetic field, minus the gradient of the magnetic potential & A\,m$^{-1}$ & $10^{3}$ to $10^{6}$\\
+$D_i$ & electric displacement & C\,m$^{-2}$ & $10^{-3}$ to $10^{-1}$\\
+$B_i$ & magnetic induction & T & $10^{-3}$ to $10^{-1}$\\
+$e_{kij}$ & piezoelectric constant & C\,m$^{-2}$ & 0.1 to 5\\
+$h_{kij}$ & piezomagnetic constant & N\,A$^{-1}$m$^{-1}$ & 10 to 500\\
+$\epsilon_{ik}$ & permittivity & F\,m$^{-1}$ & $10^{-10}$ to $10^{-8}$\\
+$\mu_{ik}$ & magnetic permeability & N\,A$^{-2}$ & $10^{-6}$ to $10^{-4}$\\
+$\alpha_{ik}$ & effective magnetoelectric coefficient & s\,m$^{-1}$ & $10^{-12}$ to $10^{-9}$\\
+$p_i$ & pyroelectric coefficient & C\,m$^{-2}$K$^{-1}$ & $10^{-6}$ to $10^{-4}$\\
+$m_i$ & pyromagnetic coefficient & N\,A$^{-1}$m$^{-1}$K$^{-1}$ & $10^{-6}$ to $10^{-4}$\\
+$\theta$ & temperature rise above the reference value & K & below 1\\
+$T_0$ & reference temperature & K & about 300\\
+$\beta_{ij}$ & thermal stress, stiffness times thermal expansion & Pa\,K$^{-1}$ & $10^{4}$ to $10^{6}$\\
+$\alpha_{kl}$ & thermal expansion coefficient & K$^{-1}$ & $10^{-6}$ to $10^{-5}$\\
+$\rho c_p$ & heat capacity per unit volume & J\,m$^{-3}$K$^{-1}$ & $10^{6}$ to $4\times10^{6}$\\
+$k_{\rm th}$ & thermal conductivity & W\,m$^{-1}$K$^{-1}$ & 0.5 to 5\\
+$\kappa$ & thermal diffusivity & m$^2$s$^{-1}$ & $10^{-7}$ to $10^{-6}$\\
+$\tau_q$ & relaxation time of the heat flux (MGT) & s & $10^{-12}$ to $10^{-10}$\\
+$\tau_T$ & diffusion time across the plate & s & $10^{-13}$ to $10^{-12}$\\
+$l_{\rm nl}$, $l_g$ & nonlocal and gradient lengths & m & $10^{-9}$ to $10^{-7}$\\
+$2h$, $h$ & plate thickness and half of it & m & $10^{-9}$ to $10^{-3}$\\
+$k$ & complex wavenumber along the plate & m$^{-1}$ & $10^{4}$ to $10^{8}$\\
+$k_r,k_i$ & real part sets wavelength, imaginary part sets decay & m$^{-1}$ & $k_i\ll k_r$\\
+$\lambda$ & wavelength & m & $10^{-8}$ to $10^{-4}$\\
+$\omega$ & angular frequency & rad\,s$^{-1}$ & $10^{6}$ to $10^{11}$\\
+$f$ & ordinary frequency & Hz & $10^{5}$ to $10^{10}$\\
+$f(2h)$ & frequency times thickness, the comparison axis & Hz\,m & 1 to $10^{4}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Glossary}
+
+\textit{Anisotropy} means properties differ with direction.
+
+\textit{Composite} is a material made of two phases whose combined behaviour is neither.
+
+\textit{Coupling} is any term through which one field influences another.
+
+\textit{Cutoff} is the lowest frequency at which a mode exists.
+
+\textit{Dispersion} is the dependence of phase velocity on frequency.
+
+\textit{Effective constant} is the value a composite appears to have when treated as a single material. It is
+not a property of either phase.
+
+\textit{Electrocaloric, magnetocaloric} are the temperature changes produced by applying an electric or
+magnetic field.
+
+\textit{Hysteresis} is the dependence of a material's state on its history. Our linear model excludes it.
+
+\textit{Magnetoelectric effect} is a magnetic field producing polarisation, or the reverse.
+
+\textit{Mode} is one of the discrete through-thickness patterns of a plate.
+
+\textit{Permeability} relates magnetic induction to magnetic field in a material; \textit{permittivity} does
+the same job for electric displacement and electric field.
+
+\textit{Piezoelectricity, piezomagnetism} are the couplings between strain and electric or magnetic state.
+
+\textit{Product property} is a property of a composite that neither phase possesses on its own.
+
+\textit{Pyroelectric, pyromagnetic} are the changes of polarisation or magnetisation produced by a change of
+temperature.
+
+\textit{Relaxation time} is how long a system takes to return to equilibrium after a small push.
+
+\textit{Strain} is change of length per unit length; \textit{stress} is force per unit area.
+
+\section{How to check your own work}
+
+Five generic tests catch most mistakes, and none needs a published number to compare against.
+
+\textit{First, units.} Write the unit of every term in every equation before coding. A term with the wrong
+units is usually wrong in sign structure as well. Keep the table and put it in the paper appendix.
+
+\textit{Second, limits.} Every new coupling has a limit in which it disappears. Set the piezoelectric constant
+to zero and the electric field must decouple. Set the thermal coupling to zero and the attenuation must fall
+to the mechanical value. Set the relaxation time to zero and MGT must return to Fourier. Assemble the reduced
+model separately and compare, rather than deleting a line from your own code.
+
+\textit{Third, symmetry.} Turn the plate over. Dispersion curves must be unchanged for each family. If a
+symmetric mode comes out with a mixture, either the coupling is real or the assembly has a sign error, and
+separating those two possibilities is worth a day.
+
+\textit{Fourth, switch a term off in two ways.} Set a constant to zero, and separately assemble a model in
+which the term was never written. The two answers must agree to six decimal places. This tests your code, not
+the physics.
+
+\textit{Fifth, compare with a cited source.} Digitise a few points from a published curve and compare the
+trend and the order of magnitude. The constants will differ, so identical digits would be suspicious rather
+than reassuring. If your curve bends the other way, stop and find out why before writing a sentence about it.
+
+Three habits finish the job. Keep a log of runs so that results can be reproduced. Plot whatever you are
+about to quote, because a table hides a shape. And when a result is surprising, obtain it a second way before
+believing it.
+
+\end{document}

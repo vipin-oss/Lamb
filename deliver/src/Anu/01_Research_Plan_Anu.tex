@@ -1,0 +1,255 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{#1}}}
+\setlength{\parskip}{4pt}
+\title{\vspace{-1.6cm}\Large Lamb Wave Attenuation in a Layered Magneto-Electro-Elastic Plate\\[2pt]
+\large with a Relaxation-Time Heat Equation and a Nonlocal Strain Gradient Elastic Stress\\[8pt]
+\large Research plan, first half}
+\author{Dr.\ Vipin \\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-6mm}
+
+\section{Title, abstract, keywords}
+
+\paragraph{Working title} Attenuation of Lamb waves in a BaTiO$_3$/CoFe$_2$O$_4$ plate: pyroelectric and
+pyromagnetic coupling, a relaxation-time heat equation and a size effect.
+
+\paragraph{Abstract} We study plane-strain Lamb waves in a laminated plate of barium titanate and cobalt
+ferrite, with free faces at $z=\pm h$ and the layering along the thickness. The model carries five fields:
+the two displacements, the electric potential, the magnetic potential and the temperature rise. The
+constitutive law is the linear magneto-electro-elastic law with the thermal terms retained in all three
+relations, that is, thermal stress in the mechanical relation, pyroelectric polarisation in the electric
+displacement and pyromagnetic induction in the magnetic induction. The heat equation is of the Moore-Gibson-Thompson (MGT)
+type in its base form with one phase lag, and it carries the electrocaloric and magnetocaloric
+couplings as well as the thermoelastic one. The mechanical stress carries the nonlocal strain gradient
+operator on its elastic part only. The magnetoelectric coefficient is not treated as a material constant but
+as an effective quantity computed by two homogenisation routes, carried through the paper as a band. The
+paper asks whether the thermal couplings produce an attenuation that is larger than the spread between those
+two routes, and if so over what thickness and frequency range. The plan gives the model, the sequence of
+comparisons, the figures, and an honest statement of how narrow the claim is.
+
+\paragraph{Keywords} magneto-electro-elastic plate; Lamb waves; pyroelectric; pyromagnetic; magnetoelectric
+composite; attenuation.
+
+\section{Introduction}
+
+A magneto-electro-elastic material converts among mechanical, electric and magnetic fields. No single phase
+does all three well, so the practical materials are composites of a piezoelectric such as barium titanate and
+a piezomagnetic such as cobalt ferrite, and the magnetoelectric effect they show is a product property of the
+two phases rather than a property of either. That is the whole reason the field exists, and it is also the
+reason a paper on such a material must be careful about what its coefficients mean. A magnetoelectric
+coefficient measured on a laminate is a property of the laminate and of its interface, not of the material.
+
+Wave propagation in magneto-electro-elastic multilayered plates has been solved in closed form by Chen, Pan
+and Chen \cite{Chen2007}, and guided waves in a graded magneto-electro-elastic plate have been computed with
+spectral elements by Xiao, Han, Liu and Li \cite{Xiao2016}. Both papers are isothermal in the sense that the
+temperature is at most a constant that shifts the coefficients. The thermal couplings themselves are
+classical and well measured: a change of temperature polarises the piezoelectric phase and magnetises the
+piezomagnetic one, and the coefficients are called pyroelectric and pyromagnetic. Kondaiah, Shankar and
+Ganesan kept both in a magneto-electro-elastic plate and showed that they change the static and the
+free-vibration response \cite{Kondaiah2013}. Tocci Monaco, Fantuzzi, Fabbrocino and Luciano kept both in a
+nonlocal strain gradient magneto-electro-elastic nanoplate with hygro-thermal loads \cite{Tocci2021}. So the
+statement that plate papers drop these terms is not true, and we should not write it.
+
+What is missing is the wave attenuation problem. Two recent papers mark the edge of what exists. Kakar and
+Kakar solved edge waves in an electro-magneto-thermoelastic homogeneous plate \cite{Kakar2015}, which is a
+plate with heat but a homogeneous material and edge rather than Lamb modes. Matlam and Kedar applied the MGT
+theory, with memory and nonlocality, to an electro-magneto-thermoelastic medium
+\cite{Matlam2026}, which is the right heat operator but not a plate and not a layered composite. To our
+knowledge, after searching Crossref and the open web in October 2026 for guided waves in magneto-electro-elastic
+plates, nobody has reported the dispersion and attenuation of Lamb modes in a layered
+barium titanate and cobalt ferrite plate whose heat conduction carries a relaxation time, with pyroelectric
+and pyromagnetic coupling both present and with a mechanical size effect.
+
+That is a narrow claim and the plan treats it as narrow. Two consequences follow. First, the paper cannot be
+sold on the couplings, because the couplings are classical; it has to be sold on the attenuation curves and
+on the thickness range where the thermal effect is resolvable. Second, the uncertainty in the effective
+magnetoelectric coefficient is not a nuisance to be hidden but the main competitor of the effect being
+studied, so it enters every figure as a band.
+
+\section{Problem statement and assumptions}
+
+The plate has thickness $2h$ and free faces at $z=\pm h$. The layering is along $z$, with the two phases
+arranged in a periodic or a graded stack, and the effective constants of the stack are computed once and
+used throughout. Motion is plane strain in the $x$--$z$ plane. Fields vary as $\exp[i(kx-\omega t)]$ with
+$k=k_r+ik_i$, a positive $k_i$ meaning decay along $+x$. Frequency is reported through $f\,(2h)$. The five
+unknowns are $u_x$, $u_z$, the electric potential $\varphi$, the magnetic potential $\psi$ with
+$H_i=-\psi_{,i}$, and the temperature rise $\theta$.
+
+\begin{enumerate}
+\item Linear magneto-electro-elasticity with constant effective constants at the reference temperature.
+\item The effective constants come from homogenisation of the two phases, and the spread between two routes
+is carried as a band rather than resolved by preference.
+\item The magnetoelectric coefficient is a product property; it is not fitted to any measurement, and when a
+measured value is quoted for comparison it is quoted with its own uncertainty.
+\item Small temperature rise, $|\theta|/T_0\ll1$.
+\item No free charge and no free current in the bulk; the electric and magnetic problems are those of a
+dielectric and a magnetisable medium.
+\item Interface conditions inside the stack are ideal, with no slip, no debonding and no interface charge.
+Imperfect interfaces are named as a limitation, not modelled.
+\end{enumerate}
+
+The second assumption is the one that decides whether the paper is publishable in a good journal or in a
+mediocre one. If the two routes for the effective constants disagree by more than the thermal contribution to
+attenuation, then the paper's central number is not measurable, and the honest response is to say so early
+and to present the thermal effect as a bound. That decision is taken at week nine, on the evidence, not on
+hope.
+
+\section{The model}
+
+\subsection{Constitutive relations}
+
+With $\varepsilon_{ij}=\tfrac12(u_{i,j}+u_{j,i})$, $E_i=-\varphi_{,i}$ and $H_i=-\psi_{,i}$,
+\begin{equation}
+\bigl(1-l_{\rm nl}^2\nabla^2\bigr)t_{ij}=\sigma_{ij},\qquad
+\sigma_{ij}=C_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}
+-e_{kij}E_k-h_{kij}H_k-\beta_{ij}\theta ,
+\end{equation}
+\begin{equation}
+D_i=e_{ikl}\varepsilon_{kl}+\epsilon_{ik}E_k+\alpha_{ik}H_k+p_i\theta ,
+\end{equation}
+\begin{equation}
+B_i=h_{ikl}\varepsilon_{kl}+\alpha_{ik}E_k+\mu_{ik}H_k+m_i\theta ,
+\end{equation}
+with $h_{kij}$ piezomagnetic, $\alpha_{ik}$ magnetoelectric, $p_i$ pyroelectric and $m_i$ pyromagnetic. The
+piezomagnetic constant is written with $h$ so that $q$ stays the carrier charge in the companion paper and
+$k$ stays the wavenumber here. The two size lengths act on the elastic part of the mechanical stress and
+nowhere else, so the electric and magnetic problems stay second order and need no extra condition at the
+faces.
+
+\subsection{Field equations}
+
+\begin{equation}
+\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\rho\,\ddot u_i=\sigma_{ij,j},
+\end{equation}
+\begin{equation}
+D_{i,i}=0,\qquad B_{i,i}=0,
+\end{equation}
+\begin{equation}
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\varepsilon_{ij}
++T_0p_i\dot E_i+T_0m_i\dot H_i\Bigr]=k_{\rm th}\nabla^2\theta .
+\end{equation}
+Five equations for five unknowns. The electrocaloric term $T_0p_i\dot E_i$ and the magnetocaloric term
+$T_0m_i\dot H_i$ are the reciprocal partners of the pyroelectric and pyromagnetic terms in the constitutive
+relations; dropping them while keeping $p_i$ and $m_i$ would break the reciprocity and is not done here. That
+pairing is the only constitutive statement in this paper that is not already in the sources we cite, and it
+is a textbook consequence rather than a discovery, so it goes in a sentence of the model section.
+
+\subsection{Notation}
+
+\begin{center}
+\small
+\begin{tabular}{p{2.4cm}p{6.7cm}p{3.4cm}}
+\toprule
+symbol & meaning & unit\\
+\midrule
+$u_x,u_z$ & displacements & m\\
+$\varphi$, $\psi$ & electric and magnetic potentials & V, A\\
+$\theta$ & temperature rise over $T_0$ & K\\
+$k=k_r+ik_i$ & wavenumber; $k_i>0$ is decay along $+x$ & m$^{-1}$\\
+$2h$ & plate thickness; faces at $z=\pm h$ & m\\
+$C_{ijkl}$ & elastic moduli of the effective medium & Pa\\
+$e_{kij}$ & piezoelectric constants & C\,m$^{-2}$\\
+$h_{kij}$ & piezomagnetic constants & N\,A$^{-1}$m$^{-1}$\\
+$\epsilon_{ik}$, $\mu_{ik}$ & dielectric permittivity, magnetic permeability & F\,m$^{-1}$, N\,A$^{-2}$\\
+$\alpha_{ik}$ & effective magnetoelectric coefficient & s\,m$^{-1}$\\
+$p_i$, $m_i$ & pyroelectric, pyromagnetic coefficients & C\,m$^{-2}$K$^{-1}$, N\,A$^{-1}$m$^{-1}$K$^{-1}$\\
+$\beta_{ij}$ & thermal stress tensor $C_{ijkl}\alpha_{kl}$ & Pa\,K$^{-1}$\\
+$l_{\rm nl}$, $l_g$ & nonlocal and gradient lengths, used as $l/h$ & m\\
+$\rho c_p$, $k_{\rm th}$, $\kappa$ & heat capacity per volume, conductivity, diffusivity & J\,m$^{-3}$K$^{-1}$, W\,m$^{-1}$K$^{-1}$, m$^2$s$^{-1}$\\
+$\tau_q$, $\tau_T$ & phase lag, $\tau_T=(2h)^2/(\pi^2\kappa)$ & s\\
+$\omega$, $f$ & angular frequency, frequency & rad\,s$^{-1}$, Hz\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Order of the system, and where this chapter stops}
+
+The two operators raise the order of the problem in $z$, so the free faces need more than the classical
+traction, electric and magnetic conditions, and the extra conditions must be consistent with the differential
+form of the size effect if the answer is to mean anything. Which extra conditions to apply at $z=\pm h$,
+and how to close the thermal condition there, is your problem to settle; this chapter stops before the
+faces.
+
+\section{Work plan}
+
+Six steps. Each ends with a written comparison and, where a comparison is numerical, with the tolerance
+stated in advance.
+
+\paragraph{Step 1. Elastic plate, no fields} With $e=h=\alpha=0$, $\theta=0$ and both size lengths zero, the
+model must return the classical Lamb spectrum of the laminated elastic plate and the Rayleigh velocity in
+the short wavelength limit, to a relative $10^{-3}$ against the closed-form value computed from the same
+$\rho$, $\lambda$ and $\mu$. Nothing else is computed until this passes.
+
+\paragraph{Step 2. Electric and magnetic coupling without heat} Switch on $e_{kij}$, $h_{kij}$ and
+$\alpha_{ik}$ and compare the branch structure with the closed-form multilayered results of Chen, Pan and
+Chen \cite{Chen2007}. The comparison is of ordering and of the sign of the shift, since our constants come
+from homogenisation and theirs from a different material set.
+
+\paragraph{Step 3. Thermal coupling in the two limits} Switch on $\theta$ with $p_i$ and $m_i$ both retained,
+and compare the isothermal and adiabatic limits. The coupled answer must lie between them to a width of order
+the thermoelastic coupling. Then remove $m_i$ alone and report the change in attenuation; that number is how
+much the paper's claim depends on the pyromagnetic term, and it should be stated whether it is large or
+small.
+
+\paragraph{Step 4. Relaxation switched on, and the two homogenisation routes} With $\tau_q$ finite, confirm the
+saturation of attenuation at high frequency, the shift of the peak to $1/|\tau_T-\tau_q|$ and the rescaling
+of the plateau, against a one-dimensional reduction of the same equations. Then repeat the calculation with
+the effective constants from the second route, and draw the two sets of attenuation curves as a band. If the
+band is wider than the thermal contribution, this is the paper's central negative result and it is reported
+as such.
+
+\paragraph{Step 5. Switching-off tests} Each coupling is switched off in two different ways, by setting its
+constant to zero and by assembling a reduced model in which the term was never written. The two must agree to
+$10^{-6}$ relative on $k_r$ and $k_i$ for every sampled mode: thermal off, electric off, magnetic off, size
+effect off. The residual table goes in an appendix. A tolerance of $10^{-4}$ is a warning, not a pass.
+
+\paragraph{Step 6. Size effect and the final sweep} Sweep $l_{\rm nl}/h$ and $l_g/h$ over the quoted range for
+the composite, then produce the attenuation families for three thicknesses and both mode families. Report the
+thermal contribution as a difference of attenuations so that a reader who ignores heat can still use the
+mechanical curve.
+
+\section{Figures, risks and timeline}
+
+Four figures. First, dispersion of the elastic limit and of the full model on shared axes. Second,
+attenuation of the two lowest branches against frequency times thickness, with three bands drawn: isothermal,
+adiabatic, and the spread between the two homogenisation routes. Third, the band of thickness and phase lag
+in which the thermal relaxation changes the peak by more than the linewidth, with the trust band of the
+continuum heat model marked on the same axes. Fourth, the magnetoelectric contribution, obtained by removing
+$\alpha_{ik}$, as a function of the layering ratio.
+
+The risks. The first is resolution: the thermal contribution may be smaller than the spread between the two
+homogenisation routes, in which case the paper reports a bound rather than a measurement of an effect. The
+second is that the relaxation time of the composite is not one number, since the two phases have very
+different conductivities, so an effective lag has to be defined and defended. The third is the size effect in
+a laminated composite, where the relevant length is not that of either phase; carried as a sensitivity. The
+fourth is the absence of a measured magnetoelectric coefficient for the exact stack we model, which we handle
+by quoting the two routes and refusing to fit.
+
+Timeline, sixteen weeks. Weeks one to three, material constants and homogenisation, since everything
+downstream depends on them. Weeks four to five, Step 1. Weeks six to seven, Step 2. Weeks eight to nine,
+Step 3 and the decision on whether the paper keeps its thermal claim, taken on the evidence with me.
+Weeks ten to eleven, Step 4. Weeks twelve to thirteen, Step 5. Weeks fourteen to fifteen, Step 6 and figures.
+Week sixteen, writing and the internal read-through.
+
+\begin{thebibliography}{99}
+\small
+\bibitem{Chen2007} J.~Chen, E.~Pan, H.~Chen, \emph{Int.\ J.\ Solids Struct.} \textbf{44} (2007) 1073, \doi{10.1016/j.ijsolstr.2006.06.003}.
+\bibitem{Xiao2016} D.~Xiao, Q.~Han, Y.~Liu, C.~Li, \emph{Compos.\ Struct.} \textbf{153} (2016) 704, \doi{10.1016/j.compstruct.2016.06.063}.
+\bibitem{Kondaiah2013} P.~Kondaiah, K.~Shankar, N.~Ganesan, \emph{Coupled Syst.\ Mech.} \textbf{2} (2013) 1, \doi{10.12989/csm.2013.2.1.001}.
+\bibitem{Tocci2021} G.~Tocci Monaco, N.~Fantuzzi, F.~Fabbrocino, R.~Luciano, \emph{Nanomaterials} \textbf{11} (2021) 87, \doi{10.3390/nano11010087}.
+\bibitem{Kakar2015} R.~Kakar, S.~Kakar, \emph{Struct.\ Eng.\ Mech.} \textbf{53} (2015) 1201, \doi{10.12989/sem.2015.53.1201}.
+\bibitem{Matlam2026} J.~L.~Matlam, G.~D.~Kedar, \emph{J.\ Therm.\ Stresses} \textbf{49} (2026) 1082, \doi{10.1080/01495739.2025.2612316}.
+\bibitem{Lim2015} C.~W.~Lim, G.~Zhang, J.~N.~Reddy, \emph{J.\ Mech.\ Phys.\ Solids} \textbf{78} (2015) 298, \doi{10.1016/j.jmps.2015.02.001}.
+\bibitem{Barretta2018} R.~Barretta, F.~Marotti de Sciarra, \emph{Int.\ J.\ Eng.\ Sci.} \textbf{130} (2018) 187, \doi{10.1016/j.ijengsci.2018.05.009}.
+\end{thebibliography}
+\end{document}

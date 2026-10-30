@@ -1,0 +1,1203 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsthm}
+
+\newif\ifshowworked \showworkedtrue
+\newenvironment{worked}{\ifshowworked\par\smallskip\noindent\textit{Working.}\par\else\setbox0\vbox\bgroup\fi}{\ifshowworked\par\smallskip\else\egroup\fi}
+
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\bth}{\beta_{\mathrm{th}}}
+\newcommand{\Pth}{\Pi_{\mathrm{th}}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\bx}{\hat u_x}
+\newcommand{\bz}{\hat u_z}
+\newcommand{\bp}{\hat\varphi}
+\newcommand{\bn}{\widehat{\Delta n}}
+\newcommand{\bt}{\hat\theta}
+\newcommand{\kB}{k_{\mathrm{th}}}
+
+\title{\bfseries Lamb waves in a piezoelectric semiconductor plate with\\[2pt]
+Moore--Gibson--Thompson heat conduction and the nonlocal\\[2pt]
+strain gradient size effect: the complete hand calculation}
+\author{Dr.\ Vipin\\ Gurugram University}
+\date{30 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+We reduce the five coupled field equations of a piezoelectric semiconductor plate to a plane-wave problem
+in the thickness coordinate. The plate has thickness $2h$, free faces at $z=\pm h$, and carries a wave
+$\exp[\ii(kx-\omega t)]$ with complex $k$. Heat conduction is of Moore--Gibson--Thompson type, and the
+elastic stress carries the nonlocal strain gradient operator of Lim, Zhang and Reddy. The calculation is
+written out in full: constitutive components for the hexagonal class $6mm$, the five governing equations in
+components, the $5\times5$ amplitude matrix, the degree of its determinant, the parity of that determinant,
+the amplitude ratios from the cofactors, the seven boundary conditions per face, the matrix whose
+determinant is the dispersion relation, and the hand limits. Every step is inside a block that can be
+switched off; every result stays outside.
+\end{abstract}
+
+\noindent\textit{Keywords.} Lamb wave; piezoelectric semiconductor; Moore--Gibson--Thompson heat conduction;
+nonlocal strain gradient; plate; dispersion.
+
+\section{Introduction}
+
+A Lamb wave is an elastic wave trapped in a plate. The two free faces reflect the wave back and forth, so the
+plate carries a finite number of wave shapes across its thickness instead of a continuous spectrum. Each
+shape travels along the plate with its own speed, and that speed depends on the product of frequency and
+thickness. This is why a plate is useful: the same plate behaves as a thin beam at low frequency and as a
+half space at high frequency, and the changeover carries information about the material.
+
+Add a piezoelectric semiconductor and two things enter. First, the electric field is not imposed from
+outside; it is generated inside by the strain and it acts back on the strain through the piezoelectric
+constants. Second, the crystal carries mobile carriers whose density is not fixed. A strain pulse produces a
+piezoelectric field, that field pushes the carriers, the carriers pile up or drain away, and their
+redistribution changes both the electric field and the temperature. The wave therefore sees a material
+with a slow internal relaxation, and its attenuation carries the signature of that relaxation. This is the
+physics behind acoustic charge transport devices, and it is why the coupled problem is worth solving
+carefully.
+
+Heat in such a plate does not obey the classical diffusion equation when the frequency is high. The
+classical equation predicts an infinite speed for a temperature signal, which is harmless at low frequency
+and wrong at high frequency. The Moore--Gibson--Thompson (MGT) equation repairs this by keeping a relaxation
+term of the heat flux and a second time derivative; it is the version that follows from a well posed
+thermoelastic theory and it reduces to the classical equation when the two time constants are set to zero
+\cite{Quintanilla2019}. We keep it because the frequencies at which the carrier and thermal relaxations
+compete with the elastic wave lie in the same window.
+
+The second size effect is the nonlocal strain gradient theory (NSGT). Two lengths enter. The gradient length
+$l_g$ (metre) measures how strongly the strain gradient stiffens the material; a small sample with a steep
+strain gradient stores extra energy, like a rope that resists bending more when the bend is sharp. The
+nonlocal length $l_{\rm nl}$ (metre) measures how far the stress at a point is averaged over its
+neighbourhood; averaging softens the response, the way a crowd absorbs the push of one person. NSGT carries
+both, and the ratio $l_g/l_{\rm nl}$ decides whether a thin plate is stiffer or softer than the classical
+one \cite{Barretta2018}. The differential form we use is the one Lim, Zhang and Reddy gave; we did not read
+their paper, and we say below exactly what we read instead.
+
+Waves in piezoelectric semiconductor plates have a long history. Drift-diffusion coupling with the elastic
+field in a plate was set out by Yang and Zhou \cite{YangZhou2005}; their equations are the starting point
+for the carrier part of our model, though we did not read their numbered equations and say so. On the
+thermoelectric side, with Seebeck and Peltier effects kept in a continuum theory, the reference is Qu, Pan,
+Zhu, Jin and Roy \cite{Qu2023}; we read the abstract and the stated scope, not the equations. Gupta and
+co-workers used the MGT framework on a piezoelectric semiconductor with a void \cite{Gupta2025}; title and
+abstract tell us that the combination exists, and we did not read their heat equation. What is missing in that literature is a single worked chain from the three-dimensional
+equations to the boundary matrix of a plate, with the thermal and carrier relaxations kept and the two size
+lengths kept. That chain is what this file gives.
+
+The novelty we claim is narrow, and we state it in the words agreed with the supervisor. Carrier and thermal
+fields are kept as full dynamic fields, not as a quasi-static correction. Heat conduction keeps the MGT
+operator with one time derivative cancelled, as fixed in the model document. Both NSGT lengths are kept,
+with the gradient operator on the elastic stress and the nonlocal operator on the inertia. Boundary
+conditions carry the surface gradient term and the double traction of the gradient theory. No claim is made
+about a new material, a new numerical method, or a new frequency range.
+
+\section{Setting and assumptions}
+
+The plate occupies $-h\le z\le h$ and is unbounded in $x$ and $y$. Its faces $z=\pm h$ are free of
+traction, free of surface charge, free of carrier flux and thermally insulating. The material is a
+hexagonal piezoelectric semiconductor of class $6mm$ with the six-fold axis along $z$.
+
+We take plane strain in the $x$--$z$ plane: $u_y=0$ and $\partial_y=0$ for every field. Nothing depends on
+$y$. The wave travels along $x$ with the factor $\exp[\ii(kx-\omega t)]$, where $\omega$ (rad/s) is real and
+$k=k_r+\ii k_i$ (rad/m) is complex. With this sign convention a positive $k_i$ means decay along $+x$; the
+time factor is $\exp[-\ii\omega t]$.
+
+Every field through the thickness is a sum of exponentials $\exp(\eta z)$, with $\eta$ (1/m) complex. We do
+not assume the parity of $\eta$ in advance; Section~\ref{sec:D} shows when the roots come in pairs.
+
+The theory is linear. Strains, electric fields, carrier perturbation $\Delta n$ (m$^{-3}$) and temperature
+change $\theta$ (K) are all small, and every product of two small quantities is dropped. The carriers are of
+one type, electrons, with equilibrium density $n_0$ (m$^{-3}$) uniform in the reference state. The
+equilibrium electric field is zero. Recombination is linear with time constant $\tau_R$ (s), and it may be
+switched off by letting $\tau_R\to\infty$.
+
+Two operators carry the size effect. They are $\Nc(\eta)=1-l_{\rm nl}^2(\eta^2-k^2)$ and
+$\Gc(\eta)=1-l_g^2(\eta^2-k^2)$; the combination $\eta^2-k^2$ is the Laplacian acting on a plane wave in
+our sign convention, and the sign of each operator is fixed by the definition in Section~\ref{sec:src}.
+The elastic stress is local in the nonlocal length and nonlocal in the gradient length only in the sense of
+the differential law; the momentum balance carries the nonlocal operator on the inertia, which is the
+equivalent differential form of the integral law.
+
+\section{Notation}\label{sec:not}
+
+\begin{center}\footnotesize
+\begin{tabular}{p{2.1cm}p{5.6cm}p{1.9cm}p{4.6cm}}
+\toprule
+symbol & meaning in words & unit & where it enters\\
+\midrule
+$h$ & half the plate thickness; the faces sit at $\pm h$ & m & boundary rows\\
+$k$ & complex wave number along the plate; its real part sets the wavelength & rad/m & every entry\\
+$\omega$ & angular frequency, real and positive & rad/s & every entry, through $\ii\omega$\\
+$\eta$ & exponential rate of a partial wave across the thickness & 1/m & roots of $\det\mathbf M$\\
+$u_x,u_z$ & displacements along the plate and across it & m & rows 1 and 2\\
+$\varphi$ & electric potential; the field is minus its gradient & V & row 3\\
+$\Delta n$ & excess electron density over the equilibrium value & m$^{-3}$ & row 4\\
+$\theta$ & change of temperature from the reference value & K & row 5\\
+$T_0$ & reference temperature & K & heat row\\
+$c_{11},c_{13},c_{33},c_{44}$ & elastic stiffnesses for the hexagonal class & Pa & rows 1, 2\\
+$e_{31},e_{33},e_{15}$ & piezoelectric constants; stress per unit field & C/m$^2$ & rows 1--3\\
+$\epsilon_{11},\epsilon_{33}$ & dielectric permittivities at constant strain & F/m & row 3\\
+$\beta_1,\beta_3$ & thermal stress coefficients, $\beta_{ij}=c_{ijkl}\alpha_{kl}$ & Pa/K & rows 1, 2, 5\\
+$p_3$ & pyroelectric constant; charge released per kelvin & C/(m$^2$K) & rows 3, 5\\
+$\alpha_{ij}$ & thermal expansion coefficients & 1/K & through $\beta$\\
+$q$ & elementary charge, a positive number & C & row 3\\
+$n_0$ & equilibrium electron density & m$^{-3}$ & row 4\\
+$b_n$ & electron mobility & m$^2$/(V\,s) & row 4\\
+$D_n$ & electron diffusivity & m$^2$/s & row 4\\
+$S_n$ & Seebeck coefficient of the electrons, negative for $n$-type & V/K & rows 4, 5\\
+$v_d$ & drift velocity along the plate & m/s & row 4\\
+$\bth$ & thermodiffusion coefficient, $\bth=-b_nn_0S_n$, positive & A/(m\,K) & row 4\\
+$\Pth$ & Peltier coefficient, $\Pth=T_0S_n$, negative for $n$-type & V & row 5\\
+$\tau_R$ & recombination time; infinite when recombination is off & s & row 4\\
+$E_g$ & band gap & J & row 5\\
+$\rho$ & mass density & kg/m$^3$ & rows 1, 2\\
+$c_p$ & specific heat at constant strain & J/(kg\,K) & row 5\\
+$\kB$ & thermal conductivity & W/(m\,K) & row 5\\
+$\tau_q$ & MGT relaxation time of the heat flux & s & row 5\\
+$\kappa$ & thermal diffusivity, $\kB/(\rho c_p)$ & m$^2$/s & row 5\\
+$l_g$ & strain gradient length of NSGT & m & $\Gc$\\
+$l_{\rm nl}$ & nonlocal length of NSGT & m & $\Nc$\\
+$\mathbf M(\eta)$ & $5\times5$ amplitude matrix of one partial wave & --- & Section~\ref{sec:C}\\
+$\mathbf B$ & boundary matrix, one row per condition, one column per root & --- & Section~\ref{sec:G}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+One everyday picture helps before the algebra. Think of the plate as a corridor with two hard walls. A
+push travels along the corridor and bounces between the walls; only those pushes whose bounce pattern fits
+the corridor exactly survive, and each surviving pattern is a mode. The algebra below is only the
+bookkeeping of which bounce patterns fit.
+
+\section{Source equations}\label{sec:src}
+
+We list the equations we start from, one at a time, with what we read and how we use it. The tag at the end
+of each item is one of three: taken from the source as it stands, taken from the source with the change we
+name, or ours because it follows from a named law.
+
+\subsection{Strain and field}
+
+The strain is the symmetric part of the displacement gradient, $\eps_{ij}=\tfrac12(u_{i,j}+u_{j,i})$, and
+the electric field is minus the gradient of the potential, $E_i=-\varphi_{,i}$. These are textbook laws of
+linear elasticity and electrostatics; no equation number is needed and none is claimed. Under our plane
+wave they give $\eps_{xx}=\ii k\,\bx$, $\eps_{zz}=\eta\,\bz$,
+$\eps_{xz}=\tfrac12(\eta\bx+\ii k\bz)$, $E_x=-\ii k\bp$, $E_z=-\eta\bp$. 
+Tag: textbook law.
+
+\subsection{Constitutive relations of the piezoelectric semiconductor}
+
+For class $6mm$ with the axis along $z$, the stress and the electric displacement are
+\begin{equation}\label{eq:const}
+\begin{aligned}
+\sigma_{ij}&=c_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\eps_{kl}-e_{kij}E_k-\beta_{ij}\theta,\\
+D_i&=e_{ikl}\eps_{kl}+\epsilon_{ik}E_k+p_i\theta .
+\end{aligned}
+\end{equation}
+The first line is the piezoelectric constitutive law of Zhu, Negahban, Xu, Xia and Li
+\cite[Eqs.~(1)--(3)]{Zhu2023} with two additions: the thermal stress $-\beta_{ij}\theta$, which
+is Duhamel's law and carries no equation number, and the gradient operator on the elastic strain, which is
+the NSGT placement explained below. The second line is the same source \cite[Eqs.~(1)--(3)]{Zhu2023} plus the pyroelectric term
+$p_i\theta$, a textbook term.
+Tag: taken from the source for the piezoelastic part; the gradient operator on the elastic strain and the
+two thermal terms are ours and follow from the named laws.
+
+We must be precise about what we read in \cite{Zhu2023}. Their Eqs.~(1) to (7) were read as a block, and
+that block contains the strain--displacement relation, the piezoelectric constitutive relations, Gauss's law
+with a mobile charge density, the drift--diffusion current and the continuity equation for the carriers. No
+note was kept of which number belongs to which line. Before submission, please open that block and write
+the exact number beside each of our equations; until you do, the citation you see here is to the block only.
+
+\subsection{Balance of momentum with the nonlocal operator}
+
+The momentum balance is
+\begin{equation}\label{eq:mom}
+\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\rho\,\ddot u_i=\sigma_{ij,j}.
+\end{equation}
+The differential form is the one quoted in the introduction of Barretta
+and Marotti de Sciarra \cite[Eqs.~(18)--(19)]{Barretta2018}, who attribute it to Lim, Zhang and Reddy
+\cite{Lim2015}. We did not open \cite{Lim2015}; the equations (17) to (19) of that paper are known to us
+only through \cite[Eqs.~(18)--(19)]{Barretta2018}. Section~2 of Lim et al.\ is the place to confirm the
+differential law and the constitutive boundary conditions, and you should open it before you defend the
+placement.
+Tag: taken from \cite{Barretta2018} as a differential law; the placement of the nonlocal operator on the
+inertia alone is ours, and it is the equivalent differential form of the integral law.
+
+\subsection{Gauss's law with mobile charge}
+
+Gauss's law reads
+\begin{equation}\label{eq:gauss}
+D_{i,i}=-q\,\Delta n .
+\end{equation}
+It is inside the block \cite[Eqs.~(1)--(7)]{Zhu2023}. The right side
+is the charge of the excess electrons; the sign is fixed by the convention that electrons carry charge $-q$
+with $q>0$, so an excess of electrons is a negative charge density.
+Tag: taken from the source.
+
+\subsection{Carrier continuity}
+
+The carrier balance is
+\begin{equation}\label{eq:carr}
+\frac{\partial\Delta n}{\partial t}
+=D_n\nabla^2\Delta n+b_nn_0\,\nabla\!\cdot\!E
++v_d\frac{\partial\Delta n}{\partial x}+\bth\nabla^2\theta-\frac{\Delta n}{\tau_R}.
+\end{equation}
+The first two terms on the right are drift and diffusion as written in
+the block \cite[Eqs.~(1)--(7)]{Zhu2023}; the drift term with $v_d$ is the same drift written in the frame
+moving with the carriers; the last two terms need their own justification.
+The thermodiffusion term $\bth\nabla^2\theta$ follows from irreversible thermodynamics: a temperature
+gradient drives a particle current, with the Onsager cross coefficient fixed by the Seebeck coefficient as
+$\bth=-b_nn_0S_n$. With $S_n<0$ for electrons this coefficient is positive, so carriers are driven towards
+the cold side, which is the behaviour seen in thermoelectric materials.
+The recombination term $-\Delta n/\tau_R$ is the linearised decay of the excess density.
+Tag: the drift and diffusion terms are taken from the source; the thermodiffusion term and the
+recombination term are ours and follow from the Onsager reciprocity and the linearised decay law.
+
+\subsection{MGT heat equation}
+
+The heat equation is
+\begin{equation}\label{eq:heat}
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\eps_{ij}+T_0p_i\dot E_i
++q\Pth\frac{\partial\Delta n}{\partial t}+\frac{E_g\Delta n}{\tau_R}\Bigr]
+=\kB\nabla^2\theta .
+\end{equation}
+The operator on the left is the Moore--Gibson--Thompson operator with one
+time derivative cancelled, which is the form read in \cite[Eqs.~(2.5) and (3.1)--(3.5)]{Quintanilla2019}; in
+that form the heat flux has a relaxation time $\tau_q$ and the temperature has the parabolic principal part.
+We use it with the thermal stress coefficients $\beta_1,\beta_3$ and the pyroelectric constant $p_3$. The
+last two terms inside the bracket are the Peltier heat of the carrier current and the recombination heat,
+and they are the partners of the thermodiffusion and recombination terms in \eqref{eq:carr}.
+Tag: the operator is taken from \cite{Quintanilla2019}; the coupling bracket is the classical
+thermoelastic one, with the pyroelectric and Peltier terms added as ours from the stated laws.
+
+The two cross coefficients are not independent. With $\bth=-b_nn_0S_n$ and $\Pth=T_0S_n$,
+\begin{equation}\label{eq:onsager}
+\frac{\Pth}{\bth}=-\frac{T_0}{b_nn_0},
+\end{equation}
+This is the Onsager relation $\Pi=TS$ of textbook thermoelectricity. For
+$n$-type electrons $S_n<0$, so $\bth>0$ and $\Pth<0$. In \eqref{eq:heat} a positive
+$\partial_t\Delta n$ with $\Pth<0$ subtracts heat, which is what physics asks: carriers that pile up carry
+their heat with them. 
+Tag: textbook thermoelectricity, cited without an equation number.
+
+\subsection{Why the heat equation has this shape}
+
+The form of \eqref{eq:heat} is not a guess. It follows from two statements: an energy balance and a flux
+law. The energy balance for the small temperature change is
+\begin{equation}\label{eq:energy}
+\rho c_p\dot\theta+T_0\beta_{ij}\dot\eps_{ij}+T_0p_i\dot E_i
++q\Pth\frac{\partial\Delta n}{\partial t}+\frac{E_g\Delta n}{\tau_R}=-q_{i,i},
+\end{equation}
+where $q_i$ (W/m$^2$) is the heat flux. Each term on the left is a heat source per unit volume: the first is
+the heat stored, the second is the heat converted to elastic stress by thermal expansion, the third is the
+heat absorbed by the pyroelectric polarisation as the field changes, the fourth is the Peltier heat carried
+by the carriers, and the fifth is the heat released when carriers recombine. The MGT flux law, with one time
+derivative cancelled, is
+\begin{equation}\label{eq:flux}
+q_i+\tau_q\dot q_i=-\kB\theta_{,i}.
+\end{equation}
+
+\begin{worked}
+Take the divergence of \eqref{eq:flux}: $q_{i,i}+\tau_q\dot q_{i,i}=-\kB\nabla^2\theta$. From
+\eqref{eq:energy}, $q_{i,i}=-B$, where $B$ is the left side of \eqref{eq:energy} without its last term. Then
+$\dot q_{i,i}=-\dot B$, and the diverged flux law reads $-B-\tau_q\dot B=-\kB\nabla^2\theta$, that is
+$(1+\tau_q\partial_t)B=\kB\nabla^2\theta$. Writing $B$ out gives \eqref{eq:heat} with $f=1-\ii\omega\tau_q$
+under the plane wave. The sign is worth one check: with $\tau_q=0$ the equation returns the classical
+Fourier form, and with $\theta$ uniform and no sources it returns $\rho c_p\dot\theta=0$, as it should.
+\end{worked}
+
+\noindent This derivation also tells you what the two time constants mean. In the flux law \eqref{eq:flux}
+the flux cannot change instantaneously, and the relaxation time $\tau_q$ is the delay. A second time constant,
+$\tau_T$ of the full MGT theory, appears when the energy balance itself is written with a lag; we drop it,
+which is the standard weak-damping form, and the effect of keeping it is one extra term in $M_{55}$.
+
+The two cross coefficients of \eqref{eq:carr} and \eqref{eq:heat} must be equal by Onsager symmetry. Write
+the entropy production of the coupled carrier and heat fluxes; it is a bilinear form in the temperature
+gradient and the electrochemical potential gradient, so the coefficient matrix must be symmetric. One entry
+of that matrix is the thermodiffusion coefficient of the carrier equation, the other is the Peltier
+coefficient of the heat equation, and their ratio is fixed by the equilibrium carrier density and the
+mobility. Equation \eqref{eq:onsager} is that statement written for electrons, and it is the only line
+in the model you cannot check by algebra alone: it needs the entropy production written out.
+
+\subsection{The MGT time constants}
+
+The phase lag $\tau_T$ of the MGT equation is set by the thickness through $\tau_T=(2h)^2/(\pi^2\kappa)$,
+the time a temperature disturbance needs to cross the plate once. The equation we use keeps $\tau_q$ and
+drops the term with $\tau_T^2$, which is the standard weak-damping form. If you want the full three-time
+form, it is a one-line change in one entry of the matrix and nothing else changes; we state it in
+Section~\ref{sec:H}.
+
+\section{Calculation A: constitutive components for class $6mm$}\label{sec:A}
+
+The point of this section is to say which material constants survive in our geometry, and why the rest
+drop out. We do it in words and then in components.
+
+\subsection{Which components survive}
+
+\begin{worked}
+The crystal has a six-fold axis along $z$. A rotation of $60^\circ$ about $z$ must leave the constants
+unchanged. Write the constants in matrix notation with $xx\to1$, $zz\to3$, $xz\to5$. Under the rotation the
+in-plane shear $4$ goes to a combination of $4$ and $5$, and $5$ goes to a combination of $5$ and $4$; the
+only way both stay invariant is $c_{45}=0$ together with the two in-plane shears equal, which is
+$c_{66}=(c_{11}-c_{12})/2$. The shear on the $x$--$z$ plane is $c_{44}$ and on the $y$--$z$ plane is $c_{55}$;
+the rotation exchanges them, so $c_{44}=c_{55}$. A rotation of $180^\circ$ about $x$ or $y$ takes $z$ to
+$-z$ and is not a symmetry of a poled crystal, so terms with an odd number of $z$ indices are allowed:
+$e_{31}$, $e_{33}$, $e_{15}$ and $p_3$ survive.
+\end{worked}
+
+In our plane strain with no $y$ dependence the fields that survive are $\eps_{xx},\eps_{zz},\eps_{xz}$,
+$E_x,E_z$ and $\theta$. Their list fixes the constants, and the list splits in two. For the three stresses
+$\sigma_{xx},\sigma_{zz},\sigma_{xz}$ the constants are $c_{11},c_{13},c_{33},c_{44}$ together with the two
+thermal stress coefficients $\beta_1,\beta_3$. For the two induction components $D_x,D_z$ they are
+$e_{31},e_{33},e_{15}$, $\epsilon_{11},\epsilon_{33}$ (components of the $3\times3$ dielectric tensor, so
+$\epsilon_{11}=\epsilon_{22}$ and $\epsilon_{33}$ is the axial one) and the pyroelectric constant $p_3$.
+The constant $c_{12}$ never appears because $\eps_{yy}=0$; it would appear only through $c_{66}$ if we kept an in-plane
+shear wave, and even then it enters through the combination $(c_{11}-c_{12})/2$.
+
+\subsection{The stresses and the induction in components}
+
+Putting the plane wave into \eqref{eq:const}, and writing $\Gc=1-l_g^2(\eta^2-k^2)$,
+\begin{align}
+\hat\sigma_{xx}&=\Gc\bigl(\ii k\,c_{11}\bx+\eta\,c_{13}\bz\bigr)+\eta\,e_{31}\bp-\beta_1\bt,
+\label{eq:sxx}\\
+\hat\sigma_{zz}&=\Gc\bigl(\ii k\,c_{13}\bx+\eta\,c_{33}\bz\bigr)+\eta\,e_{33}\bp-\beta_3\bt,
+\label{eq:szz}\\
+\hat\sigma_{xz}&=\Gc\,c_{44}\bigl(\eta\bx+\ii k\bz\bigr)+\ii k\,e_{15}\bp,
+\label{eq:sxz}\\
+\hat D_x&=e_{15}\bigl(\eta\bx+\ii k\bz\bigr)-\ii k\,\epsilon_{11}\bp,
+\label{eq:Dx}\\
+\hat D_z&=\ii k\,e_{31}\bx+\eta\,e_{33}\bz-\eta\,\epsilon_{33}\bp+p_3\bt .
+\label{eq:Dz}
+\end{align}
+
+\begin{worked}
+Each line is the same routine, so one line is enough to show it. In \eqref{eq:sxx} the term $c_{11}\eps_{xx}$
+becomes $c_{11}(\ii k\bx)$ because the only derivative is $\partial_x\to\ii k$; the term $c_{13}\eps_{zz}$
+becomes $c_{13}(\eta\bz)$; the piezoelectric term $-e_{kij}E_k$ contributes $-e_{31}E_z=-e_{31}(-\eta\bp)$,
+which is $+\eta e_{31}\bp$; the thermal term is $-\beta_1\bt$. The gradient operator multiplies only the two
+elastic terms, never the piezoelectric or thermal ones, because in \eqref{eq:const} it acts on $\eps_{kl}$
+alone. The other four lines follow the same routine with the constants of the class: for $D_z$ the relevant
+piezoelectric constant is $e_{33}$ acting on $\eps_{zz}$ and $e_{31}$ on $\eps_{xx}$, and the dielectric
+term is $-\epsilon_{33}E_z=+\eta\epsilon_{33}\bp$; the pyroelectric term is $+p_3\bt$ with the sign of
+\eqref{eq:const}.
+\end{worked}
+
+Two remarks on signs, because signs are where a first draft usually fails. A compressive $\theta>0$ with
+$\beta>0$ reduces the tensile stress, which is why the thermal term is negative in \eqref{eq:sxx}; heating a
+constrained plate puts it in compression. The pyroelectric term in \eqref{eq:Dz} is positive because a
+positive $\theta$ releases bound charge of the same sign as the poling.
+
+\section{Calculation B: the five governing equations in components}\label{sec:B}
+
+The five unknown amplitudes are collected in a column,
+\begin{equation}\label{eq:vec}
+\mathbf a=\bigl(\bx,\ \bz,\ \bp,\ \bn,\ \bt\bigr)^{\!\top}.
+\end{equation}
+The five equations are the two components of \eqref{eq:mom}, Gauss \eqref{eq:gauss}, the carrier balance
+\eqref{eq:carr} and the heat balance \eqref{eq:heat}.
+
+\subsection{Momentum, $x$ component}
+
+\begin{worked}
+Take the $x$ component of \eqref{eq:mom}. The divergence is $\sigma_{xj,j}=\partial_x\sigma_{xx}+\partial_z\sigma_{xz}$,
+so under the plane wave it becomes $\ii k\hat\sigma_{xx}+\eta\hat\sigma_{xz}$. The left side is
+$\Nc\rho\,\ddot u_x$, and with $\ddot u_x=(-\ii\omega)^2\bx=-\omega^2\bx$ it is $-\Nc\rho\omega^2\bx$.
+Bringing everything to one side,
+\[
+-\bigl(\ii k\hat\sigma_{xx}+\eta\hat\sigma_{xz}\bigr)-\Nc\rho\omega^2\bx=0 .
+\]
+\end{worked}
+
+\noindent Result, first of the five:
+\begin{equation}\label{eq:g1}
+-\bigl(\ii k\hat\sigma_{xx}+\eta\hat\sigma_{xz}\bigr)-\Nc\rho\omega^2\bx=0 .
+\end{equation}
+
+\subsection{Momentum, $z$ component}
+
+\begin{worked}
+The $z$ component is $\sigma_{zj,j}=\partial_x\sigma_{xz}+\partial_z\sigma_{zz}\to\ii k\hat\sigma_{xz}+\eta\hat\sigma_{zz}$,
+and the inertia term is again $-\Nc\rho\omega^2\bz$. Hence
+\[
+-\bigl(\ii k\hat\sigma_{xz}+\eta\hat\sigma_{zz}\bigr)-\Nc\rho\omega^2\bz=0 .
+\]
+\end{worked}
+
+\noindent Result, second of the five:
+\begin{equation}\label{eq:g2}
+-\bigl(\ii k\hat\sigma_{xz}+\eta\hat\sigma_{zz}\bigr)-\Nc\rho\omega^2\bz=0 .
+\end{equation}
+
+\subsection{Gauss's law}
+
+\begin{worked}
+The divergence of the induction is $\partial_xD_x+\partial_zD_z$ and the charge is $-q\bn$. Equation
+\eqref{eq:gauss} becomes
+\[
+\ii k\hat D_x+\eta\hat D_z=-q\bn ,
+\]
+and moving the right side across gives $\ii k\hat D_x+\eta\hat D_z+q\bn=0$.
+\end{worked}
+
+\noindent Result, third of the five:
+\begin{equation}\label{eq:g3}
+\ii k\hat D_x+\eta\hat D_z+q\bn=0 .
+\end{equation}
+
+\subsection{Carrier balance}
+
+\begin{worked}
+In \eqref{eq:carr} every time derivative is $-\ii\omega$, every $\partial_x$ is $\ii k$ and every Laplacian
+is $\eta^2-k^2$. The left side is $-\ii\omega\bn$. The first right-hand term is $D_n(\eta^2-k^2)\bn$. The
+field divergence in the second term is $\nabla\cdot E=-\nabla^2\varphi=-(\eta^2-k^2)\bp$, so that term is
+$-b_nn_0(\eta^2-k^2)\bp$. The drift term is $v_d(\ii k\bn)$. The thermodiffusion term is
+$\bth(\eta^2-k^2)\bt$, and the recombination term is $-\bn/\tau_R$. Bring all five to the left:
+\[
+-\ii\omega\bn-D_n(\eta^2-k^2)\bn+b_nn_0(\eta^2-k^2)\bp-\ii k v_d\bn-\bth(\eta^2-k^2)\bt+\frac{\bn}{\tau_R}=0 .
+\]
+\end{worked}
+
+\noindent Result, fourth of the five:
+\begin{equation}\label{eq:g4}
+\Bigl[-\ii\omega-D_nL-\ii kv_d+\frac{1}{\tau_R}\Bigr]\bn+b_nn_0L\,\bp-\bth L\,\bt=0,
+\qquad L=\eta^2-k^2 .
+\end{equation}
+
+\subsection{Heat balance}
+
+\begin{worked}
+Write $\mathrm{D}_t=-\ii\omega$ for the time derivative and $f=1+\tau_q\mathrm{D}_t=1-\ii\omega\tau_q$ for
+the MGT operator. In the bracket of \eqref{eq:heat} the first term is $-\ii\omega\rho c_p\bt$. The thermal
+stress term is $T_0\beta_{ij}\dot\eps_{ij}$, and in our plane strain the two terms that survive are
+$T_0\beta_1\dot\eps_{xx}+T_0\beta_3\dot\eps_{zz}$, which give
+$T_0\beta_1(-\ii\omega)(\ii k\bx)+T_0\beta_3(-\ii\omega)(\eta\bz)=T_0\omega k\beta_1\bx-\ii\omega T_0\beta_3\eta\bz$.
+The pyroelectric term is $T_0p_i\dot E_i=T_0p_3\dot E_z=T_0p_3(-\ii\omega)(-\eta\bp)=\ii\omega T_0p_3\eta\bp$.
+The Peltier term is $q\Pth(-\ii\omega)\bn$, and the recombination term is $E_g\bn/\tau_R$. Multiplying the
+bracket by $f$ and subtracting the conduction term $\kB(\eta^2-k^2)\bt$ gives
+\[
+f\Bigl[-\ii\omega\rho c_p\bt+T_0\omega k\beta_1\bx-\ii\omega T_0\beta_3\eta\bz
++\ii\omega T_0p_3\eta\bp-\ii\omega q\Pth\bn+\frac{E_g}{\tau_R}\bn\Bigr]-\kB L\bt=0 .
+\]
+\end{worked}
+
+\noindent Result, fifth of the five:
+\begin{equation}\label{eq:g5}
+f\Bigl[-\ii\omega\rho c_p\bt+T_0\omega k\beta_1\bx-\ii\omega T_0\beta_3\eta\bz
++\ii\omega T_0p_3\eta\bp+\Bigl(-\ii\omega q\Pth+\frac{E_g}{\tau_R}\Bigr)\bn\Bigr]-\kB L\bt=0 .
+\end{equation}
+
+\section{Calculation C: the amplitude matrix $\mathbf M(\eta)$}\label{sec:C}
+
+The five equations \eqref{eq:g1}--\eqref{eq:g5} are linear in the five amplitudes and homogeneous. Read off
+the coefficient of each amplitude in each equation, in the order of \eqref{eq:vec}. Entries not listed are
+zero.
+
+\subsection{Row 1, momentum along the plate}
+
+\begin{worked}
+Put \eqref{eq:sxx} and \eqref{eq:sxz} into \eqref{eq:g1} and collect.
+For $\bx$: from $\ii k\hat\sigma_{xx}$ we get $\ii k\,\Gc c_{11}(\ii k)=-k^2\Gc c_{11}$; from
+$\eta\hat\sigma_{xz}$ we get $\eta\,\Gc c_{44}\eta=\eta^2\Gc c_{44}$; the inertia contributes
+$-\Nc\rho\omega^2$. With the overall minus in \eqref{eq:g1} the two elastic pieces change sign and the
+inertia does not: $M_{11}=-\Nc\rho\omega^2+\Gc(c_{11}k^2-c_{44}\eta^2)$.
+For $\bz$: $\ii k\cdot\Gc c_{13}\eta$ and $\eta\cdot\Gc c_{44}(\ii k)$ add to $\ii k\eta\Gc(c_{13}+c_{44})$,
+and the overall minus gives $M_{12}=-\ii k\eta\Gc(c_{13}+c_{44})$.
+For $\bp$: $\ii k\cdot\eta e_{31}$ and $\eta\cdot\ii k e_{15}$ add to $\ii k\eta(e_{31}+e_{15})$, with a minus:
+$M_{13}=-\ii k\eta(e_{31}+e_{15})$.
+For $\bn$: nothing, since neither stress contains $\bn$: $M_{14}=0$.
+For $\bt$: $\ii k\cdot(-\beta_1)$, with the overall minus, gives $M_{15}=\ii k\beta_1$.
+\end{worked}
+
+\noindent The first row is
+\begin{equation}\label{eq:row1}
+M_{11}=-\Nc\rho\omega^2+\Gc\bigl(c_{11}k^2-c_{44}\eta^2\bigr),\quad
+M_{12}=-\ii k\eta\,\Gc(c_{13}+c_{44}),\quad
+M_{13}=-\ii k\eta(e_{31}+e_{15}),
+\end{equation}
+\begin{equation}\label{eq:row1b}
+M_{14}=0,\qquad M_{15}=\ii k\beta_1 .
+\end{equation}
+
+\subsection{Row 2, momentum across the plate}
+
+\begin{worked}
+Same routine with \eqref{eq:g2}. For $\bx$: $\ii k\cdot\Gc c_{44}\eta$ plus $\eta\cdot\Gc c_{13}(\ii k)$ gives
+$\ii k\eta\Gc(c_{13}+c_{44})$, with a minus.
+For $\bz$: $\ii k\cdot\Gc c_{44}(\ii k)=-k^2\Gc c_{44}$ and $\eta\cdot\Gc c_{33}\eta=\eta^2\Gc c_{33}$; with the
+overall minus and the inertia term, $M_{22}=-\Nc\rho\omega^2+\Gc(c_{44}k^2-c_{33}\eta^2)$.
+For $\bp$: $\ii k\cdot\ii k e_{15}=-k^2e_{15}$ and $\eta\cdot\eta e_{33}=\eta^2e_{33}$, with a minus:
+$M_{23}=e_{15}k^2-e_{33}\eta^2$.
+For $\bt$: $\eta\cdot(-\beta_3)$ with the minus gives $M_{25}=\eta\beta_3$. The $\bn$ entry is zero.
+\end{worked}
+
+\noindent The second row is
+\begin{equation}\label{eq:row2}
+M_{21}=-\ii k\eta\,\Gc(c_{13}+c_{44}),\quad
+M_{22}=-\Nc\rho\omega^2+\Gc\bigl(c_{44}k^2-c_{33}\eta^2\bigr),\quad
+M_{23}=e_{15}k^2-e_{33}\eta^2,
+\end{equation}
+\begin{equation}\label{eq:row2b}
+M_{24}=0,\qquad M_{25}=\eta\beta_3 .
+\end{equation}
+
+\subsection{Row 3, Gauss's law}
+
+\begin{worked}
+Use \eqref{eq:Dx} and \eqref{eq:Dz} in \eqref{eq:g3}. For $\bx$: $\ii k\cdot e_{15}\eta+\eta\cdot\ii k e_{31}$,
+so $M_{31}=\ii k\eta(e_{15}+e_{31})$.
+For $\bz$: $\ii k\cdot e_{15}(\ii k)=-k^2e_{15}$ and $\eta\cdot\eta e_{33}=\eta^2e_{33}$, so
+$M_{32}=e_{33}\eta^2-e_{15}k^2$.
+For $\bp$: $\ii k\cdot(-\ii k\epsilon_{11})=k^2\epsilon_{11}$ and $\eta\cdot(-\eta\epsilon_{33})=-\eta^2\epsilon_{33}$,
+so $M_{33}=\epsilon_{11}k^2-\epsilon_{33}\eta^2$.
+For $\bn$: the term $+q\bn$ in \eqref{eq:g3} gives $M_{34}=q$.
+For $\bt$: $\eta\cdot p_3$ gives $M_{35}=\eta p_3$.
+\end{worked}
+
+\noindent The third row is
+\begin{equation}\label{eq:row3}
+M_{31}=\ii k\eta(e_{15}+e_{31}),\quad
+M_{32}=e_{33}\eta^2-e_{15}k^2,\quad
+M_{33}=\epsilon_{11}k^2-\epsilon_{33}\eta^2,\quad
+M_{34}=q,\quad
+M_{35}=\eta p_3 .
+\end{equation}
+
+\subsection{Row 4, carrier balance}
+
+\begin{worked}
+Equation \eqref{eq:g4} is already in matrix form. The three nonzero entries are the coefficient of $\bn$,
+that of $\bp$ and that of $\bt$: $M_{44}=-\ii\omega-D_nL-\ii kv_d+1/\tau_R$, $M_{43}=b_nn_0L$ and
+$M_{45}=-\bth L$. The entries $M_{41}$ and $M_{42}$ are zero because the carrier equation feels the
+displacement only through the field, and the field only through $\bp$.
+\end{worked}
+
+\noindent The fourth row is
+\begin{equation}\label{eq:row4}
+M_{41}=0,\quad M_{42}=0,\quad M_{43}=b_nn_0L,\quad
+M_{44}=-\ii\omega-D_nL-\ii kv_d+\frac{1}{\tau_R},\quad M_{45}=-\bth L .
+\end{equation}
+
+\subsection{Row 5, heat balance}
+
+\begin{worked}
+Read the coefficients from \eqref{eq:g5}. For $\bx$: $fT_0\omega k\beta_1$. For $\bz$:
+$-f\ii\omega T_0\beta_3\eta$. For $\bp$: $f\ii\omega T_0p_3\eta$. For $\bn$:
+$f(-\ii\omega q\Pth+E_g/\tau_R)$. For $\bt$: $f(-\ii\omega\rho c_p)-\kB L$.
+\end{worked}
+
+\noindent The fifth row is
+\begin{equation}\label{eq:row5}
+M_{51}=fT_0\omega k\beta_1,\quad
+M_{52}=-\ii\omega fT_0\beta_3\eta,\quad
+M_{53}=\ii\omega fT_0p_3\eta,\quad
+M_{54}=f\Bigl(-\ii\omega q\Pth+\frac{E_g}{\tau_R}\Bigr),\quad
+M_{55}=-\ii\omega f\rho c_p-\kB L .
+\end{equation}
+
+\subsection{The matrix and the two operators}
+
+Collecting \eqref{eq:row1}--\eqref{eq:row5}, the five equations read
+\begin{equation}\label{eq:M}
+\mathbf M(\eta)\,\mathbf a=\mathbf 0,\qquad
+\mathbf a=(\bx,\bz,\bp,\bn,\bt)^{\top},
+\end{equation}
+with the rows in the order momentum $x$, momentum $z$, Gauss, carriers, heat, and with
+\begin{equation}\label{eq:NG}
+\Nc(\eta)=1-l_{\rm nl}^2(\eta^2-k^2),\qquad
+\Gc(\eta)=1-l_g^2(\eta^2-k^2),\qquad
+L=\eta^2-k^2,\qquad
+f=1-\ii\omega\tau_q .
+\end{equation}
+The matrix is written as five rows because a $5\times5$ array with long entries runs off the page. When you
+copy it into your own notes, keep the row order; every later formula in this file assumes this order.
+
+Notice that $\Nc$ appears in two places only, $M_{11}$ and $M_{22}$, always on the inertia; that $\Gc$
+appears in the six elastic entries of rows 1 and 2 and nowhere else; and that the electric, carrier and
+thermal entries carry no size operator at all. That is the content of the placement decision: the size
+effect enters through the two operators and through the two boundary conditions of Section~\ref{sec:F}, and
+nowhere else.
+
+\section{Calculation D: the characteristic equation}\label{sec:D}
+
+Nonzero amplitudes exist only if the determinant vanishes,
+\begin{equation}\label{eq:char}
+\det\mathbf M(\eta)=0 .
+\end{equation}
+This is a polynomial equation in $\eta$, and the number of its roots is the number of partial waves we must
+superpose. So we need its degree, and we need to know whether the roots come in pairs.
+
+\subsection{Degree counting}
+
+\begin{worked}
+Go through the matrix and write the highest power of $\eta$ in each row, allowing for the fact that the
+permutation in the determinant may take any entry of a row.
+Row 1: $M_{11}$ has $\Gc\eta^2\sim\eta^4$ through the product $l_g^2\eta^2\cdot c_{44}\eta^2$; $M_{12}$ has
+$\Gc\eta\sim\eta^3$; $M_{13}\sim\eta$; $M_{15}\sim\eta^0$.
+Row 2: $M_{21}\sim\eta^3$, $M_{22}\sim\eta^4$, $M_{23}\sim\eta^2$, $M_{25}\sim\eta^1$.
+Row 3: $M_{31}\sim\eta^1$, $M_{32}\sim\eta^2$, $M_{33}\sim\eta^2$, $M_{34}\sim\eta^0$, $M_{35}\sim\eta^1$.
+Row 4: $M_{43}\sim\eta^2$, $M_{44}\sim\eta^2$, $M_{45}\sim\eta^2$, others zero.
+Row 5: $M_{51}\sim\eta^0$, $M_{52}\sim\eta^1$, $M_{53}\sim\eta^1$, $M_{54}\sim\eta^0$, $M_{55}\sim\eta^2$.
+A determinant is a sum of products, one entry from each row and each column, so its degree is at most the
+largest total $\sum_i d_i$ over all permutations. The permutation that reaches the maximum takes
+$M_{11}$ (degree 4), $M_{22}$ (4), $M_{33}$ (2), $M_{44}$ (2) and $M_{55}$ (2), which sums to 14. No other
+permutation gives more, because rows 1 and 2 can give at most 4 each and rows 3, 4, 5 at most 2 each. So the
+degree is 14 when $l_g\ne0$.
+\end{worked}
+
+\noindent When $l_g=0$ the operator $\Gc$ is the number one, and the elastic entries of rows 1 and 2 drop
+from degree 4 and 3 to degree 2 and 1. The same counting gives
+\begin{equation}\label{eq:deg}
+\deg_\eta\det\mathbf M=
+\begin{cases}
+14, & l_g\ne0,\\
+10, & l_g=0 .
+\end{cases}
+\end{equation}
+The nonlocal length does not change the degree: $\Nc$ multiplies only the constant inertia terms in
+$M_{11}$ and $M_{22}$, so it adds powers of $\eta^2$ to entries that are already of higher degree in the
+same positions. That is why $l_{\rm nl}$ changes the roots without changing their number.
+
+\subsection{Parity of the determinant}
+
+Under $\eta\to-\eta$ an entry changes sign if and only if it contains an odd power of $\eta$. We ask whether
+a diagonal sign change of the five amplitudes can absorb all those sign changes, because if it can, then
+the determinant is even in $\eta$ and the roots come in $\pm$ pairs.
+
+\begin{worked}
+Write $p(i,j)$ for the parity of the entry in row $i$, column $j$, with $E$ for even and $O$ for odd, and
+read the parities from \eqref{eq:row1}--\eqref{eq:row5}:
+row 1 is $E,O,O,E$ for the columns $\bx,\bz,\bp,\bt$ with $M_{14}=0$; row 2 is $O,E,E,O$; row 3 is $O,E,E,O$
+for $\bx,\bz,\bp,\bt$ with $M_{34}=q$ even; row 4 is $E,E,E$ in the columns $\bp,\bn,\bt$; row 5 is
+$E,O,O,E,E$ across all five columns.
+Suppose a sign vector $s=(s_1,\dots,s_5)$ exists with $p(i,j)=s_is_j$. Take $s_1=-1$, which is free because
+$M_{11}$ is even. Then $M_{12}$ odd gives $s_2=+1$; $M_{13}$ odd gives $s_3=+1$; $M_{15}$ even gives
+$s_5=-1$; $M_{34}$ even gives $s_4=s_3=+1$. Now check the remaining entries: $M_{23}$ even needs
+$s_2s_3=+1$, and it is $+1$, so fine; $M_{25}$ odd needs $s_2s_5=-1$, and it is $-1$, fine; $M_{35}$ odd
+needs $s_3s_5=-1$, fine. The one entry that fails is $M_{45}=-\bth L$, which is even but needs
+$s_4s_5=-1$. The same failure comes from $M_{54}$ when $\Pth\ne0$, since it is even and needs $s_4s_5=-1$ as
+well.
+\end{worked}
+
+\noindent Hence
+\begin{equation}\label{eq:parity}
+\det\mathbf M(-\eta)=\det\mathbf M(\eta)
+\quad\Longleftrightarrow\quad
+\bth=0\ \text{and}\ \Pth=0 ,
+\end{equation}
+and in that case the sign vector is $(-1,+1,+1,+1,-1)$ in the order of \eqref{eq:vec}, that is
+$\bx\to-\bx$ and $\bt\to-\bt$ with the other three unchanged. With either thermoelectric coefficient present
+no such vector exists, the determinant is neither even nor odd, and the roots do not pair.
+
+The physical reading is short. A temperature gradient that drags carriers is a coupling between a scalar
+that is even in the thickness and a density that is also even; the Peltier heat does the same in the other
+direction. There is no way to assign a single parity to the pair, so the two families mix. Everything else
+in the model respects the pairing: the piezoelectric constants, the pyroelectric constant, the thermal
+stress coefficients and the size operators all keep it. This is a stricter statement than the one we
+started with, which asked for a polar coupling as well; the algebra shows that the polar couplings already
+respect the pairing and only the two thermoelectric coefficients break it.
+
+\subsection{What the parity means for the boundary rows}
+
+When \eqref{eq:parity} holds, the five amplitudes split into two sets, one odd and one even under the sign
+vector, and each set satisfies a smaller problem of its own. The two sets then give two smaller boundary
+matrices, and the full determinant factorises into the product of the two. When it fails, there is one
+$5\times5$ problem and one boundary matrix, and the symmetric and antisymmetric families are not separately
+defined. Both cases are assembled in Section~\ref{sec:G}; you should be able to say which case your chosen
+material falls in before you start any algebra.
+
+\section{Calculation E: amplitude ratios and partial waves}\label{sec:E}
+
+For each root $\eta_m$ of \eqref{eq:char} the matrix $\mathbf M(\eta_m)$ is singular, so the amplitudes are
+not all independent: they are proportional to any nonzero column of the adjugate. We use the cofactor
+formula, which needs no division and therefore survives a repeated or a nearly repeated root.
+
+\subsection{Cofactors}
+
+\begin{worked}
+Let $\mathbf A(\eta)$ be the adjugate of $\mathbf M(\eta)$, so that $\mathbf M\mathbf A=\det(\mathbf M)\mathbf I$.
+The entry $A_{ij}$ is $(-1)^{i+j}$ times the determinant of the $4\times4$ matrix obtained by deleting row
+$j$ and column $i$ from $\mathbf M$. At a root the product $\mathbf M\mathbf A$ vanishes, so every column of
+$\mathbf A$ is a null vector. Take the column with the largest entries and divide by its largest entry; the
+ratios are then finite and one of them equals one by construction.
+\end{worked}
+
+\noindent For the root $\eta_m$ write the amplitudes as
+\begin{equation}\label{eq:ratio}
+\bigl(\bx_m,\bz_m,\bp_m,\bn_m,\bt_m\bigr)=\bt_m\bigl(\rho^{(1)}_m,\rho^{(2)}_m,\rho^{(3)}_m,\rho^{(4)}_m,1\bigr),
+\end{equation}
+where the three ratios are read from the fifth row of the adjugate, and where $\bt_m$ is the arbitrary
+amplitude of the temperature part of that partial wave. The choice of the fifth entry as the normalising one
+is a convention; it fails only for a root whose temperature amplitude vanishes, and in that case you
+normalise by the largest of the five entries instead.
+
+\subsection{The general solution through the thickness}
+
+\begin{worked}
+Each root contributes $\exp(\eta_m z)$ times its amplitude vector. Summing over the $N$ roots of
+\eqref{eq:char}, and multiplying by the propagation factor,
+\[
+u_x=\sum_{m=1}^{N}a_m\rho^{(1)}_m e^{\eta_m z},\quad
+u_z=\sum_{m=1}^{N}a_m\rho^{(2)}_m e^{\eta_m z},\quad
+\varphi=\sum_{m=1}^{N}a_m\rho^{(3)}_m e^{\eta_m z},
+\]
+\[
+\Delta n=\sum_{m=1}^{N}a_m\rho^{(4)}_m e^{\eta_m z},\quad
+\theta=\sum_{m=1}^{N}a_m e^{\eta_m z},
+\]
+all multiplied by $\exp[\ii(kx-\omega t)]$, with $N=\deg_\eta\det\mathbf M$ and with the free constants
+$a_m$ carrying the dimension of temperature.
+\end{worked}
+
+\noindent So the general solution of the field equations that is bounded in the plate is a sum of $N$
+partial waves,
+\begin{equation}\label{eq:general}
+\bigl(u_x,u_z,\varphi,\Delta n,\theta\bigr)
+=\sum_{m=1}^{N}a_m\bigl(\rho^{(1)}_m,\rho^{(2)}_m,\rho^{(3)}_m,\rho^{(4)}_m,1\bigr)
+e^{\eta_m z}e^{\ii(kx-\omega t)},
+\end{equation}
+with $N=14$ when $l_g\ne0$ and $N=10$ when $l_g=0$. The number $N$ is exactly the number of boundary
+conditions we are allowed to impose, seven per face when $l_g\ne0$ and five per face when $l_g=0$; that is
+the content of Section~\ref{sec:F}, and it is why the boundary problem is square. If the number of roots and
+the number of conditions disagreed, the problem would be over- or under-determined and no dispersion
+relation would follow.
+
+\subsection{One minor written out}
+
+The cofactor formula is abstract until you do one, so here is one. The entry $A_{51}$ of the adjugate is the
+cofactor of $M_{15}$, that is $(-1)^{5+1}=+1$ times the determinant of the matrix left after deleting row 1
+and column 5:
+\begin{equation}\label{eq:minor}
+A_{51}=\begin{vmatrix}
+M_{21}&M_{22}&M_{23}&M_{24}\\
+M_{31}&M_{32}&M_{33}&M_{34}\\
+M_{41}&M_{42}&M_{43}&M_{44}\\
+M_{51}&M_{52}&M_{53}&M_{54}
+\end{vmatrix}.
+\end{equation}
+
+\begin{worked}
+Put the entries of Section~\ref{sec:C} into \eqref{eq:minor}. Row 1 of the minor is the second row of
+$\mathbf M$ with its fifth entry deleted: $-\ii k\eta\Gc(c_{13}+c_{44})$, $-\Nc\rho\omega^2+\Gc(c_{44}k^2-c_{33}\eta^2)$,
+$e_{15}k^2-e_{33}\eta^2$, $0$. Row 2 is the Gauss row: $\ii k\eta(e_{15}+e_{31})$, $e_{33}\eta^2-e_{15}k^2$,
+$\epsilon_{11}k^2-\epsilon_{33}\eta^2$, $q$. Row 3 is the carrier row: $0$, $0$, $b_nn_0L$,
+$-\ii\omega-D_nL-\ii kv_d+1/\tau_R$. Row 4 is the heat row: $fT_0\omega k\beta_1$,
+$-\ii\omega fT_0\beta_3\eta$, $\ii\omega fT_0p_3\eta$, $f(-\ii\omega q\Pth+E_g/\tau_R)$. Expanding along the
+first column of the minor leaves two terms, because the carrier row has a zero there. Each of those two
+terms is a $3\times3$ determinant whose entries you already have, so the whole cofactor is arithmetic on
+known quantities once $\eta_m$ and $k$ are fixed.
+\end{worked}
+
+\noindent The other four entries of row 5 of the adjugate follow the same pattern with a different column
+deleted, and the amplitude ratios of \eqref{eq:ratio} are their ratios after normalising by the largest. If
+you check one thing in this section, check that $A_{51}$ reduces to the elastic expression when the electric,
+carrier and thermal couplings are switched off: then the minor becomes triangular and its determinant is the
+product of the two mechanical entries, which you can verify by hand.
+
+\subsection{Why the count is not a coincidence}
+
+\begin{worked}
+Look at the order of the field equations. Four of the five equations are of second order in $z$ when
+$l_g=0$: momentum twice, Gauss once, carriers once, heat once, but Gauss carries the second derivative of
+the potential only, so five second-order equations would suggest ten conditions per face pair, that is
+five per face. The fifth-order character comes from the size operators: each factor
+$(1-l_g^2\partial_z^2)$ in the elastic entries adds two orders, and it appears in the determinant in the
+product $\Gc^2$, so four extra roots appear and four extra conditions, two per face.
+\end{worked}
+
+\noindent One rule matches all of this: each factor of $(1-l^2\partial_z^2)$ in the field equations adds one
+root pair and needs one extra condition per face. The gradient length enters squared in the determinant, so
+it adds two pairs. The nonlocal length enters only in the inertia and adds no root pair, which is why it
+also adds no boundary condition. This is a useful check on any matrix you build: count the factors of the
+gradient operator in the entries, double it, and add it to the local count of ten.
+
+\section{Calculation F: the boundary conditions}\label{sec:F}
+
+The faces $z=\pm h$ are free, electrically open, free of carrier flux and thermally insulating. In a
+gradient theory the first two of these need care, because the variation of the energy at a free surface
+carries a surface term with a gradient of the displacement. We follow the treatment of Charalambopoulos,
+Douka and Mavratzas \cite[Sec.~2, Eq.~(14)]{Charalambopoulos2019}, who write the traction condition for a
+gradient elastic solid with the surface gradient of the double traction. The form we use is the following.
+
+\subsection{The seven conditions}
+
+At each face, with outward normal $\mathbf n=(0,0,\pm1)$ and with $z_0=\pm h$:
+
+\begin{enumerate}
+\item[(b1)] the normal traction vanishes, with the surface-gradient term:
+$\bigl[\sigma_{zz}-\partial_x R_{xz}\bigr]_{z=z_0}=0$, where $R_{ij}=n_k\mu_{kijl}n_l$ is the double
+traction of the gradient theory;
+\item[(b2)] the shear traction vanishes, with its surface-gradient term:
+$\bigl[\sigma_{xz}-\partial_x R_{xx}\bigr]_{z=z_0}=0$;
+\item[(b3)] the double traction normal to the face vanishes: $\bigl[R_{zz}\bigr]_{z=z_0}=0$;
+\item[(b4)] the double traction in the plane of the face vanishes: $\bigl[R_{zx}\bigr]_{z=z_0}=0$;
+\item[(b5)] the electric condition is open circuit: $\bigl[D_z\bigr]_{z=z_0}=0$;
+\item[(b6)] no carriers leave or enter: $\bigl[\Gamma_z\bigr]_{z=z_0}=0$, where $\Gamma_z$ is the normal
+component of the carrier flux;
+\item[(b7)] the face is thermally insulating: $\bigl[\partial_z\theta\bigr]_{z=z_0}=0$.
+\end{enumerate}
+
+\noindent Conditions (b1) and (b2) are the standard free-surface conditions of the gradient theory with the
+divergence of the surface double traction added; (b3) and (b4) are the accompanying double-traction
+conditions, which in the language of \cite[condition b(i)]{Charalambopoulos2019} state that the normal
+double force vanishes. Conditions (b5), (b6) and (b7) are our modelling choices and carry no source: open
+circuit, no carrier flux, adiabatic face. Each is a choice, and each has an alternative; we list the
+alternatives in the self-test section.
+
+The word ``ours'' must be understood precisely here. Equations (b1) and (b2) with the surface gradient are
+taken from \cite[Sec.~2, Eq.~(14)]{Charalambopoulos2019} for the purely elastic case; extending the same
+structure to the piezoelectric and thermal parts, that is letting $\sigma$ and $R$ carry the electric and
+thermal contributions, is our step. If you want a conservative version, keep the surface-gradient terms in
+the elastic part only and drop them from the electric and thermal parts; the matrix changes in four entries
+and the dispersion curves move by a small amount.
+
+\subsection{The nonlocal operator, inverted root by root}
+
+The constitutive law \eqref{eq:const} is written with the gradient operator applied to the strain. In the
+integral form of NSGT the same physics is written with a kernel, and the differential form we use is
+equivalent to it only when the constitutive boundary conditions of \cite[Eq.~(19)]{Barretta2018} are
+satisfied. We do not impose those conditions as extra rows; instead we follow the route the supervisor
+fixed: the nonlocal operator is inverted root by root, so that each partial wave carries the factor
+$1/\Nc(\eta_m)$ in its stress.
+
+\begin{worked}
+The reason is one line of algebra. Suppose the stress amplitude of a partial wave is $\hat\sigma_m$, and the
+constitutive law at that root reads $\Nc(\eta_m)\hat\sigma_m=\hat\sigma^{\rm loc}_m$, where the local part is
+the right side of \eqref{eq:sxx} without the operator. Then $\hat\sigma_m=\hat\sigma^{\rm loc}_m/\Nc(\eta_m)$.
+In the boundary rows we need the stress itself, so we divide each partial wave's stress by its own
+$\Nc(\eta_m)$ rather than by a common operator. Dividing by a common $\Nc(\eta)$ would be wrong: the
+operator does not commute with the sum over roots when the roots are complex.
+\end{worked}
+
+\noindent Result: in every boundary row, the stress contribution of partial wave $m$ is divided by
+$\Nc(\eta_m)$, and the factor is inside the column, so it multiplies the whole column $m$.
+
+\subsection{From conditions to row functions}
+
+\begin{worked}
+Take (b1) at the face $z=+h$ and put the partial wave $m$ in. The stress is $\hat\sigma_{zz}$ of
+\eqref{eq:szz} with the amplitudes of that wave, divided by $\Nc(\eta_m)$; the surface-gradient term is
+$-\partial_xR_{xz}$, and $\partial_x\to\ii k$ acting on the exponential, so the term is
+$-\ii kR_{xz}$. The double traction for a normal along $z$ is $R_{xz}=\mu_{xzkl}n_kn_l$; in the gradient
+theory with one internal length $l_g$ the only non-zero components for our class are proportional to
+$l_g^2c_{44}$ acting on the gradient of $\eps_{xz}$, so within the differential law the term can be written
+as $-l_g^2c_{44}\,\partial_x\nabla^2\eps_{xz}$, and under the plane wave this is
+$-\ii k\,l_g^2c_{44}(\eta_m^2-k^2)\,\hat\eps_{xz}$. Every factor here is known once $\eta_m$ is known, so
+the row is a linear function of the amplitudes.
+\end{worked}
+
+\noindent This gives the following seven row functions for the face $z=+h$, each to be evaluated with the
+amplitudes of partial wave $m$ and then multiplied by $\exp(\eta_mh)$:
+
+\begin{align}
+b_1&=\frac{1}{\Nc(\eta_m)}\Bigl[\hat\sigma_{zz}-\ii k\,l_g^2c_{44}(\eta_m^2-k^2)\hat\eps_{xz}\Bigr],
+\label{eq:b1}\\
+b_2&=\frac{1}{\Nc(\eta_m)}\Bigl[\hat\sigma_{xz}-\ii k\,l_g^2c_{11}(\eta_m^2-k^2)\hat\eps_{xx}\Bigr],
+\label{eq:b2}\\
+b_3&=\frac{1}{\Nc(\eta_m)}\,l_g^2c_{33}(\eta_m^2-k^2)\hat\eps_{zz},
+\label{eq:b3}\\
+b_4&=\frac{1}{\Nc(\eta_m)}\,l_g^2c_{44}(\eta_m^2-k^2)\hat\eps_{xz},
+\label{eq:b4}\\
+b_5&=\hat D_z ,\qquad
+b_6=\hat\Gamma_z ,\qquad
+b_7=\eta_m\hat\theta .
+\label{eq:b567}
+\end{align}
+
+The seven conditions (b1)--(b7) are the rows; the boundary matrix has seven rows per face.
+
+\subsection{The carrier flux}
+
+\begin{worked}
+The electron current density in the drift-diffusion picture is
+$J_z=q\bigl(b_nn_0E_z+D_n\partial_z\Delta n+b_nn_0S_n\partial_z\theta\bigr)$, which is the current whose
+divergence appears in \eqref{eq:carr} once the thermodiffusion term is written with $S_n$ instead of $\bth$.
+With $E_z=-\eta\bp$ and $\partial_z\to\eta$,
+\[
+\hat J_z=q\Bigl(-b_nn_0\eta\bp+D_n\eta\bn+b_nn_0S_n\eta\bt\Bigr).
+\]
+The condition of zero flux is $\hat J_z=0$; dividing by the common factor $q\eta$ leaves the row
+$b_6=-b_nn_0\bp+D_n\bn+b_nn_0S_n\bt$. The factor $\eta$ is not zero at a root in general, so the division is
+allowed; if $\eta_m=0$ the row is identically zero and must be replaced by the second-order condition,
+which happens only for a degenerate root.
+\end{worked}
+
+\noindent The carrier row is
+\begin{equation}\label{eq:b6}
+b_6=-b_nn_0\bp+D_n\bn+b_nn_0S_n\bt .
+\end{equation}
+
+\subsection{The two faces}
+
+\begin{worked}
+At $z=-h$ the same seven functions appear, but with two changes. The amplitudes of a partial wave carry the
+factor $\exp(-\eta_mh)$ instead of $\exp(\eta_mh)$. The outward normal is $(0,0,-1)$, so the sign of the
+normal components flips: the traction $\hat\sigma_{zz}$ enters with a minus, the shear $\hat\sigma_{xz}$ with
+a minus, the induction $D_z$ with a minus and the flux with a minus, while the double tractions, which are
+quadratic in the normal, do not change sign, and the temperature gradient $\eta_m\hat\theta$ does change
+sign because $\partial_z$ is odd.
+\end{worked}
+
+\noindent Writing $c_m=\exp(\eta_mh)$ and $d_m=\exp(-\eta_mh)$, the fourteen rows are
+\begin{equation}\label{eq:rows}
+\begin{aligned}
+&b_1c_m,\ b_2c_m,\ b_3c_m,\ b_4c_m,\ b_5c_m,\ b_6c_m,\ b_7c_m &&\text{at } z=+h,\\
+-&b_1d_m,\ -b_2d_m,\ b_3d_m,\ b_4d_m,\ -b_5d_m,\ -b_6d_m,\ -b_7d_m &&\text{at } z=-h .
+\end{aligned}
+\end{equation}
+
+\section{Calculation G: the boundary matrix and the dispersion relation}\label{sec:G}
+
+\subsection{Assembly}
+
+Number the roots $\eta_1,\dots,\eta_N$ in any fixed order, with $N$ as in \eqref{eq:deg}. The boundary
+matrix $\mathbf B$ has one row per condition of \eqref{eq:rows} and one column per root. Row $i$, column $m$
+is the row function $b_i$ of \eqref{eq:b1}--\eqref{eq:b6} evaluated with the amplitudes of root $\eta_m$,
+multiplied by the factor in \eqref{eq:rows}.
+
+\begin{worked}
+The amplitude ratios in $b_i$ are the cofactors of Section~\ref{sec:E}, so each entry of $\mathbf B$ is a
+product of three known factors: the material constant of that row, the amplitude ratio of that column, and
+the exponential factor of that face. Nothing in an entry depends on $k$ except through the roots $\eta_m$
+and through the explicit $k$ in the row functions; the whole $k$-dependence sits inside $\mathbf B$.
+\end{worked}
+
+\noindent The dispersion relation is
+\begin{equation}\label{eq:disp}
+\det\mathbf B(k,\omega)=0 ,
+\end{equation}
+a $14\times14$ determinant when $l_g\ne0$ and a $10\times10$ determinant when $l_g=0$. Note that when
+$l_g=0$ the rows (b3) and (b4) are identically zero, since every entry carries a factor $l_g^2$; they must be
+deleted from the matrix, together with the four roots that the vanishing gradient operator removes. That is
+how the size of the matrix falls from fourteen to ten, and it is the reason the two cases must be written
+separately in a numerical treatment.
+
+\subsection{What is solved for}
+
+\begin{worked}
+The frequency $\omega$ is real and given, because an experiment drives the plate at a known frequency. The
+wave number is complex, $k=k_r+\ii k_i$. For each real $\omega$ the equation \eqref{eq:disp} is one complex
+equation in two real unknowns, so its solutions are isolated pairs. The real part gives the phase velocity
+$\omega/k_r$ and the imaginary part gives the attenuation; a positive $k_i$ means the wave decays along
+$+x$, which is the sign convention of this file.
+\end{worked}
+
+\noindent Solving \eqref{eq:disp} for real $\omega$ means finding the zeros of a determinant whose entries
+are themselves roots of \eqref{eq:char}. There is no closed form; the practical route is a search in the
+complex $k$ plane started from the uncoupled elastic solution, and the search must be watched because two
+branches can approach each other closely when the carrier relaxation crosses the wave frequency.
+
+\subsection{The column scaling}
+
+One technical remark belongs here, because it is the only place where the arithmetic of a computer can
+mislead you. In \eqref{eq:rows} the factors $\exp(\eta_mh)$ can be enormous when $\eta_m$ has a large real
+part, which happens for the roots created by the size operator. Their products with the amplitude ratios
+then differ by hundreds of orders of magnitude between columns, and a determinant evaluated with such
+columns loses all its digits. The cure is to multiply column $m$ by $\exp(-|\mathrm{Re}\,\eta_m|h)$ before
+any evaluation. A common factor per column does not change the zeros of the determinant, so the dispersion
+relation is untouched, but the arithmetic becomes well conditioned.
+
+\subsection{What happens when the parity holds}
+
+When \eqref{eq:parity} holds, the determinant of Section~\ref{sec:D} is even and the roots come in pairs
+$\pm\eta$. The five amplitudes split into an odd set and an even set. Assembling the seven conditions in the
+same two groups then gives two matrices, one for each family, and
+\begin{equation}\label{eq:factor}
+\det\mathbf B=\det\mathbf B_{\rm S}\cdot\det\mathbf B_{\rm A},
+\end{equation}
+where the labels S and A stand for the symmetric and antisymmetric families of the classical plate. Each of
+the two smaller matrices has seven rows and seven columns. This factorisation is not assumed anywhere; it is
+a consequence of the parity and it must appear by itself when you build the matrices. If it does not appear,
+one of your rows has the wrong parity, and the likeliest place is a sign in \eqref{eq:b1} or in the flux
+\eqref{eq:b6}.
+
+\section{Calculation H: hand limits}\label{sec:H}
+
+\subsection{All couplings off: the Rayleigh--Lamb relation}
+
+\begin{worked}
+Set $e_{31}=e_{33}=e_{15}=0$, $p_3=0$, $\beta_1=\beta_3=0$, $\bth=\Pth=0$, $\tau_R\to\infty$, and let the
+carrier and thermal fields drop out. Rows 3, 4 and 5 then decouple from rows 1 and 2, and $\det\mathbf M$ is
+the product of the $2\times2$ mechanical determinant and the three scalar factors. Keep only the mechanical
+part and set $l_g=l_{\rm nl}=0$. The mechanical determinant reads
+\[
+\begin{vmatrix}
+-\rho\omega^2+c_{11}k^2-c_{44}\eta^2 & -\ii k\eta(c_{13}+c_{44})\\
+-\ii k\eta(c_{13}+c_{44}) & -\rho\omega^2+c_{44}k^2-c_{33}\eta^2
+\end{vmatrix}=0 ,
+\]
+which is the classical P--SV condition for a transversely isotropic plate. Its four roots are
+$\eta=\pm\ii p$ and $\eta=\pm\ii q$ with $p^2=\omega^2/c_L^2-k^2$ and $q^2=\omega^2/c_T^2-k^2$, where
+$c_L$ and $c_T$ are the longitudinal and transverse speeds built from $c_{33},c_{13},c_{44}$ along the
+axis. For an isotropic solid, $c_{11}=c_{33}=\lambda+2\mu$, $c_{13}=\lambda$, $c_{44}=\mu$ and
+$c_L^2=(\lambda+2\mu)/\rho$, $c_T^2=\mu/\rho$.
+\end{worked}
+
+\noindent The four boundary rows that survive are the two tractions at each face, and the determinant of
+that $4\times4$ system reduces by the standard trigonometric elimination to the two Rayleigh--Lamb
+equations,
+\begin{equation}\label{eq:RL}
+\frac{\tan(qh)}{\tan(ph)}=-\frac{4k^2pq}{(k^2-q^2)^2}\quad\text{(symmetric)},\qquad
+\frac{\tan(qh)}{\tan(ph)}=-\frac{(k^2-q^2)^2}{4k^2pq}\quad\text{(antisymmetric)} .
+\end{equation}
+
+\begin{worked}
+The elimination is worth doing once by hand. The $4\times4$ determinant has the structure of a difference of
+two $2\times2$ blocks because the symmetric combination pairs $\cos(ph)$ with $\sin(qh)$ and the
+antisymmetric pairs $\sin(ph)$ with $\cos(qh)$. Add and subtract the rows of the two faces; the sum of the
+two traction rows at $z=\pm h$ keeps the even functions and the difference keeps the odd ones. What remains
+is a $2\times2$ determinant in each case, and setting it to zero gives \eqref{eq:RL} after dividing by
+$\sin(ph)\sin(qh)$ and using $\cos/\sin=\cot$.
+\end{worked}
+
+\noindent The two families in \eqref{eq:RL} are the S and A families. Their long-wavelength limits are the
+classical ones: the lowest symmetric branch tends to the plate speed $\sqrt{E/(\rho(1-\nu^2))}$ as the
+frequency--thickness product goes to zero, the lowest antisymmetric branch tends to zero as a bending wave,
+and both tend to the Rayleigh speed of the half space as the product becomes large. A numerical treatment
+that does not reproduce these three statements has a mistake somewhere, and the mistake is usually a sign
+in one of the stress components \eqref{eq:sxx}--\eqref{eq:sxz}.
+
+\subsection{Thin plate, open circuit: the stiffened speed}
+
+\begin{worked}
+Take the frequency--thickness product small, so that the wavelength is long compared with $2h$ and the
+fields are almost uniform across the thickness. Keep the piezoelectric coupling and set the size lengths to
+zero. The faces are free and open, so $\sigma_{zz}=\sigma_{xz}=D_z=0$ at both faces, and the plate carries
+only $\eps_{xx}$ and $E_z$. Eliminating $E_z$ from $D_z=0$ gives
+$E_z=(e_{31}\eps_{xx}+p_3\theta)/\epsilon_{33}$, and putting this into $\sigma_{xx}$ gives an effective
+stiffness
+\[
+\bar c_{11}=c_{11}+\frac{e_{31}^2}{\epsilon_{33}} ,
+\]
+which is larger than $c_{11}$: the open circuit makes the plate stiffer than the short circuit, where $E_z$
+is zero and the stiffness is $c_{11}$ itself. With the density unchanged, the extensional speed of the thin
+plate becomes
+\[
+c_{\rm open}=\sqrt{\frac{\bar c_{11}}{\rho}}\quad(\text{stiffened}),\qquad
+c_{\rm short}=\sqrt{\frac{c_{11}}{\rho}}\quad(\text{short circuit}).
+\]
+If the faces are not traction free in the $z$ direction, the elimination also brings in $c_{13}$ and $c_{33}$
+and the combination is $\bar c_{11}=c_{11}-c_{13}^2/c_{33}+(e_{31}-c_{13}e_{33}/c_{33})^2/(\epsilon_{33}+e_{33}^2/c_{33})$;
+for the plate we work with, the first form is the one to compare against.
+\end{worked}
+
+\noindent The limit is a statement about stiffness and not about numbers: the open-circuit plate is stiffer
+than the short-circuit plate, the difference grows with the square of the piezoelectric constant and falls
+with the permittivity, and it is the same difference that appears as the electromechanical coupling factor in
+the literature. A check that the coupled matrix reproduces this ordering at small frequency--thickness is the
+first test of the piezoelectric block of \eqref{eq:M}, because it tests the Gauss row and the open-circuit
+condition together.
+
+\subsection{Bulk limit: thermoelastic damping}
+
+\begin{worked}
+Let $k$ be large compared with $\omega/c_L$, so that the wave is a plane wave in an unbounded medium as far
+as the heat is concerned, and keep only the thermal coupling to the dilatation. The heat equation
+\eqref{eq:g5} with $f=1$ reads
+$-\ii\omega\rho c_p\bt+T_0\omega k\beta_1\bx-\kB L\bt=0$, and the mechanical equation carries $-\beta_1\bt$
+as a stress. Eliminating $\bt$ between the two gives a complex correction to the elastic modulus whose
+imaginary part, divided by the real part, is
+\[
+\frac{k_i}{k_r}=\frac{\Delta_E}{2}\,\frac{\omega\tau}{1+(\omega\tau)^2},
+\]
+with $\Delta_E$ the dimensionless thermal expansion strength and $\tau$ the thermal relaxation time.
+\end{worked}
+
+\noindent This is the classical thermoelastic damping formula of the Fourier theory. Two things happen when
+the MGT operator is kept. The denominator becomes
+$1+\omega^2(\tau_T-\tau_q)^2$ in place of $1+(\omega\tau)^2$, so the peak moves and its height changes; and
+the numerator gains the factor $f$ from the relaxation. The peak of the damping is the classical
+thermoelastic peak, at $\omega\tau=1$ in the Fourier case.
+
+\subsection{Bulk limit: the Hutson--White condition}
+
+\begin{worked}
+The carrier equation \eqref{eq:g4} at long wavelength, with the field term and the drift term dropped,
+reads $(-\ii\omega-D_nL+1/\tau_R)\bn=0$, so a disturbance decays at the rate $D_n|L|$ and is swept by the
+wave at the rate $\omega$. The two rates are equal when $D_nk^2=\omega$, that is when
+$k^2=\omega/D_n$. Using the Einstein relation $D_n=b_nk_BT_0/q$ and the definition of the Debye length of
+the carriers, the equality between the dielectric relaxation rate and the wave frequency reads
+\[
+n_0=\frac{\epsilon_{11}\omega}{q\,b_n},
+\]
+which is the condition for the acoustoelectric interaction to be strongest: the carriers have just enough
+time to follow the wave.
+\end{worked}
+
+\noindent This condition is the one to test against a scan in the equilibrium density: at fixed frequency,
+the attenuation as a function of $n_0$ has a maximum at the value above. It is a check on row 4 of
+\eqref{eq:M} and on the carrier row \eqref{eq:b6} of the boundary matrix, and it is the reason the carrier
+density must be kept as a variable in any numerical study rather than set to a fixed value.
+
+\subsection{Other limits worth doing by hand}
+
+\begin{worked}
+Three more reductions cost one line each. Setting $l_g=l_{\rm nl}=0$ returns the classical plate and
+\eqref{eq:RL} exactly. Setting $\tau_q=0$ returns the Fourier heat equation and the classical thermoelastic
+damping. Setting $\bth=\Pth=0$ restores the parity of \eqref{eq:parity} and splits the matrix into the two
+families; if the split does not appear, the error is in row 4 or row 5. Each of these is a switch in one
+entry, so each is a check you can run in an afternoon.
+\end{worked}
+
+\section{Self-test list}\label{sec:tests}
+
+These are the checks to run before you show the draft to anyone. Each is stated so that you can answer yes
+or no.
+
+\begin{enumerate}
+\item Units. Every entry of \eqref{eq:row1}--\eqref{eq:row5} must have the same unit within its row, because
+the equation is a sum. Check the units of $M_{15}=\ii k\beta_1$ (Pa/K per m) against $M_{11}$ (Pa/m) and
+against $M_{13}$ (C/m$^3$ times V/m). The table in Section~\ref{sec:not} gives the units.
+\item Symmetry under $\eta\to-\eta$. With $\bth=\Pth=0$ the determinant must be even, and with either of them
+on it must not. Test both.
+\item Degree. With $l_g\ne0$ the root count must be fourteen, with $l_g=0$ it must be ten. If you get a
+different number, look at the highest powers in rows 1 and 2.
+\item The classical limit. With all couplings off, both families of \eqref{eq:RL} must come out, with the
+three long- and short-wavelength limits named in Section~\ref{sec:H}.
+\item The open-circuit ordering. At small frequency--thickness the open-circuit speed must exceed the
+short-circuit speed, with the ratio set by $e_{31}^2/(\epsilon_{33}c_{11})$.
+\item The thermal peak. The attenuation against frequency must have a maximum near $\omega\tau_T=1$ in the
+Fourier limit, and the maximum must move when $\tau_q$ is switched on.
+\item The carrier peak. The attenuation against $n_0$ must have a maximum at the condition of
+Section~\ref{sec:H}.
+\item The size effect. Increasing $l_g$ must stiffen the plate and increasing $l_{\rm nl}$ must soften it.
+If both do the same thing, the signs of $\Nc$ and $\Gc$ are the same in your code, which is wrong.
+\item The parity of the boundary rows. Each of the seven rows of \eqref{eq:b1}--\eqref{eq:b6} must have a
+definite parity under $\eta\to-\eta$ when \eqref{eq:parity} holds. A row that mixes the two parities is a
+row with a term in the wrong place.
+\item The alternatives. Rewrite (b5) as closed circuit, (b6) as a fixed carrier density and (b7) as an
+isothermal face, one at a time, and see that each changes the matrix in one row only.
+\end{enumerate}
+
+\section{Work plan}
+
+\begin{enumerate}
+\item Week 1. Read Lim, Zhang and Reddy, Section 2, equations (17) to (19), and Barretta and Marotti de
+Sciarra, equations (18) and (19), side by side. Write the differential law and the constitutive boundary
+conditions in your own words. Confirm the placement of the operators in \eqref{eq:M}.
+\item Week 2. Read the block of equations in Zhu et al.\ and attach the exact number to each of our
+equations. Read Quintanilla's equations (2.5) and (3.1)--(3.5) and confirm the operator in \eqref{eq:heat}.
+\item Week 3. Redo Calculations A to D on paper without looking at this file. Compare, and mark every place
+where you differ.
+\item Week 4. Redo Calculations E to G. Build the matrix for a chosen material, and check the ten self-tests
+in order.
+\item Week 5. Sensitivity study: vary each of the two length parameters and the two time constants one at a
+time, and write down which of the ten tests moves and by how much. This is the part that becomes the results
+section of the paper.
+\item Week 6. Write the paper: the introduction from Section~2, the model from Sections~3 to 7, the
+reduction from Sections~8 to 12, and the limits from Section~13. Put the worked blocks back only where your
+supervisor asks for them.
+\end{enumerate}
+
+\bibliographystyle{unsrt}
+\bibliography{Lamb_Sumit}
+
+\end{document}

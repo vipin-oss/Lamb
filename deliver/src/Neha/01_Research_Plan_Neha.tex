@@ -1,0 +1,294 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{#1}}}
+\setlength{\parskip}{4pt}
+\title{\vspace{-1.6cm}\Large Guided Lamb Waves in a One-Dimensional Hexagonal Piezoelectric Quasicrystal Plate\\[2pt]
+\large with Phason Relaxation, a Size Effect and a Single-Lag Heat Equation\\[8pt]
+\large Research plan, first half}
+\author{Dr.\ Vipin \\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-6mm}
+
+\section{Title, abstract, keywords}
+
+\paragraph{Working title} Lamb waves in a one-dimensional hexagonal piezoelectric quasicrystal plate:
+phason relaxation, nonlocal strain gradient elasticity and thermal coupling in one dispersion problem.
+
+\paragraph{Abstract} We study plane-strain Lamb waves in a plate of thickness $2h$ cut from a
+one-dimensional hexagonal piezoelectric quasicrystal, with free faces at $z=\pm h$ and the quasiperiodic
+direction along the thickness. The model carries five fields: the two phonon displacements, the phason
+displacement, the electric potential and the temperature rise. The phason field obeys a single equation that
+contains both an inertia and a friction term, so the wave-like and the diffusive descriptions of phason
+motion are the two limits of one parameter rather than two competing models. The phonon stress is written in
+the nonlocal strain gradient form, with the two size lengths entering only as length over thickness, and
+every piezoelectric, thermal and phonon-phason term is kept local. The heat equation is of the Moore-Gibson-Thompson (MGT)
+type in its base form, with one phase lag, and it carries the work of the phason stress as well as
+the work of the phonon stress. The paper asks three things. Which of the two phason limits survives in a
+plate of finite thickness, and where the crossover sits. How much attenuation the phason friction adds to
+each Lamb branch. How the thermal relaxation competes with the phason relaxation, since both are times and
+both cut off the high frequency behaviour. The plan gives the model, the sequence of comparisons to be made
+before any claim, and the figures the paper will carry.
+
+\paragraph{Keywords} quasicrystal; phason; Lamb waves; piezoelectric plate; nonlocal strain gradient
+elasticity; attenuation.
+
+\section{Introduction}
+
+A quasicrystal is a solid with long-range order but no periodicity. Its diffraction pattern has sharp spots,
+which says that the arrangement repeats in a certain sense, but the spots sit at positions that no periodic
+lattice can produce. The standard way to describe such a material in continuum mechanics is to give it a
+second displacement field. The phonon displacement is the ordinary displacement of the material points. The
+phason displacement is not a displacement in space at all; it measures how the tiles of the aperiodic tiling
+rearrange locally, sliding over one another without changing their shape. A gradient of the phason
+displacement produces a phason strain, and a phason strain costs energy. This framework goes back to the
+mid-eighties and the hydrodynamics of the icosahedral phase by Lubensky, Ramaswamy and Toner
+\cite{Lubensky1985}, and to the elasticity of pentagonal and icosahedral quasicrystals by Levine, Lubensky,
+Ostlund, Ramaswamy, Steinhardt and Toner \cite{Levine1985}. Both of those papers are about the icosahedral
+case, and the moduli in them should not be transferred to a hexagonal quasicrystal; we cite them for the
+concept and for the relaxation mechanism.
+
+One-dimensional hexagonal quasicrystals are the simplest case and the only one with a mature plate
+literature. The quasiperiodicity runs along a single axis, which in our problem is the thickness. Guided
+waves in such plates have been computed by Zhang, Yu, Zhang and Elmaimouni \cite{Zhang2021}, and the same
+group has since added nonlocal effects with an integral kernel \cite{Wang2025}, couple stress \cite{Wang2022}
+and layered construction \cite{Wang2025b}. The message from that body of work is that the phonon-phason
+coupling shifts the branches in a way that is measurable, and that the nonlocal parameter and the thickness
+compete in a way that can be mapped.
+
+Two things are missing from it, and both are about time. The first is the dynamics of the phason itself.
+Most plate papers treat the phason as if it were in equilibrium, because the phason relaxes. The
+distinction matters when the relaxation time is comparable with the wave period, which is the case the
+phason wave parameter study of Chellappan, Gopalakrishnan and Mani \cite{Chellappan2015} puts on a formal
+footing for bulk quasicrystals. That is a
+choice, not a law. Agiasofitou and Lazar wrote the phason momentum balance with both inertia and a friction
+tensor and showed that the diffusion limit and the wave limit are the two ends of one telegraph equation
+\cite{Agiasofitou2014}. Baggioli and Landry put the same crossover in the compact form in which the phason
+frequency obeys a damped wave relation, diffusive at long wavelength and propagating at short
+\cite{Baggioli2020}. Neither paper is about plates. A plate of finite-thickness phason modes is exactly the
+regime in which the crossover should be visible, because the thickness sets the smallest wavenumber the
+plate can hold.
+
+The second missing thing is heat. A quasicrystal plate at a different temperature from its surroundings
+carries a temperature field, and both the phonon and the phason stresses do work against it. Whether the
+heat equation of a quasicrystal plate should carry a relaxation time is not settled in the literature we
+have read, and the closest paper, by Zhang, Song, Li, Han, Yu and Yang on generalized thermoelastic Lamb
+waves in hexagonal quasicrystal nanoplates \cite{Zhang2026}, must be read before we write a single sentence
+about novelty. What we can say now is what we will do differently: we put both phason terms in one equation,
+we carry the phason work in the heat equation, and we report attenuation rather than only dispersion.
+
+To our knowledge, after searching Crossref and the open web in October 2026 for Lamb waves in
+one-dimensional hexagonal piezoelectric quasicrystal plates, no paper carries a telegraph phason equation
+together with a relaxation-time heat equation in one dispersion problem. That sentence is the whole novelty
+claim, and it is narrower than it looks. If the 2026 paper already carries the same heat operator, then the
+heat part of our contribution disappears and what remains is the phason inertia and friction pair and the
+attenuation curves. Neha should read that paper in week one and write the answer in her notebook before she
+writes anything else.
+
+\section{Problem statement and assumptions}
+
+The plate has thickness $2h$ and free faces at $z=\pm h$. The quasiperiodic direction is $z$. Motion is
+plane strain in the $x$--$z$ plane. Fields vary as $\exp[i(kx-\omega t)]$ with $k=k_r+ik_i$, and a positive
+$k_i$ means decay along $+x$. Frequency is reported through $f\,(2h)$. The five unknowns are the phonon
+displacements $u_x$ and $u_z$, the phason displacement $w_z$, the electric potential $\varphi$ and the
+temperature rise $\theta$.
+
+\begin{enumerate}
+\item Linear phonon and phason elasticity, with constant moduli at the reference temperature.
+\item Small phason strain, so that the phason stress is linear in the phason strain and in the phonon
+strain.
+\item A single phason inertia $\rho_p$ and a single phason friction $\gamma$, taken isotropic in the plane
+of the plate. Anisotropic friction is a labelled sensitivity case, not the main model.
+\item Piezoelectric coupling as in a transversely isotropic hexagonal crystal with the axis along $z$.
+\item Small temperature rise, $|\theta|/T_0\ll1$, so the heat equation can be linearised about the
+reference state.
+\item No free carriers; the electric problem is a dielectric one, with a possible surface charge condition
+at the faces which the scholar will choose.
+\end{enumerate}
+
+Two of these deserve a sentence. The phason friction is the one parameter in the model that no textbook
+gives for a plate, and it must be swept rather than fixed, with the sweep reported. And the assumption of a
+single inertia and a single friction is a simplification of the tensor form in Agiasofitou and Lazar
+\cite{Agiasofitou2014}; we take it because the plate problem already has enough parameters and because the
+anisotropy of friction is not something a wave test can resolve.
+
+\section{The model}
+
+\subsection{Constitutive relations}
+
+With $\varepsilon_{ij}=\tfrac12(u_{i,j}+u_{j,i})$, $w_{ij}=w_{i,j}$ and $E_i=-\varphi_{,i}$, the phonon
+stress carries the size effect on its elastic part only,
+\begin{equation}
+\bigl(1-l_{\rm nl}^2\nabla^2\bigr)t_{ij}=\sigma_{ij},\qquad
+\sigma_{ij}=C_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}+R_{ijkl}w_{kl}
+-e_{kij}E_k-\beta_{ij}\theta ,
+\end{equation}
+the phason stress is local and carries the phonon strain and the phason strain,
+\begin{equation}
+H_{ij}=R_{klij}\varepsilon_{kl}+K_{ijkl}w_{kl}-\beta^{w}_{ij}\theta ,
+\end{equation}
+and the electric displacement is local,
+\begin{equation}
+D_i=e_{ikl}\varepsilon_{kl}+\epsilon_{ik}E_k+p_i\theta .
+\end{equation}
+The two operators act on the phonon elastic strain energy and nowhere else. The phonon-phason coupling, the
+piezoelectric coupling, the pyroelectric coupling and both thermal stresses are local. The reason is the
+same as in the companion paper: keeping $D_i$ second order means the electric problem needs no extra
+condition at the faces, and keeping the size effect mechanical means the extra conditions are mechanical
+too.
+
+The thermo-phason term $\beta^{w}_{ij}\theta$ is an extension, not a published relation. Duhamel's analogy
+extends to the phason stress in the obvious way, but we have found no paper that writes it, and the paper
+must say so in the sentence where it appears. If Neha cannot find a source, the term stays with an explicit
+statement of its status.
+
+\subsection{Field equations}
+
+Momentum, in the form in which the nonlocal operator acts on inertia,
+\begin{equation}
+\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\rho\,\ddot u_i=\sigma_{ij,j},
+\end{equation}
+the phason balance with inertia and friction,
+\begin{equation}
+H_{zj,j}=\rho_p\ddot w_z+\gamma\dot w_z ,
+\end{equation}
+Gauss law in a dielectric,
+\begin{equation}
+D_{i,i}=0 ,
+\end{equation}
+and the heat equation,
+\begin{equation}
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\varepsilon_{ij}
++T_0\beta^{w}_{ij}\dot w_{ij}+T_0p_i\dot E_i\Bigr]
+=k_{\rm th}\nabla^2\theta .
+\end{equation}
+Five equations for five unknowns. Equation four is the one this paper is about. Setting $\gamma=0$ leaves a
+wave equation for the phason with a finite speed; setting $\rho_p=0$ leaves a diffusion equation; keeping
+both leaves a telegraph equation whose dispersion runs from one limit to the other as the wavenumber grows.
+In a plate the allowed wavenumbers are set by the thickness, so the crossover can be moved through the
+measured range by changing the thickness. That is the experiment the paper proposes, in principle.
+
+\subsection{Notation}
+
+\begin{center}
+\small
+\begin{tabular}{p{2.4cm}p{6.7cm}p{3.4cm}}
+\toprule
+symbol & meaning & unit\\
+\midrule
+$u_x,u_z$ & phonon displacements & m\\
+$w_z$ & phason displacement along the quasiperiodic axis & m\\
+$\varphi$ & electric potential & V\\
+$\theta$ & temperature rise over $T_0$ & K\\
+$k=k_r+ik_i$ & wavenumber; $k_i>0$ is decay along $+x$ & m$^{-1}$\\
+$2h$ & plate thickness; faces at $z=\pm h$ & m\\
+$C_{ijkl}$ & phonon elastic moduli & Pa\\
+$K_{ijkl}$ & phason elastic moduli & Pa\\
+$R_{ijkl}$ & phonon-phason coupling moduli & Pa\\
+$e_{kij}$, $\epsilon_{ik}$, $p_i$ & piezoelectric, dielectric, pyroelectric constants & C\,m$^{-2}$, F\,m$^{-1}$, C\,m$^{-2}$K$^{-1}$\\
+$\rho$, $\rho_p$ & mass density, phason mass density & kg\,m$^{-3}$\\
+$\gamma$ & phason friction coefficient & kg\,m$^{-3}$s$^{-1}$\\
+$l_{\rm nl}$, $l_g$ & nonlocal and gradient lengths, used as $l/h$ & m\\
+$\beta_{ij}$, $\beta^{w}_{ij}$ & thermal stress, thermo-phason coupling & Pa\,K$^{-1}$, Pa\,K$^{-1}$\\
+$\rho c_p$, $k_{\rm th}$, $\kappa$ & heat capacity per volume, conductivity, diffusivity & J\,m$^{-3}$K$^{-1}$, W\,m$^{-1}$K$^{-1}$, m$^2$s$^{-1}$\\
+$\tau_q$, $\tau_T$ & phase lag, $\tau_T=(2h)^2/(\pi^2\kappa)$ & s\\
+$\omega$, $f$ & angular frequency, frequency & rad\,s$^{-1}$, Hz\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Order of the system, and where this chapter stops}
+
+The nonlocal and gradient operators raise the order of the problem in $z$, and the phason equation adds a
+second-order field with no classical counterpart, so the free faces need more conditions than the classical
+traction and electrical pair, and some of those extra conditions will be phason conditions. Which ones to
+use, and whether they should be phrased in terms of the phason stress or the phason displacement, is your
+problem to settle; this chapter stops before the faces.
+
+\section{Work plan}
+
+Six steps, each ending with a written comparison.
+
+\paragraph{Step 1. The elastic quasicrystal plate, both limits of the phason} With $e=0$, $\theta=0$ and both
+size lengths zero, the model must reproduce the published dispersion of a one-dimensional hexagonal
+quasicrystal plate \cite{Zhang2021} in shape and ordering, with the phonon-phason coupling switched off and
+then on. With $\gamma=0$ the phason branch must be a propagating branch at a speed set by the phason moduli;
+with $\rho_p=0$ it must be a diffusive branch that does not propagate. Both are computed before any coupled
+case, and the branch count is written down.
+
+\paragraph{Step 2. Piezoelectric coupling} Switch on $e_{kij}$ and compare the branch splitting with the
+piezoelectric quasicrystal plate results of the same group \cite{Wang2025,Wang2022}. The comparison is of
+ordering and of the sign of the shift, since the material set is ours.
+
+\paragraph{Step 3. Heat in the two limits} With the phason friction set aside for the moment, switch on $\theta$ and
+compare the isothermal and adiabatic limits. The coupled answer must lie between them, to a width of order
+the thermoelastic coupling. Report the width, and report separately how much of it comes from the phason
+work term, which is the one we have no source for.
+
+\paragraph{Step 4. Two times in competition} With both the phason friction and the thermal lag active, the
+high-frequency behaviour is cut off twice. The heat side cuts off at $1/|\tau_T-\tau_q|$; the phason side
+cuts off when the phason frequency falls below the friction rate. The paper must show which cutoff comes
+first for the thicknesses of interest. This is the figure that decides whether the thermal field is needed at
+all, and it is drawn before the parameter sweep, not after.
+
+\paragraph{Step 5. Switching-off tests} Set $R_{ijkl}=0$ and the phonon-phason coupling must vanish, with the
+phonon and phason problems decoupled to within $10^{-6}$ relative on $k_r$ and $k_i$ for every sampled
+mode. Set $\gamma$ to zero and the result must match an independently assembled lossless phason model to
+within the same tolerance; set $\rho_p$ to zero and it must match the diffusion model. Set the thermal
+coupling to zero and the attenuation must fall to the mechanical value. Every residual goes in an appendix
+table. A tolerance of $10^{-4}$ is a warning, not a pass.
+
+\paragraph{Step 6. Size effect and the final sweep} Sweep $l_{\rm nl}/h$ and $l_g/h$ as in the companion paper,
+then $\gamma$ over the range that keeps the phason branch on both sides of the crossover, and produce the
+attenuation families for three thicknesses. Report the phason contribution as a difference of attenuations.
+
+\section{Figures, risks and timeline}
+
+Four figures. First, the dispersion of the two phason limits on the same axes, with the propagating branch
+and the diffusive branch labelled, which is the clearest statement of what the paper is doing. Second, the
+attenuation of the two lowest branches against frequency times thickness, with the isothermal and adiabatic
+brackets as bands. Third, the competition of the two cutoff times as a map of thickness against friction
+rate, with the boundary where the thermal cutoff comes first drawn on it. Fourth, the sensitivity of the
+lowest antisymmetric branch to the nonlocal length, since that is the parameter a referee will press on.
+
+The first risk is novelty and it is serious. The 2026 paper on generalized thermoelastic Lamb waves in
+hexagonal quasicrystal nanoplates \cite{Zhang2026} may already contain the heat operator we propose to use.
+Nothing in this plan can be fixed by writing more; the paper has to be read in week one, and if it closes the
+thermal route then the paper narrows to the phason telegraph equation and the attenuation curves. The second
+risk is that the phason friction cannot be measured in a plate, so the sweep may be dismissed as arbitrary;
+the answer is to report the friction as a range tied to a measured phason relaxation time, where one exists
+for a real material. The third risk is that the two-size-length description of a quasicrystal is not on firm
+ground, since the nonlocal kernel used in the closest papers is integral and ours is differential; the
+comparison in Step 1 is designed to expose any inconsistency. The fourth risk is the missing source for the
+thermo-phason term, which is a referee question we cannot answer with a citation and must answer with a
+derivation and a statement of its size.
+
+Timeline, fourteen weeks. Weeks one to two, reading, including the 2026 paper, and Step 1. Weeks three to
+four, Step 2 and the branch count. Weeks five to six, Step 3. Weeks seven to eight, Step 4
+and the two-cutoff map. Weeks nine to ten, Step 5. Weeks eleven to twelve, Step 6 and the sweeps. Weeks
+thirteen to fourteen, figures and writing.
+
+\begin{thebibliography}{99}
+\small
+\bibitem{Lubensky1985} T.~C.~Lubensky, S.~Ramaswamy, J.~Toner, \emph{Phys.\ Rev.\ B} \textbf{32} (1985) 7444, \doi{10.1103/PhysRevB.32.7444}.
+\bibitem{Levine1985} D.~Levine, T.~C.~Lubensky, S.~Ostlund, S.~Ramaswamy, P.~J.~Steinhardt, J.~Toner, \emph{Phys.\ Rev.\ Lett.} \textbf{54} (1985) 1520, \doi{10.1103/PhysRevLett.54.1520}.
+\bibitem{Agiasofitou2014} E.~Agiasofitou, M.~Lazar, \emph{Int.\ J.\ Solids Struct.} \textbf{51} (2014) 923, \doi{10.1016/j.ijsolstr.2013.11.016}.
+\bibitem{Baggioli2020} M.~Baggioli, M.~Landry, \emph{SciPost Phys.} \textbf{9} (2020) 062, \doi{10.21468/SciPostPhys.9.5.062}.
+\bibitem{Zhang2021} B.~Zhang, J.~G.~Yu, X.~M.~Zhang, L.~Elmaimouni, \emph{Acta Mech.} \textbf{232} (2021) 135, \doi{10.1007/s00707-020-02811-7}.
+\bibitem{Wang2025} X.~Wang, J.~Yu, B.~Zhang, L.~Elmaimouni, P.~Ming, \emph{Wave Motion} \textbf{134} (2025) 103479, \doi{10.1016/j.wavemoti.2024.103479}.
+\bibitem{Wang2022} X.~X.~Wang, J.~G.~Yu, B.~Zhang, L.~Elmaimouni, X.~M.~Zhang, X.~H.~Wang, \emph{Acta Mech.} \textbf{233} (2022) 3021, \doi{10.1007/s00707-022-03274-8}.
+\bibitem{Wang2025b} X.~Wang, J.~Yu, B.~Zhang, L.~Elmaimouni, L.~Li, \emph{Compos.\ Struct.} \textbf{370} (2025) 119430, \doi{10.1016/j.compstruct.2025.119430}.
+\bibitem{Zhang2026} B.~Zhang, J.~Song, L.~Li, H.~Han, J.~Yu, X.~Yang, \emph{Acta Mech.\ Solida Sin.} (2026), \doi{10.1007/s10338-026-00755-4}.
+\bibitem{Chellappan2015} V.~Chellappan, S.~Gopalakrishnan, V.~Mani, \emph{J.\ Appl.\ Phys.} \textbf{117} (2015), \doi{10.1063/1.4907212}.
+\bibitem{Lim2015} C.~W.~Lim, G.~Zhang, J.~N.~Reddy, \emph{J.\ Mech.\ Phys.\ Solids} \textbf{78} (2015) 298, \doi{10.1016/j.jmps.2015.02.001}.
+\bibitem{Barretta2018} R.~Barretta, F.~Marotti de Sciarra, \emph{Int.\ J.\ Eng.\ Sci.} \textbf{130} (2018) 187, \doi{10.1016/j.ijengsci.2018.05.009}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,150 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\title{\vspace{-1.4cm}\Large Units, the Fourier check and the closure baseline: milestone report for Task~2}
+\author{Dr.\ Vipin\\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-7mm}
+
+\section*{The units fault}
+
+You were right. The three tabulated heat capacities, $2.8\times10^{6}$, $2.6\times10^{6}$ and
+$2.5\times10^{6}$, are volumetric already, and the code was multiplying by $\rho$ again. The heat
+capacity was five thousand six hundred times too large in Sumit, and the corresponding factors in
+Neha and Anu. `rcp_of` now returns the tabulated value. Every elastic and size-effect number
+reported so far was produced with the couplings off and does not move; the fully coupled runs move
+a little, and they now have their own baseline, $2181.9$~m/s at $fd=1000$ against the elastic
+$2326.6$.
+
+\section*{Fourier damping, bulk, after the fix}
+
+Sub-block $(u_x,\theta)$ at $\eta=0$ with $\tau_q=0$ and everything else off. The determinant is
+quadratic in $k^{2}$, so the roots are exact. Constants: $\kappa=k_{th}/r c_p=2.143\times10^{-5}$
+m$^{2}$/s, $c_L=6076.1$~m/s, $\Delta_E=T_0b_1^{2}/(r c_p c_{11})=8.175\times10^{-5}$, and the peak
+of the Fourier shape at $1/(2\pi\kappa/c_L^{2})=274$~GHz.
+
+\begin{center}\footnotesize
+\begin{tabular}{cccc}
+\toprule
+$f$ (Hz) & $k_r$ (1/m) & $k_i/k_r$ & formula\\
+\midrule
+$10^{8}$ & $1.034039\times10^{5}$ & $1.4904\times10^{-8}$ & $1.4907\times10^{-8}$\\
+$10^{9}$ & $1.034039\times10^{6}$ & $1.4904\times10^{-7}$ & $1.4906\times10^{-7}$\\
+$10^{10}$ & $1.034039\times10^{7}$ & $1.4884\times10^{-6}$ & $1.4887\times10^{-6}$\\
+$10^{11}$ & $1.034044\times10^{8}$ & $1.3155\times10^{-5}$ & $1.3157\times10^{-5}$\\
+$2.74\times10^{11}$ & $2.833326\times10^{8}$ & $2.0437\times10^{-5}$ & $2.0437\times10^{-5}$\\
+$10^{12}$ & $1.034079\times10^{9}$ & $1.0424\times10^{-5}$ & $1.0424\times10^{-5}$\\
+$10^{13}$ & $1.034082\times10^{10}$ & $1.1200\times10^{-6}$ & $1.1200\times10^{-6}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Four digits at every frequency, the peak at 274~GHz, and $k_i/k_r=\Delta_E/2$ there. That is the
+check you asked for and it passes. The plate version needs a complex-$k$ plate solver, which is not
+written yet.
+
+\section*{Hutson--White: the sign was in my test}
+
+The model is right and the masters are right. Gauss's law carries $M_{34}=q$ with the row
+$\mathrm{i}kD_x+\eta D_z+q\Delta n=0$, the carrier row carries $M_{43}=b_nn_0L$ and
+$M_{44}=-\mathrm{i}\omega-D_nL-\mathrm{i}kv_d+1/\tau_R$, and both match the master line for line.
+The piezoelectric block is skew: $M_{23}=+e_{15}k^{2}$ and $M_{32}=-e_{15}k^{2}$ at $\eta=0$. My
+hand-built test sub-block had those two entries equal, and a symmetric sub-block inverts the
+physics. With the skew entry, the sub-block $(u_z,\phi,\Delta n)$ at $\eta=0$, $D_n=0$, $v_d=0$,
+$f=100$~kHz, gives $k_i>0$ and a peak at $n_0=3\times10^{16}$~m$^{-3}$ against
+$n_0^{*}=2.9654\times10^{16}$, with $k_i/k_r=1.73\times10^{-2}$ there against $K^{2}/2=3.6\times10^{-2}$
+halved by the resonance. Sign, position and magnitude all pass, and nothing in the code or the
+masters needed changing.
+
+\begin{center}\footnotesize
+\begin{tabular}{lcccccccc}
+\toprule
+$n_0$ & $10^{15}$ & $10^{16}$ & $2\times10^{16}$ & $3\times10^{16}$ & $4\times10^{16}$ & $10^{17}$ & $3\times10^{17}$ & $10^{18}$\\
+\midrule
+$k_i/k_r$ ($10^{-2}$) & 0.11 & 1.02 & 1.59 & 1.73 & 1.68 & 0.97 & 0.35 & 0.11\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{The closed form for the plate threshold}
+
+Linearising the pair (Gauss, carriers) gives the screening threshold
+$n_{0}^{th}=\epsilon_{33}\lvert -\mathrm{i}\omega+D_nk^{2}+1/\tau_R\rvert/(qb_n)$. Two limits follow
+and both were tested. With $1/\tau_R\ll\omega$ it collapses to $\epsilon_{33}\omega/(qb_n)=n_0^{*}$,
+the bulk value, which is the consistency the bulk test shows. With $1/\tau_R\gg\omega$ it becomes
+$\epsilon_{33}/(qb_n\tau_R)=5.6\times10^{19}$ for $\tau_R=1$~ns, and the observed crossover between
+$10^{18}$ and $10^{19}$ is its lower shoulder; the factor against $n_0^{*}$ is
+$1/(\omega\tau_R)=1592$, which is the 30 to 300 we saw. Lengthening the lifetime moves it: at
+$\tau_R=1$~ms and $fd=100$ the screening is complete by $n_0=10^{18}$, S0 at 5262.7 against the
+short-circuit 5259.1, while at $\tau_R=1$~ns the same point still reads 5504.6.
+
+\section*{Phason and magnetoelastic limits}
+
+Both at $l_g=l_{nl}=0$, $h=5\times10^{-4}$~m, $fd=1000$, A0 branch. With the default lengths of
+$10^{-8}$~m these two papers give singular values of $10^{-16}$ and meaningless dips, so the lengths
+must be zeroed for any limit test on them.
+
+\begin{center}\footnotesize
+\begin{tabular}{lcc}
+\toprule
+case & A0 (m/s) & shift\\
+\midrule
+Neha full & 2216.6 & ---\\
+Neha, phason decoupled ($R_1=R_2=R_3=b_w=0$) & 2222.5 & $+5.9$ (0.27 per cent)\\
+Anu full & 2277.1 & ---\\
+Anu, magnetoelastic off ($q_{31}=q_{33}=q_{15}=0$) & 2276.4 & $-0.7$ (0.03 per cent)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+At this frequency the phason coupling is a small measurable shift and the magnetoelastic coupling is
+absent. The $K_1=K_2=0$ variant of Neha gives 2076.6 with a dip depth of 2, which is not a dip, and
+it is not reported as a limit.
+
+\section*{The closure, with its own baseline}
+
+$l_g=l_{nl}$ was the fault, as you said; with $0.5$ and $2\,l_g$ the runs are healthy. The baseline
+column is the same coupled model with both lengths at zero, $2181.9$~m/s at $fd=1000$ and $943.5$ at
+$fd=100$. The $l=10^{-8}$~m route to that baseline is not usable: at $l/h=2\times10^{-5}$ the
+equilibrated singular value is $10^{-17}$ everywhere and turns negative in the fourth digit.
+
+\begin{center}\footnotesize
+\begin{tabular}{cccc}
+\toprule
+$l_g/h$ & $l_{nl}/l_g$ & our seven rows & alternative closure\\
+\midrule
+0.05 & 0.5 & 2193.2 & 2211.5\\
+0.05 & 2 & 2175.8 & 2170.8\\
+0.10 & 0.5 & 2220.2 & 2195.3\\
+0.10 & 2 & 2154.4 & 2128.4\\
+0.20 & 0.5 & 2300.7 & no reproducible branch\\
+0.20 & 2 & 1825 & 1825\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Against the baseline the sign follows the ratio: with $l_{nl}=0.5\,l_g$ all three entries stiffen
+($+0.5$, $+1.8$, $+5.4$ per cent), with $l_{nl}=2\,l_g$ the first two soften ($-0.3$, $-1.3$ per
+cent) and the third falls to $-16$ per cent. The alternative closure moves a given branch by at
+most 26~m/s, 1.1 per cent, with no systematic sign.
+
+The $0.2$, $0.5$ alternative entry was re-run over 800 to 2600~m/s in steps of 25: five shallow
+minima, the deepest $8.3\times10^{-4}$ against a median of $2.6\times10^{-2}$, no clean branch, where
+our rows give a single dip at 2300.7 with depth 87. It stays held.
+
+\section*{Parity and delivery}
+
+Parity is unchanged: Sumit none, Sumit with $\beta_{th}=\Pi_{th}=E_g=0$ the pair
+$(+,-,-,-,+)$ and its negative, Neha and Anu the same pair always. The v8 masters are untouched,
+the held $0.2$, $0.5$ closure entry is not quoted anywhere, and no \LaTeX{} engine is installed
+here, so this file is a source that has been through the style script.
+
+\end{document}

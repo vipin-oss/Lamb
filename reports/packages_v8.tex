@@ -1,0 +1,177 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\title{\vspace{-1.4cm}\Large Every entry against the constitutive laws: milestone report for v8}
+\author{Dr.\ Vipin\\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-7mm}
+
+\section*{What was done}
+
+The three masters of this round were not checked against themselves. Each five-by-five matrix was
+built again from the component constitutive relations of Calculation~A and the balances of
+Calculation~B, with the two length operators kept as symbols, and then the entries printed in the
+\LaTeX{} file were parsed out of the display blocks and compared with the rebuilt ones at three
+points, $(k,\omega,\eta)=(2.5\times10^5,1\times10^8,3\times10^4)$ and two more, in units of
+rad/m and rad/s. The same was done for the seven row functions, which were rebuilt from the
+conditions on the face rather than from the printed rows, and for the two rows that carry a whole
+traction, whose traction was expanded from the constitutive block at the same amplitudes.
+
+\section*{Result of the entry-by-entry check: nothing to fix}
+
+Every one of the twenty-five entries and every one of the seven row functions agrees with the
+rebuild in all three papers. The largest relative difference anywhere is $1.1\times10^{-50}$, which
+is rounding in the comparison, not a difference in the physics.
+
+\begin{center}\footnotesize
+\begin{tabular}{lccc}
+\toprule
+& Sumit & Neha & Anu\\
+\midrule
+largest difference over $M_{11}\ldots M_{55}$ & $1.1\times10^{-50}$ & $2.4\times10^{-51}$ & $1.6\times10^{-50}$\\
+largest difference over $b_1\ldots b_7$ & $1.8\times10^{-51}$ & $2.1\times10^{-51}$ & $2.3\times10^{-51}$\\
+exact zero difference, entries & 18 of 25 & 22 of 25 & 8 of 25\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+So the masters of this round need no correction in the matrices. The signs that were repaired last
+round are now confirmed by an independent route and not by inspection: the Gauss row of Anu reads
+$\epsilon_{11}k^2-\epsilon_{33}\eta^2$, $\alpha_{11}k^2-\alpha_{33}\eta^2$ and
+$\mu_{11}k^2-\mu_{33}\eta^2$ in $M_{33}$, $M_{34}$, $M_{43}$ and clears the rebuild; Neha's
+$M_{44}=\epsilon_{11}k^2-\epsilon_{33}\eta^2$, her $M_{35}=-\eta\beta^{w}$ and the dotted
+$\dot w_{zz}$ in the heat row clear it as well.
+
+Two things did disagree, and both were on the checking side, not in your files. The heat row must
+carry $\rho c_p$ as one product; with $c_p$ alone the row differs by the density at the fourth
+digit, and that is what the comparison showed. Neha's $K_1$ is the axial modulus on $w_{zz}$ and
+$K_2$ the transverse one on $w_{zx}$; the comparison first used them the other way round. Both
+conventions are stated in your notation table and in Calculation~A, so nothing changes there.
+
+\section*{The elastic limit and the structure}
+
+With all couplings off and both lengths zero, the roots of the determinant reproduce the
+Rayleigh--Lamb branches of both families.
+
+\begin{center}\footnotesize
+\begin{tabular}{lccc}
+\toprule
+fd $=f\,2h$ (Hz\,m) & 10 & 100 & 1000\\
+\midrule
+$S_0$ (m/s) & 5393.9053 & 5393.1719 & 5308.5887\\
+$A_0$ (m/s) & 311.6377 & 954.2341 & 2326.6431\\
+$|{\det\mathbf B}|/\|\mathbf B\|^4$, worst of the six & \multicolumn{3}{c}{$1.6\times10^{-59}$}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The reference speeds for aluminium at $h=10^{-3}$~m are $c_L=6197.82$, $c_T=3121.95$ and
+$c_R=2909.7$~m/s; the computed values are $6197.8243$, $3121.9527$ and $2909.7314$. The tolerance
+of $10^{-5}$ is met with room to spare.
+
+Four structural statements also hold in all three papers. The degree of $\det\mathbf M(\eta)$ is
+14 when $l_g\ne0$ and 10 when $l_g=0$, and $l_{\rm nl}$ does not change it; four roots sit at
+$|\eta|l_g$ near one, as the degree count requires; the null-vector residuals of the first roots
+are between $10^{-49}$ and $10^{-71}$ and all fourteen roots have a one-dimensional null space; the
+physical roots move by no more than $1.3\times10^{-10}$ relative when both lengths are taken from
+$10^{-8}$ to $10^{-11}$~m.
+
+The parity test deserves one line of its own. In Sumit the sign vector $(1,-1,-1,-1,1)$ exists
+exactly when $\beta_{\rm th}=\Pi_{\rm th}=E_g=0$. Keeping $E_g$ alone destroys it. The sentence you
+now have in Calculation~D, which names all three constants, is the correct one; the earlier version
+that named two of them was too weak.
+
+\section*{What is open}
+
+Three items of the test list are not finished, and one of them matters for the closure question.
+
+The one-coupling-at-a-time limits were not re-run against these entries. The numbers of the earlier
+round are in the internal benchmark file and were produced from the previous entries; the present
+entries agree with the rebuild entry by entry, so those numbers are not contradicted, but they are
+not reproduced here.
+
+The direction of the shifts with the two lengths was not measured at mode level, because that
+needs a mode.
+
+The mode needs the fourteen-root assembly of Calculation~G, and that assembly is not working in my
+implementation. All fourteen roots are there, each with a clean null vector, and the column scaling
+is in place; but the assembled matrix is numerically singular at every speed tried, with an
+equilibrated determinant of order $10^{-160}$ at forty working digits, at speeds from 500 to
+5500~m/s and $l/h=0.05,0.1,0.2$. The same code assembles the elastic four-row case to
+$1.6\times10^{-59}$, so the fault lies in the fourteen-root bookkeeping and not in the determinant
+routine. Until that is found, the dispersion curves of the full model are not reported, and the
+numbers for the alternative closure are not reported either: any figure produced from a singular
+matrix would be noise.
+
+\section*{The closure of the boundary problem}
+
+The literature uses two closures and they answer different questions. For a gradient solid the
+free face carries the effective traction and the double traction, which is the variational
+condition read in Charalambopoulos et al.\ (Sec.~2, Eq.~(14), condition b(i)). For a nonlocal law
+written in differential form, the step from the integral law needs conditions on the constitutive
+quantities, read in Barretta and Marotti de Sciarra (Eqs.~(18)--(19)).
+
+Your seven rows are the first closure with the electromagnetic, carrier and thermal conditions
+added, and nothing of the second. Whether the second bites here is decided by where the nonlocal
+operator sits. In your models $\mathcal{N}$ multiplies only the inertial term: $M_{11}$ and $M_{22}$ are
+the only entries that contain it, which the entry check confirms. The degree count shows the
+consequence, because $l_{\rm nl}=0$ leaves the degree at 14 while $l_g=0$ drops it to 10. The
+nonlocal length therefore adds no root and calls for no extra condition; the gradient length adds
+four roots, and the four double-traction rows close them.
+
+That is the verdict to put in the manuscript, with one sentence of caution: it holds for the form
+in which the operator is carried on the inertia, and that choice should be named as yours. A
+shorter wording for the paragraph at the head of Calculation~F, offered for your decision rather
+than imposed:
+\begin{quote}\small
+The differential form $(1-l_{\rm nl}^2\nabla^2)t_{ij}=\sigma_{ij}$ is equivalent to the nonlocal
+integral law on a bounded body only if constitutive boundary conditions are added (Barretta and
+Marotti de Sciarra, IJES 130 (2018) 187, Eqs.~(18)--(19)). In the form used here the nonlocal
+operator multiplies the inertial term, so it adds no root to the characteristic polynomial and
+calls for no extra condition; the length that adds roots is the gradient length, four of them, and
+they are closed by the two double tractions on each face. The seven rows are a modelling choice of
+ours in that sense. Until the alternative closure is computed, $\det\mathbf B=0$ belongs to this
+boundary-value problem and to no other.
+\end{quote}
+
+\section*{Citations}
+
+Five of the six equation-level citations were read at the equation itself: Charalambopoulos
+Sec.~2 Eq.~(14), Barretta Eqs.~(18)--(19), Zhu Eq.~(1) inside Eqs.~(1)--(7), Agiasofitou
+Eq.~(26), Baggioli Eq.~(17). The sixth is the pair of equations of Yang and Zhou used for the
+drift--diffusion current; that full text is not reachable from here, so the equations are
+unverified and should either be opened before the manuscript quotes their numbers or cited without
+them.
+
+The Yang--Zhou DOI question is settled. Both DOIs are real and they are two different papers of the
+same authors from 2005: the Elsevier one, \emph{Amplification of acoustic waves in piezoelectric
+semiconductor plates}, IJSS \textbf{42} (2005) 3171--3183, and the other, \emph{Wave propagation in
+a piezoelectric ceramic plate sandwiched between two semiconductor layers}, Int.\ J.\ Appl.\
+Electromagn.\ Mech.\ \textbf{22} (2005) 97--109. Your bib entry is the first, so it stays as it is.
+The second needs its own entry only if a result from it is used.
+
+The chain to Lim, Zhang and Reddy is explicit in all three files: the equation numbers are quoted as
+Barretta identifies them and the text says the Lim paper was closed to you. Nothing to change
+there.
+
+\section*{Delivery}
+
+The masters of this round need no equation edit, so the zips in \texttt{deliver/} carry the v8
+sources unchanged, one pair of files per scholar, together with the three updated bibliographies.
+The evidence for every number in this note is in \texttt{internal/v8\_task1\_entries.md},
+\texttt{internal/v8\_task2\_tests.md}, \texttt{internal/v8\_task3\_closure.md} and
+\texttt{internal/v8\_task4\_citations.md}.
+
+There is no \LaTeX{} engine in this environment, so nothing was compiled here. Both settings of
+\texttt{\textbackslash showworked} were checked statically only: environments balance, no label is
+duplicated and no reference is undefined in any of the three files.
+
+\end{document}

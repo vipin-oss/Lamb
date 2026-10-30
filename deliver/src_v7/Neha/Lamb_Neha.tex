@@ -1,0 +1,791 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsthm}
+
+\newif\ifshowworked \showworkedtrue
+\newenvironment{worked}{\ifshowworked\par\smallskip\noindent\textit{Working.}\par\else\setbox0\vbox\bgroup\fi}{\ifshowworked\par\smallskip\else\egroup\fi}
+
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\bx}{\hat u_x}
+\newcommand{\bz}{\hat u_z}
+\newcommand{\bw}{\hat w}
+\newcommand{\bp}{\hat\varphi}
+\newcommand{\bt}{\hat\theta}
+\newcommand{\kB}{k_{\mathrm{th}}}
+\newcommand{\bwth}{\beta^{w}}
+
+\title{\bfseries Lamb waves in a one-dimensional hexagonal piezoelectric\\[2pt]
+quasicrystal plate with Moore--Gibson--Thompson heat conduction\\[2pt]
+and the nonlocal strain gradient size effect}
+\author{Dr.\ Vipin\\ Gurugram University}
+\date{30 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+A one-dimensional hexagonal quasicrystal has two displacements: the phonon displacement, which is the
+ordinary elastic motion, and the phason displacement, which describes the rearrangement of the atomic
+clusters and exists only along the quasiperiodic axis. We take that axis along the plate normal $z$, keep
+the electric potential and the temperature, and reduce the five coupled field equations to a plane-wave
+problem across the thickness. The plate has thickness $2h$ and free faces at $z=\pm h$; the wave is
+$\exp[\ii(kx-\omega t)]$ with complex $k$. Heat conduction is of Moore--Gibson--Thompson type and carries a
+thermo-phason term; the phonon stress carries the nonlocal strain gradient operator. We give the
+constitutive components, the five equations, the $5\times5$ matrix, the degree and parity of its
+determinant, the amplitude ratios, the seven conditions per face, the boundary matrix and the hand limits.
+\end{abstract}
+
+\noindent\textit{Keywords.} quasicrystal; phason; Lamb wave; Moore--Gibson--Thompson; nonlocal strain
+gradient; plate.
+
+\section{Introduction}
+
+A quasicrystal has order without periodicity. In the one-dimensional hexagonal case the atoms sit in planes
+that repeat along $x$ and $y$ in the usual way, but along the axis $z$ the spacing follows a sequence that
+is ordered and never repeats. Two displacements are needed to describe the motion. The first is the phonon
+displacement $u_i$, the same field an ordinary crystal has. The second is the phason displacement $w_z$,
+which does not move an atom from one place to another; it describes the local rearrangement of the atomic
+clusters along the quasiperiodic direction, the way a queue of people can shuffle along without anyone
+leaving the queue. Because the rearrangement costs energy, the phason field carries its own stress, its own
+moduli, and its own dynamics.
+
+The dynamics of the phason is the interesting part. It has inertia, so it can oscillate, and it has
+friction against the lattice, so it can relax. The two together give a telegraph equation: at high
+frequency the phason behaves like a wave, at low frequency like a diffusion. This is written in
+Agiasofitou and Lazar \cite[Eqs.~(26) and (30)]{Agiasofitou2014}, who give the friction term in the phason
+balance and the telegraph equation that follows from it, and in Baggioli and Landry
+\cite[Eq.~(17)]{Baggioli2020}, who write the crossover between the wave and diffusive regimes with a single
+relaxation rate. The mechanism behind the friction was proposed by Lubensky, Ramaswamy and Toner
+\cite{Lubensky1985}; we cite them for the mechanism only and we did not read their text.
+
+A Lamb wave in such a plate therefore has three partners to talk to: the electric field, the phason
+rearrangement and the temperature. Each of them has its own relaxation, and the wave is attenuated when one
+of those relaxations falls in step with the wave frequency. This is the reason the problem is worth doing:
+the attenuation spectrum carries three separate fingerprints, and a measurement of the attenuation against
+frequency can in principle separate them.
+
+Thermoelastic quasicrystal plates have been studied. Zhang, Yu, Zhang and Elmaimouni
+\cite{Zhang2021} treat wave propagation in quasicrystal plates and give the constitutive structure we use;
+we read their displayed equations as published but did not transcribe their moduli table. Their companion
+work on nonlocal quasicrystal nanoplates \cite{Wang2025} and on couple-stress plates \cite{Wang2022} treats
+size effects of other kinds. The closest competitor we know of is a 2026 paper on generalised thermoelastic
+Lamb waves in one-dimensional hexagonal quasicrystal nanoplates
+\cite{ZhangSong2026}. We could not open it; the citation service gave us the title and the authors only. It
+is cited here with a note, and the first task of the plan is to obtain it and to write down four things:
+which generalised thermoelastic model it uses, whether it has one phase lag or two, whether it reports
+attenuation, and whether the phason field is dynamic or static. If their model already contains the
+Moore--Gibson--Thompson operator with a thermo-phason term, our thermal novelty is gone and the paper must
+lean on the phason dynamics and the size effect instead.
+
+The novelty we claim is the following, in the words agreed with the supervisor. Four choices define it.
+The phason field is kept dynamic, with both inertia and relaxation, where most plate work keeps it static.
+Heat conduction is of Moore--Gibson--Thompson type and carries the thermo-phason coupling, which to our
+knowledge has not been written in a plate problem. Nonlocal strain gradient theory is applied to the phonon
+stress, with the phason part kept as a labelled option, and the boundary conditions include the double
+tractions of the gradient theory together with a phason traction condition. The parity analysis of
+Section~\ref{sec:D} is part of the claim too: it says which couplings decide whether the plate modes split
+into symmetric and antisymmetric families, and the answer is not the one we expected.
+
+\section{Setting and assumptions}
+
+The plate occupies $-h\le z\le h$ and is unbounded in $x$ and $y$. Its faces are free of traction, free of
+phason traction, free of surface charge and thermally insulating. The material is a one-dimensional
+hexagonal piezoelectric quasicrystal. The six-fold axis and the quasiperiodic direction coincide and lie
+along $z$.
+
+We take plane strain in the $x$--$z$ plane, so nothing depends on $y$ and $u_y=0$. The wave is
+$\exp[\ii(kx-\omega t)]$ with real $\omega$ and complex $k=k_r+\ii k_i$; positive $k_i$ means decay along
+$+x$. Every field through the thickness is a sum of $\exp(\eta z)$ with complex $\eta$.
+
+The theory is linear and isothermal in the reference state. Small compared with the lattice parameter is
+the phason displacement $w_z(x,z,t)$, so only the phason strains $w_{zz}=\partial_zw_z$ and
+$w_{zx}=\partial_xw_z$ are kept. For the electric field we write a potential, $E_i=-\varphi_{,i}$, which is
+the quasi-static form. Temperature enters as the change $\theta$ from the reference value $T_0$, small
+compared with $T_0$ itself.
+
+Two operators carry the size effect, exactly as in the piezoelectric semiconductor paper:
+$\Nc(\eta)=1-l_{\rm nl}^2(\eta^2-k^2)$ on the inertia and $\Gc(\eta)=1-l_g^2(\eta^2-k^2)$ on the phonon
+elastic stress. The phason stress carries no size operator in the main model. That is a choice, not a
+result; we label the alternative in Section~\ref{sec:tests}.
+
+\section{Notation}\label{sec:not}
+
+\begin{center}\footnotesize
+\begin{tabular}{p{2.0cm}p{5.6cm}p{1.9cm}p{4.6cm}}
+\toprule
+symbol & meaning in words & unit & where it enters\\
+\midrule
+$h$ & half the plate thickness & m & boundary rows\\
+$k,\omega,\eta$ & wave number, angular frequency, thickness rate & rad/m, rad/s, 1/m & everywhere\\
+$u_x,u_z$ & phonon displacements along and across the plate & m & rows 1, 2\\
+$w$ & phason displacement along the quasiperiodic axis $z$ & m & row 3\\
+$\varphi$ & electric potential & V & row 4\\
+$\theta$ & temperature change & K & row 5\\
+$c_{11},c_{12},c_{13},c_{33},c_{44}$ & phonon elastic stiffnesses & Pa & rows 1, 2\\
+$K_1,K_2$ & phason stiffnesses, in-plane and along the axis & Pa & row 3\\
+$R_1,R_2,R_3$ & phonon--phason coupling constants & Pa & rows 1--3\\
+$e_{31},e_{33},e_{15}$ & piezoelectric constants & C/m$^2$ & rows 1, 2, 4\\
+$\epsilon_{11},\epsilon_{33}$ & dielectric permittivities & F/m & row 4\\
+$\beta_1,\beta_3$ & thermal stress coefficients of the phonons & Pa/K & rows 1, 2, 5\\
+$\bwth$ & thermo-phason coefficient, the phason analogue of $\beta$ & Pa/K & rows 3, 5\\
+$p_3$ & pyroelectric constant & C/(m$^2$K) & rows 4, 5\\
+$\rho$ & phonon mass density & kg/m$^3$ & rows 1, 2\\
+$\rho_p$ & phason mass density & kg/m$^3$ & row 3\\
+$\gamma$ & phason friction coefficient, the inverse of a relaxation time & kg/(m$^3$s) & row 3\\
+$T_0$ & reference temperature & K & row 5\\
+$c_p$, $\kB$ & specific heat, thermal conductivity & J/(kg\,K), W/(m\,K) & row 5\\
+$\tau_q$ & MGT relaxation time of the heat flux & s & row 5\\
+$l_g$, $l_{\rm nl}$ & gradient and nonlocal lengths of NSGT & m & $\Gc$, $\Nc$\\
+$\mathbf M(\eta)$, $\mathbf B$ & amplitude matrix, boundary matrix & --- & Sections~\ref{sec:C}, \ref{sec:G}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The everyday picture for the phason is the queue again. Push the queue from behind and it moves as a whole;
+that is the phonon. Ask the people in it to close up the gaps without moving the ends; that is the phason.
+A real compression costs far more energy in a quasicrystal than this rearrangement does, which is why
+$K_1$ and $K_2$ are smaller than the $c$'s, and why the phason branch sits below the phonon branches in
+frequency.
+
+\section{Source equations}\label{sec:src}
+
+\subsection{Strain, phason strain, field}
+
+The phonon strain is $\eps_{ij}=\tfrac12(u_{i,j}+u_{j,i})$ and the phason strain is
+$w_{ij}=\partial_iw_j$ with only $w_3=w$ non-zero. The electric field is $E_i=-\varphi_{,i}$. Under the plane
+wave these give $\eps_{xx}=\ii k\bx$, $\eps_{zz}=\eta\bz$, $\eps_{xz}=\tfrac12(\eta\bx+\ii k\bz)$,
+$w_{zz}=\eta\bw$, $w_{zx}=\ii k\bw$, $E_x=-\ii k\bp$, $E_z=-\eta\bp$.
+Tag: textbook laws of kinematics and electrostatics; no equation number claimed.
+
+\subsection{Constitutive relations of the quasicrystal}
+
+For the class in question, the phonon stress, the phason stress and the electric displacement are
+\begin{equation}\label{eq:const}
+\begin{aligned}
+\sigma_{ij}&=c_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\eps_{kl}+R_{ijkl}w_{kl}-e_{kij}E_k-\beta_{ij}\theta,\\
+H_{ij}&=R_{klij}\eps_{kl}+K_{ijkl}w_{kl}-\bwth_{ij}\theta,\\
+D_i&=e_{ikl}\eps_{kl}+\epsilon_{ik}E_k+p_i\theta .
+\end{aligned}
+\end{equation}
+The first line is the standard phonon constitutive law of a one-dimensional hexagonal quasicrystal, as
+written for plates by Zhang and co-workers \cite{Zhang2021}; we read their displayed equations as published
+and did not transcribe their table of moduli, so no equation number is quoted from them. Line two is
+the phason constitutive law of the same source, again without an equation number from us. Ordinary
+piezoelectricity with a pyroelectric term is line three. In the first line, the gradient operator on the
+phonon strain is the NSGT placement, and the thermo-phason term $-\bwth_{ij}\theta$ in the second line is ours: it is the phason
+analogue of thermal stress and follows from Duhamel's argument applied to the phason strain.
+Tag: taken from the source for the elastic, phason and piezoelectric parts; the size operator and the
+thermo-phason term are ours.
+
+We must record what we did not read. We did not read a numbered equation for the phason constitutive law in
+any source; the structure above is the one used across the quasicrystal literature and is quoted here
+without a number. Please locate it in Section~2 of \cite{Zhang2021} and write the number in your own draft.
+
+\subsection{Balance of momentum}
+
+\begin{equation}\label{eq:mom}
+\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\rho\,\ddot u_i=\sigma_{ij,j}.
+\end{equation}
+The differential form is the one quoted in \cite[Eqs.~(18)--(19)]{Barretta2018}, who attribute it to Lim,
+Zhang and Reddy \cite{Lim2015}. We did not open \cite{Lim2015}; its equations (17) to (19) are known to us
+only through \cite{Barretta2018}, and Section~2 of the original is where you should check it.
+Tag: taken from \cite{Barretta2018}; the placement of the operator on the inertia alone is ours.
+
+\subsection{Phason balance}
+
+\begin{equation}\label{eq:phason}
+H_{ij,j}=\rho_p\,\ddot w_i+\gamma\,\dot w_i .
+\end{equation}
+The friction term is taken from \cite[Eq.~(26)]{Agiasofitou2014}, where a damping tensor multiplies the
+phason velocity, and the resulting telegraph equation is their Eq.~(30). We keep a scalar $\gamma$ in place
+of their tensor, because our geometry has one phason component only; that is our simplification. The
+relaxation rate $\gamma/\rho_p$ is written as $1/\tau$ in \cite[Eq.~(17)]{Baggioli2020}.
+Tag: taken from the source with the change named, the tensor replaced by a scalar.
+
+\subsection{Gauss's law}
+
+\begin{equation}\label{eq:gauss}
+D_{i,i}=0 .
+\end{equation}
+There are no free carriers in a quasicrystal, so the right side is zero. This is textbook electrostatics of
+a dielectric; no equation number is claimed.
+Tag: textbook law.
+
+\subsection{MGT heat equation}
+
+\begin{equation}\label{eq:heat}
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\eps_{ij}+T_0\bwth_{ij}\dot w_{ij}
++T_0p_i\dot E_i\Bigr]=\kB\nabla^2\theta .
+\end{equation}
+The operator is the Moore--Gibson--Thompson operator with one time derivative cancelled, as read in
+\cite[Eqs.~(2.5) and (3.1)--(3.5)]{Quintanilla2019}. Classical here are the phonon thermal stress term and the pyroelectric term. The thermo-phason term $T_0\bwth_{ij}\dot w_{ij}$ is ours: it is the reciprocity partner of
+the $-\bwth\theta$ term in the phason stress, and it must be there if the entropy production is to be
+positive.
+Tag: the operator is taken from \cite{Quintanilla2019}; the thermo-phason term is ours, from the entropy
+balance.
+
+\subsection{Where the friction term comes from}
+
+The phason balance \eqref{eq:phason} deserves a derivation, because the friction term is the one part of the
+model that has no counterpart in ordinary elasticity. Start from the two statements that define the
+telegraph behaviour.
+
+\begin{worked}
+The first statement is that the phason stress relaxes towards its elastic value with a time constant
+$\tau_p=\rho_p/\gamma$; write the relaxation as
+$\dot H_{ij}+\frac{1}{\tau_p}\bigl(H_{ij}-K_{ijkl}w_{kl}\bigr)=0$ in the purely phason part. The second
+statement is the balance of phason momentum. Combining the two by multiplying the balance by
+$(1+\tau_p\partial_t)$ and using the relaxation to replace $\dot H$ gives
+\[
+K_{ijkl}w_{kl,j}=\rho_p\ddot w_i+\gamma\dot w_i ,
+\]
+which is the wave--telegraph equation of Agiasofitou and Lazar \cite[Eq.~(30)]{Agiasofitou2014}: one term with
+the second time derivative and one with the first. At high frequency the first term dominates and the phason
+propagates; at low frequency the second dominates and the phason diffuses. If $\gamma=0$ the equation is a
+pure wave equation and the phason never relaxes, which is unphysical for a real quasicrystal.
+\end{worked}
+
+\noindent Written for one phason component along $z$ and with the friction collected in the scalar $\gamma$,
+this is exactly \eqref{eq:phason} with $K_{ijkl}w_{kl}$ written out as $K_1\partial_x^2w+K_2\partial_z^2w$. The
+two constants have a simple reading: $K_1$ is the stiffness against a rearrangement that varies along the
+plate, $K_2$ the stiffness against one that varies across the thickness. The mass $\rho_p$ is not a real mass
+density in the sense of atoms moving; it is the inertia associated with the collective rearrangement, and its
+value is a property of the phason mode, not of the crystal alone.
+
+\subsection{Where the thermo-phason term comes from}
+
+\begin{worked}
+Apply Duhamel's argument to the phason strain. Heat the crystal by $\theta$ and the phason strain that would
+appear in a free sample is $\alpha^{w}\theta$, with $\alpha^{w}$ a thermo-phason expansion coefficient. If
+that strain is prevented, a phason stress $-\bwth\theta$ appears with $\bwth=K\alpha^{w}$, which is the last
+term of \eqref{eq:Hzz}. Reciprocity then forces a term $+T_0\bwth\dot w_{zz}$ in the heat equation, because the
+same entropy production contains both. That term is the last of the bracket in \eqref{eq:heat}, and it is the
+one that produces the second damping peak of Section~\ref{sec:H}.
+\end{worked}
+
+\section{Calculation A: constitutive components}\label{sec:A}
+
+\subsection{Which constants survive}
+
+\begin{worked}
+The point group is $6mm$ with the axis along $z$, as in the piezoelectric semiconductor paper. A rotation of
+$60^\circ$ about $z$ forces $c_{66}=(c_{11}-c_{12})/2$ and $c_{44}=c_{55}$; a rotation of $180^\circ$ about
+an in-plane axis is not a symmetry of the poled crystal, so constants with one $z$ index survive. The
+quasiperiodic direction is $z$, so the phason strain has only the two components $w_{zz}$ and $w_{zx}$; the
+phason moduli therefore reduce to two, $K_{zzzz}=K_2$ and $K_{zxzx}=K_1$, and the phonon--phason coupling to
+three, $R_{xxzz}=R_1$, $R_{zzzz}=R_2$ and $R_{xzxz}=R_3$. In plane strain with $\eps_{yy}=0$ the constant
+$c_{12}$ drops out of every equation, exactly as in the semiconductor paper.
+\end{worked}
+
+\noindent The constants that appear are $c_{11},c_{13},c_{33},c_{44}$; $K_1,K_2$; $R_1,R_2,R_3$;
+$e_{31},e_{33},e_{15}$; $\epsilon_{11},\epsilon_{33}$; $\beta_1,\beta_3$; $\bwth$; and $p_3$. The two
+piezoelectric-phason couplings that some papers write are absent in our model, because the phason
+rearrangement does not separate charge in the class we treat; if your source keeps such a coupling, say so
+and add one entry to row 4.
+
+\subsection{Stresses and induction in components}
+
+\begin{worked}
+Apply the same routine as in the semiconductor paper. Each $\partial_x$ becomes $\ii k$, each $\partial_z$
+becomes $\eta$, and the Laplacian becomes $\eta^2-k^2$. For $\sigma_{xx}$: $c_{11}\eps_{xx}$ gives
+$c_{11}\ii k\bx$; $c_{13}\eps_{zz}$ gives $c_{13}\eta\bz$; the phason coupling $R_1w_{zz}$ gives $R_1\eta\bw$;
+the piezoelectric term $-e_{31}E_z$ gives $+e_{31}\eta\bp$; the thermal term is $-\beta_1\bt$. The gradient
+operator multiplies the two phonon elastic terms only. For $H_{zz}$: $R_1\eps_{xx}$ gives $R_1\ii k\bx$,
+$R_2\eps_{zz}$ gives $R_2\eta\bz$, $K_2w_{zz}$ gives $K_2\eta\bw$, and the thermo-phason term gives
+$-\bwth\bt$. For $D_z$: $e_{31}\eps_{xx}$ gives $e_{31}\ii k\bx$, $e_{33}\eps_{zz}$ gives $e_{33}\eta\bz$,
+$-\epsilon_{33}E_z$ gives $+\epsilon_{33}\eta\bp$, and the pyroelectric term gives $+p_3\bt$.
+\end{worked}
+
+\noindent The seven constitutive components are
+\begin{align}
+\hat\sigma_{xx}&=\Gc\bigl(\ii kc_{11}\bx+\eta c_{13}\bz\bigr)+R_1\eta\bw+e_{31}\eta\bp-\beta_1\bt,
+\label{eq:sxx}\\
+\hat\sigma_{zz}&=\Gc\bigl(\ii kc_{13}\bx+\eta c_{33}\bz\bigr)+R_2\eta\bw+e_{33}\eta\bp-\beta_3\bt,
+\label{eq:szz}\\
+\hat\sigma_{xz}&=\Gc c_{44}\bigl(\eta\bx+\ii k\bz\bigr)+R_3\ii k\bw+\ii ke_{15}\bp,
+\label{eq:sxz}\\
+\hat H_{zz}&=R_1\ii k\bx+R_2\eta\bz+K_2\eta\bw-\bwth\bt,
+\label{eq:Hzz}\\
+\hat H_{zx}&=R_3\bigl(\eta\bx+\ii k\bz\bigr)+K_1\ii k\bw,
+\label{eq:Hzx}\\
+\hat D_x&=e_{15}\bigl(\eta\bx+\ii k\bz\bigr)-\ii k\epsilon_{11}\bp,
+\label{eq:Dx}\\
+\hat D_z&=\ii ke_{31}\bx+\eta e_{33}\bz-\eta\epsilon_{33}\bp+p_3\bt .
+\label{eq:Dz}
+\end{align}
+
+Notice where the phason sits. It couples to the phonon through $R_1$ and $R_2$ in the normal stresses and
+through $R_3$ in the shear, and its own stress is driven by the phonon strain through the same constants.
+That is the reciprocity of the phonon--phason coupling, and it is why the matrix of Section~\ref{sec:C} is
+not triangular: the phason equation feels the phonon and the phonon equations feel the phason.
+
+\section{Calculation B: the five governing equations}\label{sec:B}
+
+\subsection{Momentum}
+
+\begin{worked}
+The $x$ component of \eqref{eq:mom} is $-\bigl(\ii k\hat\sigma_{xx}+\eta\hat\sigma_{xz}\bigr)-\Nc\rho\omega^2\bx=0$,
+because the divergence is $\partial_x\sigma_{xx}+\partial_z\sigma_{xz}$ and $\ddot u_x=-\omega^2\bx$. The $z$
+component is $-\bigl(\ii k\hat\sigma_{xz}+\eta\hat\sigma_{zz}\bigr)-\Nc\rho\omega^2\bz=0$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:g1}
+-\bigl(\ii k\hat\sigma_{xx}+\eta\hat\sigma_{xz}\bigr)-\Nc\rho\omega^2\bx=0,\qquad
+-\bigl(\ii k\hat\sigma_{xz}+\eta\hat\sigma_{zz}\bigr)-\Nc\rho\omega^2\bz=0 .
+\end{equation}
+
+\subsection{Phason balance}
+
+\begin{worked}
+The phason balance \eqref{eq:phason} has one free index, $i=3$. Its left side is
+$H_{3j,j}=\partial_xH_{zx}+\partial_zH_{zz}$, which under the plane wave is $\ii k\hat H_{zx}+\eta\hat H_{zz}$.
+The right side is $\rho_p\ddot w+\gamma\dot w=-\rho_p\omega^2\bw-\ii\omega\gamma\bw$. Bringing everything to
+one side gives $-\bigl(\ii k\hat H_{zx}+\eta\hat H_{zz}\bigr)-\rho_p\omega^2\bw-\ii\omega\gamma\bw=0$, and
+changing the overall sign for convenience,
+\[
+\bigl(\ii k\hat H_{zx}+\eta\hat H_{zz}\bigr)+\rho_p\omega^2\bw+\ii\omega\gamma\bw=0 .
+\]
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:g2}
+\bigl(\ii k\hat H_{zx}+\eta\hat H_{zz}\bigr)+\bigl(\rho_p\omega^2+\ii\omega\gamma\bigr)\bw=0 .
+\end{equation}
+
+\subsection{Gauss's law}
+
+\begin{worked}
+With \eqref{eq:gauss}, $\ii k\hat D_x+\eta\hat D_z=0$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:g3}
+\ii k\hat D_x+\eta\hat D_z=0 .
+\end{equation}
+
+\subsection{Heat balance}
+
+\begin{worked}
+Put the plane wave into \eqref{eq:heat}. The time derivative is $-\ii\omega$, so the bracket is
+$-\ii\omega\rho c_p\bt+T_0\beta_1(-\ii\omega)(\ii k\bx)+T_0\beta_3(-\ii\omega)(\eta\bz)
++T_0\bwth(-\ii\omega)(\eta\bw)+T_0p_3(-\ii\omega)(-\eta\bp)$, which equals
+$-\ii\omega\rho c_p\bt+T_0\omega k\beta_1\bx-\ii\omega T_0\beta_3\eta\bz-\ii\omega T_0\bwth\eta\bw
++\ii\omega T_0p_3\eta\bp$. Multiply by $f=1-\ii\omega\tau_q$ and subtract $\kB(\eta^2-k^2)\bt$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:g4}
+f\Bigl[-\ii\omega\rho c_p\bt+T_0\omega k\beta_1\bx-\ii\omega T_0\beta_3\eta\bz
+-\ii\omega T_0\bwth\eta\bw+\ii\omega T_0p_3\eta\bp\Bigr]-\kB L\bt=0,\qquad L=\eta^2-k^2 .
+\end{equation}
+
+\section{Calculation C: the amplitude matrix}\label{sec:C}
+
+The unknowns are ordered as $\mathbf a=(\bx,\bz,\bw,\bp,\bt)^{\top}$. Rows are, in order, momentum $x$,
+momentum $z$, phason, Gauss, heat.
+
+\subsection{Row 1, momentum along the plate}
+
+\begin{worked}
+Put \eqref{eq:sxx} and \eqref{eq:sxz} into the first of \eqref{eq:g1}. For $\bx$: $\ii k\cdot\Gc c_{11}\ii k=-k^2\Gc c_{11}$
+and $\eta\cdot\Gc c_{44}\eta=\eta^2\Gc c_{44}$; with the overall minus and the inertia,
+$M_{11}=-\Nc\rho\omega^2+\Gc(c_{11}k^2-c_{44}\eta^2)$. For $\bz$: $\ii k\Gc c_{13}\eta+\eta\Gc c_{44}\ii k=\ii k\eta\Gc(c_{13}+c_{44})$,
+with a minus. For $\bw$: $\ii kR_1\eta+\eta R_3\ii k=\ii k\eta(R_1+R_3)$, with a minus. For $\bp$:
+$\ii k e_{31}\eta+\eta\ii k e_{15}=\ii k\eta(e_{31}+e_{15})$, with a minus. For $\bt$: $\ii k(-\beta_1)$, with
+the overall minus, gives $+\ii k\beta_1$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:row1}
+M_{11}=-\Nc\rho\omega^2+\Gc(c_{11}k^2-c_{44}\eta^2),\quad
+M_{12}=-\ii k\eta\Gc(c_{13}+c_{44}),\quad
+M_{13}=-\ii k\eta(R_1+R_3),
+\end{equation}
+\begin{equation}\label{eq:row1b}
+M_{14}=-\ii k\eta(e_{31}+e_{15}),\qquad M_{15}=\ii k\beta_1 .
+\end{equation}
+
+\subsection{Row 2, momentum across the plate}
+
+\begin{worked}
+For $\bx$: $\ii k\Gc c_{44}\eta+\eta\Gc c_{13}\ii k=\ii k\eta\Gc(c_{13}+c_{44})$, with a minus. For $\bz$:
+$\ii k\Gc c_{44}\ii k=-k^2\Gc c_{44}$ and $\eta\Gc c_{33}\eta=\eta^2\Gc c_{33}$, so
+$M_{22}=-\Nc\rho\omega^2+\Gc(c_{44}k^2-c_{33}\eta^2)$. For $\bw$: $\ii kR_3\ii k=-k^2R_3$ and $\eta R_2\eta=\eta^2R_2$;
+with the overall minus, $M_{23}=R_3k^2-R_2\eta^2$. For $\bp$: $\ii k\ii ke_{15}=-k^2e_{15}$ and $\eta\eta e_{33}=\eta^2e_{33}$,
+with a minus. For $\bt$: $\eta(-\beta_3)$ with the minus gives $+\eta\beta_3$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:row2}
+M_{21}=-\ii k\eta\Gc(c_{13}+c_{44}),\quad
+M_{22}=-\Nc\rho\omega^2+\Gc(c_{44}k^2-c_{33}\eta^2),\quad
+M_{23}=R_3k^2-R_2\eta^2,
+\end{equation}
+\begin{equation}\label{eq:row2b}
+M_{24}=e_{15}k^2-e_{33}\eta^2,\qquad M_{25}=\eta\beta_3 .
+\end{equation}
+
+\subsection{Row 3, the phason equation}
+
+\begin{worked}
+Use \eqref{eq:Hzz} and \eqref{eq:Hzx} in \eqref{eq:g2}, which has no overall minus, so the entries keep the
+signs of the divergence. For $\bx$: $\ii kR_3\eta+\eta R_1\ii k=\ii k\eta(R_1+R_3)$. For $\bz$:
+$\ii kR_3\ii k=-k^2R_3$ and $\eta R_2\eta=\eta^2R_2$, so $M_{32}=R_2\eta^2-R_3k^2$.
+For $\bw$: $\ii kK_1\ii k=-k^2K_1$ and $\eta K_2\eta=\eta^2K_2$, plus the inertia and friction
+$\rho_p\omega^2+\ii\omega\gamma$ from \eqref{eq:g2}; so $M_{33}=-K_1k^2+K_2\eta^2+\rho_p\omega^2+\ii\omega\gamma$.
+For $\bp$: nothing, the phason does not see the electric field in our model. For $\bt$: $\eta(-\bwth)=-\eta\bwth$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:row3}
+M_{31}=\ii k\eta(R_1+R_3),\quad
+M_{32}=R_2\eta^2-R_3k^2,\quad
+M_{33}=K_2\eta^2-K_1k^2+\rho_p\omega^2+\ii\omega\gamma,
+\end{equation}
+\begin{equation}\label{eq:row3b}
+M_{34}=0,\qquad M_{35}=-\eta\bwth .
+\end{equation}
+
+\subsection{Rows 4 and 5}
+
+\begin{worked}
+Row 4 is Gauss: $\ii k\hat D_x+\eta\hat D_z$ with \eqref{eq:Dx} and \eqref{eq:Dz}. For $\bx$:
+$\ii ke_{15}\eta+\eta\ii ke_{31}=\ii k\eta(e_{15}+e_{31})$. For $\bz$: $-k^2e_{15}+\eta^2e_{33}$. For $\bw$:
+zero. For $\bp$: $\ii k(-\ii k\epsilon_{11})+\eta(-\eta\epsilon_{33})=\epsilon_{11}k^2-\epsilon_{33}\eta^2$.
+For $\bt$: $\eta p_3$. Row 5 is \eqref{eq:g4} read off directly.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:row4}
+M_{41}=\ii k\eta(e_{15}+e_{31}),\quad M_{42}=e_{33}\eta^2-e_{15}k^2,\quad M_{43}=0,\quad
+M_{44}=\epsilon_{11}k^2-\epsilon_{33}\eta^2,\quad M_{45}=\eta p_3,
+\end{equation}
+\begin{equation}\label{eq:row5}
+M_{51}=fT_0\omega k\beta_1,\quad M_{52}=-\ii\omega fT_0\beta_3\eta,\quad
+M_{53}=-\ii\omega fT_0\bwth\eta,\quad M_{54}=\ii\omega fT_0p_3\eta,\quad
+M_{55}=-\ii\omega f\rho c_p-\kB L .
+\end{equation}
+
+\subsection{The matrix}
+
+Collecting \eqref{eq:row1}--\eqref{eq:row5},
+\begin{equation}\label{eq:M}
+\mathbf M(\eta)\mathbf a=\mathbf 0,\qquad
+\mathcal N=1-l_{\rm nl}^2L,\quad \mathcal G=1-l_g^2L,\quad L=\eta^2-k^2,\quad f=1-\ii\omega\tau_q .
+\end{equation}
+The phason enters in exactly five places: $M_{13}$, $M_{23}$, $M_{31}$, $M_{32}$ through the coupling
+constants, and $M_{33}$ through its own stiffness, inertia and friction. The thermo-phason coefficient sits in
+$M_{35}$ and $M_{53}$, one each side, which is the reciprocity of the pair.
+
+\section{Calculation D: degree and parity}\label{sec:D}
+
+\subsection{Degree}
+
+\begin{worked}
+Write the highest power of $\eta$ in each entry. Row 1: $M_{11}\sim\eta^4$ when $l_g\ne0$ (from
+$\Gc\eta^2\cdot c_{44}\eta^2$), $M_{12}\sim\eta^3$, $M_{13}\sim\eta^1$, $M_{14}\sim\eta^1$, $M_{15}\sim\eta^0$.
+Row 2: $M_{21}\sim\eta^3$, $M_{22}\sim\eta^4$, $M_{23}\sim\eta^2$, $M_{24}\sim\eta^2$, $M_{25}\sim\eta^1$.
+Row 3: $M_{31}\sim\eta^1$, $M_{32}\sim\eta^2$, $M_{33}\sim\eta^2$, $M_{35}\sim\eta^1$.
+Row 4: $M_{41}\sim\eta^1$, $M_{42}\sim\eta^2$, $M_{44}\sim\eta^2$, $M_{45}\sim\eta^1$.
+Row 5: $M_{51}\sim\eta^0$, $M_{52}\sim\eta^1$, $M_{53}\sim\eta^1$, $M_{54}\sim\eta^1$, $M_{55}\sim\eta^2$.
+The permutation with the largest total takes $M_{11}$ (4), $M_{22}$ (4), $M_{33}$ (2), $M_{44}$ (2) and
+$M_{55}$ (2), giving 14. No other permutation exceeds it, because rows 1 and 2 contribute at most four each
+and rows 3, 4 and 5 at most two each.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:deg}
+\deg_\eta\det\mathbf M=\begin{cases}14,&l_g\ne0,\\10,&l_g=0 .\end{cases}
+\end{equation}
+The phason equation is of second order in $z$, like the others, so it adds no roots and no conditions. The
+gradient operator adds four roots, and with them four conditions, two per face.
+
+\subsection{Parity}
+
+\begin{worked}
+Again suppose a sign vector $s=(s_1,\dots,s_5)$ with $p(i,j)=s_is_j$, where $p$ is the parity of an entry.
+From row 1: $M_{11}$ even gives nothing; $M_{12}$ odd gives $s_2=-s_1$; $M_{13}$ odd gives $s_3=-s_1$;
+$M_{14}$ odd gives $s_4=-s_1$; $M_{15}$ even gives $s_5=s_1$. Take $s_1=-1$. Then
+$s=(-1,+1,+1,+1,-1)$. Check the rest. Row 2: $M_{21}$ odd needs $s_2s_1=-1$, and $+1\cdot-1=-1$, fine;
+$M_{23}$ even needs $s_2s_3=+1$, and it is, fine; $M_{24}$ even, fine; $M_{25}$ odd needs $s_2s_5=-1$, fine.
+Row 3: $M_{31}$ odd needs $s_3s_1=-1$, fine; $M_{32}$ even, fine; $M_{33}$ even, fine; $M_{35}$ odd needs
+$s_3s_5=-1$, fine. Row 4: $M_{41}$ odd needs $s_4s_1=-1$, fine; $M_{42}$ even, fine; $M_{44}$ even, fine;
+$M_{45}$ odd needs $s_4s_5=-1$, fine. Row 5: $M_{51}$ even needs $s_5s_1=+1$, fine; $M_{52}$ odd,
+$M_{53}$ odd, $M_{54}$ odd all need products $-1$, fine; $M_{55}$ even, fine.
+No entry fails. So the sign vector always exists.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:parity}
+\det\mathbf M(-\eta)=\det\mathbf M(\eta)\quad\text{for every value of every coupling constant,}
+\end{equation}
+with the sign vector $(-1,+1,+1,+1,-1)$ in the order $(\bx,\bz,\bw,\bp,\bt)$: the phonon displacement along
+the plate is odd through the thickness, and so is the temperature; the other three fields are even.
+
+This is the result we did not expect, and you should test it yourself before you write it. The phason
+coupling constants $R_1,R_2,R_3$ are not small, and one would guess that a field that couples the normal
+stress to a rearrangement along the axis must break the mirror symmetry. It does not. The reason is that
+$R_1$ and $R_2$ always appear as an odd number of $z$ derivatives in the momentum equations and an even
+number in the phason equation, which is exactly the pattern the sign vector needs. The thermo-phason term
+does the same: it is even in the phason equation and odd in the heat equation, again matching. What breaks
+the pairing in the semiconductor paper is not a polar coupling but the carrier field: a density that is even
+sits in a row coupled to a temperature that must be odd, and no sign vector can satisfy both. Remove the
+carrier field and the obstruction disappears.
+
+The consequence is practical. Plate modes of a quasicrystal plate split into a symmetric and an
+antisymmetric family, and the split survives every coupling we have. Its algebraic form is a factorisation
+of the boundary matrix, $\det\mathbf B=\det\mathbf B_{\rm S}\det\mathbf B_{\rm A}$, so the two families
+can be found separately. That is a strong simplification, and it also means that any observed mixing of the two families
+in an experiment cannot come from the couplings in this model; it must come from the geometry, from a
+lateral boundary, or from a nonlinearity.
+
+\section{Calculation E: amplitude ratios and partial waves}\label{sec:E}
+
+\begin{worked}
+For a root $\eta_m$ the matrix $\mathbf M(\eta_m)$ is singular. The adjugate $\mathbf A$ of
+$\mathbf M$ satisfies $\mathbf M\mathbf A=\det(\mathbf M)\mathbf I$, so every column of $\mathbf A$ vanishes
+when multiplied by $\mathbf M$ at the root. Compute the entries of the fifth row of the adjugate as
+$A_{5j}=(-1)^{5+j}$ times the $4\times4$ minor obtained by deleting row $j$ and column $5$, take the column
+with the largest entries, and divide by its largest entry. The four ratios $\rho^{(1)}_m,\dots,\rho^{(4)}_m$
+are then finite, and the fifth entry of the column is one by construction.
+\end{worked}
+
+\noindent The general solution is
+\begin{equation}\label{eq:general}
+\bigl(u_x,u_z,w,\varphi,\theta\bigr)=\sum_{m=1}^{N}a_m
+\bigl(\rho^{(1)}_m,\rho^{(2)}_m,\rho^{(3)}_m,\rho^{(4)}_m,1\bigr)e^{\eta_mz}e^{\ii(kx-\omega t)},
+\end{equation}
+with $N=14$ when $l_g\ne0$ and $N=10$ when $l_g=0$. The number of free constants $a_m$ equals the number of
+boundary conditions we may impose, seven per face when $l_g\ne0$ and five per face when $l_g=0$.
+
+One consequence of the parity \eqref{eq:parity} deserves a line here. When the sign vector exists, the
+roots come in pairs $\pm\eta_m$ and the amplitude ratios of the pair are related: the odd fields change sign
+and the even fields keep it. So each partial wave has a twin, and the pair can be combined into a
+hyperbolic cosine for the even fields and a hyperbolic sine for the odd ones. That is the mathematical
+statement behind the split, and it is worth checking on one pair of roots before you trust the algebra.
+
+\section{Calculation F: boundary conditions}\label{sec:F}
+
+At each face, with outward normal $\mathbf n=(0,0,\pm1)$:
+
+\begin{enumerate}
+\item[(b1)] normal traction, with the surface gradient of the double traction:
+$\bigl[\sigma_{zz}-\partial_xR_{xz}\bigr]_{z=z_0}=0$;
+\item[(b2)] shear traction, with its surface gradient:
+$\bigl[\sigma_{xz}-\partial_xR_{xx}\bigr]_{z=z_0}=0$;
+\item[(b3)] normal double traction: $\bigl[R_{zz}\bigr]_{z=z_0}=0$;
+\item[(b4)] in-plane double traction: $\bigl[R_{zx}\bigr]_{z=z_0}=0$;
+\item[(b5)] phason traction: $\bigl[H_{zz}\bigr]_{z=z_0}=0$;
+\item[(b6)] open circuit: $\bigl[D_z\bigr]_{z=z_0}=0$;
+\item[(b7)] adiabatic face: $\bigl[\partial_z\theta\bigr]_{z=z_0}=0$.
+\end{enumerate}
+
+The surface-gradient form of (b1) and (b2) and the double-traction conditions (b3), (b4) are taken from the
+gradient elasticity treatment of Charalambopoulos, Douka and Mavratzas
+\cite[Sec.~2, Eq.~(14)]{Charalambopoulos2019}, extended by us to the phason, electric and thermal parts.
+Conditions (b5), (b6) and (b7) are our modelling choices; the phason condition states that no phason
+traction acts on the free face, which is the natural statement for a face where the clusters are free to
+rearrange. If your source uses a different phason condition, for example a clamped phason displacement
+$w=0$ at the face, say so; the change is one row.
+
+\begin{worked}
+The nonlocal operator is inverted root by root, for the same reason as in the semiconductor paper: the
+constitutive law at root $\eta_m$ reads $\Nc(\eta_m)\hat\sigma_m=\hat\sigma^{\rm loc}_m$, so the stress that
+enters a boundary row is $\hat\sigma^{\rm loc}_m/\Nc(\eta_m)$, and the factor sits inside column $m$. No
+common operator can be pulled out of the sum over roots.
+\end{worked}
+
+\noindent Evaluating \eqref{eq:sxx}--\eqref{eq:Dz} with the amplitudes of partial wave $m$, dividing the
+phonon stresses by $\Nc(\eta_m)$, and using $\partial_x\to\ii k$, the seven row functions at $z=+h$ are
+\begin{align}
+b_1&=\frac{1}{\Nc(\eta_m)}\Bigl[\hat\sigma_{zz}-\ii k\,l_g^2c_{44}L\hat\eps_{xz}\Bigr],\quad
+b_2=\frac{1}{\Nc(\eta_m)}\Bigl[\hat\sigma_{xz}-\ii k\,l_g^2c_{11}L\hat\eps_{xx}\Bigr],
+\label{eq:b12}\\
+b_3&=\frac{1}{\Nc(\eta_m)}l_g^2c_{33}L\hat\eps_{zz},\quad
+b_4=\frac{1}{\Nc(\eta_m)}l_g^2c_{44}L\hat\eps_{xz},\quad
+b_5=\hat H_{zz},\quad b_6=\hat D_z,\quad b_7=\eta_m\bt .
+\label{eq:b34567}
+\end{align}
+
+The phason row $b_5$ is the one to watch. It carries $R_1\ii k\bx+R_2\eta\bz+K_2\eta\bw-\bwth\bt$, and it is
+the only row in which the thermo-phason coefficient appears alone; if you want to see the size of the
+thermo-phason effect on a dispersion curve, switch this coefficient off and look at how much the phason
+traction row changes.
+
+\subsection{The two faces}
+
+\begin{worked}
+At $z=-h$ the partial wave carries $\exp(-\eta_mh)$ instead of $\exp(\eta_mh)$. The outward normal is
+$(0,0,-1)$, so the normal components flip sign: $\sigma_{zz}$, $\sigma_{xz}$, $H_{zz}$ and $D_z$ all appear
+with a minus. The double tractions are quadratic in the normal and keep their sign. The temperature gradient
+changes sign because $\partial_z$ is odd.
+\end{worked}
+
+\noindent With $c_m=\exp(\eta_mh)$ and $d_m=\exp(-\eta_mh)$ the fourteen rows are
+\begin{equation}\label{eq:rows}
+b_1c_m,\ b_2c_m,\ b_3c_m,\ b_4c_m,\ b_5c_m,\ b_6c_m,\ b_7c_m\quad(z=+h),\qquad
+-b_1d_m,\ -b_2d_m,\ b_3d_m,\ b_4d_m,\ -b_5d_m,\ -b_6d_m,\ -b_7d_m\quad(z=-h).
+\end{equation}
+
+\section{Calculation G: the boundary matrix}\label{sec:G}
+
+\begin{worked}
+Number the roots $\eta_1,\dots,\eta_N$. Put the row functions of \eqref{eq:b12} and \eqref{eq:b34567} in the
+fourteen rows of \eqref{eq:rows} and the roots in fourteen columns. Every entry is a product of a material
+constant, an amplitude ratio and an exponential factor. The determinant of the resulting matrix vanishes
+exactly when the plate carries a wave.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:disp}
+\det\mathbf B(k,\omega)=0,\qquad \mathbf B \text{ is }14\times14\ (l_g\ne0),\ 10\times10\ (l_g=0).
+\end{equation}
+When $l_g=0$ the rows (b3) and (b4) vanish identically, because each of their entries carries $l_g^2$; they
+must be deleted with the four extra roots.
+
+Because the parity \eqref{eq:parity} holds, the matrix blocks. Draw the odd amplitude from each partial wave
+into one set and the even amplitude into the other; the rows separate the same way, and
+\begin{equation}\label{eq:factor}
+\det\mathbf B=\det\mathbf B_{\rm S}\cdot\det\mathbf B_{\rm A},
+\end{equation}
+with seven rows and seven columns in each block. If you build the matrix and this factorisation does not
+appear, either a row has the wrong parity or the roots have not been paired correctly.
+
+The frequency $\omega$ is real and given, the wave number $k$ is complex, and \eqref{eq:disp} is one complex
+equation in two real unknowns. Before any determinant is evaluated, multiply column $m$ by
+$\exp(-|\mathrm{Re}\,\eta_m|h)$. That factor is common to a column and does not move a zero, but it keeps the
+columns within a few orders of magnitude of each other, which they otherwise are not once the gradient roots
+appear.
+
+\section{Calculation H: hand limits}\label{sec:H}
+
+\subsection{Phason off: back to the piezoelectric thermoelastic plate}
+
+\begin{worked}
+Set $R_1=R_2=R_3=0$, $\bwth=0$ and $\bw=0$. Row 3 and column 3 disappear from the matrix, and
+$\det\mathbf M$ becomes the $4\times4$ determinant of the phonon, electric and thermal fields. Put
+$e_{31}=e_{33}=e_{15}=0$, $p_3=0$ and $\beta_1=\beta_3=0$ as well, and the $2\times2$ mechanical block
+remains:
+\[
+\begin{vmatrix}-\rho\omega^2+c_{11}k^2-c_{44}\eta^2&-\ii k\eta(c_{13}+c_{44})\\
+-\ii k\eta(c_{13}+c_{44})&-\rho\omega^2+c_{44}k^2-c_{33}\eta^2\end{vmatrix}=0 .
+\]
+With $c_{11}=c_{33}=\lambda+2\mu$ and $c_{13}=\lambda$, $c_{44}=\mu$, this is the classical Rayleigh--Lamb
+problem, and the boundary conditions reduce to the two traction conditions per face.
+\end{worked}
+
+\noindent The two families then obey the classical relations
+\begin{equation}\label{eq:RL}
+\frac{\tan(qh)}{\tan(ph)}=-\frac{4k^2pq}{(k^2-q^2)^2}\ ({\rm symmetric}),\qquad
+\frac{\tan(qh)}{\tan(ph)}=-\frac{(k^2-q^2)^2}{4k^2pq}\ ({\rm antisymmetric}),
+\end{equation}
+with $p^2=\omega^2/c_L^2-k^2$ and $q^2=\omega^2/c_T^2-k^2$. This is the check that the phonon part of the
+matrix is right, and it is the first test in the list.
+
+\subsection{Phason relaxation: wave or diffusion}
+
+\begin{worked}
+Switch off everything except the phason and take the long-wavelength limit, so that $k$ is small. Row 3 reads
+$K_2\eta^2+\rho_p\omega^2+\ii\omega\gamma=0$, that is
+\[
+\eta^2=-\frac{\rho_p\omega^2+\ii\omega\gamma}{K_2}.
+\]
+At high frequency, $\rho_p\omega\gg\gamma$, the right side is $-\rho_p\omega^2/K_2$ and the phason travels as
+a wave with speed $\sqrt{K_2/\rho_p}$. At low frequency, $\gamma\gg\rho_p\omega$, the right side is
+$-\ii\omega\gamma/K_2$, which is the dispersion of a diffusion with diffusivity $K_2/\gamma$. The crossover
+frequency is $\omega_c=\gamma/\rho_p$, the inverse of the phason relaxation time $\tau_p=\rho_p/\gamma$.
+\end{worked}
+
+\noindent
+\begin{equation}\label{eq:phasonspeed}
+c_{\rm ph}=\sqrt{\frac{K_2}{\rho_p}}\ \ (\omega\tau_p\gg1),\qquad
+D_{\rm ph}=\frac{K_2}{\gamma}\ \ (\omega\tau_p\ll1),\qquad \tau_p=\frac{\rho_p}{\gamma}.
+\end{equation}
+This is the second test: a plot of the phason branch against frequency must flatten to the diffusive form
+below $\omega_c$ and become a straight line of slope $c_{\rm ph}$ above it. If your numerical branch does
+neither, look at the signs in $M_{33}$.
+
+\subsection{Thermo-phason coupling: the damping partner}
+
+\begin{worked}
+Keep only the phason and the temperature. The two rows read
+$(-\ii\omega\rho c_p)f\bt-\kB L\bt-\ii\omega fT_0\bwth\eta\bw=0$ and
+$(K_2\eta^2+\rho_p\omega^2+\ii\omega\gamma)\bw-\eta\bwth\bt=0$. Eliminating $\bw$ gives a complex correction
+to $K_2$ of order $\bwth^2/(\rho c_p)$ times the thermal relaxation factor
+$\ii\omega f/(\ii\omega f\rho c_p+\kB L)$, which has the same shape as the thermoelastic damping of an
+ordinary solid, with the phason relaxation time playing the role of the thermal one.
+\end{worked}
+
+\noindent The thermo-phason term therefore produces a second damping peak, at a frequency set by
+$\omega\tau_p\sim1$ rather than by the thermal relaxation. Two peaks in the attenuation spectrum, one from
+the temperature and one from the phason, are the observable signature of this model. Whether they can be
+separated experimentally depends on their width, and that is a question for the results section, not for
+this file.
+
+\subsection{The two size lengths}
+
+\begin{worked}
+Set $l_g=l_{\rm nl}=0$ and the classical plate returns exactly, with $\Nc=\Gc=1$ and ten roots. Turning $l_g$
+on stiffens the phonon elastic terms, since $\Gc>1$ for a short wave; turning $l_{\rm nl}$ on softens the
+inertia, since $\Nc<1$ there. The two shifts are in opposite directions, which is the point of NSGT: a
+stiffening and a softening scale, each of them a length, and only their ratio is measured by a dispersion
+curve.
+\end{worked}
+
+\noindent The phason part carries no size operator in this model, so the phason branch is the cleanest place
+to look for the phonon size effect: any shift of the phason branch with $l_g$ or $l_{\rm nl}$ must come
+through the coupling $R$, and its size tells you how strongly the two fields are tied.
+
+\section{Self-test list}\label{sec:tests}
+
+\begin{enumerate}
+\item Units within every row of \eqref{eq:M}. Row 3 is in Pa/m; check that each of its five entries is.
+\item Degree: fourteen with $l_g\ne0$, ten with $l_g=0$.
+\item Parity: the sign vector $(-1,+1,+1,+1,-1)$ must work for every choice of the coupling constants. Test
+two extreme cases, with all couplings on and with all couplings off.
+\item The classical limit \eqref{eq:RL}, both families, and the three long- and short-wavelength limits of
+the ordinary plate.
+\item The phason speed and diffusivity of \eqref{eq:phasonspeed}, including the crossover.
+\item The factorisation \eqref{eq:factor}, checked on the assembled matrix and not on the determinant of the
+full matrix alone.
+\item The number of roots equal to the number of rows of $\mathbf B$, before and after the switch $l_g=0$.
+\item The sign of the thermo-phason effect: switching $\bwth$ on must move the phason branch and the
+attenuation, and must do nothing to the purely elastic limit.
+\item The alternative boundary conditions: clamped phason displacement, closed circuit, isothermal face, one
+at a time, each changing one row.
+\item The size effect: stiffening with $l_g$, softening with $l_{\rm nl}$, and a phason branch that shifts
+only through the coupling.
+\end{enumerate}
+
+\section{Work plan}
+
+\begin{enumerate}
+\item Week 1. Obtain the 2026 paper of Zhang, Song, Li, Han, Yu and Yang and write down its model, its heat
+equation, its phason treatment and whether it reports attenuation. Until this is done, the novelty paragraph
+stays provisional.
+\item Week 2. Read Lim, Zhang and Reddy Section 2 and Barretta and Marotti de Sciarra equations (18) and
+(19). Confirm the operator placement.
+\item Week 3. Read the phason balance in Agiasofitou and Lazar around equations (26) and (30), and the
+crossover in Baggioli and Landry equation (17). Write the scalar friction case yourself.
+\item Week 4. Redo Calculations A to D without looking at this file, and check the parity statement twice.
+\item Week 5. Redo Calculations E to G, build the matrix, and run the ten self-tests.
+\item Week 6. Sensitivity: the two sizes, the phason relaxation and the thermo-phason coefficient, one at a
+time. Write the paper.
+\end{enumerate}
+
+\bibliographystyle{unsrt}
+\bibliography{Lamb_Neha}
+
+\end{document}
