@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{#1}}}
+\newcommand{\dd}{\mathrm{d}}
+\setlength{\parskip}{2pt}
+\title{\vspace{-1.4cm}\textbf{Model v4 --- field equations for the three papers}\\[2pt]
+\large Gate document for approval, before any package is built}
+\author{Dr.\ Vipin \\ Gurugram University}
+\date{30 October 2026}
+\begin{document}
+\maketitle
+\vspace{-7mm}
+\small
+\noindent\textbf{Scope of this document.} The coupled field equations of the three papers, counted, with a
+source for every term. The model stops before the boundary conditions, the dispersion determinant and any
+solution step: those are the scholars' work. Status marks in the source columns are
+[R]~read in the source, [T]~standard textbook law (no equation number needed),
+[D]~form fixed by your instruction, [P]~proposed extension with no source; for every [P] the scholar
+derives it from the stated textbook law. Where the entry does not quote an equation number, I did not read
+one and the scholar is asked to locate it and write it down.
+
+\section*{1. Paper A (Sumit) --- piezoelectric semiconductor plate, ZnO type}
+
+\textbf{Unknowns (5):} $u_x$, $u_z$, $\varphi$, $\Delta n$, $\theta$.\quad
+\textbf{Equations (5):} momentum $x$, momentum $z$, Gauss, carrier continuity, MGT heat.
+
+\noindent\textbf{Geometry.} Plane strain in $x$--$z$, poling along $z$, faces $z=\pm h$, fields
+proportional to $e^{i(kx-\omega t)}$.
+
+\noindent\textbf{Strain and field variables.} $\varepsilon_{ij}=\tfrac12(u_{i,j}+u_{j,i})$ ($i,j=x,z$),
+$E_i=-\varphi_{,i}$, carrier density $n=n_0+\Delta n$, temperature rise $\theta=T-T_0$.
+
+\noindent\textbf{Constitutive relations with the size effect.} The total stress carries the nonlocal
+strain gradient operator, the classical (local) stress does not:
+\begin{align}
+t_{ij}&=\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\sigma_{ij}, \qquad
+\sigma_{ij}=c_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}-e_{kij}E_k-\beta_{ij}\theta, \tag{A1}\\
+D_i&=e_{ikl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}+\epsilon_{ik}E_k+p_i\theta, \tag{A2}
+\end{align}
+with $\beta_{ij}=c_{ijkl}\alpha_{kl}$ and $p_i$ the pyroelectric vector. Only the \emph{elastic} part of
+$\sigma$ carries the gradient operator; the piezoelectric, thermal and dielectric terms are not strain
+gradients of the displacement and are left local. $l_{\rm nl}$ and $l_g$ enter only as $l/h$.
+\begin{center}\footnotesize
+\begin{tabular}{p{2.5cm}p{5.3cm}p{6.3cm}}
+\toprule
+term & meaning & source (status)\\
+\midrule
+(A1) NSGT form & nonlocal (softening) and gradient (stiffening) operators acting on the elastic stress &
+Lim, Zhang \& Reddy, \emph{J.~Mech.~Phys.~Solids} \textbf{78} (2015) 298, \doi{10.1016/j.jmps.2015.02.001} [T]; no eq.\ no.\ read\\
+$\beta_{ij}\theta$ & thermal stress by Duhamel's analogy & textbook thermoelasticity [T]\\
+$p_i\theta$ & pyroelectric polarisation & Bursian \& Zaikovskii line of work; no eq.\ no.\ read [T]\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Field equations.}
+\begin{align}
+t_{xj,j}&=\rho\,\ddot u_x, \qquad t_{zj,j}=\rho\,\ddot u_z, \tag{A3}\\
+D_{i,i}&=-q\,\Delta n, \tag{A4}\\
+\frac{\partial \Delta n}{\partial t}&=D_n\nabla^2\Delta n+\mu_n n_0\,\nabla\!\cdot\!E
++v_d\,\frac{\partial \Delta n}{\partial x}+\frac{\mu_n n_0}{q}\,\beta_{\rm th}\nabla^2\theta, \tag{A5}\\
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\varepsilon_{ij}
++T_0 p_i \dot E_i-\frac{E_{g}}{q}\,\dot{(\Delta n)}\Bigr]&=k_{\rm th}\nabla^2\theta . \tag{A6}
+\end{align}
+\begin{center}\footnotesize
+\begin{tabular}{p{2.5cm}p{5.4cm}p{6.2cm}}
+\toprule
+term & meaning & source (status)\\
+\midrule
+(A3) & balance of momentum, total stress & textbook [T]\\
+(A4) & Gauss law with the mobile carrier charge & textbook; PSC form in Yang \& Zhou, \emph{Int.\ J.\ Solids Struct.} \textbf{42} (2005) 3171, \doi{10.1016/j.ijsolstr.2004.10.011} [T]\\
+(A5) drift term $v_d\partial_x\Delta n$ & drift current from a bias field $E_0$, $v_d=\mu_nE_0$ & Yang \& Zhou (2005), as above [T]; the tool is published, the combination below is not\\
+(A5) thermodiffusion term & carrier flux driven by a temperature gradient (Seebeck), $\beta_{\rm th}$ the thermoelectric coefficient & textbook irreversible thermodynamics [T]\\
+(A6) MGT operator & \emph{(base form, $K^*=0$, one time derivative cancelled)} $(1+\tau_q\partial_t)$ acting on the whole bracket & form fixed by your instruction [D]; attendant paper: Gupta et al., \emph{Int.\ J.\ Numer.\ Methods Heat Fluid Flow} \textbf{35}(9) (2025) 3400, \doi{10.1108/HFF-04-2025-0254}\\
+(A6) $T_0\beta_{ij}\dot\varepsilon_{ij}$ & thermoelastic (dilatational) coupling & textbook [T]\\
+(A6) $T_0p_i\dot E_i$ & electrocaloric coupling, the reverse of pyroelectricity & textbook [T]\\
+(A6) $-(E_g/q)\dot{\Delta n}$ & carrier recombination/energy release as a heat source, the direct carrier--temperature coupling & [P]: derived from the energy balance of the electron gas; closest published PSC wave paper (Yang \& Zhou 2005) keeps the mechanical and electrical fields uncoupled from heat\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{What makes this paper different from the closest papers.} The carrier--temperature loop is
+closed in both directions: the temperature gradient drives a carrier current through (A5), and the carrier
+perturbation heats the lattice through (A6). Published PSC plate papers close at most one of the two. The
+risk is that the loop is small: both coefficients are proportional to $T_0$ times a transport coefficient,
+so the effect may sit below the root-finding resolution. How the paper handles that is in section 4.
+
+\section*{2. Paper B (Neha) --- 1D hexagonal piezoelectric quasicrystal plate}
+
+\textbf{Unknowns (5):} $u_x$, $u_z$, $w_z$, $\varphi$, $\theta$, with $w_z$ the phason displacement along
+the quasiperiodic direction.\quad
+\textbf{Equations (5):} phonon momentum $x$ and $z$, phason balance, Gauss, MGT heat.
+
+\noindent\textbf{Constitutive relations.} Phonon stress carries the size effect; phason stress is carried
+both ways, since which of the two the referee will accept is not settled:
+\begin{align}
+t_{ij}&=\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\sigma_{ij},\qquad
+\sigma_{ij}=C_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}
++R_{ijkl}w_{kl}-e_{kij}E_k-\beta_{ij}\theta, \tag{B1}\\
+H_{ij}&=R_{klij}\varepsilon_{kl}+K_{ijkl}w_{kl}-\beta^{w}_{ij}\theta, \tag{B2}\\
+D_i&=e_{ikl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}+\epsilon_{ik}E_k+p_i\theta, \tag{B3}
+\end{align}
+with $w_{kl}=\partial w_k/\partial x_l$ and $\beta^w$ the thermo-phason coupling. The phason stress in (B2)
+is kept classical in the main model; the NSGT-on-phason variant is a labelled sensitivity result only,
+because no published work applies the operator to the phason strain and there is no measured phason
+correlation length.
+\begin{center}\footnotesize
+\begin{tabular}{p{2.4cm}p{5.4cm}p{6.3cm}}
+\toprule
+term & meaning & source (status)\\
+\midrule
+$R_{ijkl}$, $K_{ijkl}$ & phonon--phason coupling and phason elastic constants, 1D hexagonal QC & benchmark material set of \emph{Acta Mech.} \textbf{232} (2021) 135--151, \doi{10.1007/s00707-020-02811-7} [T]; values to be transcribed by the scholar\\
+$\beta^{w}_{ij}\theta$ & thermo-phason coupling & [P] extension of Duhamel's analogy to the phason stress; no source found\\
+(B1) NSGT & as in (A1) & Lim, Zhang \& Reddy (2015), as above [T]\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Field equations.}
+\begin{align}
+t_{xj,j}&=\rho\,\ddot u_x,\qquad t_{zj,j}=\rho\,\ddot u_z, \tag{B4}\\
+H_{zj,j}&=\rho_p\,\ddot w_z+\gamma\,\dot w_z, \tag{B5}\\
+D_{i,i}&=0, \tag{B6}\\
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\varepsilon_{ij}
++T_0\beta^{w}_{ij}\dot w_{ij}+T_0 p_i\dot E_i\Bigr]&=k_{\rm th}\nabla^2\theta . \tag{B7}
+\end{align}
+\begin{center}\footnotesize
+\begin{tabular}{p{2.4cm}p{5.4cm}p{6.3cm}}
+\toprule
+term & meaning & source (status)\\
+\midrule
+(B5) inertia $\rho_p\ddot w_z$ & wave-like phason motion & Lubensky, \emph{Phys.\ Rev.\ B} \textbf{32} (1985) 7444, \doi{10.1103/PhysRevB.32.7444} [T]\\
+(B5) relaxation $\gamma\dot w_z$ & diffusive (overdamped) phason motion; the two limits are one equation with $\gamma\to0$ and $\rho_p\to0$ & same source [T]; the comparison of the two limits in a plate is not published\\
+(B6) & Gauss law, no free carriers in the dielectric & textbook [T]\\
+(B7) MGT operator & as (A6) & [D]\\
+(B7) $T_0\beta^w_{ij}\dot w_{ij}$ & work of the phason stress against the temperature & [P]; the heat equation in QC papers is written without it\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{What makes this paper different.} One phason equation carries both inertia and relaxation,
+so the wave-like and the diffusive descriptions become the two ends of a single parameter instead of two
+competing models, and the heat equation is coupled to the phason work as well as the phonon work. The risk
+is the opposite of Paper A's: the relaxation term is easy to see in the numbers but hard to justify from a
+measurement, so $\gamma$ must be swept and reported, not fixed.
+
+\section*{3. Paper C (Anu) --- magneto-electro-elastic plate, BaTiO$_3$/CoFe$_2$O$_4$}
+
+\textbf{Unknowns (5):} $u_x$, $u_z$, $\varphi$, $\psi$, $\theta$, with $\psi$ the magnetic potential,
+$H_i=-\psi_{,i}$.\quad
+\textbf{Equations (5):} momentum $x$, momentum $z$, electric Gauss, magnetic Gauss, MGT heat.
+
+\noindent\textbf{Constitutive relations.}
+\begin{align}
+t_{ij}&=\bigl(1-l_{\rm nl}^2\nabla^2\bigr)\sigma_{ij},\qquad
+\sigma_{ij}=C_{ijkl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}-e_{kij}E_k-q_{kij}H_k-\beta_{ij}\theta, \tag{C1}\\
+D_i&=e_{ikl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}+\epsilon_{ik}E_k+\alpha_{ik}H_k+p_i\theta, \tag{C2}\\
+B_i&=q_{ikl}\bigl(1-l_g^2\nabla^2\bigr)\varepsilon_{kl}+\alpha_{ik}E_k+\mu_{ik}H_k+m_i\theta, \tag{C3}
+\end{align}
+with $q_{kij}$ piezomagnetic, $\alpha_{ik}$ the magnetoelectric tensor, $p_i$ pyroelectric and $m_i$
+pyromagnetic.
+\begin{center}\footnotesize
+\begin{tabular}{p{2.4cm}p{5.4cm}p{6.3cm}}
+\toprule
+term & meaning & source (status)\\
+\midrule
+(C1)--(C3) linear MEE constitutive law & full coupled set for a piezoelectric--piezomagnetic composite & Chen, Pan \& Chen, \emph{Int.\ J.\ Solids Struct.} \textbf{44} (2007) 1073, \doi{10.1016/j.ijsolstr.2006.06.003} [T]; no eq.\ no.\ read\\
+$p_i\theta$, $m_i\theta$ & pyroelectric and pyromagnetic terms & textbook extension [T]; rarely retained in plate papers, which is the opening\\
+$\alpha_{ik}$ direct ME coefficient & product property of the two phases; in a laminate it is not a material constant & reported as an effective quantity from homogenisation [T], not measured & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Field equations.}
+\begin{align}
+t_{xj,j}&=\rho\ddot u_x,\qquad t_{zj,j}=\rho\ddot u_z, \tag{C4}\\
+D_{i,i}&=0,\qquad B_{i,i}=0, \tag{C5}\\
+\Bigl(1+\tau_q\frac{\partial}{\partial t}\Bigr)
+\Bigl[\rho c_p\dot\theta+T_0\beta_{ij}\dot\varepsilon_{ij}
++T_0p_i\dot E_i+T_0m_i\dot H_i\Bigr]&=k_{\rm th}\nabla^2\theta . \tag{C6}
+\end{align}
+\begin{center}\footnotesize
+\begin{tabular}{p{2.4cm}p{5.4cm}p{6.3cm}}
+\toprule
+term & meaning & source (status)\\
+\midrule
+(C5) & electric and magnetic Gauss laws in a dielectric with no free charge or current & textbook [T]\\
+(C6) $T_0m_i\dot H_i$ & magnetocaloric coupling, the reverse of pyromagneticity & textbook [T]\\
+homogenisation & effective constants of the laminate from the two phases; two schemes carried & Mori--Tanaka and rule-of-mixtures, textbook micromechanics [T]\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{What makes this paper different.} The thermal field is coupled to all three of the
+electric, magnetic and mechanical fields at once, and the magnetoelectric coefficient is treated as an
+effective, frequency-dependent quantity obtained from homogenisation rather than as a material constant.
+Published MEE plate papers either drop the pyromagnetic term or fix $\alpha$ at a measured value. The risk
+is that the two homogenisation schemes disagree more than the effect being studied, which the paper must
+show on one figure before anything else.
+
+\section*{4. Honest note on where the earlier findings still bite}
+
+MGT is now part of all three models, as instructed. The earlier work in this project established two
+facts that do not go away, and the papers should present them as results. First, in an unbounded medium
+both Fourier and MGT conduction make the thermoelastic attenuation \emph{saturate}; MGT rescales the
+plateau by $\tau_T^2/(\tau_T-\tau_q)^2$ and moves the peak from $1/\tau_T$ to $1/|\tau_T-\tau_q|$, and it
+does not remove the floor. Second, whether the relaxation time is \emph{visible} depends on the plate
+thickness: the crossing condition is $(2h)^*=\pi\sqrt{\kappa\tau_q}$, and with the phonon mean free path
+of ZnO taken from the literature the crossing sits below the thickness at which the continuum heat model
+is defensible. Each paper therefore carries one figure, early, that maps the plane of thickness against
+$\tau_q$ and shades the region where the thermal relaxation is resolvable, with the trust band drawn on
+it. Inside the shaded region the MGT terms do the work; outside, the adiabatic and isothermal solutions
+bracket the answer to a width of order the thermoelastic coupling parameter, and that bracket is reported
+as the verification of the model rather than as its replacement. Written this way, a referee sees a paper
+that knows where its own effect lives, which is stronger than a paper that assumes it lives everywhere.
+
+\section*{5. Counts, for the record}
+
+\begin{center}\small
+\begin{tabular}{lcccl}
+\toprule
+paper & unknowns & field equations & coupled terms beyond the closest papers & extra \\
+\midrule
+A (Sumit) & 5 & 5 & carrier--temperature loop in both directions, pyroelectric, drift & (A1)--(A6)\\
+B (Neha) & 5 & 5 & phason inertia and relaxation in one equation, thermo-phason coupling & (B1)--(B7)\\
+C (Anu) & 5 & 5 & pyroelectric and pyromagnetic together, effective $\alpha$ & (C1)--(C6)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{What is deliberately not in this document:} boundary conditions, interface and face
+conditions, the dispersion determinant, the solution method and any numerical value. Those are the
+scholars' work and the subject of the first meeting.
+
+\end{document}
