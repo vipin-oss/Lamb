@@ -65,22 +65,29 @@ explicit failure condition. Tolerance references are those of `docs/02_workflow_
   In that case C1 is dropped and the paper is not submitted at Q1 (see `q1_scorecard.md`).
 
 ### C2 — Above a threshold doping the residual loss is a thermoelastic floor whose high-frequency behaviour discriminates MGT from Fourier conduction.
-- **Statement.** For `n₀ ≫ n₀*(fd)` the carrier channel is screened and `k_i` approaches the
-  thermoelastic floor `k_i^th`. Under **MGT** this floor decreases once `ω τ_q > 1` (the thermal
-  wave is too fast to exchange energy with the elastic wave within a cycle); under **Fourier**
-  (`τ_q = 0`) it saturates. The two models therefore separate at high fd, and the separation is
-  **a different slope of the same measured curve**, not a different curve.
-- **Figure.** F6: `k_i^th` vs `fd` at fixed h for τ_q = 0 (Fourier) and τ_q = 10⁻¹², 10⁻¹¹ s,
-  carrier channel removed two ways (high doping, and drift-nulled), with the floor's asymptotic
-  slopes annotated.
+- **Statement (REVISED 2026-30-10 after the bulk-medium test — the earlier "MGT removes the floor"
+  wording was wrong).** For `n₀ ≫ n₀*(fd)` the carrier channel is screened and `k_i` approaches the
+  thermoelastic floor `k_i^th`. In an unbounded medium **both** models saturate at high frequency:
+  `k_i^F → Δ_E/(2c_Lτ_T)` and `k_i^MGT → (Δ_E/2c_L)·τ_T/(τ_T−τ_q)²` (derivation:
+  `steps/step3_prerecheck_bulk_medium.md`, eqs. 3 and 5). MGT therefore changes **two** observables:
+  it rescales the plateau by `τ_T²/(τ_T−τ_q)²`, and it moves the peak from `ω = 1/τ_T` to
+  `ω = 1/|τ_T−τ_q|`. In a plate `τ_T` is replaced by the through-thickness diffusion time
+  `τ_th = (2h)²/(π²κ)`, so the peak position becomes a function of **thickness**. The discriminating
+  observable is the **peak shift with 2h**, not a change of slope.
+- **Figure.** F6: peak position (fd at which `k_i^th` is maximal) vs `2h`, for Fourier and for
+  τ_q = 10⁻¹³, 10⁻¹², 10⁻¹¹ s at both k_th ends (60 and 1.2 W/m·K); inset: plateau ratio
+  `k_i^MGT/k_i^F = τ_T²/(τ_T−τ_q)²`. Carrier channel removed two ways (high doping, drift-nulled).
 - **Limiting cases.**
   1. `τ_q → 0` must reproduce the Fourier curve to < 1e-6 (programming check).
   2. Thermal coupling off (λ_ij, p_i → 0) must give `k_i^th = 0` exactly.
   3. Classical coupled thermoelasticity must reproduce the published TED peak condition for a
      plate, `ω ≈ π²α/(2h)²`, to < 5% (order-of-magnitude check, number recorded).
 - **Fails if.** The floor is numerically smaller than the root-finding resolution of the solver
-  (i.e. the complex root `k_i` is below ~1e-8 `k_r`) or is monotone in fd for every τ_q in
-  10⁻¹³–10⁻¹¹ s. Then C2 is dropped and MGT is demoted from a claim to a formulation remark.
+  (i.e. the complex root `k_i` is below ~1e-8 `k_r`); **or** the predicted peak shift between τ_q = 0
+  and τ_q = 10⁻¹¹ s is smaller than the solver's peak-location resolution at the thicknesses where the
+  floor is resolvable; **or** the two k_th ends give the same sign of effect (in which case the k_th
+  uncertainty, not MGT, controls the observation). Then C2 is dropped and MGT is demoted from a claim
+  to a formulation remark.
 
 ### C3 — The two NSGT length scales move the peak locus and the floor cutoff, and a two-point attenuation protocol can separate them where phase velocity cannot.
 - **Statement.** NSGT enters wave problems through the ratio `(1 + l_g²k²)/(1 + l_nl²k²)`

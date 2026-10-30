@@ -22,7 +22,7 @@ Sumit leads, Neha one week behind, Anu two weeks behind.
 | 1 | Literature + novelty sweep, Step 1 equations | Reading items 1-5, decide poling/quasi axis | Reading items 1-3, fix poling axis | Run common solver, send equations pack |
 | 2 | Step 1 done -> plot | Step 1 | Reading, Step 1 | Cross-check Step 1 numbers (3 scholars) |
 | 3 | Step 2 piezo | Step 1 done / Step 2 | Step 1 | Independent Step 2 in Arena for Sumit |
-| 4 | Step 3 MGT heat | Step 2 | Step 2 | Cross-check Sumit; start Neha Step 2 check |
+| 4 | **bulk-medium test (Fourier vs MGT) -> then** Step 3 MGT heat | Step 2 | Step 2 | Cross-check Sumit; start Neha Step 2 check |
 | 5 | Step 4 carriers | Step 3 phason (decision gate) | Step 2 done / Step 3 | Arena: carrier limit check |
 | 6 | Step 4 done, **base paper figures** | Step 3 done | Step 3 | Cross-check Neha Step 3 vs published |
 | 7 | Step 5 NSGT | Step 4 MGT | Step 3 done | Arena NSGT root-count check |
@@ -39,6 +39,7 @@ Sumit leads, Neha one week behind, Anu two weeks behind.
 - **Week 2:** novelty sweep for all three. If a near-identical paper exists, change the hook now.
 - **Step 3 of Neha:** phason wave-like vs diffusive. Pick, justify, test the other.
 - **Step 4 of Sumit:** carriers-off returns Step 3 AND high-density limit sane. This is a base paper.
+- **Bulk-medium gate (Sumit, before Step 3):** `steps/step3_prerecheck_bulk_medium.md` shows both Fourier and MGT *saturate* in an infinite medium; MGT only rescales the plateau and moves the peak. C2 was restated accordingly — the observable is peak position vs thickness. Step 3 does not start until Dr. Vipin accepts the restatement and confirms the Gupta equation's placement of tau_q.
 - **Step 4 of Sumit, added at Task 0 (cheap, decides the paper):** the **C1 test** — `k_i(n0)` at
   fd = 1000 and 3000 must be non-monotonic with its peak within 5% of `n0* = eps33 w/(e mu)`. If it
   is monotone, the ordering argument dies and the paper goes to a Q2 target. Also the

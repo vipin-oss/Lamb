@@ -96,8 +96,11 @@ is material-set and linear. \emph{Figure F4.}
 \emph{Checks:} $n_0\to0$ returns Step~3 to $<10^{-6}$; measured peak within $5\%$ of $n_0^{*}$
 (the $5\%$ is the claim's own error budget and is printed on the figure).
 \item[\textbf{C2}] For $n_0\gg n_0^{*}$ the residual loss is the thermoelastic floor
-$k_i^{\rm th}$; it decreases once $\omega\tau_q>1$ under MGT and saturates under Fourier.
-\emph{Figure F6.}
+$k_i^{\rm th}$. \emph{Revised at this gate:} an unbounded medium saturates under \emph{both} models
+(\S\,``bulk test''), so MGT changes the \emph{plateau value}, by $\tau_T^2/(\tau_T-\tau_q)^2$, and
+moves the \emph{peak} from $\omega=1/\tau_T$ to $1/|\tau_T-\tau_q|$ --- with $\tau_T\to\tau_{\rm th}
+=(2h)^2/\pi^2\kappa$ in a plate, the peak position becomes a thickness observable.
+\emph{Figure F6:} peak position vs $2h$ with the plateau ratio in the inset.
 \emph{Checks:} $\tau_q\to0$ reproduces the Fourier curve to $<10^{-6}$; thermal coupling off gives
 $k_i^{\rm th}=0$ exactly; the classical plate damping peak $\omega\simeq\pi^2\alpha/(2h)^2$ is
 recovered to $<5\%$.
@@ -115,6 +118,27 @@ thermal floor, which then becomes the dominant signal and turns $\tau_q$ into a 
 quantity. Delivered as a sign map of $k_i$ in the $(v_d/c_{\rm ph},fd)$ plane with the null line.
 \textbf{U2 (minor).} Attenuation budget by energy flux, so carrier and thermal parts are derived by
 an identity on the mode shape rather than by switching terms off.
+
+\\section*{3a. The bulk-medium test that C2 now rests on}
+Before any Step~3 code: attenuation of a longitudinal wave in an \\emph{infinite} medium with coupling
+parameter $\\Delta_E=T_0\\beta^2/(\\rho c_p(\\lambda+2\\mu))$ and $\\tau_T=\\kappa/c_L^2$.
+Fourier: $k_i=(\\omega/c_L)(\\Delta_E/2)\\,\\omega\\tau_T/[1+(\\omega\\tau_T)^2]$ --- grows as $\\omega^2$,
+then \\emph{plateaus} at $\\Delta_E/(2c_L\\tau_T)$ for $\\omega>1/\\tau_T$.
+MGT in the Gupta form $(1+\\tau_q\\partial_t)[\\rho c_p\\dot\\theta+T_0\\beta\\dot\\varepsilon_{kk}]
+=k_{\\rm th}\\nabla^2\\theta$ multiplies capacity and coupling by the \\emph{same} factor
+$1-i\\omega\\tau_q$, giving $k_i=(\\omega/c_L)(\\Delta_E/2)\\,\\omega\\tau_T/[1+\omega^2(\\tau_T-\\tau_q)^2]$
+--- the Fourier formula with $\\tau_T\\to\\tau_T-\\tau_q$ in the width only. \\textbf{Answer to the
+question posed at the gate: the MGT floor does not fall --- it saturates too, rescaled.} The plateau
+ratio is $\\tau_T^2/(\\tau_T-\\tau_q)^2$, $>1$ for $0<\\tau_q<2\\tau_T$ and exactly 1 at
+$\\tau_q=2\\tau_T$; at $\\tau_q=\\tau_T$ the first-order expansion diverges (second-sound resonance, model
+unusable). The alternative placement, $\\tau_q$ on $\\ddot\\theta$ alone, yields $k_i<0$ for
+$\\tau_q>\\tau_T$ and is therefore inadmissible --- a concrete reason to confirm which form Gupta
+et al.\\ actually use. With $\\rho c_p=5680\\times500$, $c_L=6095$ m/s: $\\tau_T=5.7\\times10^{-13}$ s at
+$k_{\\rm th}=60$ W/m$\\cdot$K and $1.1\\times10^{-14}$ s at 1.2 W/m$\\cdot$K. Since
+$\\tau_q\\in[10^{-13},10^{-11}]$ s, the thin-film end has $\\tau_q>\\tau_T$ for every $\\tau_q$ in range
+while the bulk end straddles it --- the two conductivity ends are \\emph{qualitatively} different
+scenarios, which promotes $k_{\\rm th}$ from a nuisance constant to the first-ranked sensitivity.
+Full page: \\texttt{steps/step3\_prerecheck\_bulk\_medium.md}.
 
 \section*{4. Model, boundary conditions and validity window}
 Unknowns: $u_x,u_z,\varphi,\theta,\Delta n$ in plane strain. Constitutive relations are written in
@@ -153,6 +177,41 @@ $\sigma=n_0e\mu_n$, so the peak identifies the product and not the factors --- s
 (iii) $\tau_q$, the least measured constant and the one the MGT claim rests on, hence given as a
 range and labelled ``assumed''. (iv) $l_{\rm nl},l_g$, invisible below $kh\approx0.3$.
 (v) $c_p,\alpha_T,\rho$ enter as one Zener group and rescale but do not shift the floor.
+
+\textbf{Where each $\tau_q$ actually sits in the experiment.} $\omega=2\pi fd/2h$, so the whole MGT
+claim depends on $\omega\tau_q$, and the table below is the one number that decides whether MGT is
+observable at all. Entries are $\omega\tau_q$ (dimensionless), rows $2h$, columns $fd$ in Hz$\cdot$m:
+
+\begin{center}\footnotesize
+\begin{tabular}{l|lllll}
+\toprule
+$2h$ \textbackslash{} $fd$ & 500 & 1000 & 2000 & 3000 & 5000\\
+\midrule
+\multicolumn{6}{l}{$\tau_q=10^{-13}$ s}\\
+10 nm  & 0.0314 & 0.0628 & 0.126 & 0.188 & 0.314\\
+50 nm  & 0.00628 & 0.0126 & 0.0251 & 0.0377 & 0.0628\\
+250 nm & 0.00126 & 0.00251 & 0.00503 & 0.00754 & 0.0126\\
+\midrule
+\multicolumn{6}{l}{$\tau_q=10^{-12}$ s (all ten times the row above)}\\
+10 nm  & 0.314 & 0.628 & 1.26 & 1.88 & 3.14\\
+50 nm  & 0.0628 & 0.126 & 0.251 & 0.377 & 0.628\\
+250 nm & 0.0126 & 0.0251 & 0.0503 & 0.0754 & 0.126\\
+\midrule
+\multicolumn{6}{l}{$\tau_q=10^{-11}$ s (all ten times the block above)}\\
+10 nm  & 3.14 & 6.28 & 12.6 & 18.8 & 31.4\\
+50 nm  & 0.628 & 1.26 & 2.51 & 3.77 & 6.28\\
+250 nm & 0.126 & 0.251 & 0.503 & 0.754 & 1.26\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent Reading: at $2h=250$ nm even $\tau_q=10^{-11}$ s never exceeds $\omega\tau_q=1.26$, so the
+MGT correction is a few per cent and \emph{not} a qualitative change; only a 10 nm plate with
+$\tau_q\ge10^{-12}$ s enters $\omega\tau_q\gg1$. Two consequences are binding. (a) The $2h=250$ nm
+plate in the current sweep cannot test MGT at all --- the MGT claim needs $2h\le10$ nm, where the
+continuum model itself is at its limit and $l/h$ is being swept to $\sim0.1$. (b) The reported
+thickness range must therefore be split: $2h\le10$ nm for the MGT/NSGT physics, and there the
+\emph{size} effect and the \emph{thermal} effect are the same order of magnitude, which is precisely
+why C3 needs two independent observables.
 
 \section*{6. Q1 assessment}
 \begin{table}[h]

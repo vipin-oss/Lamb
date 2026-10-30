@@ -17,10 +17,11 @@ Plane strain in the `x–z` plane: `u_y = 0`, `∂/∂y = 0`. Isotropic, homogen
 σ_ij,j = ρ ü_i ,    σ_ij = λ ε_kk δ_ij + 2μ ε_ij ,    ε_ij = ½(u_i,j + u_j,i)      (1)
 ```
 
-Helmholtz decomposition `u = ∇φ + ∇×ψ` with `ψ = (0, ψ, 0)`:
+Helmholtz decomposition `u = ∇φ + ∇×ψ` with the vector potential taken along `−y`,
+`ψ = (0, −ψ, 0)`, so that `∇×ψ = (ψ,_z, 0, −ψ,_x)`:
 
 ```
-u_x = φ,_x − ψ,_z ,      u_z = φ,_z + ψ,_x                                        (2)
+u_x = φ,_x + ψ,_z ,      u_z = φ,_z − ψ,_x                                        (2)
 ```
 
 With the harmonic ansatz `φ = Φ(z) e^{i(kx−ωt)}`, `ψ = Ψ(z) e^{i(kx−ωt)}`, (1)–(2) give
@@ -36,30 +37,28 @@ exact and no overflow occurs at large `|p|h`.
 
 ## 2. Stresses in potential form
 
-```
-σ_zz = −μ(q² − k²) Φ cos-type …        (see the assembled forms below)
-σ_xz = μ( u_x,z + u_z,x )
-```
-
 For the **symmetric** family take `φ = A cos(pz)`, `ψ = B sin(qz)`; for the **antisymmetric**
 family `φ = A sin(pz)`, `ψ = B cos(qz)`. Substituting into (2) and then into the constitutive law:
 
 | | `σ_zz / μ` | `σ_xz / μ` |
 |---|---|---|
-| S | `−(q²−k²) A cos(pz) + 2ikq B cos(qz)` | `−2ikp A sin(pz) + (q²−k²) B sin(qz)` |
-| A | `−(q²−k²) A sin(pz) − 2ikq B sin(qz)` | `2ikp A cos(pz) + (q²−k²) B cos(qz)` |
-
-> **Sign convention, stated once.** The sign of the `ψ` terms depends on the direction chosen for
-> the `ψ` vector in (2). Both choices give the same physical roots; they give the two equations
-> below with the *second* term's sign flipped. Do not "fix" the sign by argument — fix it by the
-> `S0` thin-plate check in §5, which is decisive. The forms given below are the ones I verified
-> numerically to reproduce `S0 → 5393.91 m/s`.
+| S | `−(q²−k²) A cos(pz) − 2ikq B cos(qz)` | `−2ikp A sin(pz) − (q²−k²) B sin(qz)` |
+| A | `−(q²−k²) A sin(pz) + 2ikq B sin(qz)` | `2ikp A cos(pz) − (q²−k²) B cos(qz)` |
 
 ## 3. Boundary conditions and the dispersion equations
 
 Traction-free faces: `σ_zz = σ_xz = 0` at `z = ±h`. Four equations, four unknowns `(A,B)` per
-family, so a `2×2` determinant per family. The **undivided determinants are numerically dangerous**
-(see §6), so the working forms are the divided ones:
+family, so a `2×2` determinant per family. Setting the determinant of the two boundary equations to
+zero gives, for the two families,
+
+```
+S:  (q² − k²)² cos(ph) sin(qh)  +  4 k² p q sin(ph) cos(qh)  =  0                 (4S)
+A:  (q² − k²)² sin(ph) cos(qh)  +  4 k² p q cos(ph) sin(qh)  =  0                 (4A)
+```
+
+These undivided forms are **numerically dangerous** — they vanish identically at `c = c_T` (§6) —
+so the working forms are the divided ones below, which carry the **same sign** (they are (4S), (4A)
+divided by `q` and `p` respectively):
 
 **Symmetric (S):**
 ```
@@ -77,8 +76,8 @@ form** for all later steps.
 
 ### Equivalently, the tangent forms (use only as a cross-check)
 ```
-S:  tan(qh)/tan(ph) = − 4 k² p q / (q² − k²)²
-A:  tan(ph)/tan(qh) = − (q² − k²)² / (4 k² p q)
+S:  tan(ph)/tan(qh) = − (q² − k²)² / (4 k² p q)      [from (4S)]
+A:  tan(ph)/tan(qh) = − 4 k² p q / (q² − k²)²        [from (4A)]
 ```
 These fail at `p h` or `q h = mπ/2`; they are for checking algebra, not for root finding.
 
@@ -118,7 +117,7 @@ constants in §7. Record scholar-vs-Arena differences in `checks/step1_compare.m
 ## 6. Numerical warnings — three failures I reproduced myself
 
 1. **Spurious root at `c = c_T`.** The undivided determinant
-   `(q²−k²)² cos(ph) sin(qh) − 4k²pq sin(ph) cos(qh)` vanishes identically at `q = 0` (i.e. `c = c_T`)
+   `(q²−k²)² cos(ph) sin(qh) + 4k²pq sin(ph) cos(qh)` vanishes identically at `q = 0` (i.e. `c = c_T`)
    for *every* `k`, because `sin(qh) = 0` there. A naive grid search returns `c = c_T` at every
    frequency. **This is workflow failure cause 6** ("spurious roots from scaling the determinant").
    Dividing by `q` and `p` as in (5S)/(5A) removes it. Verified: the undivided form returns 3122.0

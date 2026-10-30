@@ -29,7 +29,7 @@ floor), never as a claim.
 | 0 | Literature + novelty sweep, problem v2, scorecard | 16 papers, empty cell identified | — | [x] |
 | 1 | Elastic Rayleigh–Lamb | see common/step1_instructions.md | [ ] | [ ] |
 | 2 | + piezoelectric (open/short) | coupling off -> Step 1; K² from open/short | [ ] | [ ] |
-| 3 | + MGT heat | thermal off -> Step 2; classical thermoelastic limit | [ ] | [ ] |
+| 3 | + MGT heat | **prerequisite: bulk-medium test `steps/step3_prerecheck_bulk_medium.md` signed off**; then thermal off -> Step 2; classical thermoelastic limit | [ ] | [ ] |
 | 4 | + carriers | n0 -> 0 returns Step 3; high-n0 limit sane; **C1 monotonicity test** | [ ] | [ ] |
 | 5 | + NSGT | l = 0 returns Step 4; nonlocal-only, gradient-only checked; extra BCs approved first | [ ] | [ ] |
 | 6 | Analysis, figures | smooth branches, consistent root counts, trust window on every figure | [ ] | [ ] |
