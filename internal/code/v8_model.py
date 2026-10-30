@@ -45,7 +45,10 @@ def const_anu():
 
 # ----------------------------------------------------------------- builders
 def rcp_of(P):
-    return P['rho']*P['cp']
+    # volumetric heat capacity, J m^-3 K^-1.  The tabulated cp of all three papers
+    # (2.8e6, 2.6e6, 2.5e6) is already rho times the specific heat, so it is not
+    # multiplied by rho again.
+    return P['cp']
 
 def N_of(eta, k, P):
     return 1 - P['lnl']**2*(eta**2 - k**2)

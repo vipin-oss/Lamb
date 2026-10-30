@@ -7,60 +7,96 @@
 \usepackage[a4paper,margin=2.2cm]{geometry}
 \usepackage[hidelinks]{hyperref}
 \setlength{\parskip}{3pt}
-\title{\vspace{-1.4cm}\Large Couplings one at a time and the closure: milestone report for Task~2}
+\title{\vspace{-1.4cm}\Large Units, the Fourier check and the closure baseline: milestone report for Task~2}
 \author{Dr.\ Vipin\\ Gurugram University}
 \date{30 October 2026}
 \begin{document}
 \maketitle
 \vspace{-7mm}
 
-\section*{What was already settled}
+\section*{The units fault}
 
-The fourteen-row matrix is not singular; the earlier verdict came from scanning the determinant, a
-coarse grid and the wrong length ratio. Your three dips are reproduced to the grid: A0 at
-$2340.0$, $2365.0$ and $2460.3$~m/s for $l_g/h=0.05$, $0.10$, $0.20$ at $h=5\times10^{-4}$~m and
-$fd=1000$, with depths of $92$, $33$ and $63$ against the local median. The gradient length
-stiffens both branches monotonically: S0 runs $5311.2$, $5318.7$, $5348.4$ at the same three
-lengths against $5308.6$ elastic, and A0 runs $2337.4$, $2367.0$, $2460.3$ against $2326.6$. The
-$fd=10$ S0 entries stay excluded for the reason already accepted.
+You were right. The three tabulated heat capacities, $2.8\times10^{6}$, $2.6\times10^{6}$ and
+$2.5\times10^{6}$, are volumetric already, and the code was multiplying by $\rho$ again. The heat
+capacity was five thousand six hundred times too large in Sumit, and the corresponding factors in
+Neha and Anu. `rcp_of` now returns the tabulated value. Every elastic and size-effect number
+reported so far was produced with the couplings off and does not move; the fully coupled runs move
+a little, and they now have their own baseline, $2181.9$~m/s at $fd=1000$ against the elastic
+$2326.6$.
 
-\section*{The piezoelectric limit, corrected}
+\section*{Fourier damping, bulk, after the fix}
 
-You were right that the $5368$~m/s figure was not a fault. The carriers were still on and mobile
-charge was screening the stiffening. With $q=0$, the thermal couplings off, $p_3=0$ and
-$b_1=b_3=0$, the open-circuit thin-plate speed comes out where it should:
+Sub-block $(u_x,\theta)$ at $\eta=0$ with $\tau_q=0$ and everything else off. The determinant is
+quadratic in $k^{2}$, so the roots are exact. Constants: $\kappa=k_{th}/r c_p=2.143\times10^{-5}$
+m$^{2}$/s, $c_L=6076.1$~m/s, $\Delta_E=T_0b_1^{2}/(r c_p c_{11})=8.175\times10^{-5}$, and the peak
+of the Fourier shape at $1/(2\pi\kappa/c_L^{2})=274$~GHz.
 
 \begin{center}\footnotesize
-\begin{tabular}{lccc}
+\begin{tabular}{cccc}
 \toprule
-case & $fd=10$ & $fd=100$ & closed form\\
+$f$ (Hz) & $k_r$ (1/m) & $k_i/k_r$ & formula\\
 \midrule
-piezoelectric, faces open & 5509.7 & 5509.2 & 5509.57\\
-elastic baseline, $e=0$ & 5259.5 & 5258.8 & 5259.13\\
+$10^{8}$ & $1.034039\times10^{5}$ & $1.4904\times10^{-8}$ & $1.4907\times10^{-8}$\\
+$10^{9}$ & $1.034039\times10^{6}$ & $1.4904\times10^{-7}$ & $1.4906\times10^{-7}$\\
+$10^{10}$ & $1.034039\times10^{7}$ & $1.4884\times10^{-6}$ & $1.4887\times10^{-6}$\\
+$10^{11}$ & $1.034044\times10^{8}$ & $1.3155\times10^{-5}$ & $1.3157\times10^{-5}$\\
+$2.74\times10^{11}$ & $2.833326\times10^{8}$ & $2.0437\times10^{-5}$ & $2.0437\times10^{-5}$\\
+$10^{12}$ & $1.034079\times10^{9}$ & $1.0424\times10^{-5}$ & $1.0424\times10^{-5}$\\
+$10^{13}$ & $1.034082\times10^{10}$ & $1.1200\times10^{-6}$ & $1.1200\times10^{-6}$\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-That is 0.06 per cent at worst, and it confirms the plane-stress reduction the masters carry.
+Four digits at every frequency, the peak at 274~GHz, and $k_i/k_r=\Delta_E/2$ there. That is the
+check you asked for and it passes. The plate version needs a complex-$k$ plate solver, which is not
+written yet.
 
-Switching the carriers back on gives the screening curve at $fd=100$: $5509.2$ at $n_0=0$,
-$5509.2$ at $10^{16}$, $5504.9$ at $10^{18}$, $5474.7$ at $10^{19}$, $5355.1$ at $10^{20}$ and
-$5273.7$~m/s at $10^{21}$~m$^{-3}$. The crossover falls between $10^{18}$ and $10^{19}$, and at the
-top of the range the speed has come down to the short-circuit value, which is what complete
-screening means. This curve is worth a figure in the Sumit paper.
+\section*{Hutson--White, bulk}
 
-\section*{The closure, with the two lengths separated}
+Sub-block $(u_z,\phi,\delta n)$ at $\eta=0$, only $e_{15}$ and the carriers, $D_n=0$, no
+recombination, $f=100$~kHz. The peak of $|k_i/k_r|$ falls at $n_0=3\times10^{16}$~m$^{-3}$ against
+$n_0^{*}=\varepsilon_{11}\omega/(q b_n)=2.965\times10^{16}$, one grid step, with
+$|k_i/k_r|=1.86\times10^{-2}$ there. So the peak position is confirmed.
 
-Your diagnosis was exact. With $l_{nl}=l_g$ the two operators coincide, $N(\eta)=G(\eta)$, the
-elastic block becomes $G$ times the classical one, and at the four gradient roots $G$ vanishes, so
-the traction rows divide by zero. That is the origin of the $10^{-18}$ singular values, not the
-closure. With $l_{nl}=0.5\,l_g$ and $l_{nl}=2\,l_g$ the runs are healthy: medians of $10^{-2}$ to
-$10^{-1}$ and dips of depth 87 to 420.
+The sign is not. In this code's convention the root has $k_i<0$, that is growth, and four different
+starting guesses converge to it, so it is not a root-selection artefact. Without drift a
+piezosemiconductor should attenuate. Either the acoustoelectric term carries the opposite sign in
+the v8 rows from the one the masters intend, or the model does amplify at $n_0^{*}$ and should say
+so. I have not written either into a master.
 
-Sumit paper fully coupled, $h=5\times10^{-4}$~m, $fd=1000$, A0 branch, elastic value $2326.6$~m/s:
+\section*{Why the plate crossover is not at $n_0^{*}$}
+
+Plate S0 at $fd=100$, piezoelectric and carriers only, three diffusivities:
 
 \begin{center}\footnotesize
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
+\toprule
+$D_n$ (m$^2$/s) & $10^{16}$ & $10^{17}$ & $10^{18}$ & $10^{19}$\\
+\midrule
+$10^{-3}$ & 5508.9 & 5508.7 & 5504.6 & 5474.3\\
+$2.6\times10^{-4}$ & 5508.9 & 5508.7 & 5504.6 & 5474.3\\
+0 & build degenerates & --- & --- & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The answer is independent of $D_n$ to the last digit, so the gap is not diffusion or Debye screening
+inside the code, and at $D_n=0$ the carrier block loses its roots so that control cannot be
+reported. The crossover is set by the carrier relaxation $-i\omega+1/\tau_R$ against $\omega$, and
+it sits 30 to 300 times above the bulk $n_0^{*}$ because the plate test measures the static
+stiffening at $kh\to0$, not the dielectric resonance that produces the bulk peak. That is what the
+numbers say; the closed-form plate threshold is the next thing to write down, and I would rather do
+that than assert a mechanism now.
+
+\section*{The closure, with its own baseline}
+
+$l_g=l_{nl}$ was the fault, as you said; with $0.5$ and $2\,l_g$ the runs are healthy. The baseline
+column is the same coupled model with both lengths at zero, $2181.9$~m/s at $fd=1000$ and $943.5$ at
+$fd=100$. The $l=10^{-8}$~m route to that baseline is not usable: at $l/h=2\times10^{-5}$ the
+equilibrated singular value is $10^{-17}$ everywhere and turns negative in the fourth digit.
+
+\begin{center}\footnotesize
+\begin{tabular}{cccc}
 \toprule
 $l_g/h$ & $l_{nl}/l_g$ & our seven rows & alternative closure\\
 \midrule
@@ -68,60 +104,27 @@ $l_g/h$ & $l_{nl}/l_g$ & our seven rows & alternative closure\\
 0.05 & 2 & 2175.8 & 2170.8\\
 0.10 & 0.5 & 2220.2 & 2195.3\\
 0.10 & 2 & 2154.4 & 2128.4\\
-0.20 & 0.5 & 2300.7 & no dip near 2300\\
+0.20 & 0.5 & 2300.7 & no reproducible branch\\
 0.20 & 2 & 1825 & 1825\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Where both closures give a dip in the same window the difference is at most 26~m/s, 1.1 per cent,
-and carries no systematic sign. That is smaller than the size effect it is competing with, since
-these lengths move the branch by 3 to 22 per cent, so the closure does not decide the numbers. It
-does decide what we may claim: the seven rows remain a modelling choice of ours, and the masters
-still need the paragraph that says so. The proposed wording now carries the 1.1 per cent figure.
+Against the baseline the sign follows the ratio: with $l_{nl}=0.5\,l_g$ all three entries stiffen
+($+0.5$, $+1.8$, $+5.4$ per cent), with $l_{nl}=2\,l_g$ the first two soften ($-0.3$, $-1.3$ per
+cent) and the third falls to $-16$ per cent. The alternative closure moves a given branch by at
+most 26~m/s, 1.1 per cent, with no systematic sign.
 
-Two entries need care. Every value in the table lies below the elastic speed, even with $l_{nl}$ at
-half the gradient length, because at these lengths the nonlocal softening outweighs the gradient
-stiffening; that ordering should be stated where the limits are quoted. And the
-$l_{nl}=0.5\,l_g$, $l_g/h=0.2$ alternative closure has no dip anywhere near 2300~m/s but a shallow
-one at 1110~m/s. A closure that removes a branch is not credible, so that entry is held back and
-will be re-run; the likely cause is the same near-degenerate column pair, now appearing inside one
-of the two row sets at the larger length.
+The $0.2$, $0.5$ alternative entry was re-run over 800 to 2600~m/s in steps of 25: five shallow
+minima, the deepest $8.3\times10^{-4}$ against a median of $2.6\times10^{-2}$, no clean branch, where
+our rows give a single dip at 2300.7 with depth 87. It stays held.
 
-\section*{Parity}
+\section*{Parity and what is left}
 
-All thirty-two diagonal sign vectors were tested against $M(-\eta)=S\,M(\eta)\,S$ at
-$k=3\times10^{5}$, $\omega=2\pi10^{8}$ and $\eta=10^{4}+2\times10^{3}i$.
-
-\begin{center}\footnotesize
-\begin{tabular}{llc}
-\toprule
-paper & field order & patterns\\
-\midrule
-Sumit & $u_x,u_z,\phi,\psi,\theta$ & none\\
-Sumit, $\beta_{th}=\Pi_{th}=E_g=0$ & same & $(+,-,-,-,+)$ and its negative\\
-Neha & $u_x,u_z,w,\phi,\theta$ & $(+,-,-,-,+)$ and its negative\\
-Anu & $u_x,u_z,\phi,\psi,\theta$ & $(+,-,-,-,+)$ and its negative\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-This is the wording the three masters already carry, and it stands as written.
-
-\section*{Fourier damping: attempted, not a test yet}
-
-A bulk longitudinal wave at $\eta=0$ with the thermal coupling live and everything else off gives
-$k_i/k_r$ of order $10^{-19}$ at $100$~kHz and $10^{-14}$ at $10$~GHz, rising straight through the
-frequency where the Fourier shape should peak, $1/(2\pi\tau_R)=159$~MHz. Attenuation five to seven
-orders below any physical $\Delta_E$ cannot be right, and the likely reason is that the defaults
-mingle units: $bth=10^{18}$ cannot be SI beside $b_1=b_3=4\times10^{5}$. The damping check, and with
-it the Hutson--White peak, the phason limits and the magnetoelastic limits, waits until the two are
-put on one footing. I would rather say that than quote a number.
-
-\section*{Delivery}
-
-The v8 masters are untouched. Every number here is in the internal notes with the code that
-produced it. No \LaTeX{} engine is installed in this sandbox, so this file is a source; it has been
-through the style script and compiles on any recent \TeX{}~Live.
+Parity is unchanged: Sumit none, Sumit with $\beta_{th}=\Pi_{th}=E_g=0$ the pair
+$(+,-,-,-,+)$ and its negative, Neha and Anu the same pair always. The phason limits and the
+magnetoelastic limits are not done; they come with the plate threshold and the sign question above.
+The v8 masters are untouched, and no \LaTeX{} engine is installed here, so this file is a source
+that has been through the style script.
 
 \end{document}

@@ -72,33 +72,47 @@ Set-up: Sumit paper, fully coupled, `h = 5e-4` m, `fd = 1000`, seven rows per fa
 constitutive rows in the same two slots, A0 window scanned at 5 m/s and refined by a parabola.
 Elastic A0 for reference is 2326.6 m/s. Values in m/s.
 
-| l_g/h | l_nl/l_g | seven rows | alternative closure | difference |
+| l_g/h | l_nl/l_g | seven rows | alternative closure | coupled l=0 baseline |
 |---|---|---|---|---|
-| 0.05 | 0.5 | 2193.2 | 2211.5 | +18.3 |
-| 0.05 | 2 | 2175.8 | 2170.8 | -5.0 |
-| 0.1 | 0.5 | 2220.2 | 2195.3 | -24.9 |
-| 0.1 | 2 | 2154.4 | 2128.4 | -26.0 |
-| 0.2 | 0.5 | 2300.7 | dip at 1110, none near 2300 | to check |
-| 0.2 | 2 | 1825 | 1825 | 0.0 |
+| 0.05 | 0.5 | 2193.2 | 2211.5 | 2181.9 |
+| 0.05 | 2 | 2175.8 | 2170.8 | 2181.9 |
+| 0.10 | 0.5 | 2220.2 | 2195.3 | 2181.9 |
+| 0.10 | 2 | 2154.4 | 2128.4 | 2181.9 |
+| 0.20 | 0.5 | 2300.7 | no reproducible branch | 2181.9 |
+| 0.20 | 2 | 1825 | 1825 | 2181.9 |
 
-Reading. Where both closures give a dip in the same window, the alternative changes the lowest
-branch by at most 26 m/s, which is 1.1 per cent, and with no systematic sign. That is smaller than
-the size effect itself (the same lengths move the branch by 3 to 22 per cent against the elastic
-value), so the closure is not what decides the numbers — but it is not nothing either, and the
-masters cannot claim the seven rows are forced by the nonlocal law.
+The baseline of the last column is the same model with both lengths switched off, all couplings
+on: A0 = 2181.9 m/s at `fd = 1000` (943.5 m/s at `fd = 100`). It is not 2326.6, which is the elastic
+value without the piezoelectric and carrier couplings; comparing against that would have shown a
+false softening of 6 per cent from the lengths alone.
+
+The `l = 1e-8` route to the same baseline is not usable: at `l/h = 2e-5` the equilibrated singular
+value is of order `1e-17` at every speed and even turns negative in the fourth digit, which is the
+same near-degenerate column pair as before. The ten-row system with the lengths set to zero is the
+baseline, and it is clean.
+
+Reading against the coupled baseline: the pair of lengths moves the branch from -2.6 per cent
+(2154.4 at `l_g/h = 0.1`, `l_nl = 2 l_g`) to +5.4 per cent (2300.7 at `0.2`, `0.5`), so neither
+length dominates across the range and the sign of the size effect depends on the ratio
+`l_nl/l_g`. Where both closures give a dip in the same window the alternative moves the branch by
+at most 26 m/s, 1.1 per cent, with no systematic sign. The closure therefore does not decide the
+numbers; it does decide what we may claim, and the masters still need the paragraph that says so.
 
 Two things are worth flagging rather than hiding.
 
-1. Every entry in the table sits *below* the elastic 2326.6 m/s, including the ones with `l_nl` at
-   half the gradient length. At these lengths the nonlocal softening dominates the gradient
-   stiffening: at `l_g/h = 0.05, l_nl = 0.5 l_g` the stiffening from `l_g` alone is +0.5 per cent
-   (2337.4 against 2326.6 in the elastic table) while the pair lands at 2193.2, i.e. -5.7 per cent.
-   That ordering is physical and should be said in the paper when the coupling limits are quoted.
-2. The `l_g/h = 0.2, l_nl = 0.5 l_g` alternative-closure case has no dip anywhere near 2300 and
-   shows a shallow one at 1110. A closure that removes a branch is not credible as it stands, so
-   this entry is marked to be re-run before it is used. The likely cause is the same near-degenerate
-   column pair that spoiled the `l_nl = l_g` run, appearing in one of the two closure row sets at
-   the larger length.
+1. The sign of the size effect follows the ratio. At `l_nl = 0.5 l_g` the pair sits above the
+   coupled baseline at all three lengths, 2193.2, 2220.2 and 2300.7 against 2181.9, i.e. the
+   gradient length wins. At `l_nl = 2 l_g` it sits below at the first two, 2175.8 and 2154.4, and
+   well below at the third, 1825, i.e. the nonlocal length wins. So stiffening is reported only when
+   `l_nl < l_g`, and the papers must say which ratio they are using.
+
+2. The `l_g/h = 0.2, l_nl = 0.5 l_g` alternative-closure entry was re-run over the whole band
+   `800` to `2600` m/s in steps of 25. It shows five shallow minima (950, 1100, 1175, 1225, 1975
+   m/s, the deepest `8.3e-4` against a median of `2.6e-2`) and no clean branch, where the same
+   configuration with our seven rows gives a single dip at 2300.7 with depth 87. A closure that
+   fragments the spectrum is not credible as it stands, so the entry stays held; the likely cause
+   is still the near-degenerate column pair, now inside one of the two alternative row sets at the
+   larger length.
 
 ## (v) Proposed wording — to propose, not to impose
 
